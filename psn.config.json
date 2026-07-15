@@ -1,0 +1,14 @@
+{
+  "players": [
+    {
+      "key": "dad",
+      "displayName": "Dad",
+      "auth": { "mode": "npsso", "envVar": "NPSSO_DAD" }
+    },
+    {
+      "key": "braidan",
+      "displayName": "Braidan",
+      "auth": { "mode": "npsso", "envVar": "NPSSO_BRAIDAN" }
+    }
+  ]
+}
