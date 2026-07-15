@@ -33,4 +33,13 @@ describe('routing', () => {
     );
     expect(screen.getByRole('heading', { name: 'Compare' })).toBeInTheDocument();
   });
+
+  it('renders a not-found page for an unmatched route', () => {
+    render(
+      <MemoryRouter initialEntries={['/this-path-does-not-exist']}>
+        <App />
+      </MemoryRouter>,
+    );
+    expect(screen.getByRole('heading', { name: /page not found/i })).toBeInTheDocument();
+  });
 });

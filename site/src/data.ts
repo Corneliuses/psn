@@ -7,7 +7,11 @@ import type { PlayerSnapshot } from 'psn';
 import dadSnapshot from '../../data/dad/latest.json';
 import braidanSnapshot from '../../data/braidan/latest.json';
 
-export const snapshotsByKey: Record<string, PlayerSnapshot> = {
+const snapshots: Partial<Record<string, PlayerSnapshot>> = {
   dad: dadSnapshot as PlayerSnapshot,
   braidan: braidanSnapshot as PlayerSnapshot,
 };
+
+export function snapshotByKey(key: string): PlayerSnapshot | undefined {
+  return snapshots[key];
+}
