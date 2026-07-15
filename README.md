@@ -43,8 +43,8 @@ This repo is a living, public consumer of [Corneliuses/agentic-config](https://g
 |---|---|
 | issue drafting (refiner-style structure) | [#1 PSN data layer](https://github.com/Corneliuses/psn/issues/1) · [#2 snapshot store + sync CLI](https://github.com/Corneliuses/psn/issues/2) · [#3 derived stats](https://github.com/Corneliuses/psn/issues/3) |
 | `repo-setup` | [AGENTS.md](./AGENTS.md) |
-| `milestone-planner` | v1 site milestone (coming — planned against the real data layer) |
-| `issue-planner` / `vibe-coding` | per-feature plans and PRs as the site gets built |
+| `milestone-planner` | v1 site — [#4](https://github.com/Corneliuses/psn/issues/4) scaffold+splash · [#5](https://github.com/Corneliuses/psn/issues/5) player page · [#6](https://github.com/Corneliuses/psn/issues/6) compare page · [#7](https://github.com/Corneliuses/psn/issues/7) analytics · [#8](https://github.com/Corneliuses/psn/issues/8) auto-sync · [#9](https://github.com/Corneliuses/psn/issues/9) suggestions spike · [#10](https://github.com/Corneliuses/psn/issues/10) docs |
+| `issue-planner` / `vibe-coding` | per-feature plans and PRs as the site gets built (future sessions) |
 
 Everything above was produced by an AI agent executing those skills against this repo — nothing staged. Sample data in `src/fixtures/` is clearly fake and used only for tests and `--dry-run`; committed snapshots in `data/` are real.
 
