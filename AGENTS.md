@@ -76,3 +76,7 @@ Run from the repo root via `pnpm --filter site <script>`, or `cd site && pnpm <s
 ### Deferred work always gets a ticket
 
 Any work you identify but defer out of the current change — a refactor you're not doing, an edge case you're not handling, a pre-existing failure you're not fixing — must have a GitHub issue created **immediately**, before you move on. If you write "I'll track this separately", "out of scope", or "in a follow-up", the very next action is creating that issue and linking it where you deferred the work (PR body, code comment, or review reply). Never defer work with only a prose note.
+
+### Every PR has What / Why / How to test
+
+Every pull request description must have three sections, in this order: **What was done**, **Why it was done**, and **How to manually test / verify**. `.github/pull_request_template.md` pre-fills this structure — fill it in, don't remove it. The "how to test" section must give a reviewer exact, runnable steps (commands, URLs, expected output), not a restatement of the test suite.
