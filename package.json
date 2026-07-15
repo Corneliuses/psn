@@ -1,0 +1,32 @@
+{
+  "name": "psn",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Father–son PlayStation stats: sync PSN play and trophy data, derive stats, compare players.",
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build": "tsup",
+    "sync": "tsx src/cli/sync.ts"
+  },
+  "dependencies": {
+    "psn-api": "^2.18.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.1.1",
+    "eslint": "^10.7.0",
+    "tsup": "^8.5.1",
+    "tsx": "^4.23.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.64.0",
+    "vitest": "^4.1.10"
+  }
+}
