@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "player": {
+    "key": "braidan",
+    "displayName": "Braidan"
+  },
+  "capturedAt": "2026-07-15T00:00:00.000Z",
+  "playedTitles": [
+    {
+      "titleId": "CUSA01433_00",
+      "name": "Rocket League®",
+      "imageUrl": "https://image.example/CUSA01433_00.png",
+      "category": "ps4_game",
+      "playCount": 512,
+      "playDurationIso": "PT301H12M55S",
+      "playDurationMinutes": 18073,
+      "firstPlayed": "2025-01-01T12:00:00Z",
+      "lastPlayed": "2026-07-14T20:00:00Z"
+    },
+    {
+      "titleId": "PPSA01325_00",
+      "name": "God of War Ragnarök",
+      "imageUrl": "https://image.example/PPSA01325_00.png",
+      "category": "ps5_native_game",
+      "playCount": 8,
+      "playDurationIso": "PT12H2M",
+      "playDurationMinutes": 722,
+      "firstPlayed": "2025-01-01T12:00:00Z",
+      "lastPlayed": "2026-04-11T17:00:00Z"
+    },
+    {
+      "titleId": "PPSA04873_00",
+      "name": "Fortnite",
+      "imageUrl": "https://image.example/PPSA04873_00.png",
+      "category": "ps5_native_game",
+      "playCount": 344,
+      "playDurationIso": "PT188H30M2S",
+      "playDurationMinutes": 11310,
+      "firstPlayed": "2025-01-01T12:00:00Z",
+      "lastPlayed": "2026-07-14T21:10:00Z"
+    },
+    {
+      "titleId": "PPSA13195_00",
+      "name": "Astro Bot",
+      "imageUrl": "https://image.example/PPSA13195_00.png",
+      "category": "ps5_native_game",
+      "playCount": 25,
+      "playDurationIso": "PT31H8M17S",
+      "playDurationMinutes": 1868,
+      "firstPlayed": "2025-01-01T12:00:00Z",
+      "lastPlayed": "2026-07-05T16:20:00Z"
+    }
+  ],
+  "trophyTitles": [
+    {
+      "npCommunicationId": "NPWR06904_00",
+      "name": "Rocket League®",
+      "platform": "PS4",
+      "iconUrl": "https://image.example/NPWR06904_00.png",
+      "defined": {
+        "bronze": 30,
+        "silver": 20,
+        "gold": 15,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 25,
+        "silver": 14,
+        "gold": 8,
+        "platinum": 0
+      },
+      "earnedTotal": 47,
+      "progress": 71,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-06-15T20:00:00Z"
+    },
+    {
+      "npCommunicationId": "NPWR22859_00",
+      "name": "God of War Ragnarök",
+      "platform": "PS5",
+      "iconUrl": "https://image.example/NPWR22859_00.png",
+      "defined": {
+        "bronze": 26,
+        "silver": 15,
+        "gold": 4,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 9,
+        "silver": 2,
+        "gold": 0,
+        "platinum": 0
+      },
+      "earnedTotal": 11,
+      "progress": 21,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-06-15T20:00:00Z"
+    },
+    {
+      "npCommunicationId": "NPWR35123_00",
+      "name": "Astro Bot",
+      "platform": "PS5",
+      "iconUrl": "https://image.example/NPWR35123_00.png",
+      "defined": {
+        "bronze": 29,
+        "silver": 10,
+        "gold": 3,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 29,
+        "silver": 10,
+        "gold": 3,
+        "platinum": 1
+      },
+      "earnedTotal": 43,
+      "progress": 100,
+      "hasPlatinum": true,
+      "lastTrophyAt": "2026-06-15T20:00:00Z"
+    }
+  ]
+}

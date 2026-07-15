@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "player": {
+    "key": "dad",
+    "displayName": "Dad"
+  },
+  "capturedAt": "2026-07-15T00:00:00.000Z",
+  "playedTitles": [
+    {
+      "titleId": "CUSA01433_00",
+      "name": "Rocket League®",
+      "imageUrl": "https://image.example/CUSA01433_00.png",
+      "category": "ps4_game",
+      "playCount": 203,
+      "playDurationIso": "PT96H40M",
+      "playDurationMinutes": 5800,
+      "firstPlayed": "2025-01-01T12:00:00Z",
+      "lastPlayed": "2026-07-14T19:12:00Z"
+    },
+    {
+      "titleId": "PPSA01325_00",
+      "name": "God of War Ragnarök",
+      "imageUrl": "https://image.example/PPSA01325_00.png",
+      "category": "ps5_native_game",
+      "playCount": 61,
+      "playDurationIso": "PT82H14M9S",
+      "playDurationMinutes": 4934,
+      "firstPlayed": "2025-01-01T12:00:00Z",
+      "lastPlayed": "2026-07-10T21:30:00Z"
+    },
+    {
+      "titleId": "PPSA02342_00",
+      "name": "Gran Turismo 7",
+      "imageUrl": "https://image.example/PPSA02342_00.png",
+      "category": "ps5_native_game",
+      "playCount": 39,
+      "playDurationIso": "PT44H52M31S",
+      "playDurationMinutes": 2693,
+      "firstPlayed": "2025-01-01T12:00:00Z",
+      "lastPlayed": "2026-05-20T18:45:00Z"
+    },
+    {
+      "titleId": "PPSA07950_00",
+      "name": "Elden Ring",
+      "imageUrl": "https://image.example/PPSA07950_00.png",
+      "category": "ps5_native_game",
+      "playCount": 148,
+      "playDurationIso": "PT210H3M44S",
+      "playDurationMinutes": 12604,
+      "firstPlayed": "2025-01-01T12:00:00Z",
+      "lastPlayed": "2026-07-13T22:05:00Z"
+    }
+  ],
+  "trophyTitles": [
+    {
+      "npCommunicationId": "NPWR06904_00",
+      "name": "Rocket League®",
+      "platform": "PS4",
+      "iconUrl": "https://image.example/NPWR06904_00.png",
+      "defined": {
+        "bronze": 30,
+        "silver": 20,
+        "gold": 15,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 30,
+        "silver": 20,
+        "gold": 15,
+        "platinum": 1
+      },
+      "earnedTotal": 66,
+      "progress": 100,
+      "hasPlatinum": true,
+      "lastTrophyAt": "2026-06-15T20:00:00Z"
+    },
+    {
+      "npCommunicationId": "NPWR22859_00",
+      "name": "God of War Ragnarök",
+      "platform": "PS5",
+      "iconUrl": "https://image.example/NPWR22859_00.png",
+      "defined": {
+        "bronze": 26,
+        "silver": 15,
+        "gold": 4,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 26,
+        "silver": 12,
+        "gold": 4,
+        "platinum": 1
+      },
+      "earnedTotal": 43,
+      "progress": 89,
+      "hasPlatinum": true,
+      "lastTrophyAt": "2026-06-15T20:00:00Z"
+    },
+    {
+      "npCommunicationId": "NPWR23407_00",
+      "name": "Elden Ring",
+      "platform": "PS5",
+      "iconUrl": "https://image.example/NPWR23407_00.png",
+      "defined": {
+        "bronze": 28,
+        "silver": 13,
+        "gold": 3,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 28,
+        "silver": 11,
+        "gold": 2,
+        "platinum": 0
+      },
+      "earnedTotal": 41,
+      "progress": 78,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-06-15T20:00:00Z"
+    }
+  ]
+}

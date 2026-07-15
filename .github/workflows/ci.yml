@@ -33,3 +33,11 @@ jobs:
 
       - name: Sync pipeline dry run (no credentials)
         run: pnpm sync --dry-run
+
+      - run: pnpm --filter site lint
+
+      - run: pnpm --filter site typecheck
+
+      - run: pnpm --filter site test
+
+      - run: pnpm --filter site build
