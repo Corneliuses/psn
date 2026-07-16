@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 
 import { duration, easing, glowPulse } from '../motion/presets';
 
@@ -8,32 +8,44 @@ import { duration, easing, glowPulse } from '../motion/presets';
  * surface, with the four abstract PlayStation shapes scattered as confetti
  * accents in the shape token colors. The whole piece is a single image to
  * assistive tech (role="img" + aria-label on the wrapper); the SVG internals are
- * purely decorative (aria-hidden). A subtle idle float plus the shared PS-blue
- * glow pulse compose the motion presets, so both neutralize under reduced motion
- * via the app-level <MotionConfig reducedMotion="user">.
+ * purely decorative (aria-hidden). A subtle idle float (transform) plus the
+ * shared PS-blue glow pulse (box-shadow) compose the motion presets; both are
+ * gated on `useReducedMotion` so the hero is fully still — no movement and no
+ * pulsing glow — when the viewer prefers reduced motion. (The app-level
+ * <MotionConfig reducedMotion="user"> already stops the transform float, but not
+ * the box-shadow glow, so we gate it here explicitly.)
  */
 
 const HERO_LABEL = 'A dad and his son sitting side by side, each holding a game controller';
 
 export function HeroIllustration() {
+  const shouldReduceMotion = useReducedMotion();
+
+  // Under reduced motion, drop the animation props entirely: no inline glow keeps
+  // the static `shadow-panel` in place, and the SVG renders without the float.
+  const glowProps = shouldReduceMotion
+    ? {}
+    : ({ variants: glowPulse, initial: 'rest', animate: 'pulse' } as const);
+  const floatProps = shouldReduceMotion
+    ? {}
+    : {
+        animate: { y: [0, -6, 0] },
+        transition: { duration: duration.slow * 4, ease: easing.inOut, repeat: Infinity },
+      };
+
   return (
     <motion.div
       role="img"
       aria-label={HERO_LABEL}
       className="mx-auto flex w-full max-w-md items-center justify-center rounded-panel border border-border-subtle bg-surface-2 p-6 shadow-panel"
-      variants={glowPulse}
-      initial="rest"
-      animate="pulse"
+      {...glowProps}
     >
       <motion.svg
         viewBox="0 0 320 200"
         className="h-auto w-full"
         aria-hidden="true"
         focusable="false"
-        // Gentle idle float, composed from the tokenized timing primitives rather
-        // than a bespoke keyframe set; disabled automatically under reduced motion.
-        animate={{ y: [0, -6, 0] }}
-        transition={{ duration: duration.slow * 4, ease: easing.inOut, repeat: Infinity }}
+        {...floatProps}
       >
         {/* Confetti accents — the four abstract PlayStation shapes, one per token color. */}
         <polygon points="44,26 58,52 30,52" className="fill-shape-triangle" opacity="0.9" />
