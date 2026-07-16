@@ -17,8 +17,7 @@ const navItems: NavItem[] = [
 ];
 
 function navLinkClass({ isActive }: { isActive: boolean }): string {
-  const base =
-    'rounded-pill px-3 py-1.5 text-sm font-semibold transition-colors focus-visible:outline-none';
+  const base = 'rounded-pill px-3 py-1.5 text-sm font-semibold transition-colors';
   return isActive
     ? `${base} bg-surface-2 text-foreground shadow-glow-sm`
     : `${base} text-foreground-muted hover:text-foreground`;

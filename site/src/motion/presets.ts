@@ -43,10 +43,12 @@ export const staggerChildren: Variants = {
 export const glowPulse: Variants = {
   rest: { boxShadow: '0 0 0 0 rgba(0, 112, 209, 0)' },
   pulse: {
+    // Glow color/size is single-sourced from theme.css (--shadow-glow-*);
+    // Motion resolves these custom properties from computed style at runtime.
     boxShadow: [
-      '0 0 12px 0 rgba(0, 112, 209, 0.25)',
-      '0 0 28px 4px rgba(0, 112, 209, 0.5)',
-      '0 0 12px 0 rgba(0, 112, 209, 0.25)',
+      'var(--shadow-glow-sm)',
+      'var(--shadow-glow-lg)',
+      'var(--shadow-glow-sm)',
     ],
     transition: {
       duration: duration.slow * 3,
