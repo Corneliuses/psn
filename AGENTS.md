@@ -66,6 +66,24 @@ Run from the repo root via `pnpm --filter site <script>`, or `cd site && pnpm <s
 - **Snapshots are diff-friendly**: stable key order, arrays sorted by stable IDs, 2-space indent, trailing newline. Preserve this — committed snapshot history doubles as the trend-analytics dataset.
 - **`schemaVersion` guards `PlayerSnapshot`**: bump it and handle old versions in readers if the shape changes; committed history must stay loadable.
 
+## `site/` UI conventions
+
+The site's design foundation (Tailwind CSS 4 + Motion) was established in #15; later
+design-milestone work must build on it consistently:
+
+- **Design tokens live in `site/src/styles/theme.css`** — a CSS-first `@theme` block defines the
+  dark PlayStation palette (surface scale, PS-blue accent, decorative shape/trophy colors), type
+  scale, radii, and glow shadows. Style with the generated token utilities (`bg-surface-0`,
+  `text-ps-blue`, `shadow-glow`, …); never hardcode colors. The theme is dark-only, and uses no
+  Sony logos or trademarked assets — shape glyphs/colors evoke the vibe without imitation.
+- **Animation composes the shared presets in `site/src/motion/presets.ts`** (`fadeRise`,
+  `staggerChildren`, `glowPulse`, plus tokenized `duration`/`easing`) rather than redefining
+  timing inline. The app is wrapped in `<MotionConfig reducedMotion="user">`, so honour reduced
+  motion.
+- **Every route renders inside `AppShell`** (`site/src/components/AppShell.tsx`), the persistent
+  header/nav. Its nav links derive from `players` (never hardcode player keys) and the route
+  structure in `site/src/App.tsx` must stay intact.
+
 ## Security & Secrets
 
 - NPSSO tokens live in `.env` (gitignored) or CI secrets, named per `psn.config.json` (`NPSSO_DAD`, `NPSSO_BRAIDAN`). Never commit, log, or embed tokens in error messages — `PsnAuthError` names the env var, never the value.
