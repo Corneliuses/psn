@@ -1,5 +1,9 @@
+import '@fontsource-variable/source-sans-3';
+import './styles/theme.css';
+
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { MotionConfig } from 'motion/react';
 import { BrowserRouter } from 'react-router';
 
 import { App } from './App';
@@ -9,8 +13,10 @@ if (!rootElement) throw new Error('Missing #root element');
 
 createRoot(rootElement).render(
   <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <MotionConfig reducedMotion="user">
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </MotionConfig>
   </StrictMode>,
 );
