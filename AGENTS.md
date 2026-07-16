@@ -83,6 +83,12 @@ design-milestone work must build on it consistently:
 - **Every route renders inside `AppShell`** (`site/src/components/AppShell.tsx`), the persistent
   header/nav. Its nav links derive from `players` (never hardcode player keys) and the route
   structure in `site/src/App.tsx` must stay intact.
+- **Card-like UI composes the Phase 2 component kit** (`site/src/components/`, established in #16):
+  `GlassCard` is the shared elevated glass surface every card builds on; `TrophyBadge`, `StatTile`,
+  `SectionHeader`, and `AnimatedNumber` are the reusable primitives. Compose these rather than
+  re-styling surfaces or re-implementing count-ups. `AnimatedNumber` renders its final value under
+  reduced motion and in jsdom (no timers), so component tests assert the final number, not
+  intermediate animation state.
 
 ## Security & Secrets
 

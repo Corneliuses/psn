@@ -26,9 +26,10 @@ export interface GameSectionProps {
 /**
  * A titled list of games rendered as glass cards: each row is a rounded icon
  * tile, name, and metric with a hover lift + glow, entering in a stagger. The
- * DOM contract is deliberately stable — `section > h2`, one `<li>` per game with
- * a decorative empty-alt icon, and an empty-state paragraph — so assistive tech
- * and existing tests see the same semantics the visual redesign sits on top of.
+ * accessible contract is deliberately stable — a level-2 heading (via
+ * `SectionHeader`), one `<li>` per game with a decorative empty-alt icon, and an
+ * empty-state paragraph — so assistive tech and existing tests see the same
+ * semantics the visual redesign sits on top of.
  */
 export function GameSection({
   heading,

@@ -4,7 +4,7 @@
 
 - [x] #15 (Phase 1: Foundation) merged — design tokens (`site/src/styles/theme.css`) and Motion
       presets (`site/src/motion/presets.ts`) are in place. Confirmed on `main`.
-- [] Work on branch `claude/issue-planner-imyuu1` (or the implementation branch), based on latest `main`.
+- [ ] Work on branch `claude/issue-planner-imyuu1` (or the implementation branch), based on latest `main`.
 
 > **Note on phasing:** Phase 1 builds the leaf primitives (no cross-dependencies except tokens);
 > Phase 2 builds the composites that depend on them (`StatTile` → `AnimatedNumber` + `GlassCard`;
