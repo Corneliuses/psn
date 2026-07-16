@@ -17,11 +17,13 @@ describe('GameSection', () => {
     const items = screen.getAllByRole('listitem');
     expect(items).toHaveLength(2);
 
+    // The icon is decorative (empty alt), so it is absent from the
+    // accessibility tree; assert on the underlying <img> element directly.
+    const icon = items[0]!.querySelector('img');
+    expect(icon).toHaveAttribute('src', 'https://image.example/a.png');
+    expect(icon).toHaveAttribute('alt', '');
+
     const first = within(items[0]!);
-    expect(first.getByRole('img', { name: 'Elden Ring' })).toHaveAttribute(
-      'src',
-      'https://image.example/a.png',
-    );
     expect(first.getByText('Elden Ring')).toBeInTheDocument();
     expect(first.getByText('210h 3m')).toBeInTheDocument();
   });

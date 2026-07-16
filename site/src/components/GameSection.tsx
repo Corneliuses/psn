@@ -25,7 +25,9 @@ export function GameSection({ heading, games, emptyLabel = 'No games yet' }: Gam
         <ul>
           {games.map((game) => (
             <li key={game.id}>
-              <img src={game.iconUrl} alt={game.name} width={48} height={48} />
+              {/* Decorative: the game name is rendered as adjacent text, so an
+                  empty alt keeps assistive tech from announcing it twice. */}
+              <img src={game.iconUrl} alt="" width={48} height={48} />
               <span>{game.name}</span>
               <span>{game.metric}</span>
             </li>
