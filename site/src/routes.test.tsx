@@ -31,7 +31,11 @@ describe('routing', () => {
         <App />
       </MemoryRouter>,
     );
-    expect(screen.getByRole('heading', { name: 'Compare' })).toBeInTheDocument();
+    // The compare page leads with the VS hero matchup heading (players in config order).
+    const [a, b] = players;
+    expect(
+      screen.getByRole('heading', { name: new RegExp(`${a!.displayName} versus ${b!.displayName}`, 'i') }),
+    ).toBeInTheDocument();
   });
 
   it('renders a not-found page for an unmatched route', () => {

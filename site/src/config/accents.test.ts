@@ -30,4 +30,13 @@ describe('accentForKey', () => {
   it('falls back to the first accent for an unknown key', () => {
     expect(accentForKey('stranger').fill).toBe(SHAPE_FILLS[0]);
   });
+
+  it('exposes the matching CSS color variable for each accent', () => {
+    players.forEach((player) => {
+      const accent = accentForKey(player.key);
+      // e.g. fill-shape-circle → var(--color-shape-circle)
+      const shape = accent.fill.replace('fill-', '');
+      expect(accent.colorVar).toBe(`var(--color-${shape})`);
+    });
+  });
 });
