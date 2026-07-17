@@ -20,8 +20,10 @@ export interface VsHeroProps {
 }
 
 function Player({ name, accent }: { name: string; accent: PlayerAccent }) {
+  // A <span> (not a <div>) because this renders inside the <h1>, whose content
+  // model is phrasing content only; `flex` still lays the glyph over the name.
   return (
-    <motion.div variants={fadeRise} className="flex flex-col items-center gap-1.5">
+    <motion.span variants={fadeRise} className="flex flex-col items-center gap-1.5">
       <span aria-hidden="true" className={`text-4xl leading-none sm:text-5xl ${accent.text}`}>
         {accent.glyph}
       </span>
@@ -32,7 +34,7 @@ function Player({ name, accent }: { name: string; accent: PlayerAccent }) {
       >
         {name}
       </span>
-    </motion.div>
+    </motion.span>
   );
 }
 
