@@ -10,11 +10,13 @@ cases — ties, an empty opponent, cross-platform name normalization — are alr
 `test/stats.test.ts`. This PR delivers the full visual design and closes #6 (the functional compare
 feature) as well.
 
-The core interaction is a per-metric row with **two opposing proportional bars** — one per player,
-each filled relative to the larger value — where the winning side's bar reaches full width and
-glows in that player's accent color. Ties render neutral (equal bars, no glow), which also cleanly
-handles the always-tied shared-games count and any zero/zero tier without special casing. Trophy
-tiers get their own visually distinct block tinted with the trophy metal tokens.
+The core interaction is a per-metric **clash meter**: one contested track with a glowing
+lightning/spark seam at the proportional division (`a / (a+b)`), pushed toward whoever's ahead. The
+winning side is saturated in that player's accent and glows while the loser's side dims; ties render
+neutral (seam dead-center, no glow), which also cleanly handles the always-tied shared-games count
+and any zero/zero tier. The spark seam deliberately reuses the VS hero's lightning divider so the
+page reads as one system, with the count-up numbers at each end as the assertable source of truth.
+Trophy tiers get their own visually distinct block tinted with the trophy metal tokens.
 
 ## Scope
 
@@ -38,8 +40,9 @@ tiers get their own visually distinct block tinted with the trophy metal tokens.
 2. A missing snapshot for either player renders a styled empty state (no crash).
 3. VS hero shows both display names with per-player accents and a decorative (`aria-hidden`) spark
    divider, entering with a staggered animation.
-4. Metric scoreboard renders `comparison.metrics` with label, both values, and an animated
-   proportional bar per side; the winner glows in that player's accent, driven by `metric.winner`.
+4. Metric scoreboard renders `comparison.metrics` as clash meters: label, both count-up values, and a
+   glowing spark seam at the proportional division; the winner's side glows in that player's accent
+   and the loser's dims, driven by `metric.winner`.
 5. `winner === 'tie'` renders neutrally (no glow toward either side) — explicit test.
 6. Trophy-tier metrics render in a dedicated block using `TrophyBadge` metal colors.
 7. Shared-games deep list renders name, each player's playtime (`formatMinutes`) and trophies, in
@@ -64,8 +67,8 @@ tiers get their own visually distinct block tinted with the trophy metal tokens.
 | Risk | Impact | Mitigation |
 |---|---|---|
 | Missing snapshot crashes the compare call | Med | Guard and render the empty state before calling `comparePlayers`; explicit test. |
-| Bar animation breaks jsdom/reduced-motion tests | Med | Render final bar width immediately when not animatable (AnimatedNumber pattern); assert on text values, not geometry. |
-| Zero/zero metric divides by zero in bar math | Low | `max===0` → 0% fills, no glow. |
+| Seam animation breaks jsdom/reduced-motion tests | Med | Render final seam position immediately when not animatable (AnimatedNumber pattern); assert on text values, not geometry. |
+| Zero/zero metric divides by zero in seam math | Low | `a+b===0` → seam centered at `0.5`, no glow. |
 | Winner glow uses the wrong player accent | Low | `accentForKey(players[i].key)`, config order — same source as PlayerPage/Splash. |
 | Data layer later reorders `metrics` | Low | Group rows by `metric` key, never by array index. |
 
