@@ -11,7 +11,7 @@ const SHAPE_FILLS = [
 ];
 
 describe('accentForKey', () => {
-  it('assigns accents by config order, wrapping over the shape tokens', () => {
+  it('assigns each configured player the shape token at its config index', () => {
     players.forEach((player, index) => {
       expect(accentForKey(player.key).fill).toBe(SHAPE_FILLS[index % SHAPE_FILLS.length]);
     });
