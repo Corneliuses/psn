@@ -7,6 +7,7 @@ import {
   gamesWithMostTrophies,
   mostPlayedGames,
   platinumGames,
+  playerTotals,
   recentGames,
 } from '../src/stats/index.js';
 
@@ -69,6 +70,26 @@ describe('platinumGames', () => {
 
   it('returns empty for an empty snapshot', () => {
     expect(platinumGames(empty)).toEqual([]);
+  });
+});
+
+describe('playerTotals', () => {
+  it('aggregates the headline totals from a snapshot', () => {
+    const totals = playerTotals(dad);
+    expect(totals.gamesPlayed).toBe(4); // four played titles
+    expect(totals.trophiesTotal).toBe(150); // 43 + 41 + 66 earned
+    expect(totals.platinums).toBe(2); // God of War + Rocket League
+  });
+
+  it('returns zeros for an empty snapshot', () => {
+    const totals = playerTotals(empty);
+    expect(totals).toMatchObject({
+      playtimeMinutes: 0,
+      gamesPlayed: 0,
+      trophiesTotal: 0,
+      platinums: 0,
+      trophies: { bronze: 0, silver: 0, gold: 0, platinum: 0 },
+    });
   });
 });
 

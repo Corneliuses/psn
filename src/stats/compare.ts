@@ -1,13 +1,5 @@
-import type { PlayerIdentity, PlayerSnapshot, TrophyCounts } from '../psn/models.js';
-import { totalTrophies } from '../psn/models.js';
-
-export interface PlayerTotals {
-  playtimeMinutes: number;
-  gamesPlayed: number;
-  trophies: TrophyCounts;
-  trophiesTotal: number;
-  platinums: number;
-}
+import type { PlayerIdentity, PlayerSnapshot } from '../psn/models.js';
+import { playerTotals, type PlayerTotals } from './totals.js';
 
 export interface MetricComparison {
   metric: string;
@@ -30,25 +22,6 @@ export interface Comparison {
   sharedGames: SharedGame[];
 }
 
-function totals(snapshot: PlayerSnapshot): PlayerTotals {
-  const trophies = snapshot.trophyTitles.reduce<TrophyCounts>(
-    (acc, t) => ({
-      bronze: acc.bronze + t.earned.bronze,
-      silver: acc.silver + t.earned.silver,
-      gold: acc.gold + t.earned.gold,
-      platinum: acc.platinum + t.earned.platinum,
-    }),
-    { bronze: 0, silver: 0, gold: 0, platinum: 0 },
-  );
-  return {
-    playtimeMinutes: snapshot.playedTitles.reduce((sum, t) => sum + t.playDurationMinutes, 0),
-    gamesPlayed: snapshot.playedTitles.length,
-    trophies,
-    trophiesTotal: totalTrophies(trophies),
-    platinums: trophies.platinum,
-  };
-}
-
 function metric(metricKey: string, label: string, a: number, b: number): MetricComparison {
   return { metric: metricKey, label, a, b, winner: a > b ? 'a' : b > a ? 'b' : 'tie' };
 }
@@ -67,8 +40,8 @@ function nameKey(name: string): string {
  * render directly: per-metric winners plus a shared-games breakdown.
  */
 export function comparePlayers(a: PlayerSnapshot, b: PlayerSnapshot): Comparison {
-  const totalsA = totals(a);
-  const totalsB = totals(b);
+  const totalsA = playerTotals(a);
+  const totalsB = playerTotals(b);
 
   const trophiesByNameB = new Map(b.trophyTitles.map((t) => [nameKey(t.name), t]));
   const playedByNameB = new Map(b.playedTitles.map((t) => [nameKey(t.name), t]));

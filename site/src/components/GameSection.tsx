@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { motion } from 'motion/react';
 
 import { fadeRise, staggerChildren } from '../motion/presets';
@@ -10,8 +11,8 @@ export interface GameEntry {
   id: string;
   iconUrl: string;
   name: string;
-  /** The section's relevant metric, pre-formatted for display. */
-  metric: string;
+  /** The section's relevant metric, pre-formatted for display (text or a badge). */
+  metric: ReactNode;
 }
 
 export interface GameSectionProps {
