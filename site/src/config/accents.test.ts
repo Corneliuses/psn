@@ -17,12 +17,14 @@ describe('accentForKey', () => {
     });
   });
 
-  it('gives distinct accents to the first two players (Dad vs Braidan)', () => {
-    expect(accentForKey('dad').fill).not.toBe(accentForKey('braidan').fill);
+  it('gives distinct accents to the first two configured players', () => {
+    const [first, second] = players;
+    expect(accentForKey(first!.key).fill).not.toBe(accentForKey(second!.key).fill);
   });
 
   it('is stable for the same key', () => {
-    expect(accentForKey('dad')).toEqual(accentForKey('dad'));
+    const key = players[0]!.key;
+    expect(accentForKey(key)).toEqual(accentForKey(key));
   });
 
   it('falls back to the first accent for an unknown key', () => {
