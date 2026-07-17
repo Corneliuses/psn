@@ -18,9 +18,11 @@ No blocking work remains; this issue can start immediately. It can run in parall
       `{ label, a, b, winner: 'a'|'b'|'tie', accentA, accentB, format?, tint? }`;
       renders the label, a contested track with a glowing spark seam at position `a/(a+b)`
       (`0.5` when `a+b===0`), both formatted values as count-up text at the ends, winner side
-      saturated + glowing in its accent and loser side dimmed (none on tie). Seam slides from center
-      on entrance but renders final position immediately under reduced motion / jsdom (mirror
-      `AnimatedNumber` in `components/AnimatedNumber.tsx`); spark glyph is `aria-hidden`.
+      saturated + glowing in its accent and loser side eased back gently (~0.62 opacity, no
+      desaturation; none on tie). Seam is a bold jagged lightning bolt (inline SVG) over a glowing
+      core + thick glowing line, with a subtle flicker gated on reduced motion. Seam slides from
+      center on entrance but renders final position immediately under reduced motion / jsdom (mirror
+      `AnimatedNumber` in `components/AnimatedNumber.tsx`); the bolt is `aria-hidden`.
 - [ ] Add `site/src/components/MetricScoreboard.tsx` — takes the `Comparison`, selects the headline
       metrics by key (`playtimeMinutes` formatted via `formatMinutes`, `gamesPlayed`, `trophiesTotal`,
       `sharedGames`), renders a `SectionHeader title="Head to head"` + one `ClashMeter` each.

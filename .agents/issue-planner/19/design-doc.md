@@ -85,11 +85,14 @@ One horizontal track per metric, divided proportionally with a glowing spark sea
   left of the seam; player B's accent fills the right.
 - **`a + b === 0`** (both zero — e.g. a zero/zero tier, or the shared-games count when no games are
   shared): seam sits dead-center (`0.5`), neutral treatment, no divide-by-zero.
-- **Spark seam** = a decorative (`aria-hidden`) lightning/spark glyph sitting on the division,
-  glowing in the winner's accent (neutral on tie) — the same motif as the VS hero divider.
+- **Spark seam** = a decorative (`aria-hidden`) bold jagged lightning bolt (inline SVG) over a
+  glowing core and a thick glowing vertical line, sitting on the division and glowing in the
+  winner's accent (neutral white on tie) — the same motif as the VS hero divider. The bolt has a
+  subtle looping flicker, gated on reduced motion.
 - **Winner treatment** driven by `metric.winner` (not by seam position, so it's robust): winner's
-  side is saturated + glows in `accentForKey(winnerKey)`; loser's side dims; `tie` → both sides
-  neutral, seam centered, no glow.
+  side is saturated + glows in `accentForKey(winnerKey)`; the loser's side eases back gently
+  (~0.62 opacity, no desaturation — a soft recede, not a hard dim); `tie` → both sides neutral,
+  seam centered, no glow.
 - **Values** = count-up numbers at each end (left = A, right = B), always rendered as plain text via
   `AnimatedNumber` so they're assertable regardless of animation.
 - **Animation** = the seam animates from center to its final position on entrance; renders the final
