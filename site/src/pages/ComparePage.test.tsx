@@ -25,7 +25,11 @@ afterEach(() => {
 
 /** The clash-meter row whose label matches, so its winner indication can be read. */
 function rowByLabel(label: string): HTMLElement {
-  return screen.getByText(label).closest('[data-winner]') as HTMLElement;
+  const row = screen.getByText(label).closest('[data-winner]');
+  if (!(row instanceof HTMLElement)) {
+    throw new Error(`No [data-winner] row found for label "${label}"`);
+  }
+  return row;
 }
 
 describe('ComparePage', () => {

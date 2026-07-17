@@ -31,10 +31,13 @@ describe('routing', () => {
         <App />
       </MemoryRouter>,
     );
-    // The compare page leads with the VS hero matchup heading (players in config order).
+    // The compare page leads with the VS hero matchup heading (players in config
+    // order). Fail fast on a misconfigured roster, and match the exact accessible
+    // name as a string so a display name with regex metacharacters can't skew it.
+    expect(players.length).toBeGreaterThanOrEqual(2);
     const [a, b] = players;
     expect(
-      screen.getByRole('heading', { name: new RegExp(`${a!.displayName} versus ${b!.displayName}`, 'i') }),
+      screen.getByRole('heading', { level: 1, name: `${a!.displayName} versus ${b!.displayName}` }),
     ).toBeInTheDocument();
   });
 
