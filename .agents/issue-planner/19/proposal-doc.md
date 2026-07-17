@@ -12,9 +12,9 @@ feature) as well.
 
 The core interaction is a per-metric **clash meter**: one contested track with a glowing
 lightning/spark seam at the proportional division (`a / (a+b)`), pushed toward whoever's ahead. The
-winning side is saturated in that player's accent and glows while the loser's side dims; ties render
-neutral (seam dead-center, no glow), which also cleanly handles the always-tied shared-games count
-and any zero/zero tier. The spark seam deliberately reuses the VS hero's lightning divider so the
+winning side is saturated in that player's accent and glows while the loser's side eases back gently;
+ties render neutral (seam dead-center, no glow), which also cleanly handles the always-tied
+shared-games count and any zero/zero tier. The spark seam deliberately reuses the VS hero's lightning divider so the
 page reads as one system, with the count-up numbers at each end as the assertable source of truth.
 Trophy tiers get their own visually distinct block tinted with the trophy metal tokens.
 
