@@ -39,16 +39,23 @@ export const staggerChildren: Variants = {
   },
 };
 
-/** Ambient PS-blue glow pulse for accent/hero elements. */
+/**
+ * Ambient PS-blue glow pulse for accent/hero elements. Every keyframe layers the
+ * base `--shadow-panel` elevation *under* the glow, so an elevated panel keeps its
+ * normal drop shadow while pulsing (animating `boxShadow` fully replaces the
+ * property, so the constant panel layer has to travel with the glow). The layer
+ * count stays fixed at two across `rest` and `pulse` so Motion interpolates
+ * cleanly rather than snapping.
+ */
 export const glowPulse: Variants = {
-  rest: { boxShadow: '0 0 0 0 rgba(0, 112, 209, 0)' },
+  rest: { boxShadow: 'var(--shadow-panel), 0 0 0 0 rgba(0, 112, 209, 0)' },
   pulse: {
-    // Glow color/size is single-sourced from theme.css (--shadow-glow-*);
+    // Glow color/size is single-sourced from theme.css (--shadow-panel/--shadow-glow-*);
     // Motion resolves these custom properties from computed style at runtime.
     boxShadow: [
-      'var(--shadow-glow-sm)',
-      'var(--shadow-glow-lg)',
-      'var(--shadow-glow-sm)',
+      'var(--shadow-panel), var(--shadow-glow-sm)',
+      'var(--shadow-panel), var(--shadow-glow-lg)',
+      'var(--shadow-panel), var(--shadow-glow-sm)',
     ],
     transition: {
       duration: duration.slow * 3,
