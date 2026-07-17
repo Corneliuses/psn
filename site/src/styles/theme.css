@@ -26,6 +26,11 @@
   --color-ps-blue: #0070d1;
   --color-ps-blue-hover: #1a86e6;
   --color-ps-blue-glow: rgba(0, 112, 209, 0.45);
+  /* Accessible accent for small blue *text*: the brand #0070d1 clears WCAG AA
+     only as large text, so small ps-blue text (e.g. the header wordmark) uses
+     this lighter variant, which clears 4.5:1 on surfaces 0–3. Decorative fills,
+     glows, large headings, and the focus ring keep the brand --color-ps-blue. */
+  --color-ps-blue-text: #4c9ff0;
 
   /* PlayStation shape accents — decorative motifs only */
   --color-shape-triangle: #00ac9f;

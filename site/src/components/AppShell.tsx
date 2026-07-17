@@ -43,7 +43,7 @@ export function AppShell({ children }: AppShellProps) {
             className="text-lg font-bold tracking-tight text-foreground"
             aria-label="PSN Stats home"
           >
-            PSN<span className="text-ps-blue"> Stats</span>
+            PSN<span className="text-ps-blue-text"> Stats</span>
           </NavLink>
           <nav aria-label="Primary">
             <ul className="flex items-center gap-1">
