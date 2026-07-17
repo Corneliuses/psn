@@ -1,0 +1,23 @@
+# AWS Amplify Hosting build spec.
+# The Amplify build image does not ship with pnpm, so install the same
+# pinned version as package.json's `packageManager` field before the
+# workspace install. The site package imports the root `psn` package and
+# the JSON snapshots in data/, so everything runs from the repo root.
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm install -g pnpm@10.33.0
+        - pnpm config set store-dir .pnpm-store
+        - pnpm install --frozen-lockfile
+    build:
+      commands:
+        - pnpm --filter site build
+  artifacts:
+    baseDirectory: site/dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - .pnpm-store/**/*
