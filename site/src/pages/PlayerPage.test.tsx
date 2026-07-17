@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { sampleSnapshot } from 'psn';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
@@ -30,8 +30,24 @@ describe('PlayerPage', () => {
     expect(screen.getByText('66 trophies')).toBeInTheDocument();
     // Recent games → last-played date (Rocket League, most recent).
     expect(screen.getByText('Last played Jul 14, 2026')).toBeInTheDocument();
-    // Platinum games → every game with a platinum (Rocket League + God of War).
-    expect(screen.getAllByText(/^Platinum ·/)).toHaveLength(2);
+    // Platinum games → every game with a platinum (Rocket League + God of War),
+    // now marked with a platinum TrophyBadge rather than the word "Platinum".
+    expect(screen.getAllByRole('img', { name: /platinum trophy/i })).toHaveLength(2);
+  });
+
+  it('shows a summary row of stat tiles with final count-up values', () => {
+    snapshotByKeyMock.mockReturnValue(sampleSnapshot('dad', 'Dad'));
+
+    render(<PlayerPage playerKey="dad" />);
+
+    // Each tile: the value and its label live in the same GlassCard, so scope
+    // the numeric assertion to the tile to avoid colliding with other "2"/"4".
+    const tileValue = (label: string): HTMLElement =>
+      screen.getByText(label).closest('div') as HTMLElement;
+
+    expect(within(tileValue('Games played')).getByText('4')).toBeInTheDocument();
+    expect(within(tileValue('Total trophies')).getByText('150')).toBeInTheDocument();
+    expect(within(tileValue('Platinums')).getByText('2')).toBeInTheDocument();
   });
 
   it('renders a friendly empty state when the player has no snapshot', () => {
