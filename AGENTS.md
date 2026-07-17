@@ -79,7 +79,10 @@ design-milestone work must build on it consistently:
 - **Animation composes the shared presets in `site/src/motion/presets.ts`** (`fadeRise`,
   `staggerChildren`, `glowPulse`, plus tokenized `duration`/`easing`) rather than redefining
   timing inline. The app is wrapped in `<MotionConfig reducedMotion="user">`, so honour reduced
-  motion.
+  motion — but note it only neutralizes *transform*/layout animations: an ambient non-transform
+  loop (a `box-shadow` glow, an opacity pulse) keeps running, so gate those on `useReducedMotion()`
+  explicitly (as `HeroIllustration` does). `glowPulse` layers the base `--shadow-panel` under the
+  glow in every keyframe so an elevated surface keeps its drop shadow while pulsing.
 - **Every route renders inside `AppShell`** (`site/src/components/AppShell.tsx`), the persistent
   header/nav. Its nav links derive from `players` (never hardcode player keys) and the route
   structure in `site/src/App.tsx` must stay intact.
