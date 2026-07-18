@@ -1,6 +1,6 @@
 # psn
 
-Father–son PlayStation stats tracker for two players (Dad and Braidan): syncs play history and trophy data from PSN into committed JSON snapshots, derives displayable stats, and (in future milestones) renders them as a website with per-player pages and a comparison view.
+Father–son PlayStation stats tracker for two players (Dad and Braidan): syncs play history and trophy data from PSN into committed JSON snapshots, derives displayable stats, and renders them as a website (`site/`) with a splash landing, per-player pages, and a head-to-head comparison view in a dark, PlayStation-vibe UI.
 
 ## Repository Structure
 
@@ -19,7 +19,7 @@ psn/
 │       ├── styles/     # theme.css — CSS-first Tailwind 4 `@theme` design tokens (single source of truth)
 │       ├── motion/     # presets.ts — shared Motion variants/transitions all animation composes
 │       ├── components/ # PlayStation component kit (GlassCard, StatTile, TrophyBadge, …) + AppShell
-│       └── pages/       # Splash, Player, Compare, NotFound — each composes the kit
+│       └── pages/      # Splash, Player, Compare, NotFound — each composes the kit
 └── .claude/skills/ # Workflow skills installed from Corneliuses/agentic-config
 ```
 
