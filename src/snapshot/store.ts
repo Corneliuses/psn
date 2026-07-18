@@ -32,6 +32,19 @@ export function readLatestSnapshot(baseDir: string, playerKey: string): PlayerSn
   return JSON.parse(raw) as PlayerSnapshot;
 }
 
+/**
+ * Read every dated snapshot for a player, oldest → newest — the full history the
+ * trend analytics need, not just latest.json. Backed by listSnapshotDates, so
+ * latest.json (a mirror of the newest dated file) is excluded and never
+ * double-counted; an unknown player yields an empty array.
+ */
+export function readAllSnapshots(baseDir: string, playerKey: string): PlayerSnapshot[] {
+  return listSnapshotDates(baseDir, playerKey).map((date) => {
+    const raw = readFileSync(join(baseDir, playerKey, `${date}.json`), 'utf8');
+    return JSON.parse(raw) as PlayerSnapshot;
+  });
+}
+
 /** Dated snapshot filenames for a player, oldest first. */
 export function listSnapshotDates(baseDir: string, playerKey: string): string[] {
   try {
