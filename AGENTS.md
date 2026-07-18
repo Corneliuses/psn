@@ -1,6 +1,6 @@
 # psn
 
-Father–son PlayStation stats tracker for two players (Dad and Braidan): syncs play history and trophy data from PSN into committed JSON snapshots, derives displayable stats, and (in future milestones) renders them as a website with per-player pages and a comparison view.
+Father–son PlayStation stats tracker for two players (Dad and Braidan): syncs play history and trophy data from PSN into committed JSON snapshots, derives displayable stats, and renders them as a website (`site/`) with a splash landing, per-player pages, and a head-to-head comparison view in a dark, PlayStation-vibe UI.
 
 ## Repository Structure
 
@@ -15,6 +15,11 @@ psn/
 ├── data/           # Committed real snapshots, one dir per player key
 ├── test/           # Vitest suites, one file per module
 ├── site/           # Vite + React + TS static site — reads src/stats and data/*/latest.json only
+│   └── src/
+│       ├── styles/     # theme.css — CSS-first Tailwind 4 `@theme` design tokens (single source of truth)
+│       ├── motion/     # presets.ts — shared Motion variants/transitions all animation composes
+│       ├── components/ # PlayStation component kit (GlassCard, StatTile, TrophyBadge, …) + AppShell
+│       └── pages/      # Splash, Player, Compare, NotFound — each composes the kit
 └── .claude/skills/ # Workflow skills installed from Corneliuses/agentic-config
 ```
 
@@ -28,6 +33,7 @@ This repo is a pnpm workspace (`pnpm-workspace.yaml`): the root package (`psn`) 
 - **Testing**: Vitest, fixture-based — no test may require credentials or network
 - **Lint / Format**: ESLint (flat config, typescript-eslint)
 - **Build**: tsup (library + CLI), tsx for running the CLI from source
+- **Site UI** (`site/`): React 19 + Vite 7; [Tailwind CSS 4](https://tailwindcss.com) via `@tailwindcss/vite` (CSS-first `@theme`, no `tailwind.config.js`); [Motion](https://motion.dev) (`motion/react`) for animation; self-hosted display font via `@fontsource-variable/source-sans-3`; React Router 7. See **Designing views & components** below before building UI.
 
 ## Commands
 
@@ -66,39 +72,87 @@ Run from the repo root via `pnpm --filter site <script>`, or `cd site && pnpm <s
 - **Snapshots are diff-friendly**: stable key order, arrays sorted by stable IDs, 2-space indent, trailing newline. Preserve this — committed snapshot history doubles as the trend-analytics dataset.
 - **`schemaVersion` guards `PlayerSnapshot`**: bump it and handle old versions in readers if the shape changes; committed history must stay loadable.
 
-## `site/` UI conventions
+## Designing views & components
 
-The site's design foundation (Tailwind CSS 4 + Motion) was established in #15; later
-design-milestone work must build on it consistently:
+The `site/` design system — a dark, PlayStation-vibe language — shipped across the "Design v1"
+milestone (#15–#21). It is the single visual vocabulary for the site: **every new view or component
+composes it rather than reinventing one.** The rules below are hard requirements, not suggestions.
 
-- **Design tokens live in `site/src/styles/theme.css`** — a CSS-first `@theme` block defines the
-  dark PlayStation palette (surface scale, PS-blue accent, decorative shape/trophy colors), type
-  scale, radii, and glow shadows. Style with the generated token utilities (`bg-surface-0`,
-  `text-ps-blue`, `shadow-glow`, …); never hardcode colors. The theme is dark-only, and uses no
-  Sony logos or trademarked assets — shape glyphs/colors evoke the vibe without imitation. For small
-  blue *text*, use `text-ps-blue-text` (an AA-compliant lighter variant added in #20): the brand
-  `text-ps-blue` only clears WCAG AA at large sizes, so reserve it for large headings, glows, fills,
-  and the focus ring.
-- **Animation composes the shared presets in `site/src/motion/presets.ts`** (`fadeRise`,
-  `staggerChildren`, `glowPulse`, plus tokenized `duration`/`easing`) rather than redefining
-  timing inline. The app is wrapped in `<MotionConfig reducedMotion="user">`, so honour reduced
-  motion — but note it only neutralizes *transform*/layout animations: an ambient non-transform
-  loop (a `box-shadow` glow, an opacity pulse) keeps running, so gate those on `useReducedMotion()`
-  explicitly (as `HeroIllustration` does). `glowPulse` layers the base `--shadow-panel` under the
-  glow in every keyframe so an elevated surface keeps its drop shadow while pulsing.
-- **Every route renders inside `AppShell`** (`site/src/components/AppShell.tsx`), the persistent
-  header/nav. Its nav links derive from `players` (never hardcode player keys) and the route
-  structure in `site/src/App.tsx` must stay intact. Route-level page transitions are centralized
-  there (added in #20): `App.tsx` wraps the routed content in `<AnimatePresence mode="wait">` +
-  `RouteTransition` (keyed by `location.pathname`, with `<Routes location={location}>`), so each page
-  owns only its own internal entrance stagger — never add a second route-level transition, and keep
-  `AppShell` outside the animated region so the header stays persistent.
-- **Card-like UI composes the Phase 2 component kit** (`site/src/components/`, established in #16):
-  `GlassCard` is the shared elevated glass surface every card builds on; `TrophyBadge`, `StatTile`,
-  `SectionHeader`, and `AnimatedNumber` are the reusable primitives. Compose these rather than
-  re-styling surfaces or re-implementing count-ups. `AnimatedNumber` renders its final value under
-  reduced motion and in jsdom (no timers), so component tests assert the final number, not
-  intermediate animation state.
+### 1. Tokens are the single source of truth
+
+- All colors, type sizes, radii, and shadows come from the CSS-first `@theme` block in
+  **`site/src/styles/theme.css`**. Style with the generated token utilities (`bg-surface-0`,
+  `text-ps-blue`, `shadow-glow`, `rounded-panel`, `text-display`, …). Motion timing is **not** a
+  theme token — the `duration`/`easing` primitives live in `site/src/motion/presets.ts` (see
+  Animation below).
+- **Never introduce a raw hex color, a one-off shadow, or an ad-hoc duration/easing in a component.**
+  If a value you need doesn't exist, extend it centrally rather than inline: colors, radii, and
+  shadows get a new token in `theme.css`; durations and easings get a new entry in
+  `motion/presets.ts`. Keeping the vocabulary central keeps it reusable and auditable.
+- For small blue **text**, use `text-ps-blue-text` (the AA-compliant lighter variant). The brand
+  `text-ps-blue` (#0070d1) only clears WCAG AA at large sizes — reserve it for large headings,
+  glows, fills, and the focus ring.
+
+### 2. Compose the kit before inventing a primitive
+
+- Card-like and stat UI is built from the existing kit in **`site/src/components/`**: `GlassCard`
+  (the shared elevated glass surface every card builds on), `StatTile`, `TrophyBadge`,
+  `SectionHeader`, `AnimatedNumber`, and the redesigned `GameSection`. Compose these rather than
+  re-styling surfaces or re-implementing count-ups.
+- A genuinely new primitive (not expressible by composing the kit) also lives in
+  `site/src/components/` and **ships with a component test** (render, accessible name,
+  reduced-motion/jsdom-safe final state) in the same PR.
+- `AnimatedNumber` renders its final value immediately under reduced motion and in jsdom (no
+  timers), so component tests assert the **final** number, never intermediate animation state.
+
+### 3. Animation composes the shared presets
+
+- Every entrance/hover composes the shared presets in **`site/src/motion/presets.ts`** (`fadeRise`,
+  `staggerChildren`, `glowPulse`, plus tokenized `duration`/`easing`) — do not redefine timing or
+  easing inline.
+- The app is wrapped in `<MotionConfig reducedMotion="user">`, so honour reduced motion — but note
+  it only neutralizes **transform/layout** animations. An ambient non-transform loop (a `box-shadow`
+  glow, an opacity pulse) keeps running, so gate those on `useReducedMotion()` explicitly (as
+  `HeroIllustration` does). Under reduced motion every page must render **complete and static** — no
+  content stuck at an initial animation state.
+- `glowPulse` layers the base `--shadow-panel` under the glow in every keyframe so an elevated
+  surface keeps its drop shadow while pulsing.
+
+### 4. Route & shell structure
+
+- Every route renders inside **`AppShell`** (`site/src/components/AppShell.tsx`), the persistent
+  header/nav. Its nav links derive from `players` (**never hardcode player keys**), and the route
+  structure in `site/src/App.tsx` must stay intact.
+- Route-level page transitions are centralized in `App.tsx`: the routed content is wrapped in
+  `<AnimatePresence mode="wait">` + `RouteTransition` (keyed by `location.pathname`, with
+  `<Routes location={location}>`). Each page owns only its **own** internal entrance stagger — never
+  add a second route-level transition, and keep `AppShell` **outside** the animated region so the
+  header stays persistent.
+
+### 5. PlayStation-vibe boundaries
+
+- **Dark-only** theme — there is no light mode; don't add one or design for it.
+- The four shape glyphs (△ ○ ✕ □) and their `--color-shape-*` tokens are **decorative motifs only**:
+  render them `aria-hidden` and never as the sole carrier of meaning.
+- The trophy-metal colors (`--color-trophy-bronze/silver/gold/platinum`) are **reserved for trophy
+  data** — don't repurpose them as general accents.
+- **No Sony logos or trademarked assets.** The vibe is evoked with original silhouettes and the four
+  abstract shapes; never import or recreate PlayStation branding.
+
+### 6. Ship checklist for any new view
+
+Before a view is done, confirm all of:
+
+- [ ] **Semantics**: roles and accessible names are testable in jsdom (headings by role/name, one
+  `listitem` per item, decorative images have empty `alt` / are `aria-hidden`).
+- [ ] **Contrast**: every text/surface pair meets WCAG AA (4.5:1 body, 3:1 large text) using
+  existing token pairs — fix contrast by adjusting tokens centrally, not per-usage.
+- [ ] **Keyboard**: logical focus order; the PS-blue `:focus-visible` ring is visible on every
+  interactive element; decorative animations never receive focus.
+- [ ] **Motion**: entrance choreography is composed from the presets and resolves to a complete
+  static state under reduced motion.
+- [ ] **Gate green**: `pnpm --filter site lint`, `pnpm --filter site typecheck`,
+  `pnpm --filter site test`, and `pnpm --filter site build` all pass.
 
 ## Security & Secrets
 
