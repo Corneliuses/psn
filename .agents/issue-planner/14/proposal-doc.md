@@ -84,4 +84,6 @@ changes and one focused spec.
 
 1. Review and approve this proposal.
 2. Follow `task-doc.md` to implement phase by phase.
-3. After implementation is merged, delete `.agents/issue-planner/14/` and close the issue.
+3. After implementation is merged, archive `.agents/issue-planner/14/` to
+   `.agents/archive/issue-planner/14/` (preserving the planning history, per repo convention)
+   and close the issue.
