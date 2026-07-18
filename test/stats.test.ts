@@ -1,14 +1,19 @@
 import { describe, expect, it } from 'vitest';
 
 import { sampleSnapshot } from '../src/fixtures/sample.js';
-import type { PlayerSnapshot } from '../src/psn/models.js';
+import type { PlayerSnapshot, TrophyCounts } from '../src/psn/models.js';
+import { totalTrophies } from '../src/psn/models.js';
 import {
   comparePlayers,
+  completionScoreboard,
   gamesWithMostTrophies,
   mostPlayedGames,
   platinumGames,
   playerTotals,
+  playtimeTrend,
   recentGames,
+  sharedGamesDeepDive,
+  trophyPace,
 } from '../src/stats/index.js';
 
 const dad = sampleSnapshot('dad', 'Dad');
@@ -128,5 +133,161 @@ describe('comparePlayers', () => {
     const vsEmpty = comparePlayers(dad, empty);
     expect(vsEmpty.sharedGames).toEqual([]);
     expect(vsEmpty.metrics.find((m) => m.metric === 'trophiesTotal')!.winner).toBe('a');
+  });
+});
+
+// Build a snapshot with given playtime + captured time from the dad fixture's
+// first played title, so trend tests read from a known shape.
+function playtimeSnapshot(capturedAt: string, playtimeMinutes: number): PlayerSnapshot {
+  return {
+    ...empty,
+    capturedAt,
+    playedTitles: [{ ...dad.playedTitles[0]!, playDurationMinutes: playtimeMinutes }],
+  };
+}
+
+// A snapshot whose single trophy title has exactly the given earned tiers.
+function trophySnapshot(capturedAt: string, earned: TrophyCounts): PlayerSnapshot {
+  return {
+    ...empty,
+    capturedAt,
+    trophyTitles: [{ ...dad.trophyTitles[0]!, earned, earnedTotal: totalTrophies(earned) }],
+  };
+}
+
+describe('playtimeTrend', () => {
+  it('returns total playtime per snapshot, oldest → newest', () => {
+    const trend = playtimeTrend([
+      playtimeSnapshot('2026-07-13T00:00:00.000Z', 100),
+      playtimeSnapshot('2026-07-15T00:00:00.000Z', 250),
+    ]);
+    expect(trend).toEqual([
+      { capturedAt: '2026-07-13T00:00:00.000Z', playtimeMinutes: 100 },
+      { capturedAt: '2026-07-15T00:00:00.000Z', playtimeMinutes: 250 },
+    ]);
+  });
+
+  it('yields a single point for one snapshot (a normal pre-history state)', () => {
+    const trend = playtimeTrend([playtimeSnapshot('2026-07-15T00:00:00.000Z', 100)]);
+    expect(trend).toEqual([{ capturedAt: '2026-07-15T00:00:00.000Z', playtimeMinutes: 100 }]);
+  });
+
+  it('returns empty for no snapshots', () => {
+    expect(playtimeTrend([])).toEqual([]);
+  });
+});
+
+describe('trophyPace', () => {
+  it('reports trophies earned between consecutive snapshots, by tier', () => {
+    const pace = trophyPace([
+      trophySnapshot('2026-07-13T00:00:00.000Z', { bronze: 5, silver: 2, gold: 1, platinum: 0 }),
+      trophySnapshot('2026-07-15T00:00:00.000Z', { bronze: 8, silver: 2, gold: 1, platinum: 1 }),
+    ]);
+    expect(pace).toEqual([
+      {
+        from: '2026-07-13T00:00:00.000Z',
+        to: '2026-07-15T00:00:00.000Z',
+        earned: { bronze: 3, silver: 0, gold: 0, platinum: 1 },
+        total: 4,
+      },
+    ]);
+  });
+
+  it('produces one interval per consecutive pair', () => {
+    const pace = trophyPace([
+      trophySnapshot('2026-07-13T00:00:00.000Z', { bronze: 1, silver: 0, gold: 0, platinum: 0 }),
+      trophySnapshot('2026-07-14T00:00:00.000Z', { bronze: 3, silver: 0, gold: 0, platinum: 0 }),
+      trophySnapshot('2026-07-15T00:00:00.000Z', { bronze: 6, silver: 0, gold: 0, platinum: 0 }),
+    ]);
+    expect(pace.map((p) => p.total)).toEqual([2, 3]);
+  });
+
+  it('clamps a negative delta (dropped title) to zero', () => {
+    const pace = trophyPace([
+      trophySnapshot('2026-07-13T00:00:00.000Z', { bronze: 5, silver: 0, gold: 0, platinum: 0 }),
+      trophySnapshot('2026-07-15T00:00:00.000Z', { bronze: 2, silver: 0, gold: 0, platinum: 0 }),
+    ]);
+    expect(pace[0]!.earned.bronze).toBe(0);
+    expect(pace[0]!.total).toBe(0);
+  });
+
+  it('returns empty for fewer than two snapshots', () => {
+    expect(trophyPace([])).toEqual([]);
+    expect(trophyPace([trophySnapshot('2026-07-15T00:00:00.000Z', { bronze: 1, silver: 0, gold: 0, platinum: 0 })])).toEqual([]);
+  });
+});
+
+describe('completionScoreboard', () => {
+  it('lists near-platinum titles (progress >= 90, no platinum), closest first', () => {
+    const snapshot: PlayerSnapshot = {
+      ...empty,
+      trophyTitles: [
+        { ...dad.trophyTitles[0]!, name: 'Almost', progress: 95, hasPlatinum: false },
+        { ...dad.trophyTitles[0]!, name: 'Closer', progress: 99, hasPlatinum: false },
+        { ...dad.trophyTitles[0]!, name: 'Done', progress: 100, hasPlatinum: true },
+        { ...dad.trophyTitles[0]!, name: 'Midway', progress: 50, hasPlatinum: false },
+      ],
+    };
+    expect(completionScoreboard(snapshot).nearPlatinum.map((t) => t.name)).toEqual([
+      'Closer',
+      'Almost',
+    ]);
+  });
+
+  it('counts the untouched backlog (no trophy title or nothing earned)', () => {
+    // Dad has 4 played titles; only Gran Turismo 7 has no trophy title.
+    expect(completionScoreboard(dad).untouchedBacklog).toBe(1);
+  });
+
+  it('counts a played title with a zero-earned trophy title as untouched', () => {
+    const snapshot: PlayerSnapshot = {
+      ...empty,
+      playedTitles: [{ ...dad.playedTitles[0]!, name: 'Shelved' }],
+      trophyTitles: [
+        {
+          ...dad.trophyTitles[0]!,
+          name: 'Shelved',
+          earned: { bronze: 0, silver: 0, gold: 0, platinum: 0 },
+          earnedTotal: 0,
+        },
+      ],
+    };
+    expect(completionScoreboard(snapshot).untouchedBacklog).toBe(1);
+  });
+
+  it('averages progress across trophy titles', () => {
+    expect(completionScoreboard(dad).averageProgress).toBeCloseTo((89 + 78 + 100) / 3);
+  });
+
+  it('returns a zero average for a snapshot with no trophy titles', () => {
+    expect(completionScoreboard(empty).averageProgress).toBe(0);
+    expect(completionScoreboard(empty).nearPlatinum).toEqual([]);
+  });
+});
+
+describe('sharedGamesDeepDive', () => {
+  const deepDive = sharedGamesDeepDive(dad, braidan);
+
+  it('covers the same shared games as comparePlayers, busiest first', () => {
+    expect(deepDive.map((g) => g.name)).toEqual(['Rocket League®', 'God of War Ragnarök']);
+  });
+
+  it('reports playtime gap, trophy gap, and per-metric leaders', () => {
+    const rocket = deepDive.find((g) => g.name === 'Rocket League®')!;
+    expect(rocket.playtimeGap).toBe(Math.abs(rocket.a.playtimeMinutes - rocket.b.playtimeMinutes));
+    expect(rocket.trophyGap).toBe(Math.abs(rocket.a.trophiesEarned - rocket.b.trophiesEarned));
+    // Braidan sank far more hours into Rocket League; Dad earned its platinum set.
+    expect(rocket.playtimeLeader).toBe('b');
+    expect(rocket.trophyLeader).toBe('a');
+  });
+
+  it('flags who played each shared game more recently', () => {
+    // Dad last played God of War 2026-07-10; Braidan 2026-04-11.
+    const gow = deepDive.find((g) => g.name === 'God of War Ragnarök')!;
+    expect(gow.recentlyPlayedBy).toBe('a');
+  });
+
+  it('returns empty against an opponent with no shared games', () => {
+    expect(sharedGamesDeepDive(dad, empty)).toEqual([]);
   });
 });

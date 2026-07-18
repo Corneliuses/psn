@@ -9,6 +9,6 @@ export { totalTrophies } from './psn/models.js';
 export { durationToMinutes, formatMinutes } from './psn/duration.js';
 export { authenticate, withRetry, PsnAuthError } from './psn/client.js';
 export { fetchPlayerSnapshot } from './psn/fetch.js';
-export { writeSnapshot, readLatestSnapshot, listSnapshotDates } from './snapshot/store.js';
+export { writeSnapshot, readLatestSnapshot, listSnapshotDates, readAllSnapshots } from './snapshot/store.js';
 export * from './stats/index.js';
 export { sampleSnapshot } from './fixtures/sample.js';
