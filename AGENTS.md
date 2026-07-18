@@ -80,12 +80,15 @@ composes it rather than reinventing one.** The rules below are hard requirements
 
 ### 1. Tokens are the single source of truth
 
-- All colors, type sizes, radii, shadows, and motion timings come from the CSS-first `@theme` block
-  in **`site/src/styles/theme.css`**. Style with the generated token utilities (`bg-surface-0`,
-  `text-ps-blue`, `shadow-glow`, `rounded-panel`, `text-display`, …).
-- **Never introduce a raw hex color, an ad-hoc duration, or a one-off shadow in a component.** If a
-  value you need doesn't exist, add a token to `theme.css` and use it — extend the vocabulary
-  centrally so it stays reusable and auditable.
+- All colors, type sizes, radii, and shadows come from the CSS-first `@theme` block in
+  **`site/src/styles/theme.css`**. Style with the generated token utilities (`bg-surface-0`,
+  `text-ps-blue`, `shadow-glow`, `rounded-panel`, `text-display`, …). Motion timing is **not** a
+  theme token — the `duration`/`easing` primitives live in `site/src/motion/presets.ts` (see
+  Animation below).
+- **Never introduce a raw hex color, a one-off shadow, or an ad-hoc duration/easing in a component.**
+  If a value you need doesn't exist, extend it centrally rather than inline: colors, radii, and
+  shadows get a new token in `theme.css`; durations and easings get a new entry in
+  `motion/presets.ts`. Keeping the vocabulary central keeps it reusable and auditable.
 - For small blue **text**, use `text-ps-blue-text` (the AA-compliant lighter variant). The brand
   `text-ps-blue` (#0070d1) only clears WCAG AA at large sizes — reserve it for large headings,
   glows, fills, and the focus ring.

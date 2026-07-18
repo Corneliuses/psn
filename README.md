@@ -54,8 +54,8 @@ The design is built on three layers, all under `site/src/`:
 
 - **Tokens** — `styles/theme.css` holds a CSS-first Tailwind 4 `@theme` block: the surface scale,
   PS-blue accent, decorative shape colors, trophy metals, type scale, radii, and glow shadows. It's
-  the single source of truth — components use the generated token utilities and never hardcode
-  colors, durations, or shadows.
+  the single source of truth for those — components use the generated token utilities and never
+  hardcode colors or shadows. (Motion timing lives separately in `motion/presets.ts`, below.)
 - **Component kit** — `components/` provides the reusable primitives every view composes: `GlassCard`
   (the shared elevated glass surface), `StatTile`, `TrophyBadge`, `SectionHeader`, `AnimatedNumber`,
   and `GameSection`. `AppShell` is the persistent header/nav every route renders inside.
