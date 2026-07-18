@@ -1,8 +1,8 @@
-import { comparePlayers } from 'psn/stats';
+import { comparePlayers, sharedGamesDeepDive } from 'psn/stats';
 
 import { GlassCard } from '../components/GlassCard';
 import { MetricScoreboard } from '../components/MetricScoreboard';
-import { SharedGamesList } from '../components/SharedGamesList';
+import { SharedGamesDeepDive } from '../components/SharedGamesDeepDive';
 import { TrophyTiers } from '../components/TrophyTiers';
 import { VsHero } from '../components/VsHero';
 import { accentForKey } from '../config/accents';
@@ -44,6 +44,7 @@ export function ComparePage() {
   }
 
   const comparison = comparePlayers(snapshotA, snapshotB);
+  const deepDive = sharedGamesDeepDive(snapshotA, snapshotB);
   const accentA = accentForKey(playerA.key);
   const accentB = accentForKey(playerB.key);
 
@@ -57,8 +58,8 @@ export function ComparePage() {
       />
       <MetricScoreboard comparison={comparison} accentA={accentA} accentB={accentB} />
       <TrophyTiers comparison={comparison} accentA={accentA} accentB={accentB} />
-      <SharedGamesList
-        sharedGames={comparison.sharedGames}
+      <SharedGamesDeepDive
+        games={deepDive}
         nameA={playerA.displayName}
         nameB={playerB.displayName}
         accentA={accentA}

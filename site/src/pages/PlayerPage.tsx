@@ -1,21 +1,27 @@
 import { motion, useReducedMotion } from 'motion/react';
 import { formatMinutes } from 'psn/duration';
 import {
+  completionScoreboard,
   gamesWithMostTrophies,
   mostPlayedGames,
   platinumGames,
   playerTotals,
+  playtimeTrend,
   recentGames,
+  trophyPace,
 } from 'psn/stats';
 import type { PlayerSnapshot } from 'psn';
 
 import { GameSection, type GameEntry } from '../components/GameSection';
 import { GlassCard } from '../components/GlassCard';
+import { SectionHeader } from '../components/SectionHeader';
 import { StatTile } from '../components/StatTile';
+import { TrendChart } from '../components/TrendChart';
 import { TrophyBadge } from '../components/TrophyBadge';
+import { TrophyPaceList } from '../components/TrophyPaceList';
 import { accentForKey } from '../config/accents';
 import { playerByKey } from '../config/players';
-import { snapshotByKey } from '../data';
+import { snapshotByKey, snapshotsByKey } from '../data';
 import { duration, easing, fadeRise, staggerChildren } from '../motion/presets';
 import { formatDate } from '../format';
 
@@ -164,6 +170,16 @@ export function PlayerPage({ playerKey }: PlayerPageProps) {
   }
 
   const totals = playerTotals(snapshot);
+  const accent = accentForKey(playerKey);
+
+  const history = snapshotsByKey(playerKey);
+  const completion = completionScoreboard(snapshot);
+  const nearPlatinum: GameEntry[] = completion.nearPlatinum.map((t) => ({
+    id: t.npCommunicationId,
+    iconUrl: t.iconUrl,
+    name: t.name,
+    metric: `${t.progress}% · ${t.earnedTotal} trophies`,
+  }));
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
@@ -182,6 +198,32 @@ export function PlayerPage({ playerKey }: PlayerPageProps) {
           </motion.div>
         ))}
       </motion.div>
+
+      <section className="mb-10">
+        <SectionHeader title="Playtime trend" shapeIndex={0} />
+        <TrendChart points={playtimeTrend(history)} color={accent.colorVar} label="Playtime" />
+      </section>
+
+      <TrophyPaceList intervals={trophyPace(history)} shapeIndex={1} />
+
+      <section aria-label="Completion" className="mb-10">
+        <SectionHeader title="Completion" shapeIndex={2} />
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <StatTile label="Untouched backlog" value={completion.untouchedBacklog} />
+          <StatTile
+            label="Average completion"
+            value={completion.averageProgress}
+            format={(n) => `${Math.round(n)}%`}
+          />
+        </div>
+      </section>
+
+      <GameSection
+        heading="Near platinum"
+        games={nearPlatinum}
+        emptyLabel="No titles within reach of a platinum yet."
+        shapeIndex={3}
+      />
     </main>
   );
 }
