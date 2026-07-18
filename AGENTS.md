@@ -61,9 +61,12 @@ Run from the repo root via `pnpm --filter site <script>`, or `cd site && pnpm <s
 | Lint | `pnpm --filter site lint` |
 | Typecheck | `pnpm --filter site typecheck` |
 | Test | `pnpm --filter site test` |
+| Browser smoke test (E2E) | `pnpm --filter site test:e2e` |
 | Build | `pnpm --filter site build` |
 
 `site` has its own ESLint config, TypeScript config, and Vitest suite, run separately from the root package's. Root `pnpm test` only runs `test/` (the data-layer lib); it does not run `site`'s tests.
+
+`pnpm --filter site test:e2e` is a `@playwright/test` smoke suite (`site/e2e/`) that runs against the **production build** — its Playwright config runs `vite build` then serves `dist/` via `vite preview`, so a build-only break (e.g. a Node-only transitive import that breaks `vite build` while every jsdom test stays green) fails it, which the jsdom `pnpm --filter site test` run cannot catch. It needs a Playwright Chromium binary: locally the dev container pre-provisions one (`PLAYWRIGHT_BROWSERS_PATH`); CI runs it in a dedicated `site-e2e` job that installs Chromium via `playwright install --with-deps chromium`. The `e2e/` specs are excluded from the Vitest run, so `pnpm --filter site test` never launches a browser.
 
 ## Architecture Rules
 
