@@ -7,11 +7,11 @@ import { duration, easing } from '../motion/presets';
  * Route-level page transition wrapper. App keys one of these per
  * `location.pathname` inside an <AnimatePresence mode="wait">: the outgoing page
  * crossfades out, then the incoming page fades in and rises a few pixels
- * (composing the same feel as `fadeRise`). Under reduced motion the transition
- * collapses to zero duration and the rise is dropped, so the page is committed
- * at full opacity/position on first paint — never parked at a hidden initial
- * state. (MotionConfig reducedMotion="user" already neutralizes the transform
- * rise; gating the opacity here makes the whole transition truly instant.)
+ * (composing the same feel as `fadeRise`). Under reduced motion the animation
+ * props are dropped entirely, so there is no hidden initial state to paint: the
+ * page is committed at its natural opacity/position on first paint and exits
+ * instantly. (MotionConfig reducedMotion="user" neutralizes the transform rise
+ * but not opacity, so dropping the props here is what makes it truly instant.)
  */
 
 export interface RouteTransitionProps {
