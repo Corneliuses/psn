@@ -75,7 +75,10 @@ design-milestone work must build on it consistently:
   dark PlayStation palette (surface scale, PS-blue accent, decorative shape/trophy colors), type
   scale, radii, and glow shadows. Style with the generated token utilities (`bg-surface-0`,
   `text-ps-blue`, `shadow-glow`, …); never hardcode colors. The theme is dark-only, and uses no
-  Sony logos or trademarked assets — shape glyphs/colors evoke the vibe without imitation.
+  Sony logos or trademarked assets — shape glyphs/colors evoke the vibe without imitation. For small
+  blue *text*, use `text-ps-blue-text` (an AA-compliant lighter variant added in #20): the brand
+  `text-ps-blue` only clears WCAG AA at large sizes, so reserve it for large headings, glows, fills,
+  and the focus ring.
 - **Animation composes the shared presets in `site/src/motion/presets.ts`** (`fadeRise`,
   `staggerChildren`, `glowPulse`, plus tokenized `duration`/`easing`) rather than redefining
   timing inline. The app is wrapped in `<MotionConfig reducedMotion="user">`, so honour reduced
@@ -85,7 +88,11 @@ design-milestone work must build on it consistently:
   glow in every keyframe so an elevated surface keeps its drop shadow while pulsing.
 - **Every route renders inside `AppShell`** (`site/src/components/AppShell.tsx`), the persistent
   header/nav. Its nav links derive from `players` (never hardcode player keys) and the route
-  structure in `site/src/App.tsx` must stay intact.
+  structure in `site/src/App.tsx` must stay intact. Route-level page transitions are centralized
+  there (added in #20): `App.tsx` wraps the routed content in `<AnimatePresence mode="wait">` +
+  `RouteTransition` (keyed by `location.pathname`, with `<Routes location={location}>`), so each page
+  owns only its own internal entrance stagger — never add a second route-level transition, and keep
+  `AppShell` outside the animated region so the header stays persistent.
 - **Card-like UI composes the Phase 2 component kit** (`site/src/components/`, established in #16):
   `GlassCard` is the shared elevated glass surface every card builds on; `TrophyBadge`, `StatTile`,
   `SectionHeader`, and `AnimatedNumber` are the reusable primitives. Compose these rather than
