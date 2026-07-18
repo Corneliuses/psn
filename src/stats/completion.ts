@@ -24,11 +24,15 @@ export function completionScoreboard(snapshot: PlayerSnapshot): CompletionScoreb
     .filter((t) => t.progress >= NEAR_PLATINUM_THRESHOLD && !t.hasPlatinum)
     .sort((a, b) => b.progress - a.progress || a.name.localeCompare(b.name));
 
-  const trophiesByName = new Map(snapshot.trophyTitles.map((t) => [nameKey(t.name), t]));
-  const untouchedBacklog = snapshot.playedTitles.filter((played) => {
-    const trophies = trophiesByName.get(nameKey(played.name));
-    return trophies === undefined || trophies.earnedTotal === 0;
-  }).length;
+  // Normalized names with at least one earned trophy. Keyed as a Set (not a
+  // last-wins Map) so a title with separate PS4/PS5 trophy sets counts as
+  // touched when *any* variant has earned trophies, not just the last one seen.
+  const earnedNames = new Set(
+    snapshot.trophyTitles.filter((t) => t.earnedTotal > 0).map((t) => nameKey(t.name)),
+  );
+  const untouchedBacklog = snapshot.playedTitles.filter(
+    (played) => !earnedNames.has(nameKey(played.name)),
+  ).length;
 
   const averageProgress =
     snapshot.trophyTitles.length === 0

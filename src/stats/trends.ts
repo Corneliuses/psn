@@ -53,14 +53,16 @@ function tierDelta(later: TrophyCounts, earlier: TrophyCounts): TrophyCounts {
  * history.
  */
 export function trophyPace(snapshots: PlayerSnapshot[]): TrophyPaceInterval[] {
+  // Roll each snapshot up once (not twice per interval), so the interval loop is
+  // O(n) over snapshots rather than O(2·(n-1)) full reductions.
+  const trophyTotals = snapshots.map((snapshot) => playerTotals(snapshot).trophies);
+
   const intervals: TrophyPaceInterval[] = [];
   for (let i = 1; i < snapshots.length; i++) {
-    const earlier = snapshots[i - 1]!;
-    const later = snapshots[i]!;
-    const earned = tierDelta(playerTotals(later).trophies, playerTotals(earlier).trophies);
+    const earned = tierDelta(trophyTotals[i]!, trophyTotals[i - 1]!);
     intervals.push({
-      from: earlier.capturedAt,
-      to: later.capturedAt,
+      from: snapshots[i - 1]!.capturedAt,
+      to: snapshots[i]!.capturedAt,
       earned,
       total: totalTrophies(earned),
     });

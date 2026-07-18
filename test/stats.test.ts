@@ -239,6 +239,30 @@ describe('completionScoreboard', () => {
     expect(completionScoreboard(dad).untouchedBacklog).toBe(1);
   });
 
+  it('counts a played title as touched when any trophy variant has earned trophies', () => {
+    // Separate PS4/PS5 trophy sets normalize to the same name; one is untouched,
+    // the other has earned trophies. The played title must count as touched.
+    const snapshot: PlayerSnapshot = {
+      ...empty,
+      playedTitles: [{ ...dad.playedTitles[0]!, name: 'Rocket League®' }],
+      trophyTitles: [
+        {
+          ...dad.trophyTitles[0]!,
+          name: 'Rocket League',
+          earned: { bronze: 0, silver: 0, gold: 0, platinum: 0 },
+          earnedTotal: 0,
+        },
+        {
+          ...dad.trophyTitles[0]!,
+          name: 'Rocket League®',
+          earned: { bronze: 5, silver: 0, gold: 0, platinum: 0 },
+          earnedTotal: 5,
+        },
+      ],
+    };
+    expect(completionScoreboard(snapshot).untouchedBacklog).toBe(0);
+  });
+
   it('counts a played title with a zero-earned trophy title as untouched', () => {
     const snapshot: PlayerSnapshot = {
       ...empty,
