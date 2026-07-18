@@ -13,21 +13,30 @@ const SECTION_HEADINGS = ['Recent games', 'Most played', 'Most trophies', 'Plati
 
 /**
  * The placeholder fixture snapshots point game icons at https://image.example/…,
- * which does not resolve; those 404s are expected until real snapshots land in
- * #8. Any other console error or uncaught page error is a real regression.
+ * which does not resolve; those load failures are expected until real snapshots
+ * land in #8. Any other console error or uncaught page error is a real
+ * regression.
+ *
+ * A failed resource load surfaces as a console `error` whose *text* is generic
+ * ("Failed to load resource: net::ERR_…") — the offending URL lives only in
+ * `msg.location().url`. So the placeholder failures must be matched against the
+ * location URL, not just the text, or the allowlist silently never matches.
  */
-const isExpectedError = (text: string): boolean => text.includes('image.example');
+const PLACEHOLDER_IMAGE_HOST = 'image.example';
+const isExpected = (...parts: string[]): boolean =>
+  parts.some((p) => p.includes(PLACEHOLDER_IMAGE_HOST));
 
 /** Attach listeners that collect only the *unexpected* console/page errors. */
 function collectErrors(page: Page): string[] {
   const errors: string[] = [];
   page.on('console', (msg) => {
-    if (msg.type() === 'error' && !isExpectedError(msg.text())) {
-      errors.push(`console: ${msg.text()}`);
-    }
+    if (msg.type() !== 'error') return;
+    const url = msg.location().url;
+    if (isExpected(msg.text(), url)) return;
+    errors.push(`console: ${msg.text()}${url ? ` (${url})` : ''}`);
   });
   page.on('pageerror', (err) => {
-    if (!isExpectedError(err.message)) {
+    if (!isExpected(err.message)) {
       errors.push(`pageerror: ${err.message}`);
     }
   });
@@ -40,7 +49,10 @@ for (const key of playerKeys) {
   }) => {
     const errors = collectErrors(page);
 
-    await page.goto(`/${key}`);
+    // Wait for the network to settle so every load-time error (including the
+    // tolerated placeholder-image failures) has actually surfaced before we
+    // assert on `errors`; asserting after only `load` races those failures.
+    await page.goto(`/${key}`, { waitUntil: 'networkidle' });
 
     // All four section headings render (level-2 headings from SectionHeader).
     for (const heading of SECTION_HEADINGS) {
@@ -53,7 +65,8 @@ for (const key of playerKeys) {
     const metric = page.getByText(/\d+h \d+m|\d+ trophies/).first();
     await expect(metric).toBeVisible();
 
-    // No unexpected console/page errors (placeholder image 404s are tolerated).
+    // No unexpected console/page errors (placeholder image load failures are
+    // tolerated by host, real JS/render/asset errors are not).
     expect(errors, `unexpected browser errors on /${key}`).toEqual([]);
   });
 }
