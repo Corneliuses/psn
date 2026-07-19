@@ -3,11 +3,12 @@ import { sampleSnapshot } from 'psn';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { PlayerPage } from './PlayerPage';
-import { snapshotByKey } from '../data';
+import { snapshotByKey, snapshotsByKey } from '../data';
 
 vi.mock('../data');
 
 const snapshotByKeyMock = vi.mocked(snapshotByKey);
+const snapshotsByKeyMock = vi.mocked(snapshotsByKey);
 
 afterEach(() => {
   vi.resetAllMocks();
@@ -16,11 +17,21 @@ afterEach(() => {
 describe('PlayerPage', () => {
   it('renders the four stat sections for a player with a snapshot', () => {
     snapshotByKeyMock.mockReturnValue(sampleSnapshot('dad', 'Dad'));
+    snapshotsByKeyMock.mockReturnValue([sampleSnapshot('dad', 'Dad')]);
 
     render(<PlayerPage playerKey="dad" />);
 
     expect(screen.getByRole('heading', { level: 1, name: /Dad/ })).toBeInTheDocument();
-    for (const heading of ['Recent games', 'Most played', 'Most trophies', 'Platinum games']) {
+    for (const heading of [
+      'Recent games',
+      'Most played',
+      'Most trophies',
+      'Platinum games',
+      'Playtime trend',
+      'Trophy pace',
+      'Completion',
+      'Near platinum',
+    ]) {
       expect(screen.getByRole('heading', { level: 2, name: heading })).toBeInTheDocument();
     }
 
@@ -37,6 +48,7 @@ describe('PlayerPage', () => {
 
   it('shows a summary row of stat tiles with final count-up values', () => {
     snapshotByKeyMock.mockReturnValue(sampleSnapshot('dad', 'Dad'));
+    snapshotsByKeyMock.mockReturnValue([sampleSnapshot('dad', 'Dad')]);
 
     render(<PlayerPage playerKey="dad" />);
 

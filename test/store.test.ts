@@ -5,7 +5,12 @@ import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { sampleSnapshot } from '../src/fixtures/sample.js';
-import { listSnapshotDates, readLatestSnapshot, writeSnapshot } from '../src/snapshot/store.js';
+import {
+  listSnapshotDates,
+  readAllSnapshots,
+  readLatestSnapshot,
+  writeSnapshot,
+} from '../src/snapshot/store.js';
 
 let dir: string;
 beforeEach(() => {
@@ -42,5 +47,25 @@ describe('snapshot store', () => {
 
   it('returns an empty date list for unknown players', () => {
     expect(listSnapshotDates(dir, 'stranger')).toEqual([]);
+  });
+});
+
+describe('readAllSnapshots', () => {
+  it('reads every dated snapshot oldest → newest, excluding latest.json', () => {
+    writeSnapshot(dir, sampleSnapshot('dad', 'Dad', '2026-07-13T04:00:00.000Z'));
+    writeSnapshot(dir, sampleSnapshot('dad', 'Dad', '2026-07-15T04:00:00.000Z'));
+    writeSnapshot(dir, sampleSnapshot('dad', 'Dad', '2026-07-14T04:00:00.000Z'));
+
+    const history = readAllSnapshots(dir, 'dad');
+    // Three dated files, not four — latest.json (a mirror) is never counted.
+    expect(history.map((s) => s.capturedAt)).toEqual([
+      '2026-07-13T04:00:00.000Z',
+      '2026-07-14T04:00:00.000Z',
+      '2026-07-15T04:00:00.000Z',
+    ]);
+  });
+
+  it('returns an empty array for an unknown player', () => {
+    expect(readAllSnapshots(dir, 'stranger')).toEqual([]);
   });
 });
