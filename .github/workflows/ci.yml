@@ -41,3 +41,29 @@ jobs:
       - run: pnpm --filter site test
 
       - run: pnpm --filter site build
+
+  # Browser-level smoke test: drives the real production bundle (vite build +
+  # vite preview) in headless Chromium, catching build-only breaks that the
+  # jsdom suite in `verify` cannot see (see #14). Runs in its own job so the
+  # Chromium provisioning stays isolated.
+  site-e2e:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright Chromium (+ OS deps)
+        run: pnpm --filter site exec playwright install --with-deps chromium
+
+      - run: pnpm --filter site test:e2e
