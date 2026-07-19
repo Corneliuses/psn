@@ -47,6 +47,13 @@ jobs:
           NPSSO_BRAIDAN: ${{ secrets.NPSSO_BRAIDAN }}
 
       - name: Commit updated snapshots
+        # Run even when the sync step failed, so a healthy player's fresh
+        # snapshot is still committed when the *other* player's token is expired
+        # (sync.ts isolates per-player failures). The job still exits non-zero
+        # from the failed sync step, so the failure notification/alert stands —
+        # this only rescues the data that did sync. `!cancelled()` (not
+        # `always()`) so a manual cancel never pushes a half-written tree.
+        if: ${{ !cancelled() }}
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
