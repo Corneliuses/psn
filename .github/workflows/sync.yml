@@ -58,4 +58,8 @@ jobs:
           # [skip ci] keeps this data-only commit from re-running the full CI
           # matrix on main — no source changed, so there's nothing to verify.
           git commit -m 'chore(data): daily PSN sync [skip ci]'
-          git push
+          # Push explicitly to the default branch. Scheduled/dispatch runs check
+          # out main on a branch (checkout@v4 uses `-B main`), so a bare `git
+          # push` already works — HEAD:main is just belt-and-suspenders against
+          # any future change that leaves HEAD detached.
+          git push origin HEAD:main
