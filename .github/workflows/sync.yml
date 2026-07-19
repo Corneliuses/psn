@@ -1,0 +1,59 @@
+name: Weekly sync
+
+# Automated weekly PSN snapshot sync. Runs `pnpm sync` with the NPSSO tokens
+# stored as repo secrets and commits any changed files under data/ back to main,
+# so snapshot history accumulates without a manual run (see issue #8).
+#
+# Alerting: we deliberately build no custom notifications. `src/cli/sync.ts`
+# isolates each player's failure and exits non-zero if any player failed, which
+# fails this workflow — GitHub's own workflow-failure notifications are the alert.
+#
+# The Node/pnpm setup steps below are kept byte-for-byte identical to
+# .github/workflows/ci.yml to avoid drift between the two workflows.
+
+on:
+  # Mondays at 08:00 UTC: the first snapshot of the week, capturing the prior
+  # weekend's play. The exact time isn't load-bearing (snapshots are at most one
+  # per day) — adjust freely.
+  schedule:
+    - cron: '0 8 * * 1'
+  # Manual trigger, e.g. to verify secrets after refreshing an expired token.
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # required to push the data commit back to main
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Sync PSN snapshots
+        run: pnpm sync
+        env:
+          NPSSO_DAD: ${{ secrets.NPSSO_DAD }}
+          NPSSO_BRAIDAN: ${{ secrets.NPSSO_BRAIDAN }}
+
+      - name: Commit updated snapshots
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          if [ -z "$(git status --porcelain data/)" ]; then
+            echo 'No snapshot changes this week — nothing to commit.'
+            exit 0
+          fi
+          git add data/
+          # [skip ci] keeps this data-only commit from re-running the full CI
+          # matrix on main — no source changed, so there's nothing to verify.
+          git commit -m 'chore(data): weekly PSN sync [skip ci]'
+          git push

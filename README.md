@@ -27,6 +27,8 @@ pnpm sync --dry-run     # exercise the pipeline with sample data, no credentials
 
 Players are declared in [`psn.config.json`](./psn.config.json). Each player either signs in with their own token (`mode: "npsso"`) or is fetched through another account's session (`mode: "friend"`, requires friendship and open privacy settings).
 
+**Automated weekly sync**: the [`Weekly sync`](./.github/workflows/sync.yml) GitHub Actions workflow runs `pnpm sync` every Monday (08:00 UTC) and commits any changed snapshots under `data/` back to `main`, so history accumulates without a manual run. It reads the NPSSO tokens from repo secrets — add them at **repo Settings → Secrets and variables → Actions** as `NPSSO_DAD` and `NPSSO_BRAIDAN` (an agent can't set these for you). Because the NPSSO tokens last ~2 months (see above), the workflow will start failing with a per-player auth error when one expires; GitHub's workflow-failure notification is your cue to refresh the affected token and re-run the workflow (it also has a manual "Run workflow" trigger for testing).
+
 ## Commands
 
 | Purpose | Command |
