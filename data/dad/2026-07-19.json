@@ -4,7 +4,7 @@
     "key": "dad",
     "displayName": "Dad"
   },
-  "capturedAt": "2026-07-19T03:53:57.293Z",
+  "capturedAt": "2026-07-19T11:57:18.421Z",
   "playedTitles": [
     {
       "titleId": "CUSA00001_00",
@@ -2508,11 +2508,11 @@
       "name": "LEGO® Batman™: Legacy of the Dark Knight",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202508/1316/3302f35b66691aa405aee31624c0c95fe73081be8e0c75bb.png",
       "category": "ps5_native_game",
-      "playCount": 27,
-      "playDurationIso": "PT17H38M50S",
-      "playDurationMinutes": 1059,
+      "playCount": 28,
+      "playDurationIso": "PT19H29M30S",
+      "playDurationMinutes": 1170,
       "firstPlayed": "2026-06-24T05:11:56.370000Z",
-      "lastPlayed": "2026-07-18T23:05:32.890000Z"
+      "lastPlayed": "2026-07-19T04:59:11.740000Z"
     },
     {
       "titleId": "PPSA17085_00",
@@ -2706,11 +2706,11 @@
       "name": "Like a Dragon: Pirate Yakuza in Hawaii",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202408/1401/5cbfb4502807fef739169f7e9bdd0cd615d7a86ce4e6af82.png",
       "category": "ps5_native_game",
-      "playCount": 20,
-      "playDurationIso": "PT5H6M32S",
-      "playDurationMinutes": 307,
+      "playCount": 21,
+      "playDurationIso": "PT5H17M37S",
+      "playDurationMinutes": 318,
       "firstPlayed": "2026-07-04T04:42:08.110000Z",
-      "lastPlayed": "2026-07-18T14:34:03.000000Z"
+      "lastPlayed": "2026-07-19T05:22:48.160000Z"
     },
     {
       "titleId": "PPSA25153_00",

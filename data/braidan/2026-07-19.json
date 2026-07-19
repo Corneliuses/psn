@@ -4,7 +4,7 @@
     "key": "braidan",
     "displayName": "Braidan"
   },
-  "capturedAt": "2026-07-19T03:53:57.996Z",
+  "capturedAt": "2026-07-19T11:57:19.337Z",
   "playedTitles": [
     {
       "titleId": "CUSA00079_00",
@@ -341,11 +341,11 @@
       "name": "NBA 2K Playgrounds 2",
       "imageUrl": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA13619_00/6/i_39d47c5fc755ad6a933ae11d9deeef0e7b3d5af2c4ebe46e600b588bbb8d008f/i/icon0.png",
       "category": "ps4_game",
-      "playCount": 15,
-      "playDurationIso": "PT11H20M30S",
-      "playDurationMinutes": 681,
+      "playCount": 16,
+      "playDurationIso": "PT11H32M2S",
+      "playDurationMinutes": 692,
       "firstPlayed": "2024-01-19T19:08:20.470000Z",
-      "lastPlayed": "2026-07-18T04:34:07.530000Z"
+      "lastPlayed": "2026-07-19T05:11:24.140000Z"
     },
     {
       "titleId": "CUSA13594_00",
@@ -1068,10 +1068,10 @@
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202508/1316/3302f35b66691aa405aee31624c0c95fe73081be8e0c75bb.png",
       "category": "ps5_native_game",
       "playCount": 13,
-      "playDurationIso": "PT38H54M32S",
-      "playDurationMinutes": 2335,
+      "playDurationIso": "PT40H44M57S",
+      "playDurationMinutes": 2445,
       "firstPlayed": "2026-05-19T16:29:25.170000Z",
-      "lastPlayed": "2026-07-18T21:13:46.360000Z"
+      "lastPlayed": "2026-07-19T00:56:01.560000Z"
     },
     {
       "titleId": "PPSA18571_00",
