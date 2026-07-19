@@ -1,6 +1,6 @@
-name: Weekly sync
+name: Daily sync
 
-# Automated weekly PSN snapshot sync. Runs `pnpm sync` with the NPSSO tokens
+# Automated daily PSN snapshot sync. Runs `pnpm sync` with the NPSSO tokens
 # stored as repo secrets and commits any changed files under data/ back to main,
 # so snapshot history accumulates without a manual run (see issue #8).
 #
@@ -12,11 +12,13 @@ name: Weekly sync
 # .github/workflows/ci.yml to avoid drift between the two workflows.
 
 on:
-  # Mondays at 08:00 UTC: the first snapshot of the week, capturing the prior
-  # weekend's play. The exact time isn't load-bearing (snapshots are at most one
-  # per day) — adjust freely.
+  # Daily at 11:00 UTC — 6:00 AM US Central during daylight time (CDT, most of
+  # the year). GitHub cron is UTC-only and does not follow DST, so during
+  # standard time (CST) this lands at 5:00 AM Central. The exact time isn't
+  # load-bearing (writeSnapshot keeps at most one snapshot per calendar day, so
+  # a second run the same day just refreshes it) — adjust the hour freely.
   schedule:
-    - cron: '0 8 * * 1'
+    - cron: '0 11 * * *'
   # Manual trigger, e.g. to verify secrets after refreshing an expired token.
   workflow_dispatch:
 
@@ -55,5 +57,5 @@ jobs:
           git add data/
           # [skip ci] keeps this data-only commit from re-running the full CI
           # matrix on main — no source changed, so there's nothing to verify.
-          git commit -m 'chore(data): weekly PSN sync [skip ci]'
+          git commit -m 'chore(data): daily PSN sync [skip ci]'
           git push
