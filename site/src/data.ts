@@ -1,4 +1,5 @@
 import type { PlayerSnapshot } from 'psn';
+import type { SuggestionsFile } from 'psn/suggestions';
 
 // FIXTURE DATA: data/dad/latest.json and data/braidan/latest.json are
 // placeholder snapshots (see sampleSnapshot() in the root package), not
@@ -6,6 +7,7 @@ import type { PlayerSnapshot } from 'psn';
 // typechecks; issue #8 (auto-sync) replaces them with real snapshots.
 import dadSnapshot from '../../data/dad/latest.json';
 import braidanSnapshot from '../../data/braidan/latest.json';
+import suggestions from '../../data/suggestions.json';
 
 const snapshots: Partial<Record<string, PlayerSnapshot>> = {
   dad: dadSnapshot as PlayerSnapshot,
@@ -14,6 +16,15 @@ const snapshots: Partial<Record<string, PlayerSnapshot>> = {
 
 export function snapshotByKey(key: string): PlayerSnapshot | undefined {
   return snapshots[key];
+}
+
+/**
+ * Game suggestions built at sync time (see src/suggestions/) from the top
+ * genres both players share. `by_genre` is empty until a real RAWG-backed
+ * sync has run.
+ */
+export function suggestionsData(): SuggestionsFile {
+  return suggestions as SuggestionsFile;
 }
 
 // Build-time snapshot history. The static site can't read the filesystem at

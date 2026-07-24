@@ -1,6 +1,7 @@
 import { players } from './config/players';
 
 export const COMPARE_PATH = '/compare';
+export const DISCOVER_PATH = '/discover';
 
 export function playerPath(key: string): string {
   return `/${key}`;

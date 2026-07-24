@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router';
 
 import { App } from './App';
 import { players } from './config/players';
-import { COMPARE_PATH, playerPath } from './routes';
+import { COMPARE_PATH, DISCOVER_PATH, playerPath } from './routes';
 
 describe('routing', () => {
   it('renders the splash page at /', () => {
@@ -39,6 +39,15 @@ describe('routing', () => {
     expect(
       screen.getByRole('heading', { level: 1, name: `${a!.displayName} versus ${b!.displayName}` }),
     ).toBeInTheDocument();
+  });
+
+  it('renders the discover page at /discover', () => {
+    render(
+      <MemoryRouter initialEntries={[DISCOVER_PATH]}>
+        <App />
+      </MemoryRouter>,
+    );
+    expect(screen.getByRole('heading', { level: 1, name: 'Discover' })).toBeInTheDocument();
   });
 
   it('renders a not-found page for an unmatched route', () => {
