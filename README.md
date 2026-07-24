@@ -29,6 +29,8 @@ Players are declared in [`psn.config.json`](./psn.config.json). Each player eith
 
 **Automated daily sync**: the [`Daily sync`](./.github/workflows/sync.yml) GitHub Actions workflow runs `pnpm sync` every day at 11:00 UTC (6:00 AM US Central during daylight time; 5:00 AM during standard time — GitHub cron is UTC-only and doesn't follow DST) and commits any changed snapshots under `data/` back to `main`, so history accumulates without a manual run. It reads the NPSSO tokens from repo secrets — add them at **repo Settings → Secrets and variables → Actions** as `NPSSO_DAD` and `NPSSO_BRAIDAN` (an agent can't set these for you). Because the NPSSO tokens last ~2 months (see above), the workflow will start failing with a per-player auth error when one expires; GitHub's workflow-failure notification is your cue to refresh the affected token and re-run the workflow (it also has a manual "Run workflow" trigger for testing).
 
+**Game suggestions** (`src/suggestions/`): after the PSN sync, `pnpm sync` refreshes `data/suggestions.json` — unowned games suggested from the top genres both players share, sourced from the [RAWG](https://rawg.io) API (see the [#9 spike write-up](./docs/game-suggestions-spike.md) for why RAWG was chosen). This needs a `RAWG_API_KEY` (free at [rawg.io/apidocs](https://rawg.io/apidocs)) in `.env` locally, or as the `RAWG_API_KEY` repo secret for the daily sync workflow; without it, this step is skipped with a warning rather than failing the sync. Pass `--no-suggestions` to skip it explicitly. A `data/suggestions-cache.json` (title → RAWG genres) is committed alongside it so repeat syncs only fetch genres for newly-seen titles. For manual corrections (hiding a misclassified game, adding an edge case RAWG tags poorly), add a gitignored `data/suggestions-overrides.json` — see `src/suggestions/overrides.ts` for its shape.
+
 ## Commands
 
 | Purpose | Command |
@@ -36,6 +38,7 @@ Players are declared in [`psn.config.json`](./psn.config.json). Each player eith
 | Lint / typecheck / test / build | `pnpm lint` / `pnpm typecheck` / `pnpm test` / `pnpm build` |
 | Sync all players | `pnpm sync` |
 | Sync one player | `pnpm sync --player braidan` |
+| Sync without refreshing suggestions | `pnpm sync --no-suggestions` |
 | Credential-free pipeline check | `pnpm sync --dry-run` |
 
 ## Design language

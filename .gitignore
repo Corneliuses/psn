@@ -11,3 +11,6 @@ playwright-report/
 .env
 .env.*
 !.env.example
+
+# Local-only curated corrections to data/suggestions.json (see src/suggestions/overrides.ts)
+data/suggestions-overrides.json
