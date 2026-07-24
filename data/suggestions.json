@@ -2,33 +2,198 @@
   "by_genre": {
     "Action": [
       {
-        "name": "Returnal",
-        "rawgId": 326243,
-        "rating": 86,
-        "released": "2021-04-30"
+        "name": "Uncharted 2: Among Thieves",
+        "rawgId": 22513,
+        "rating": 96,
+        "released": "2009-10-13"
       },
       {
-        "name": "Ghost of Tsushima",
-        "rawgId": 422635,
-        "rating": 83,
-        "released": "2020-07-17"
+        "name": "The Last Of Us",
+        "rawgId": 3990,
+        "rating": 95,
+        "released": "2013-06-14"
+      },
+      {
+        "name": "Red Dead Redemption",
+        "rawgId": 4544,
+        "rating": 95,
+        "released": "2010-05-18"
+      },
+      {
+        "name": "Elden Ring",
+        "rawgId": 326243,
+        "rating": 95,
+        "released": "2022-02-25"
+      },
+      {
+        "name": "Resident Evil Code: Veronica",
+        "rawgId": 40841,
+        "rating": 94,
+        "released": "2000-02-03"
+      },
+      {
+        "name": "Grand Theft Auto: Vice City",
+        "rawgId": 430,
+        "rating": 94,
+        "released": "2002-10-27"
+      },
+      {
+        "name": "Quake",
+        "rawgId": 54491,
+        "rating": 94,
+        "released": "1996-06-22"
+      },
+      {
+        "name": "BioShock Infinite",
+        "rawgId": 4062,
+        "rating": 94,
+        "released": "2013-03-26"
+      },
+      {
+        "name": "The Elder Scrolls V: Skyrim",
+        "rawgId": 5679,
+        "rating": 94,
+        "released": "2011-11-11"
+      },
+      {
+        "name": "Batman: Arkham City",
+        "rawgId": 28623,
+        "rating": 94,
+        "released": "2011-10-18"
+      }
+    ],
+    "Adventure": [
+      {
+        "name": "Baldur's Gate III",
+        "rawgId": 324997,
+        "rating": 97,
+        "released": "2023-08-03"
+      },
+      {
+        "name": "The Last Of Us",
+        "rawgId": 3990,
+        "rating": 95,
+        "released": "2013-06-14"
+      },
+      {
+        "name": "Resident Evil Code: Veronica",
+        "rawgId": 40841,
+        "rating": 94,
+        "released": "2000-02-03"
+      },
+      {
+        "name": "Persona 5 Royal",
+        "rawgId": 339958,
+        "rating": 94,
+        "released": "2020-03-31"
+      },
+      {
+        "name": "Hades",
+        "rawgId": 274755,
+        "rating": 93,
+        "released": "2020-09-17"
+      },
+      {
+        "name": "Persona 5",
+        "rawgId": 49,
+        "rating": 93,
+        "released": "2016-09-15"
+      },
+      {
+        "name": "The Walking Dead: Season 1",
+        "rawgId": 23027,
+        "rating": 92,
+        "released": "2012-04-23"
+      },
+      {
+        "name": "OKAMI HD",
+        "rawgId": 47326,
+        "rating": 92,
+        "released": "2017-12-12"
+      },
+      {
+        "name": "The Witcher 3 Wild Hunt - Complete Edition",
+        "rawgId": 257255,
+        "rating": 92,
+        "released": "2016-08-30"
+      },
+      {
+        "name": "Journey",
+        "rawgId": 3254,
+        "rating": 92,
+        "released": "2012-03-13"
       }
     ],
     "RPG": [
       {
+        "name": "Baldur's Gate III",
+        "rawgId": 324997,
+        "rating": 97,
+        "released": "2023-08-03"
+      },
+      {
+        "name": "Divinity: Original Sin 2",
+        "rawgId": 10073,
+        "rating": 95,
+        "released": "2017-09-14"
+      },
+      {
+        "name": "Elden Ring",
+        "rawgId": 326243,
+        "rating": 95,
+        "released": "2022-02-25"
+      },
+      {
+        "name": "The Elder Scrolls V: Skyrim",
+        "rawgId": 5679,
+        "rating": 94,
+        "released": "2011-11-11"
+      },
+      {
+        "name": "Divinity: Original Sin 2 - Definitive Edition",
+        "rawgId": 59199,
+        "rating": 94,
+        "released": "2018-08-31"
+      },
+      {
+        "name": "Divinity: Original Sin - Enhanced Edition",
+        "rawgId": 16359,
+        "rating": 94,
+        "released": "2015-10-27"
+      },
+      {
         "name": "Persona 5 Royal",
-        "rawgId": 326900,
+        "rawgId": 339958,
         "rating": 94,
         "released": "2020-03-31"
+      },
+      {
+        "name": "Hades",
+        "rawgId": 274755,
+        "rating": 93,
+        "released": "2020-09-17"
+      },
+      {
+        "name": "Persona 5",
+        "rawgId": 49,
+        "rating": 93,
+        "released": "2016-09-15"
+      },
+      {
+        "name": "Demon's Souls (2020)",
+        "rawgId": 452648,
+        "rating": 92,
+        "released": "2020-11-12"
       }
     ]
   },
   "shared_genres": [
     "Action",
+    "Adventure",
     "RPG"
   ],
   "metadata": {
-    "generated_at": "2026-07-15T00:00:00.000Z",
+    "generated_at": "2026-07-24T12:30:48.910Z",
     "rawg_base_url": "https://rawg.io",
     "attribution": "Data from RAWG.io",
     "build": "v0.1.0"
