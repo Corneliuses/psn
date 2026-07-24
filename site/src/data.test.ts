@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { snapshotByKey, snapshotsByKey } from './data';
+import { snapshotByKey, snapshotsByKey, suggestionsData } from './data';
 
 describe('snapshotByKey', () => {
   it('loads a PlayerSnapshot for each configured player via Vite JSON import', () => {
@@ -25,5 +25,13 @@ describe('snapshotsByKey', () => {
 
   it('returns an empty array for an unconfigured key', () => {
     expect(snapshotsByKey('stranger')).toEqual([]);
+  });
+});
+
+describe('suggestionsData', () => {
+  it('loads the committed data/suggestions.json via Vite JSON import', () => {
+    const data = suggestionsData();
+    expect(data.metadata.rawg_base_url).toBe('https://rawg.io');
+    expect(Array.isArray(data.shared_genres)).toBe(true);
   });
 });

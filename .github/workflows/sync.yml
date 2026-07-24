@@ -45,6 +45,9 @@ jobs:
         env:
           NPSSO_DAD: ${{ secrets.NPSSO_DAD }}
           NPSSO_BRAIDAN: ${{ secrets.NPSSO_BRAIDAN }}
+          # Refreshes data/suggestions.json (see src/suggestions/); if unset,
+          # sync.ts skips that step with a warning rather than failing.
+          RAWG_API_KEY: ${{ secrets.RAWG_API_KEY }}
 
       - name: Commit updated snapshots
         # Run even when the sync step failed, so a healthy player's fresh

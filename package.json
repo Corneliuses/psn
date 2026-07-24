@@ -13,7 +13,8 @@
   "exports": {
     ".": "./src/index.ts",
     "./stats": "./src/stats/index.ts",
-    "./duration": "./src/psn/duration.ts"
+    "./duration": "./src/psn/duration.ts",
+    "./suggestions": "./src/suggestions/index.ts"
   },
   "scripts": {
     "lint": "eslint .",

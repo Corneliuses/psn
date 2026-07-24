@@ -7,6 +7,7 @@
 import type { RawPlayedTitle } from '../psn/map.js';
 import { mapPlayedTitle, mapTrophyTitle } from '../psn/map.js';
 import type { PlayerSnapshot } from '../psn/models.js';
+import type { SuggestionsFile } from '../suggestions/types.js';
 import type { TrophyTitle as PsnTrophyTitle } from 'psn-api';
 
 function rawPlayed(overrides: Partial<RawPlayedTitle> & Pick<RawPlayedTitle, 'titleId' | 'name'>): RawPlayedTitle {
@@ -89,5 +90,28 @@ export function sampleSnapshot(key: string, displayName: string, capturedAt = '2
     capturedAt,
     playedTitles: raw.played.map(mapPlayedTitle).sort((a, b) => a.titleId.localeCompare(b.titleId)),
     trophyTitles: raw.trophies.map(mapTrophyTitle).sort((a, b) => a.npCommunicationId.localeCompare(b.npCommunicationId)),
+  };
+}
+
+/**
+ * Sample `data/suggestions.json` shape for tests and as the initial
+ * committed file before a real RAWG-backed sync has run.
+ */
+export function sampleSuggestions(generatedAt = '2026-07-15T00:00:00.000Z'): SuggestionsFile {
+  return {
+    by_genre: {
+      Action: [
+        { name: 'Returnal', rawgId: 326243, rating: 86, released: '2021-04-30' },
+        { name: 'Ghost of Tsushima', rawgId: 422635, rating: 83, released: '2020-07-17' },
+      ],
+      RPG: [{ name: 'Persona 5 Royal', rawgId: 326900, rating: 94, released: '2020-03-31' }],
+    },
+    shared_genres: ['Action', 'RPG'],
+    metadata: {
+      generated_at: generatedAt,
+      rawg_base_url: 'https://rawg.io',
+      attribution: 'Data from RAWG.io',
+      build: 'v0.1.0',
+    },
   };
 }
