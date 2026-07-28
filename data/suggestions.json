@@ -44,16 +44,16 @@
         "released": "1996-06-22"
       },
       {
-        "name": "Batman: Arkham City",
-        "rawgId": 28623,
-        "rating": 94,
-        "released": "2011-10-18"
-      },
-      {
         "name": "The Elder Scrolls V: Skyrim",
         "rawgId": 5679,
         "rating": 94,
         "released": "2011-11-11"
+      },
+      {
+        "name": "Batman: Arkham City",
+        "rawgId": 28623,
+        "rating": 94,
+        "released": "2011-10-18"
       },
       {
         "name": "BioShock Infinite",
@@ -150,16 +150,16 @@
         "released": "2011-11-11"
       },
       {
-        "name": "Divinity: Original Sin 2 - Definitive Edition",
-        "rawgId": 59199,
-        "rating": 94,
-        "released": "2018-08-31"
-      },
-      {
         "name": "Divinity: Original Sin - Enhanced Edition",
         "rawgId": 16359,
         "rating": 94,
         "released": "2015-10-27"
+      },
+      {
+        "name": "Divinity: Original Sin 2 - Definitive Edition",
+        "rawgId": 59199,
+        "rating": 94,
+        "released": "2018-08-31"
       },
       {
         "name": "Persona 5 Royal",
@@ -193,7 +193,7 @@
     "RPG"
   ],
   "metadata": {
-    "generated_at": "2026-07-27T13:38:47.460Z",
+    "generated_at": "2026-07-28T12:53:08.393Z",
     "rawg_base_url": "https://rawg.io",
     "attribution": "Data from RAWG.io",
     "build": "v0.1.0"
