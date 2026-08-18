@@ -1,6 +1,6 @@
 # psn
 
-Father–son PlayStation stats tracker for two players (Dad and Braidan): syncs play history and trophy data from PSN into committed JSON snapshots, derives displayable stats, and renders them as a website (`site/`) with a splash landing, per-player pages, and a head-to-head comparison view in a dark, PlayStation-vibe UI.
+PlayStation stats tracker for the players configured in `psn.config.json` (currently Dad, Braidan, and Nadia): syncs play history and trophy data from PSN into committed JSON snapshots, derives displayable stats, and renders them as a website (`site/`) with a splash landing, per-player pages, and a head-to-head comparison view in a dark, PlayStation-vibe UI.
 
 ## Repository Structure
 
@@ -159,8 +159,8 @@ Before a view is done, confirm all of:
 
 ## Security & Secrets
 
-- NPSSO tokens live in `.env` (gitignored) or CI secrets, named per `psn.config.json` (`NPSSO_DAD`, `NPSSO_BRAIDAN`). Never commit, log, or embed tokens in error messages — `PsnAuthError` names the env var, never the value.
-- `data/` holds only *real* synced snapshots. Dry-run output is fixture data and must not be committed as if it were real. **Exception:** `data/dad/latest.json` and `data/braidan/latest.json` are currently committed *fixture* snapshots (generated via `sampleSnapshot()`), added in #4 so `site/` has something to import before real sync (#8) lands. Once #8 runs for real, these must be overwritten with genuine synced data, not left in place.
+- NPSSO tokens live in `.env` (gitignored) or CI secrets, one per player named in `psn.config.json` (`NPSSO_DAD`, `NPSSO_BRAIDAN`, `NPSSO_NADIA`). Never commit, log, or embed tokens in error messages — `PsnAuthError` names the env var, never the value.
+- `data/` holds only *real* synced snapshots. Dry-run output is fixture data and must not be committed as if it were real. **Exception:** `data/nadia/latest.json` is a committed *fixture* snapshot (generated via `sampleSnapshot()`), added in #41 so `site/` has something to render for her before her first real sync. The daily sync workflow overwrites it with genuine data once the `NPSSO_NADIA` secret is set; it must not be left in place after that. `data/dad/` and `data/braidan/` hold real synced data — never overwrite them with fixture output (note that `pnpm sync --dry-run` does exactly that — see #49 — so revert `data/` after a dry run).
 
 ## Working Rules
 

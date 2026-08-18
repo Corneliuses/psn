@@ -105,6 +105,10 @@ export function topGenresForPlayer(profile: GenreMinutes, playerKey: string, cou
 /**
  * Genres every player has time in, ranked by combined minutes, capped to the
  * top `count` — the genres suggestions are fetched for.
+ *
+ * NOTE: the all-players rule narrows as the roster grows — one player with no
+ * time in a genre drops it for everyone. See #50 for replacing it with a
+ * threshold or weighted ranking.
  */
 export function sharedGenres(profile: GenreMinutes, count = 3): string[] {
   const players = Object.keys(profile);

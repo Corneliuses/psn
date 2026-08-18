@@ -1,8 +1,11 @@
 /**
- * Representative sample data for two players with overlapping and disjoint
- * game libraries. Used by unit tests and by `pnpm sync --dry-run` so the
- * whole pipeline runs with zero PSN credentials. Shapes mirror what
- * psn-api returns (see src/psn/map.ts raw types).
+ * Representative sample data for every configured player, with deliberately
+ * overlapping and disjoint game libraries. Used by unit tests and by
+ * `pnpm sync --dry-run` so the whole pipeline runs with zero PSN credentials.
+ * Shapes mirror what psn-api returns (see src/psn/map.ts raw types).
+ *
+ * Adding a player to psn.config.json means adding them here too — `sync
+ * --dry-run` throws for any key this file doesn't know.
  */
 import type { RawPlayedTitle } from '../psn/map.js';
 import { mapPlayedTitle, mapTrophyTitle } from '../psn/map.js';
@@ -71,9 +74,23 @@ const BRAIDAN_TROPHIES: PsnTrophyTitle[] = [
   rawTrophy({ npCommunicationId: 'NPWR22859_00', trophyTitleName: 'God of War Ragnarök', earnedTrophies: { bronze: 9, silver: 2, gold: 0, platinum: 0 }, definedTrophies: { bronze: 26, silver: 15, gold: 4, platinum: 1 }, progress: 21 }),
 ];
 
+const NADIA_PLAYED: RawPlayedTitle[] = [
+  rawPlayed({ titleId: 'CUSA01433_00', name: 'Rocket League®', category: 'ps4_game', playDuration: 'PT58H21M12S', playCount: 121, lastPlayedDateTime: '2026-07-14T18:40:00Z' }),
+  rawPlayed({ titleId: 'PPSA13195_00', name: 'Astro Bot', playDuration: 'PT47H55M6S', playCount: 63, lastPlayedDateTime: '2026-07-12T20:15:00Z' }),
+  rawPlayed({ titleId: 'PPSA02342_00', name: 'Gran Turismo 7', playDuration: 'PT19H27M43S', playCount: 22, lastPlayedDateTime: '2026-06-28T15:05:00Z' }),
+  rawPlayed({ titleId: 'PPSA03078_00', name: 'Stray', playDuration: 'PT9H14M28S', playCount: 11, lastPlayedDateTime: '2026-07-08T22:30:00Z' }),
+];
+
+const NADIA_TROPHIES: PsnTrophyTitle[] = [
+  rawTrophy({ npCommunicationId: 'NPWR06904_00', trophyTitleName: 'Rocket League®', trophyTitlePlatform: 'PS4', npServiceName: 'trophy', earnedTrophies: { bronze: 18, silver: 9, gold: 4, platinum: 0 }, definedTrophies: { bronze: 30, silver: 20, gold: 15, platinum: 1 }, progress: 48 }),
+  rawTrophy({ npCommunicationId: 'NPWR35123_00', trophyTitleName: 'Astro Bot', earnedTrophies: { bronze: 21, silver: 6, gold: 1, platinum: 0 }, definedTrophies: { bronze: 29, silver: 10, gold: 3, platinum: 1 }, progress: 62 }),
+  rawTrophy({ npCommunicationId: 'NPWR24721_00', trophyTitleName: 'Stray', earnedTrophies: { bronze: 15, silver: 6, gold: 2, platinum: 1 }, definedTrophies: { bronze: 15, silver: 6, gold: 2, platinum: 1 }, progress: 100 }),
+];
+
 const RAW: Record<string, { played: RawPlayedTitle[]; trophies: PsnTrophyTitle[] }> = {
   dad: { played: DAD_PLAYED, trophies: DAD_TROPHIES },
   braidan: { played: BRAIDAN_PLAYED, trophies: BRAIDAN_TROPHIES },
+  nadia: { played: NADIA_PLAYED, trophies: NADIA_TROPHIES },
 };
 
 export function sampleRawResponses(key: string): { played: RawPlayedTitle[]; trophies: PsnTrophyTitle[] } {

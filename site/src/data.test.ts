@@ -1,11 +1,19 @@
 import { describe, expect, it } from 'vitest';
 
+import psnConfig from '../../psn.config.json';
 import { snapshotByKey, snapshotsByKey, suggestionsData } from './data';
 
+/**
+ * Snapshots load via an `import.meta.glob` over every data/<player>/latest.json
+ * rather than per-player imports, so these cases are driven off psn.config.json:
+ * a player configured without a committed snapshot (or with a mismatched
+ * directory name) fails here rather than silently rendering an empty page.
+ */
+const configuredKeys = psnConfig.players.map((player) => player.key);
+
 describe('snapshotByKey', () => {
-  it('loads a PlayerSnapshot for each configured player via Vite JSON import', () => {
-    expect(snapshotByKey('dad')?.player.key).toBe('dad');
-    expect(snapshotByKey('braidan')?.player.key).toBe('braidan');
+  it.each(configuredKeys)('loads a PlayerSnapshot for configured player "%s"', (key) => {
+    expect(snapshotByKey(key)?.player.key).toBe(key);
   });
 
   it('returns undefined for an unconfigured key', () => {
@@ -14,11 +22,11 @@ describe('snapshotByKey', () => {
 });
 
 describe('snapshotsByKey', () => {
-  it('returns an ordered, non-empty history for a configured player', () => {
-    // Until dated files land (#8), this falls back to [latest.json].
-    const history = snapshotsByKey('dad');
+  it.each(configuredKeys)('returns an ordered, non-empty history for "%s"', (key) => {
+    // Players with no dated files yet fall back to [latest.json].
+    const history = snapshotsByKey(key);
     expect(history.length).toBeGreaterThanOrEqual(1);
-    expect(history[0]?.player.key).toBe('dad');
+    expect(history[0]?.player.key).toBe(key);
     const times = history.map((s) => s.capturedAt);
     expect([...times].sort()).toEqual(times); // oldest → newest
   });

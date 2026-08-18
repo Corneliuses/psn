@@ -17,6 +17,11 @@ const SECTION_HEADINGS = ['Recent games', 'Most played', 'Most trophies', 'Plati
  * land in #8. Any other console error or uncaught page error is a real
  * regression.
  *
+ * Snapshots that have really synced (data/dad, data/braidan) reference
+ * image.api.playstation.com instead, which is NOT allowlisted — so this suite
+ * needs outbound access to that host and fails in sandboxed/offline
+ * environments. See #51.
+ *
  * A failed resource load surfaces as a console `error` whose *text* is generic
  * ("Failed to load resource: net::ERR_…") — the offending URL lives only in
  * `msg.location().url`. So the placeholder failures must be matched against the
