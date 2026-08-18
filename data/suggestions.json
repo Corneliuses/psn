@@ -26,16 +26,16 @@
         "released": "2022-02-25"
       },
       {
-        "name": "Resident Evil Code: Veronica",
-        "rawgId": 40841,
-        "rating": 94,
-        "released": "2000-02-03"
-      },
-      {
         "name": "Grand Theft Auto: Vice City",
         "rawgId": 430,
         "rating": 94,
         "released": "2002-10-27"
+      },
+      {
+        "name": "Resident Evil Code: Veronica",
+        "rawgId": 40841,
+        "rating": 94,
+        "released": "2000-02-03"
       },
       {
         "name": "The Elder Scrolls V: Skyrim",
@@ -193,7 +193,7 @@
     "RPG"
   ],
   "metadata": {
-    "generated_at": "2026-08-01T12:01:44.129Z",
+    "generated_at": "2026-08-18T11:24:03.813Z",
     "rawg_base_url": "https://rawg.io",
     "attribution": "Data from RAWG.io",
     "build": "v0.1.0"

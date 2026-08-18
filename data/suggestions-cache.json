@@ -887,6 +887,15 @@
     ],
     "checkedAt": "2026-07-24T12:30:47.007Z"
   },
+  "grounded 2": {
+    "rawgId": 391397,
+    "matchedName": "Grounded",
+    "genres": [
+      "Indie",
+      "Adventure"
+    ],
+    "checkedAt": "2026-08-18T11:24:01.052Z"
+  },
   "hamster playground": {
     "rawgId": 22627,
     "matchedName": "NBA Playgrounds",
@@ -930,6 +939,15 @@
       "RPG"
     ],
     "checkedAt": "2026-07-24T12:30:47.007Z"
+  },
+  "hot shots golf 2": {
+    "rawgId": 5500,
+    "matchedName": "Hot Shots Golf 2",
+    "genres": [
+      "Simulation",
+      "Sports"
+    ],
+    "checkedAt": "2026-08-18T11:24:01.052Z"
   },
   "hotline miami": {
     "rawgId": 3612,
@@ -1787,6 +1805,15 @@
       "Action"
     ],
     "checkedAt": "2026-07-24T12:30:47.007Z"
+  },
+  "super mega baseball 4": {
+    "rawgId": 2808,
+    "matchedName": "SUPER MEGA BASEBALL",
+    "genres": [
+      "Arcade",
+      "Sports"
+    ],
+    "checkedAt": "2026-08-18T11:24:01.052Z"
   },
   "surgeon simulator": {
     "rawgId": 2778,
