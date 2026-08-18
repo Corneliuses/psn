@@ -28,6 +28,19 @@ function invitationLine(displayName: string): string {
   return `Explore ${displayName}’s trophies & playtime`;
 }
 
+/**
+ * Portal-card column counts by roster size, so a growing roster never leaves an
+ * orphaned card on a row of its own. Written as whole literal class strings —
+ * Tailwind scans source text, so an interpolated `grid-cols-${n}` would never
+ * generate the utility.
+ */
+const GRID_COLUMNS: Record<number, string> = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-1 sm:grid-cols-2',
+  3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+};
+const gridColumns = GRID_COLUMNS[players.length] ?? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4';
+
 export function SplashPage() {
   return (
     <motion.main
@@ -58,7 +71,7 @@ export function SplashPage() {
       {/* Player portal cards — one large glass card per configured player. */}
       <motion.ul
         variants={staggerChildren}
-        className="grid w-full list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2"
+        className={`grid w-full list-none gap-4 p-0 ${gridColumns}`}
       >
         {players.map((player) => (
           <motion.li key={player.key} variants={fadeRise}>
