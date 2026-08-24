@@ -38,28 +38,28 @@
         "released": "2002-10-27"
       },
       {
-        "name": "Batman: Arkham City",
-        "rawgId": 28623,
-        "rating": 94,
-        "released": "2011-10-18"
-      },
-      {
         "name": "BioShock Infinite",
         "rawgId": 4062,
         "rating": 94,
         "released": "2013-03-26"
       },
       {
-        "name": "The Elder Scrolls V: Skyrim",
-        "rawgId": 5679,
-        "rating": 94,
-        "released": "2011-11-11"
-      },
-      {
         "name": "Quake",
         "rawgId": 54491,
         "rating": 94,
         "released": "1996-06-22"
+      },
+      {
+        "name": "Batman: Arkham City",
+        "rawgId": 28623,
+        "rating": 94,
+        "released": "2011-10-18"
+      },
+      {
+        "name": "The Elder Scrolls V: Skyrim",
+        "rawgId": 5679,
+        "rating": 94,
+        "released": "2011-11-11"
       }
     ],
     "Adventure": [
@@ -193,7 +193,7 @@
     "RPG"
   ],
   "metadata": {
-    "generated_at": "2026-08-23T11:19:29.149Z",
+    "generated_at": "2026-08-24T11:27:04.168Z",
     "rawg_base_url": "https://rawg.io",
     "attribution": "Data from RAWG.io",
     "build": "v0.1.0"
