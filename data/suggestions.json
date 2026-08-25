@@ -8,16 +8,16 @@
         "released": "2009-10-13"
       },
       {
-        "name": "The Last Of Us",
-        "rawgId": 3990,
-        "rating": 95,
-        "released": "2013-06-14"
-      },
-      {
         "name": "Red Dead Redemption",
         "rawgId": 4544,
         "rating": 95,
         "released": "2010-05-18"
+      },
+      {
+        "name": "The Last Of Us",
+        "rawgId": 3990,
+        "rating": 95,
+        "released": "2013-06-14"
       },
       {
         "name": "Elden Ring",
@@ -38,12 +38,6 @@
         "released": "2002-10-27"
       },
       {
-        "name": "BioShock Infinite",
-        "rawgId": 4062,
-        "rating": 94,
-        "released": "2013-03-26"
-      },
-      {
         "name": "Quake",
         "rawgId": 54491,
         "rating": 94,
@@ -54,6 +48,12 @@
         "rawgId": 28623,
         "rating": 94,
         "released": "2011-10-18"
+      },
+      {
+        "name": "BioShock Infinite",
+        "rawgId": 4062,
+        "rating": 94,
+        "released": "2013-03-26"
       },
       {
         "name": "The Elder Scrolls V: Skyrim",
@@ -193,7 +193,7 @@
     "RPG"
   ],
   "metadata": {
-    "generated_at": "2026-08-24T11:27:04.168Z",
+    "generated_at": "2026-08-25T11:25:56.397Z",
     "rawg_base_url": "https://rawg.io",
     "attribution": "Data from RAWG.io",
     "build": "v0.1.0"
