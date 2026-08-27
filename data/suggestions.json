@@ -38,16 +38,16 @@
         "released": "2002-10-27"
       },
       {
-        "name": "Quake",
-        "rawgId": 54491,
-        "rating": 94,
-        "released": "1996-06-22"
-      },
-      {
         "name": "BioShock Infinite",
         "rawgId": 4062,
         "rating": 94,
         "released": "2013-03-26"
+      },
+      {
+        "name": "Quake",
+        "rawgId": 54491,
+        "rating": 94,
+        "released": "1996-06-22"
       },
       {
         "name": "The Elder Scrolls V: Skyrim",
@@ -193,7 +193,7 @@
     "RPG"
   ],
   "metadata": {
-    "generated_at": "2026-08-26T11:28:41.890Z",
+    "generated_at": "2026-08-27T20:54:21.609Z",
     "rawg_base_url": "https://rawg.io",
     "attribution": "Data from RAWG.io",
     "build": "v0.1.0"
