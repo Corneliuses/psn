@@ -44,10 +44,10 @@
         "released": "1996-06-22"
       },
       {
-        "name": "BioShock Infinite",
-        "rawgId": 4062,
+        "name": "Batman: Arkham City",
+        "rawgId": 28623,
         "rating": 94,
-        "released": "2013-03-26"
+        "released": "2011-10-18"
       },
       {
         "name": "The Elder Scrolls V: Skyrim",
@@ -56,10 +56,10 @@
         "released": "2011-11-11"
       },
       {
-        "name": "Batman: Arkham City",
-        "rawgId": 28623,
+        "name": "BioShock Infinite",
+        "rawgId": 4062,
         "rating": 94,
-        "released": "2011-10-18"
+        "released": "2013-03-26"
       }
     ],
     "Adventure": [
@@ -193,7 +193,7 @@
     "RPG"
   ],
   "metadata": {
-    "generated_at": "2026-09-11T14:50:28.726Z",
+    "generated_at": "2026-09-12T13:53:06.192Z",
     "rawg_base_url": "https://rawg.io",
     "attribution": "Data from RAWG.io",
     "build": "v0.1.0"
