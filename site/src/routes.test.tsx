@@ -3,8 +3,9 @@ import { describe, expect, it } from 'vitest';
 import { MemoryRouter } from 'react-router';
 
 import { App } from './App';
+import { companions } from './companions';
 import { players } from './config/players';
-import { COMPARE_PATH, DISCOVER_PATH, playerPath } from './routes';
+import { COMPARE_PATH, DISCOVER_PATH, TOGETHER_PATH, companionPath, playerPath } from './routes';
 
 describe('routing', () => {
   it('renders the splash page at /', () => {
@@ -48,6 +49,26 @@ describe('routing', () => {
       </MemoryRouter>,
     );
     expect(screen.getByRole('heading', { level: 1, name: 'Discover' })).toBeInTheDocument();
+  });
+
+  it('renders the together page at /together', () => {
+    render(
+      <MemoryRouter initialEntries={[TOGETHER_PATH]}>
+        <App />
+      </MemoryRouter>,
+    );
+    expect(screen.getByRole('heading', { level: 1, name: 'Together' })).toBeInTheDocument();
+  });
+
+  it('renders a companion app at /together/:slug', () => {
+    const [first] = companions;
+    expect(first).toBeDefined();
+    render(
+      <MemoryRouter initialEntries={[companionPath(first!.slug)]}>
+        <App />
+      </MemoryRouter>,
+    );
+    expect(screen.getByRole('heading', { level: 1, name: first!.name })).toBeInTheDocument();
   });
 
   it('renders a not-found page for an unmatched route', () => {

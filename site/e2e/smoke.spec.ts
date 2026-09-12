@@ -1,6 +1,10 @@
 import { expect, test, type Page } from '@playwright/test';
 
 import psnConfig from '../../psn.config.json' with { type: 'json' };
+import { companions } from '../src/companions';
+
+/** Escape a game name so it can be matched literally inside a RegExp. */
+const escapeRegExp = (value: string): string => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 /**
  * Player keys come from psn.config.json (never hardcode them — see AGENTS.md),
@@ -70,3 +74,46 @@ for (const key of playerKeys) {
     expect(errors, `unexpected browser errors on /${key}`).toEqual([]);
   });
 }
+
+/**
+ * The companion apps (/together). Driven here rather than only in jsdom because
+ * the map is a percentage-positioned layer over an SVG backdrop — real layout,
+ * real hit-testing. Titles come from the companion registry, so this tracks
+ * whichever games are registered.
+ */
+test('the together section lists every companion and opens one', async ({ page }) => {
+  const errors = collectErrors(page);
+  await page.goto('/together', { waitUntil: 'networkidle' });
+
+  await expect(page.getByRole('heading', { level: 1, name: 'Together' })).toBeVisible();
+  for (const companion of companions) {
+    await expect(page.getByRole('link', { name: new RegExp(escapeRegExp(companion.name)) })).toBeVisible();
+  }
+
+  const first = companions[0]!;
+  await page.getByRole('link', { name: new RegExp(escapeRegExp(first.name)) }).click();
+  await expect(page.getByRole('heading', { level: 1, name: first.name })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 2, name: 'Our time in this one' })).toBeVisible();
+
+  expect(errors, 'unexpected browser errors on /together').toEqual([]);
+});
+
+test('a companion map filters its pins and reveals a pin note', async ({ page }) => {
+  const mapped = companions.find((companion) => companion.map);
+  test.skip(!mapped, 'no registered companion has a map module');
+  const map = mapped!.map!;
+  const pin = map.pins[0]!;
+  const category = map.categories.find((c) => c.id === pin.categoryId)!;
+
+  await page.goto(`/together/${mapped!.slug}`, { waitUntil: 'networkidle' });
+
+  const pinButton = page.getByRole('button', { name: `${pin.name} — ${category.label}` });
+  await expect(pinButton).toBeVisible();
+
+  await pinButton.click();
+  if (pin.note) await expect(page.getByText(pin.note)).toBeVisible();
+
+  // Turning the pin's category off removes it from the map entirely.
+  await page.getByRole('button', { name: category.label, exact: true }).click();
+  await expect(pinButton).toBeHidden();
+});

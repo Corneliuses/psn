@@ -13,6 +13,7 @@ import {
   playtimeTrend,
   recentGames,
   sharedGamesDeepDive,
+  titleStats,
   trophyPace,
 } from '../src/stats/index.js';
 
@@ -313,5 +314,107 @@ describe('sharedGamesDeepDive', () => {
 
   it('returns empty against an opponent with no shared games', () => {
     expect(sharedGamesDeepDive(dad, empty)).toEqual([]);
+  });
+});
+
+describe('titleStats', () => {
+  it('rolls a single title up from played and trophy data', () => {
+    const stats = titleStats(dad, ['Elden Ring']);
+    expect(stats).toMatchObject({
+      name: 'Elden Ring',
+      playtimeMinutes: 12604,
+      trophiesEarned: 41,
+      trophiesDefined: 45,
+      progress: 78,
+      hasPlatinum: false,
+    });
+  });
+
+  it('matches every alias a title goes by, ignoring case and trademark symbols', () => {
+    const byExactName = titleStats(dad, ['Rocket League®']);
+    const byAlias = titleStats(dad, ['rocket league']);
+    expect(byAlias).toEqual(byExactName);
+    expect(byAlias?.hasPlatinum).toBe(true);
+  });
+
+  it('sums playtime, play counts and trophies across duplicate entries for one game', () => {
+    const twice: PlayerSnapshot = {
+      ...empty,
+      playedTitles: [
+        {
+          titleId: 'PPSA00001_00',
+          name: 'Grounded 2',
+          imageUrl: '',
+          category: 'ps5_native_game',
+          playCount: 10,
+          playDurationIso: 'PT2H',
+          playDurationMinutes: 120,
+          firstPlayed: '2026-08-11T00:00:00Z',
+          lastPlayed: '2026-09-11T00:00:00Z',
+        },
+        {
+          titleId: 'PPSA00002_00',
+          name: 'Grounded 2',
+          imageUrl: '',
+          category: 'ps5_native_game',
+          playCount: 1,
+          playDurationIso: 'PT1H',
+          playDurationMinutes: 60,
+          firstPlayed: '2026-08-01T00:00:00Z',
+          lastPlayed: '2026-08-20T00:00:00Z',
+        },
+      ],
+    };
+
+    expect(titleStats(twice, ['Grounded 2'])).toMatchObject({
+      playtimeMinutes: 180,
+      playCount: 11,
+      firstPlayed: '2026-08-01T00:00:00Z',
+      lastPlayed: '2026-09-11T00:00:00Z',
+    });
+  });
+
+  it('takes the highest progress across separate trophy stacks for one game', () => {
+    const crossGen: PlayerSnapshot = {
+      ...empty,
+      trophyTitles: [
+        {
+          npCommunicationId: 'NPWR00001_00',
+          name: 'Grounded',
+          platform: 'PS4',
+          iconUrl: '',
+          defined: { bronze: 2, silver: 0, gold: 0, platinum: 0 },
+          earned: { bronze: 1, silver: 0, gold: 0, platinum: 0 },
+          earnedTotal: 1,
+          progress: 40,
+          hasPlatinum: false,
+          lastTrophyAt: '2026-01-01T00:00:00Z',
+        },
+        {
+          npCommunicationId: 'NPWR00002_00',
+          name: 'Grounded',
+          platform: 'PS5',
+          iconUrl: '',
+          defined: { bronze: 2, silver: 1, gold: 0, platinum: 0 },
+          earned: { bronze: 2, silver: 1, gold: 0, platinum: 0 },
+          earnedTotal: 3,
+          progress: 90,
+          hasPlatinum: false,
+          lastTrophyAt: '2026-02-01T00:00:00Z',
+        },
+      ],
+    };
+
+    expect(titleStats(crossGen, ['Grounded'])).toMatchObject({
+      playtimeMinutes: 0,
+      trophiesEarned: 4,
+      trophiesDefined: 5,
+      progress: 90,
+    });
+  });
+
+  it('returns undefined when the player has neither played nor earned a trophy in the title', () => {
+    expect(titleStats(dad, ['A Game Nobody Here Owns'])).toBeUndefined();
+    expect(titleStats(empty, ['Elden Ring'])).toBeUndefined();
   });
 });

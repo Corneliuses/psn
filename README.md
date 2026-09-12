@@ -1,6 +1,6 @@
 # psn — father & son PlayStation stats
 
-A stats site for two players — Dad and Braidan — tracking what we play and the trophies we earn. A splash page links to each player's stats (recent games, most played, trophy leaders, platinums) and a head-to-head comparison. The site ships as a dark, PlayStation-vibe UI (see [Design language](#design-language) below); the data layer that feeds it is described further down.
+A stats site for two players — Dad and Braidan — tracking what we play and the trophies we earn. A splash page links to each player's stats (recent games, most played, trophy leaders, platinums) and a head-to-head comparison, and a **Together** section holds a [companion app](#companion-apps) per game we play side by side. The site ships as a dark, PlayStation-vibe UI (see [Design language](#design-language) below); the data layer that feeds it is described further down.
 
 ## How it works
 
@@ -12,7 +12,7 @@ PSN API ──> pnpm sync ──> data/<player>/<date>.json ──> src/stats �
 - **Sync** (`src/psn`, `src/cli`): authenticates with PSN via NPSSO tokens and pulls each player's played titles (play time, play counts, last played) and trophy titles (earned tiers, platinums, progress).
 - **Snapshots** (`data/`): one JSON per player per day plus `latest.json`, committed to git — the history doubles as the dataset for trend analytics later.
 - **Stats** (`src/stats`): pure functions over snapshots — recent games, most played, trophy leaders, platinum list, and a full player-vs-player comparison. The site reads only this layer.
-- **Site** (`site/`): a React + Vite app that renders the stats as a dark, PlayStation-vibe UI — a splash landing, a per-player page, and a head-to-head compare view. See [Design language](#design-language).
+- **Site** (`site/`): a React + Vite app that renders the stats as a dark, PlayStation-vibe UI — a splash landing, a per-player page, a head-to-head compare view, and the [companion apps](#companion-apps) for the games we play together. See [Design language](#design-language).
 
 ## Setup
 
@@ -69,6 +69,40 @@ The design is built on three layers, all under `site/src/`:
 
 Building a new view or component? The hard rules — token vocabulary, composing the kit, animation,
 PS-vibe boundaries, and a per-view ship checklist — live in [`AGENTS.md`](./AGENTS.md#designing-views--components).
+
+## Companion apps
+
+**Together** (`/together`) is a grid of the games we actually play as a pair; each tile opens that
+title's companion app — the stuff worth having on a second screen mid-session.
+
+|  |  |
+|---|---|
+| ![Together grid](./docs/screenshots/together.png) | ![Companion app](./docs/screenshots/companion.png) |
+| **Together** — one tile per title, tagged with the modules it has | **Companion** — our stats on the title, quick reference, map, guides, links, notes |
+
+A companion app is assembled from optional modules, and a title renders exactly the ones it has
+content for — so a new game can ship with just a links list and grow:
+
+| Module | What it holds |
+|---|---|
+| **Our time in this one** | Combined and per-player playtime, trophies and last session, derived from the synced snapshots by `titleStats` — the only module that isn't hand-written |
+| **Quick reference** | The one-screen cheat sheet: grouped term/detail pairs |
+| **Map** | An original, hand-drawn zone sketch with category-filterable pins and per-pin notes — never in-game map art |
+| **Guides** | Sortable, filterable reference tables (equipment, materials) |
+| **Help sites** | Curated outbound links, each with a line on why it's worth opening |
+| **Videos** | Embedded YouTube walkthroughs (privacy-friendly `youtube-nocookie` host) |
+| **Our notes** | House rules, plans, reminders — the part no wiki has |
+
+**Adding a title** is one content file plus one line of registry:
+
+1. Write `site/src/companions/<slug>.ts` exporting a `Companion` (see
+   [`grounded-2.ts`](./site/src/companions/grounded-2.ts) and the module shapes in
+   [`types.ts`](./site/src/companions/types.ts)). Set `psnTitleNames` to every name PSN spells the
+   game by, across played titles and trophy lists — that's how the stats module finds it.
+2. Add it to the `companions` array in [`site/src/companions/index.ts`](./site/src/companions/index.ts).
+
+The grid, the routes, the section accents and the tests all derive from that registry, so nothing
+else changes. Content is plain data: no component reads markup from a companion file.
 
 ## Built with agentic-config
 
