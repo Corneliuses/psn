@@ -23,7 +23,14 @@ const SHAPE_COLORS = [
   'text-shape-square',
 ] as const;
 
-/** Human labels for the modules a companion has, in page order. */
+/**
+ * Human labels for the modules a companion has, in page order.
+ *
+ * The stats module ("Our time in this one") is deliberately absent: it renders
+ * for every title by construction, so a chip for it would appear on every tile
+ * and tell the reader nothing about what is inside this one. These chips exist
+ * to differentiate tiles, not to inventory the page.
+ */
 function moduleLabels(companion: Companion): string[] {
   const labels: string[] = [];
   if (companion.quickReference?.length) labels.push('Quick reference');
