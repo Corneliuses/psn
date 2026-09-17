@@ -8,16 +8,16 @@
         "released": "2009-10-13"
       },
       {
-        "name": "The Last Of Us",
-        "rawgId": 3990,
-        "rating": 95,
-        "released": "2013-06-14"
-      },
-      {
         "name": "Red Dead Redemption",
         "rawgId": 4544,
         "rating": 95,
         "released": "2010-05-18"
+      },
+      {
+        "name": "The Last Of Us",
+        "rawgId": 3990,
+        "rating": 95,
+        "released": "2013-06-14"
       },
       {
         "name": "Elden Ring",
@@ -150,16 +150,16 @@
         "released": "2011-11-11"
       },
       {
-        "name": "Divinity: Original Sin 2 - Definitive Edition",
-        "rawgId": 59199,
-        "rating": 94,
-        "released": "2018-08-31"
-      },
-      {
         "name": "Divinity: Original Sin - Enhanced Edition",
         "rawgId": 16359,
         "rating": 94,
         "released": "2015-10-27"
+      },
+      {
+        "name": "Divinity: Original Sin 2 - Definitive Edition",
+        "rawgId": 59199,
+        "rating": 94,
+        "released": "2018-08-31"
       },
       {
         "name": "Persona 5 Royal",
@@ -193,7 +193,7 @@
     "RPG"
   ],
   "metadata": {
-    "generated_at": "2026-09-11T14:50:28.726Z",
+    "generated_at": "2026-09-16T15:20:03.678Z",
     "rawg_base_url": "https://rawg.io",
     "attribution": "Data from RAWG.io",
     "build": "v0.1.0"

@@ -4,7 +4,7 @@
     "key": "braidan",
     "displayName": "Braidan"
   },
-  "capturedAt": "2026-09-16T15:20:01.208Z",
+  "capturedAt": "2026-09-15T15:26:51.672Z",
   "playedTitles": [
     {
       "titleId": "CUSA00079_00",
@@ -1298,11 +1298,11 @@
       "name": "Grounded 2",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/0316/a79dd27918cc2856b6f459dec2857548cfea7db7a85af544.png",
       "category": "ps5_native_game",
-      "playCount": 66,
-      "playDurationIso": "PT89H14M21S",
-      "playDurationMinutes": 5354,
+      "playCount": 63,
+      "playDurationIso": "PT87H43M40S",
+      "playDurationMinutes": 5264,
       "firstPlayed": "2026-08-11T17:12:03.260000Z",
-      "lastPlayed": "2026-09-16T11:33:55.760000Z"
+      "lastPlayed": "2026-09-15T11:56:28.540000Z"
     }
   ],
   "trophyTitles": [
