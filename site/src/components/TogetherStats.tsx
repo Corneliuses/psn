@@ -19,6 +19,15 @@ import { StatTile } from './StatTile';
  * implies someone played a game they haven't.
  */
 
+/*
+ * AnimatedNumber counts up through fractional values, and `formatMinutes` takes
+ * `minutes % 60` — so an unrounded formatter renders "79h 32.4m" mid-count.
+ * Round on the way in, the same as MetricScoreboard does.
+ */
+function formatPlaytime(minutes: number): string {
+  return formatMinutes(Math.round(minutes));
+}
+
 export interface TogetherStatsEntry {
   playerKey: string;
   displayName: string;
@@ -56,7 +65,7 @@ export function TogetherStats({ entries, shapeIndex = 0 }: TogetherStatsProps) {
             initial="hidden"
             animate="visible"
           >
-            <StatTile label="Combined playtime" value={combinedMinutes} format={formatMinutes} />
+            <StatTile label="Combined playtime" value={combinedMinutes} format={formatPlaytime} />
             <StatTile label="Trophies between us" value={combinedTrophies} />
           </motion.div>
 

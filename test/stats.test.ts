@@ -413,6 +413,45 @@ describe('titleStats', () => {
     });
   });
 
+  it('keeps the shared progress when two trophy stacks are tied', () => {
+    const tied: PlayerSnapshot = {
+      ...empty,
+      trophyTitles: [
+        {
+          npCommunicationId: 'NPWR00003_00',
+          name: 'Grounded',
+          platform: 'PS4',
+          iconUrl: '',
+          defined: { bronze: 2, silver: 0, gold: 0, platinum: 0 },
+          earned: { bronze: 1, silver: 0, gold: 0, platinum: 0 },
+          earnedTotal: 1,
+          progress: 50,
+          hasPlatinum: false,
+          lastTrophyAt: '2026-01-01T00:00:00Z',
+        },
+        {
+          npCommunicationId: 'NPWR00004_00',
+          name: 'Grounded',
+          platform: 'PS5',
+          iconUrl: '',
+          defined: { bronze: 2, silver: 0, gold: 0, platinum: 0 },
+          earned: { bronze: 1, silver: 0, gold: 0, platinum: 0 },
+          earnedTotal: 1,
+          progress: 50,
+          hasPlatinum: false,
+          lastTrophyAt: '2026-02-01T00:00:00Z',
+        },
+      ],
+    };
+
+    // Equal progress resolves to that value, while the counts still sum.
+    expect(titleStats(tied, ['Grounded'])).toMatchObject({
+      progress: 50,
+      trophiesEarned: 2,
+      trophiesDefined: 4,
+    });
+  });
+
   it('returns undefined when the player has neither played nor earned a trophy in the title', () => {
     expect(titleStats(dad, ['A Game Nobody Here Owns'])).toBeUndefined();
     expect(titleStats(empty, ['Elden Ring'])).toBeUndefined();

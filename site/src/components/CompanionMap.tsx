@@ -20,6 +20,15 @@ import { SectionHeader } from './SectionHeader';
 const VIEW_WIDTH = 100;
 const VIEW_HEIGHT = 62;
 
+/*
+ * Zone-label geometry, in the SVG's own viewBox units — not CSS pixels and not
+ * type-scale values, so these deliberately are not theme tokens: they scale with
+ * the drawing rather than with the page's typography. Named here rather than
+ * inline so the drawing's proportions are adjustable in one place.
+ */
+const ZONE_LABEL_SIZE = 2.6;
+const ZONE_LABEL_TRACKING = 0.15;
+
 /** Percent-of-box (the pin coordinate space) → the SVG backdrop's viewBox. */
 function toViewBox(xPercent: number, yPercent: number): { x: number; y: number } {
   return { x: (xPercent / 100) * VIEW_WIDTH, y: (yPercent / 100) * VIEW_HEIGHT };
@@ -109,10 +118,10 @@ export function CompanionMap({ map, shapeIndex = 0 }: CompanionMapProps) {
                       middle) never land on top of them. */}
                   <text
                     x={x}
-                    y={y - (zone.ry / 100) * VIEW_HEIGHT + 2.6}
+                    y={y - (zone.ry / 100) * VIEW_HEIGHT + ZONE_LABEL_SIZE}
                     textAnchor="middle"
                     className="fill-foreground-muted"
-                    style={{ fontSize: '2.6px', letterSpacing: '0.15px' }}
+                    style={{ fontSize: `${ZONE_LABEL_SIZE}px`, letterSpacing: `${ZONE_LABEL_TRACKING}px` }}
                   >
                     {zone.label}
                   </text>
