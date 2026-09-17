@@ -33,6 +33,43 @@ describe('LinkList', () => {
     expect(link).toHaveAttribute('rel', 'noreferrer');
     expect(screen.getByText('Creature pages.')).toBeInTheDocument();
   });
+
+  it('files links under group headings when content groups them', () => {
+    render(
+      <LinkList
+        links={[
+          { group: 'Maps', label: 'Interactive map', href: 'https://example.test/map' },
+          { group: 'Wikis', label: 'Community wiki', href: 'https://example.test/wiki' },
+          { group: 'Maps', label: 'Second map', href: 'https://example.test/map-2' },
+        ]}
+      />,
+    );
+
+    expect(screen.getByRole('heading', { name: 'Maps' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Wikis' })).toBeInTheDocument();
+    // Groups render in first-appearance order, with their own links together.
+    expect(screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent)).toEqual(['Maps', 'Wikis']);
+    expect(screen.getAllByRole('link')).toHaveLength(3);
+  });
+
+  it('files an ungrouped link under a trailing More heading when others are grouped', () => {
+    render(
+      <LinkList
+        links={[
+          { group: 'Maps', label: 'Interactive map', href: 'https://example.test/map' },
+          { label: 'Loose link', href: 'https://example.test/loose' },
+        ]}
+      />,
+    );
+
+    expect(screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent)).toEqual(['Maps', 'More']);
+  });
+
+  it('renders no group headings when no link declares a group', () => {
+    render(<LinkList links={[{ label: 'Wiki', href: 'https://example.test' }]} />);
+
+    expect(screen.queryByRole('heading', { level: 3 })).not.toBeInTheDocument();
+  });
 });
 
 describe('VideoList', () => {

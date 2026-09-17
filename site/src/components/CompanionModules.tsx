@@ -60,33 +60,69 @@ export interface LinkListProps {
   shapeIndex?: number;
 }
 
-/** Curated outbound help sites, each with a line on why it is worth opening. */
+/** One card per link — shared by the grouped and ungrouped renderings below. */
+function LinkCards({ links }: { links: CompanionLink[] }) {
+  return (
+    <motion.ul
+      className="grid list-none grid-cols-1 gap-3 p-0 sm:grid-cols-2"
+      variants={staggerChildren}
+      initial="hidden"
+      animate="visible"
+    >
+      {links.map((link) => (
+        <motion.li key={link.href} variants={fadeRise}>
+          <GlassCard
+            as="a"
+            glow
+            href={link.href}
+            target="_blank"
+            rel="noreferrer"
+            className="block h-full p-4"
+          >
+            <span className="font-semibold text-foreground">{link.label}</span>
+            {link.note ? <span className="mt-1 block text-sm text-foreground-muted">{link.note}</span> : null}
+          </GlassCard>
+        </motion.li>
+      ))}
+    </motion.ul>
+  );
+}
+
+/** Links by group, in the order each group first appears; ungrouped links last. */
+function byGroup(links: CompanionLink[]): [string, CompanionLink[]][] {
+  const groups = new Map<string, CompanionLink[]>();
+  for (const link of links) {
+    const key = link.group ?? 'More';
+    const existing = groups.get(key);
+    if (existing) existing.push(link);
+    else groups.set(key, [link]);
+  }
+  return [...groups];
+}
+
+/**
+ * Curated outbound help sites, each with a line on why it is worth opening.
+ * Once a title has more links than fit in one scan, content can file them under
+ * group headings; a list with no groups renders as one flat grid.
+ */
 export function LinkList({ links, shapeIndex = 0 }: LinkListProps) {
+  const grouped = links.some((link) => link.group);
+
   return (
     <section className="mb-10">
       <SectionHeader title="Help sites" shapeIndex={shapeIndex} />
-      <motion.ul
-        className="grid list-none grid-cols-1 gap-3 p-0 sm:grid-cols-2"
-        variants={staggerChildren}
-        initial="hidden"
-        animate="visible"
-      >
-        {links.map((link) => (
-          <motion.li key={link.href} variants={fadeRise}>
-            <GlassCard
-              as="a"
-              glow
-              href={link.href}
-              target="_blank"
-              rel="noreferrer"
-              className="block h-full p-4"
-            >
-              <span className="font-semibold text-foreground">{link.label}</span>
-              {link.note ? <span className="mt-1 block text-sm text-foreground-muted">{link.note}</span> : null}
-            </GlassCard>
-          </motion.li>
-        ))}
-      </motion.ul>
+      {grouped ? (
+        byGroup(links).map(([group, groupLinks]) => (
+          <div key={group} className="mb-6 last:mb-0">
+            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-foreground-muted">
+              {group}
+            </h3>
+            <LinkCards links={groupLinks} />
+          </div>
+        ))
+      ) : (
+        <LinkCards links={links} />
+      )}
     </section>
   );
 }

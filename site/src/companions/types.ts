@@ -19,6 +19,12 @@ export interface CompanionLink {
   href: string;
   /** One line on why this link is worth opening. */
   note?: string;
+  /**
+   * Optional heading to file this link under, e.g. 'Maps'. Groups render in the
+   * order they first appear. Either every link in a title has a group or none
+   * does — a mix files the ungrouped ones under a trailing 'More' heading.
+   */
+  group?: string;
 }
 
 export interface CompanionVideo {
