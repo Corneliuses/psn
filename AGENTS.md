@@ -164,6 +164,10 @@ The **Together** section (`/together`) is content-driven: each game is one data 
 `site/src/companions/`, registered in `companions/index.ts`. The grid, routes, section accents and
 tests all derive from that array.
 
+The [`add-companion-app`](./.claude/skills/add-companion-app/SKILL.md) skill is the procedure for
+adding one, with a script for the `psnTitleNames` lookup. The rules below are the constraints it
+works within, and they hold whether or not the skill is used.
+
 - **Content is data, never markup.** A companion file exports a `Companion` object (see
   `companions/types.ts`); no component reads raw HTML from it. Adding a game must not require a
   component or route change — if it does, the module shape is missing something, so extend

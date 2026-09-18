@@ -3,6 +3,9 @@ dist/
 coverage/
 .pnpm-store/
 
+# Agent worktrees (created by isolated subagent runs)
+.claude/worktrees/
+
 # Playwright browser-test artifacts
 test-results/
 playwright-report/
