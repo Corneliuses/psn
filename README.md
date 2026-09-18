@@ -93,7 +93,10 @@ content for — so a new game can ship with just a links list and grow:
 | **Videos** | Embedded YouTube walkthroughs (privacy-friendly `youtube-nocookie` host) |
 | **Our notes** | House rules, plans, reminders — the part no wiki has |
 
-**Adding a title** is one content file plus one line of registry:
+**Adding a title** is one content file plus one line of registry. The
+[`add-companion-app`](./.claude/skills/add-companion-app/SKILL.md) skill walks the whole job,
+including a lookup script that works out which PSN titles and trophy lists actually belong to the
+game — the one step where a plausible guess silently shows another game's numbers. By hand:
 
 1. Write `site/src/companions/<slug>.ts` exporting a `Companion` (see
    [`grounded-2.ts`](./site/src/companions/grounded-2.ts) and the module shapes in

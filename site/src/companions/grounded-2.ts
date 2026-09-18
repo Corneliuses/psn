@@ -147,7 +147,7 @@ export const grounded2: Companion = {
 
   map: {
     caption:
-      'Our own rough mental model of how the park hangs together, hand-drawn and deliberately not to scale — not the game map, and not its real geometry. Zone names are the game’s; the pins are ours. Use an interactive map above for real positions.',
+      'Our own rough mental model of how the park hangs together, hand-drawn and deliberately not to scale — not the game map, and not its real geometry. Zone names are the game’s; the pins are ours. Use one of the interactive maps linked below for real positions.',
     zones: [
       { id: 'park', label: 'Brookhollow Park', x: 32, y: 36, rx: 26, ry: 24, tone: 'landmark' },
       { id: 'gnarly-bark', label: 'Gnarly Bark', x: 72, y: 26, rx: 21, ry: 19, tone: 'resource' },
