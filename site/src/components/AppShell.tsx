@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { NavLink } from 'react-router';
 
 import { players } from '../config/players';
-import { COMPARE_PATH, DISCOVER_PATH, playerPath } from '../routes';
+import { COMPARE_PATH, DISCOVER_PATH, TOGETHER_PATH, playerPath } from '../routes';
 
 interface NavItem {
   to: string;
@@ -14,6 +14,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   ...players.map((player) => ({ to: playerPath(player.key), label: player.displayName, end: false })),
   { to: COMPARE_PATH, label: 'Compare', end: false },
+  { to: TOGETHER_PATH, label: 'Together', end: false },
   { to: DISCOVER_PATH, label: 'Discover', end: false },
 ];
 
@@ -37,7 +38,9 @@ export function AppShell({ children }: AppShellProps) {
   return (
     <div className="min-h-dvh">
       <header className="sticky top-0 z-50 border-b border-border-subtle bg-surface-0/70 backdrop-blur-md">
-        <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3">
+        {/* Wraps rather than overflowing once the nav outgrows a phone-width
+            row — the nav drops to its own line instead of scrolling off. */}
+        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3">
           <NavLink
             to="/"
             end
@@ -47,7 +50,7 @@ export function AppShell({ children }: AppShellProps) {
             PSN<span className="text-ps-blue-text"> Stats</span>
           </NavLink>
           <nav aria-label="Primary">
-            <ul className="flex items-center gap-1">
+            <ul className="flex flex-wrap items-center gap-1">
               {navItems.map((item) => (
                 <li key={item.to}>
                   <NavLink to={item.to} end={item.end} className={navLinkClass}>

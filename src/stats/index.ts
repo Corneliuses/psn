@@ -17,3 +17,5 @@ export type { CompletionScoreboard } from './completion.js';
 export { nameKey } from './names.js';
 export { playerTotals } from './totals.js';
 export type { PlayerTotals } from './totals.js';
+export { titleStats } from './title.js';
+export type { TitleStats } from './title.js';

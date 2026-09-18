@@ -1,6 +1,6 @@
 # psn
 
-Father–son PlayStation stats tracker for two players (Dad and Braidan): syncs play history and trophy data from PSN into committed JSON snapshots, derives displayable stats, and renders them as a website (`site/`) with a splash landing, per-player pages, and a head-to-head comparison view in a dark, PlayStation-vibe UI.
+Father–son PlayStation stats tracker for two players (Dad and Braidan): syncs play history and trophy data from PSN into committed JSON snapshots, derives displayable stats, and renders them as a website (`site/`) with a splash landing, per-player pages, a head-to-head comparison view, and companion apps for the games both players play, in a dark, PlayStation-vibe UI.
 
 ## Repository Structure
 
@@ -19,7 +19,8 @@ psn/
 │       ├── styles/     # theme.css — CSS-first Tailwind 4 `@theme` design tokens (single source of truth)
 │       ├── motion/     # presets.ts — shared Motion variants/transitions all animation composes
 │       ├── components/ # PlayStation component kit (GlassCard, StatTile, TrophyBadge, …) + AppShell
-│       └── pages/      # Splash, Player, Compare, NotFound — each composes the kit
+│       ├── companions/ # Companion-app content: one data file per game + the registry
+│       └── pages/      # Splash, Player, Compare, Discover, Together, Companion, NotFound
 └── .claude/skills/ # Workflow skills installed from Corneliuses/agentic-config
 ```
 
@@ -156,6 +157,31 @@ Before a view is done, confirm all of:
   static state under reduced motion.
 - [ ] **Gate green**: `pnpm --filter site lint`, `pnpm --filter site typecheck`,
   `pnpm --filter site test`, and `pnpm --filter site build` all pass.
+
+## Adding a companion app
+
+The **Together** section (`/together`) is content-driven: each game is one data file under
+`site/src/companions/`, registered in `companions/index.ts`. The grid, routes, section accents and
+tests all derive from that array.
+
+- **Content is data, never markup.** A companion file exports a `Companion` object (see
+  `companions/types.ts`); no component reads raw HTML from it. Adding a game must not require a
+  component or route change — if it does, the module shape is missing something, so extend
+  `types.ts` and the rendering module rather than special-casing one title.
+- **Every module is optional.** `CompanionPage` renders only the modules a title declares, and
+  advances the △ ○ ✕ □ section accent per rendered module — so a title that skips the map still gets
+  a clean accent sequence. New modules follow the same pattern.
+- **`psnTitleNames` is the link back to the data layer.** List every name PSN spells the game by
+  (played titles *and* trophy lists — they differ). `titleStats` matches them with `nameKey` and
+  sums across duplicate entries, so cross-gen and multi-SKU titles roll up correctly.
+- **Never ship game art.** Tiles are text and shape glyphs only, and the map is an original,
+  abstract zone drawing — not a reproduction of an in-game map. This is the same
+  no-trademarked-assets rule as the rest of the site.
+- **Colors come from tones, not hex.** Map and pin colors are named by *role* (`resource`,
+  `creature`, `landmark`, `base`) in content and resolved to shape tokens in `config/tones.ts` —
+  content files never name a color. Trophy metals stay reserved for trophy data.
+- **Say what our content is.** Anything hand-written that could be mistaken for authoritative game
+  data (map pins, our notes) carries a caption saying it describes our save, not the game.
 
 ## Security & Secrets
 
