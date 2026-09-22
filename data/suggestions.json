@@ -26,22 +26,16 @@
         "released": "2022-02-25"
       },
       {
-        "name": "Grand Theft Auto: Vice City",
-        "rawgId": 430,
-        "rating": 94,
-        "released": "2002-10-27"
-      },
-      {
         "name": "Resident Evil Code: Veronica",
         "rawgId": 40841,
         "rating": 94,
         "released": "2000-02-03"
       },
       {
-        "name": "Quake",
-        "rawgId": 54491,
+        "name": "Grand Theft Auto: Vice City",
+        "rawgId": 430,
         "rating": 94,
-        "released": "1996-06-22"
+        "released": "2002-10-27"
       },
       {
         "name": "Batman: Arkham City",
@@ -54,6 +48,12 @@
         "rawgId": 4062,
         "rating": 94,
         "released": "2013-03-26"
+      },
+      {
+        "name": "Quake",
+        "rawgId": 54491,
+        "rating": 94,
+        "released": "1996-06-22"
       },
       {
         "name": "The Elder Scrolls V: Skyrim",
@@ -193,7 +193,7 @@
     "RPG"
   ],
   "metadata": {
-    "generated_at": "2026-09-21T16:47:31.731Z",
+    "generated_at": "2026-09-22T15:25:27.432Z",
     "rawg_base_url": "https://rawg.io",
     "attribution": "Data from RAWG.io",
     "build": "v0.1.0"
