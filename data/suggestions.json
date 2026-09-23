@@ -50,16 +50,16 @@
         "released": "2013-03-26"
       },
       {
-        "name": "Quake",
-        "rawgId": 54491,
-        "rating": 94,
-        "released": "1996-06-22"
-      },
-      {
         "name": "The Elder Scrolls V: Skyrim",
         "rawgId": 5679,
         "rating": 94,
         "released": "2011-11-11"
+      },
+      {
+        "name": "Quake",
+        "rawgId": 54491,
+        "rating": 94,
+        "released": "1996-06-22"
       }
     ],
     "Adventure": [
@@ -193,7 +193,7 @@
     "RPG"
   ],
   "metadata": {
-    "generated_at": "2026-09-22T15:25:27.432Z",
+    "generated_at": "2026-09-23T15:17:39.007Z",
     "rawg_base_url": "https://rawg.io",
     "attribution": "Data from RAWG.io",
     "build": "v0.1.0"
