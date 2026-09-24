@@ -53,6 +53,27 @@ describe('GuideTable', () => {
     expect(bodyRowNames()).toEqual(['Spear', 'Bow', 'Hammer']);
   });
 
+  it('formats numeric cells with thousands separators and shows a dash for an empty cell', () => {
+    render(
+      <GuideTable
+        guide={{
+          title: 'Targets',
+          columns: [
+            { id: 'name', label: 'Task' },
+            { id: 'target', label: 'Target', numeric: true },
+          ],
+          rows: [
+            { id: 'studs', cells: { name: 'Studs', target: 1000000 } },
+            { id: 'none', cells: { name: 'Shop' } },
+          ],
+        }}
+      />,
+    );
+
+    expect(screen.getByRole('cell', { name: '1,000,000' })).toBeInTheDocument();
+    expect(screen.getByRole('cell', { name: '—' })).toBeInTheDocument();
+  });
+
   it('filters rows against every cell and reports when nothing matches', () => {
     render(<GuideTable guide={guide} />);
 

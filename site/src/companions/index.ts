@@ -1,4 +1,5 @@
 import { grounded2 } from './grounded-2';
+import { legoBatmanLegacy } from './lego-batman-legacy';
 import type { Companion } from './types';
 
 /*
@@ -6,7 +7,7 @@ import type { Companion } from './types';
  * the grid, the routes and the page all derive from this array, so nothing else
  * changes. Order here is the order tiles appear.
  */
-export const companions: Companion[] = [grounded2];
+export const companions: Companion[] = [grounded2, legoBatmanLegacy];
 
 export function companionBySlug(slug: string | undefined): Companion | undefined {
   return companions.find((companion) => companion.slug === slug);
