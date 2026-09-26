@@ -48,6 +48,20 @@ describe('TogetherStats', () => {
     expect(screen.getByText('Sep 9, 2026')).toBeInTheDocument();
   });
 
+  it('shows each player’s trophy progress as a labelled progress bar', () => {
+    render(<TogetherStats entries={[entry('dad', 'Dad', dadStats)]} />);
+
+    const bar = screen.getByRole('progressbar', { name: /dad trophy progress/i });
+    expect(bar).toHaveAttribute('aria-valuenow', '20');
+    expect(screen.getByText('20%')).toBeInTheDocument();
+  });
+
+  it('shows no progress bar for a title without a trophy list', () => {
+    render(<TogetherStats entries={[entry('dad', 'Dad', { ...dadStats, trophiesEarned: 0, trophiesDefined: 0 })]} />);
+
+    expect(screen.queryByRole('progressbar')).toBeNull();
+  });
+
   it('marks a player who has never launched the title instead of showing zeroes', () => {
     render(<TogetherStats entries={[entry('dad', 'Dad', dadStats), entry('braidan', 'Braidan', undefined)]} />);
 

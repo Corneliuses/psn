@@ -1,9 +1,9 @@
-import { Link, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { titleStats } from 'psn/stats';
 
 import { companionBySlug } from '../companions';
 import { CompanionMap } from '../components/CompanionMap';
-import { GlassCard } from '../components/GlassCard';
+import { CompanionHero } from '../components/CompanionHero';
 import { GuideTable } from '../components/GuideTable';
 import { LinkList, NoteList, QuickReference, VideoList } from '../components/CompanionModules';
 import { TogetherStats, type TogetherStatsEntry } from '../components/TogetherStats';
@@ -11,7 +11,6 @@ import { accentForKey } from '../config/accents';
 import { players } from '../config/players';
 import { snapshotByKey } from '../data';
 import { NotFoundPage } from './NotFoundPage';
-import { TOGETHER_PATH } from '../routes';
 
 /*
  * One title's companion app. Every module is optional and rendered only when the
@@ -44,18 +43,7 @@ export function CompanionPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
-      <GlassCard glow className="mb-10 p-8 sm:p-10">
-        <Link
-          to={TOGETHER_PATH}
-          className="text-sm font-semibold text-ps-blue-text transition-colors hover:text-foreground"
-        >
-          &larr; All companion apps
-        </Link>
-        <h1 className="mt-3 text-3xl font-bold leading-none text-foreground sm:text-display">
-          {companion.name}
-        </h1>
-        <p className="mt-2 text-foreground-muted">{companion.blurb}</p>
-      </GlassCard>
+      <CompanionHero companion={companion} />
 
       <TogetherStats entries={entries} shapeIndex={nextShape()} />
 

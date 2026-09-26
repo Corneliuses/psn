@@ -22,6 +22,13 @@ export const legoBatmanLegacy: Companion = {
   blurb:
     'Traveller’s Tales’ open-world LEGO Batman, out on PS5 since 22 May 2026. Seven playable heroes, a Batcave to fill, and a long collectible tail after the story. This page is the lookups we keep making on the way to the platinum.',
   psnTitleNames: ['LEGO® Batman™: Legacy of the Dark Knight'],
+  backdrop: 'skyline',
+  facts: [
+    { label: 'Platform', value: 'PS5' },
+    { label: 'Released', value: '22 May 2026' },
+    { label: 'Co-op', value: '2 players, local split-screen' },
+    { label: 'Trophies', value: '52, none missable' },
+  ],
 
   quickReference: [
     {

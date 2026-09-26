@@ -11,6 +11,17 @@ import { GlassCard } from './GlassCard';
 import { SectionHeader } from './SectionHeader';
 
 /*
+ * Quick-reference cards each take the next shape in △ ○ ✕ □ — a coloured top
+ * edge and a decorative glyph — so a wall of cards reads as distinct panels.
+ */
+const CARD_ACCENTS = [
+  { glyph: '△', text: 'text-shape-triangle', edge: 'border-t-shape-triangle' },
+  { glyph: '○', text: 'text-shape-circle', edge: 'border-t-shape-circle' },
+  { glyph: '✕', text: 'text-shape-cross', edge: 'border-t-shape-cross' },
+  { glyph: '□', text: 'text-shape-square', edge: 'border-t-shape-square' },
+] as const;
+
+/*
  * The simple list-shaped companion modules: quick reference, links, videos and
  * our own notes. Each is a thin, content-driven section composed from the kit —
  * none of them owns layout or timing of its own beyond the shared stagger.
@@ -35,21 +46,29 @@ export function QuickReference({ groups, shapeIndex = 0 }: QuickReferenceProps) 
         initial="hidden"
         animate="visible"
       >
-        {groups.map((group) => (
-          <motion.div key={group.title} variants={fadeRise}>
-            <GlassCard className="h-full p-5">
-              <h3 className="mb-3 text-lg font-bold text-foreground">{group.title}</h3>
-              <dl className="m-0 flex flex-col gap-3">
-                {group.items.map((item) => (
-                  <div key={item.term}>
-                    <dt className="font-semibold text-foreground">{item.term}</dt>
-                    <dd className="m-0 text-sm text-foreground-muted">{item.detail}</dd>
-                  </div>
-                ))}
-              </dl>
-            </GlassCard>
-          </motion.div>
-        ))}
+        {groups.map((group, index) => {
+          const accent = CARD_ACCENTS[index % CARD_ACCENTS.length]!;
+          return (
+            <motion.div key={group.title} variants={fadeRise}>
+              <GlassCard className={`h-full border-t-2 p-5 ${accent.edge}`}>
+                <h3 className="mb-3 flex items-center gap-2 text-lg font-bold text-foreground">
+                  <span aria-hidden="true" className={`text-base leading-none ${accent.text}`}>
+                    {accent.glyph}
+                  </span>
+                  {group.title}
+                </h3>
+                <dl className="m-0 flex flex-col gap-3">
+                  {group.items.map((item) => (
+                    <div key={item.term}>
+                      <dt className="font-semibold text-foreground">{item.term}</dt>
+                      <dd className="m-0 text-sm text-foreground-muted">{item.detail}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </GlassCard>
+            </motion.div>
+          );
+        })}
       </motion.div>
     </section>
   );
