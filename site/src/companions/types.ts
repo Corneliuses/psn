@@ -107,6 +107,19 @@ export interface CompanionNote {
   body: string;
 }
 
+/** A headline fact shown as a chip in the page hero, e.g. `Platform: PS5`. */
+export interface CompanionFact {
+  label: string;
+  value: string;
+}
+
+/**
+ * An original, abstract drawing behind the page hero — never game art. Content
+ * picks one by name; the drawing itself lives in `CompanionHero`.
+ * - `skyline`: a night city silhouette with two sweeping searchlight beams.
+ */
+export type CompanionBackdrop = 'skyline';
+
 export interface Companion {
   /** URL segment, e.g. `grounded-2`. */
   slug: string;
@@ -122,6 +135,10 @@ export interface Companion {
    * see `titleStats` in the data layer.
    */
   psnTitleNames: string[];
+  /** Headline facts for the hero: platform, release, player count and the like. */
+  facts?: CompanionFact[];
+  /** Optional abstract hero backdrop. Omit for the plain glass hero. */
+  backdrop?: CompanionBackdrop;
   quickReference?: QuickReferenceGroup[];
   map?: CompanionMapContent;
   guides?: GuideTableContent[];

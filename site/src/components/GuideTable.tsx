@@ -23,6 +23,12 @@ function compare(a: string | number, b: string | number, numeric: boolean): numb
   return String(a).localeCompare(String(b));
 }
 
+/** Numbers get thousands separators, so 1000000 reads as 1,000,000. */
+function formatCell(cell: string | number | undefined): string | number {
+  if (cell === undefined) return '—';
+  return typeof cell === 'number' ? cell.toLocaleString('en-US') : cell;
+}
+
 export interface GuideTableProps {
   guide: GuideTableContent;
   /** Which PS shape accents the section header; wraps around △ ○ ✕ □. */
@@ -124,7 +130,7 @@ export function GuideTable({ guide, shapeIndex = 0 }: GuideTableProps) {
                         column.numeric ? 'text-right tabular-nums' : ''
                       }`}
                     >
-                      {row.cells[column.id] ?? '—'}
+                      {formatCell(row.cells[column.id])}
                     </td>
                   ))}
                 </tr>

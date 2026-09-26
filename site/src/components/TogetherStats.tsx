@@ -4,7 +4,7 @@ import type { TitleStats } from 'psn/stats';
 
 import type { PlayerAccent } from '../config/accents';
 import { formatDate } from '../format';
-import { fadeRise, staggerChildren } from '../motion/presets';
+import { fadeRise, staggerChildren, transitions } from '../motion/presets';
 import { GlassCard } from './GlassCard';
 import { SectionHeader } from './SectionHeader';
 import { StatTile } from './StatTile';
@@ -26,6 +26,44 @@ import { StatTile } from './StatTile';
  */
 function formatPlaytime(minutes: number): string {
   return formatMinutes(Math.round(minutes));
+}
+
+/**
+ * How far through the trophy list a player is, as a bar in their accent. The
+ * fill grows in with a scale (a transform), so reduced motion shows it full-size
+ * straight away; the numbers themselves are on the progressbar for assistive tech.
+ */
+function TrophyProgress({ entry, stats }: { entry: TogetherStatsEntry; stats: TitleStats }) {
+  const percent = Math.round((stats.trophiesEarned / stats.trophiesDefined) * 100);
+
+  return (
+    <div className="mt-4">
+      <div className="mb-1.5 flex justify-between text-xs font-semibold uppercase tracking-wide text-foreground-muted">
+        <span>Trophy progress</span>
+        <span className="tabular-nums text-foreground">{percent}%</span>
+      </div>
+      <div
+        role="progressbar"
+        aria-label={`${entry.displayName} trophy progress`}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={percent}
+        className="h-2 overflow-hidden rounded-pill bg-surface-3"
+      >
+        <motion.div
+          className="h-full rounded-pill"
+          style={{
+            width: `${percent}%`,
+            originX: 0,
+            backgroundColor: entry.accent.colorVar,
+          }}
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={transitions.slow}
+        />
+      </div>
+    </div>
+  );
 }
 
 export interface TogetherStatsEntry {
@@ -113,7 +151,11 @@ export function TogetherStats({ entries, shapeIndex = 0 }: TogetherStatsProps) {
                         </div>
                       ) : null}
                     </dl>
-                  ) : (
+                  ) : null}
+                  {entry.stats && entry.stats.trophiesDefined > 0 ? (
+                    <TrophyProgress entry={entry} stats={entry.stats} />
+                  ) : null}
+                  {entry.stats ? null : (
                     <p className="mt-3 text-sm text-foreground-muted">Not in this library yet.</p>
                   )}
                 </GlassCard>
