@@ -26,16 +26,16 @@
         "released": "2022-02-25"
       },
       {
-        "name": "Grand Theft Auto: Vice City",
-        "rawgId": 430,
-        "rating": 94,
-        "released": "2002-10-27"
-      },
-      {
         "name": "Resident Evil Code: Veronica",
         "rawgId": 40841,
         "rating": 94,
         "released": "2000-02-03"
+      },
+      {
+        "name": "Grand Theft Auto: Vice City",
+        "rawgId": 430,
+        "rating": 94,
+        "released": "2002-10-27"
       },
       {
         "name": "BioShock Infinite",
@@ -50,16 +50,16 @@
         "released": "1996-06-22"
       },
       {
-        "name": "Batman: Arkham City",
-        "rawgId": 28623,
-        "rating": 94,
-        "released": "2011-10-18"
-      },
-      {
         "name": "The Elder Scrolls V: Skyrim",
         "rawgId": 5679,
         "rating": 94,
         "released": "2011-11-11"
+      },
+      {
+        "name": "Batman: Arkham City",
+        "rawgId": 28623,
+        "rating": 94,
+        "released": "2011-10-18"
       }
     ],
     "Adventure": [
@@ -193,7 +193,7 @@
     "RPG"
   ],
   "metadata": {
-    "generated_at": "2026-10-02T16:29:39.757Z",
+    "generated_at": "2026-10-03T15:03:13.922Z",
     "rawg_base_url": "https://rawg.io",
     "attribution": "Data from RAWG.io",
     "build": "v0.1.0"
