@@ -209,6 +209,21 @@ describe('compareRoster', () => {
     }
   });
 
+  it('matches comparePlayers when the first player has PS4 + PS5 entries of one game', () => {
+    const rocket = dad.playedTitles.find((t) => t.name === 'Rocket League®')!;
+    const rocketTrophies = dad.trophyTitles.find((t) => t.name === 'Rocket League®')!;
+    const twoVersions: PlayerSnapshot = {
+      ...dad,
+      playedTitles: [...dad.playedTitles, { ...rocket, name: 'Rocket League', playDurationMinutes: 7 }],
+      trophyTitles: [...dad.trophyTitles, { ...rocketTrophies, name: 'Rocket League', earnedTotal: 1 }],
+    };
+    const two = compareRoster([twoVersions, braidan]);
+    const pairwise = comparePlayers(twoVersions, braidan);
+    expect(two.sharedGames.map((g) => [g.name, g.players[0]!.playtimeMinutes, g.players[0]!.trophiesEarned])).toEqual(
+      pairwise.sharedGames.map((g) => [g.name, g.a.playtimeMinutes, g.a.trophiesEarned]),
+    );
+  });
+
   it('handles an empty snapshot in the roster without crashing', () => {
     const withEmpty = compareRoster([dad, braidan, empty]);
     expect(withEmpty.sharedGames).toEqual([]);
