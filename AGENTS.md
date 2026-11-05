@@ -134,8 +134,11 @@ composes it rather than reinventing one.** The rules below are hard requirements
   `COMPARE_PATH` (`/compare`) renders `CompareHubPage` (a VS card per entry in `playerPairings`, then
   `FamilyScoreboard`, which renders a `RosterComparison` from `compareRoster()` as `TriClashMeter`
   rows), and `/compare/:a/:b` renders
-  `ComparePage` for that pair (build links with `comparePath(a, b)`; an unknown key or `a === b`
-  renders `NotFoundPage`). Pairwise pages keep the two-sided `ClashMeter`/`comparePlayers` shape;
+  `ComparePage` for that pair (build links with `comparePath(a, b)`; `playerPairings` is every
+  2-combination of `players` in config order). A reversed pair is valid and swaps sides, but hub
+  cards always link the config-order URL so each matchup has one canonical link. An unknown key, a
+  missing param, or `a === b` renders `NotFoundPage`. The e2e smoke suite derives pairings from
+  `psn.config.json`, so a new player gets compare coverage automatically. Pairwise pages keep the two-sided `ClashMeter`/`comparePlayers` shape;
   only the hub is N-player.
 - Route-level page transitions are centralized in `App.tsx`: the routed content is wrapped in
   `<AnimatePresence mode="wait">` + `RouteTransition` (keyed by `location.pathname`, with
