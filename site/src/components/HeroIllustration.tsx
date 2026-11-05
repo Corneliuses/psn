@@ -3,8 +3,9 @@ import { motion, useReducedMotion } from 'motion/react';
 import { duration, easing, glowPulse } from '../motion/presets';
 
 /*
- * Custom father-&-son hero illustration for the splash page: two silhouetted
- * players sitting side by side, each holding a controller, on the dark glass
+ * Custom family hero illustration for the splash page: three silhouetted
+ * players (dad in the middle, son and daughter either side) sitting side by
+ * side, each holding a controller, on the dark glass
  * surface, with the four abstract PlayStation shapes scattered as confetti
  * accents in the shape token colors. The whole piece is a single image to
  * assistive tech (role="img" + aria-label on the wrapper); the SVG internals are
@@ -16,7 +17,8 @@ import { duration, easing, glowPulse } from '../motion/presets';
  * the box-shadow glow, so we gate it here explicitly.)
  */
 
-const HERO_LABEL = 'A dad and his son sitting side by side, each holding a game controller';
+const HERO_LABEL =
+  'A dad, his son, and his daughter sitting side by side, each holding a game controller';
 
 export function HeroIllustration() {
   const shouldReduceMotion = useReducedMotion();
@@ -65,20 +67,27 @@ export function HeroIllustration() {
           transform="rotate(18 275 159)"
         />
 
-        {/* Dad — the larger silhouette on the left. */}
+        {/* Son — the smaller silhouette, leaning in on the left. */}
         <g className="fill-foreground-muted">
-          <circle cx="122" cy="66" r="22" />
-          <path d="M92 100c0-16 14-26 30-26s30 10 30 26v60H92z" />
+          <circle cx="92" cy="86" r="17" />
+          <path d="M69 114c0-13 10-21 23-21s23 8 23 21v46H69z" />
         </g>
-        {/* Son — the smaller silhouette, leaning in on the right. */}
+        {/* Dad — the larger silhouette in the middle. */}
         <g className="fill-foreground-muted">
-          <circle cx="210" cy="86" r="17" />
-          <path d="M187 114c0-13 10-21 23-21s23 8 23 21v46h-46z" />
+          <circle cx="160" cy="66" r="22" />
+          <path d="M130 100c0-16 14-26 30-26s30 10 30 26v60h-60z" />
+        </g>
+        {/* Daughter — the smaller silhouette on the right, with a ponytail. */}
+        <g className="fill-foreground-muted">
+          <circle cx="228" cy="88" r="16" />
+          <ellipse cx="248" cy="96" rx="6" ry="13" transform="rotate(-28 248 96)" />
+          <path d="M206 115c0-13 10-21 22-21s22 8 22 21v45h-44z" />
         </g>
 
         {/* Controllers each player is holding, in the PS-blue accent. */}
-        <rect x="100" y="126" width="46" height="16" rx="7" className="fill-ps-blue" />
-        <rect x="184" y="134" width="38" height="13" rx="6" className="fill-ps-blue" />
+        <rect x="73" y="134" width="38" height="13" rx="6" className="fill-ps-blue" />
+        <rect x="137" y="126" width="46" height="16" rx="7" className="fill-ps-blue" />
+        <rect x="210" y="136" width="36" height="12" rx="6" className="fill-ps-blue" />
       </motion.svg>
     </motion.div>
   );
