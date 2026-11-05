@@ -106,6 +106,9 @@ composes it rather than reinventing one.** The rules below are hard requirements
 - A genuinely new primitive (not expressible by composing the kit) also lives in
   `site/src/components/` and **ships with a component test** (render, accessible name,
   reduced-motion/jsdom-safe final state) in the same PR.
+- Comparison meters: `ClashMeter` is the two-sided meter for pairwise pages; `TriClashMeter` is its
+  N-player sibling for the hub. Drive leader glow from `compareRoster().metrics[].leaders`, never
+  from segment width, so near-ties read correctly; a full tie (including all-zero) renders neutral.
 - `AnimatedNumber` renders its final value immediately under reduced motion and in jsdom (no
   timers), so component tests assert the **final** number, never intermediate animation state.
 
@@ -128,8 +131,9 @@ composes it rather than reinventing one.** The rules below are hard requirements
   header/nav. Its nav links derive from `players` (**never hardcode player keys**), and the route
   structure in `site/src/App.tsx` must stay intact.
 - Player routes (`/<key>`) are generated one per configured player. Compare is two-level:
-  `COMPARE_PATH` (`/compare`) renders `CompareHubPage` (a VS card per entry in `playerPairings` plus
-  the `TriClashMeter` family scoreboard driven by `compareRoster()`), and `/compare/:a/:b` renders
+  `COMPARE_PATH` (`/compare`) renders `CompareHubPage` (a VS card per entry in `playerPairings`, then
+  `FamilyScoreboard`, which renders a `RosterComparison` from `compareRoster()` as `TriClashMeter`
+  rows), and `/compare/:a/:b` renders
   `ComparePage` for that pair (build links with `comparePath(a, b)`; an unknown key or `a === b`
   renders `NotFoundPage`). Pairwise pages keep the two-sided `ClashMeter`/`comparePlayers` shape;
   only the hub is N-player.

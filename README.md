@@ -55,7 +55,7 @@ vibe comes from original silhouettes, the four shape glyphs (△ ○ ✕ □), a
 
 ![Compare page](./docs/screenshots/compare.png)
 
-**Compare** — `/compare` is a hub: one VS card per pair of players, a three-way family scoreboard (`TriClashMeter` — each metric's track split proportionally in every player's accent, the leader glowing) and a "played by everyone" list. Each pair's page (`/compare/:a/:b`, pictured) keeps the VS hero, the two-way clash-meter scoreboard with a proportional lightning seam and winner-accent glow, trophy tiers, and a shared-games list.
+**Compare** — `/compare` is a hub: one VS card per pair of players, then the `FamilyScoreboard`: a three-way scoreboard and family trophy tiers (`TriClashMeter` — each metric's track split proportionally in every player's accent with a lightning seam at each division, every tied leader glowing, a full tie shown neutral) and a "played by everyone" list. Each pair's page (`/compare/:a/:b`, pictured) keeps the VS hero, the two-way clash-meter scoreboard with a proportional lightning seam and winner-accent glow, trophy tiers, and a shared-games list.
 
 > Screenshots predate the three-player redesign (#41–#46) and show the original two-player splash and compare pages.
 
