@@ -5,7 +5,15 @@ import { MemoryRouter } from 'react-router';
 import { App } from './App';
 import { companions } from './companions';
 import { players } from './config/players';
-import { COMPARE_PATH, DISCOVER_PATH, TOGETHER_PATH, companionPath, playerPath } from './routes';
+import {
+  COMPARE_PATH,
+  DISCOVER_PATH,
+  TOGETHER_PATH,
+  companionPath,
+  comparePath,
+  playerPairings,
+  playerPath,
+} from './routes';
 
 describe('routing', () => {
   it('renders the splash page at /', () => {
@@ -26,19 +34,25 @@ describe('routing', () => {
     expect(screen.getByRole('heading', { name: new RegExp(player.displayName) })).toBeInTheDocument();
   });
 
-  it('renders the compare page at /compare', () => {
+  it('renders the compare hub at /compare', () => {
     render(
       <MemoryRouter initialEntries={[COMPARE_PATH]}>
         <App />
       </MemoryRouter>,
     );
-    // The compare page leads with the VS hero matchup heading (players in config
-    // order). Fail fast on a misconfigured roster, and match the exact accessible
-    // name as a string so a display name with regex metacharacters can't skew it.
-    expect(players.length).toBeGreaterThanOrEqual(2);
-    const [a, b] = players;
+    expect(screen.getByRole('heading', { level: 1, name: 'Compare' })).toBeInTheDocument();
+  });
+
+  it.each(playerPairings)('renders the pairwise compare page for $a.key vs $b.key', ({ a, b }) => {
+    render(
+      <MemoryRouter initialEntries={[comparePath(a.key, b.key)]}>
+        <App />
+      </MemoryRouter>,
+    );
+    // Match the exact accessible name as a string so a display name with regex
+    // metacharacters can't skew it.
     expect(
-      screen.getByRole('heading', { level: 1, name: `${a!.displayName} versus ${b!.displayName}` }),
+      screen.getByRole('heading', { level: 1, name: `${a.displayName} versus ${b.displayName}` }),
     ).toBeInTheDocument();
   });
 
@@ -78,5 +92,29 @@ describe('routing', () => {
       </MemoryRouter>,
     );
     expect(screen.getByRole('heading', { name: /page not found/i })).toBeInTheDocument();
+  });
+});
+
+describe('comparePath', () => {
+  it('builds /compare/:a/:b', () => {
+    expect(comparePath('dad', 'braidan')).toBe('/compare/dad/braidan');
+  });
+});
+
+describe('playerPairings', () => {
+  it('is every 2-combination of players in config order', () => {
+    const expected = players.flatMap((a, i) => players.slice(i + 1).map((b) => [a.key, b.key]));
+    expect(playerPairings.map(({ a, b }) => [a.key, b.key])).toEqual(expected);
+    expect(playerPairings).toHaveLength((players.length * (players.length - 1)) / 2);
+  });
+
+  it('never pairs a player with themselves or repeats a matchup', () => {
+    const seen = new Set<string>();
+    for (const { a, b } of playerPairings) {
+      expect(a.key).not.toBe(b.key);
+      const id = [a.key, b.key].sort().join('|');
+      expect(seen.has(id)).toBe(false);
+      seen.add(id);
+    }
   });
 });
