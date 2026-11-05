@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { sampleSnapshot } from 'psn';
 import type { PlayerSnapshot } from 'psn';
+import { MemoryRouter, Route, Routes } from 'react-router';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { ComparePage } from './ComparePage';
@@ -18,6 +19,18 @@ const emptySnapshot: PlayerSnapshot = {
   playedTitles: [],
   trophyTitles: [],
 };
+
+/** Render the page at a URL through the same `/compare/:a/:b` pattern App uses. */
+function renderAt(path: string) {
+  return render(
+    <MemoryRouter initialEntries={[path]}>
+      <Routes>
+        <Route path="/compare/:a/:b" element={<ComparePage />} />
+        <Route path="/compare/:a" element={<ComparePage />} />
+      </Routes>
+    </MemoryRouter>,
+  );
+}
 
 afterEach(() => {
   vi.resetAllMocks();
@@ -38,7 +51,7 @@ describe('ComparePage', () => {
       key === 'dad' ? sampleSnapshot('dad', 'Dad') : sampleSnapshot('braidan', 'Braidan'),
     );
 
-    render(<ComparePage />);
+    renderAt('/compare/dad/braidan');
 
     expect(screen.getByRole('heading', { level: 1, name: /Dad versus Braidan/i })).toBeInTheDocument();
 
@@ -57,7 +70,7 @@ describe('ComparePage', () => {
       key === 'dad' ? sampleSnapshot('dad', 'Dad') : emptySnapshot,
     );
 
-    render(<ComparePage />);
+    renderAt('/compare/dad/braidan');
 
     // Scoreboard still renders (the matchup exists)…
     expect(screen.getByRole('heading', { level: 1, name: /Dad versus Braidan/i })).toBeInTheDocument();
@@ -71,10 +84,36 @@ describe('ComparePage', () => {
       key === 'dad' ? sampleSnapshot('dad', 'Dad') : undefined,
     );
 
-    render(<ComparePage />);
+    renderAt('/compare/dad/braidan');
 
-    expect(screen.getByText(/need to be synced/i)).toBeInTheDocument();
+    // The empty state names the specific pair rather than "both players".
+    expect(
+      screen.getByText('Stats for Dad and Braidan need to be synced before they can be compared.'),
+    ).toBeInTheDocument();
     // The VS hero (and its "versus" heading) never renders without both snapshots.
+    expect(screen.queryByRole('heading', { name: /versus/i })).not.toBeInTheDocument();
+  });
+
+  it('follows the route params, so the reversed pair puts braidan on the left', () => {
+    snapshotByKeyMock.mockImplementation((key) =>
+      key === 'dad' ? sampleSnapshot('dad', 'Dad') : sampleSnapshot('braidan', 'Braidan'),
+    );
+
+    renderAt('/compare/braidan/dad');
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Braidan versus Dad' })).toBeInTheDocument();
+  });
+
+  it.each([
+    ['an unknown key', '/compare/dad/nobody'],
+    ['a missing param', '/compare/dad'],
+    ['a player against themselves', '/compare/dad/dad'],
+  ])('renders the not-found page for %s', (_label, path) => {
+    snapshotByKeyMock.mockImplementation((key) => sampleSnapshot(key, key));
+
+    renderAt(path);
+
+    expect(screen.getByRole('heading', { level: 1, name: /page not found/i })).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: /versus/i })).not.toBeInTheDocument();
   });
 });

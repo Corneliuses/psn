@@ -117,3 +117,39 @@ test('a companion map filters its pins and reveals a pin note', async ({ page })
   await page.getByRole('button', { name: category.label, exact: true }).click();
   await expect(pinButton).toBeHidden();
 });
+
+/**
+ * Every pairwise compare page plus the /compare hub. Pairings are derived from
+ * psnConfig.players (all 2-combinations in config order), mirroring
+ * `playerPairings` in src/routes.ts, so this tracks the configured roster.
+ */
+const pairings = psnConfig.players.flatMap((a, i) =>
+  psnConfig.players.slice(i + 1).map((b) => ({ a, b })),
+);
+
+test('the compare hub lists a matchup card per pairing', async ({ page }) => {
+  const errors = collectErrors(page);
+  await page.goto('/compare', { waitUntil: 'networkidle' });
+
+  await expect(page.getByRole('heading', { level: 1, name: 'Compare' })).toBeVisible();
+  for (const { a, b } of pairings) {
+    const card = page.getByRole('link', { name: `Compare ${a.displayName} and ${b.displayName}`, exact: true });
+    await expect(card).toBeVisible();
+    await expect(card).toHaveAttribute('href', `/compare/${a.key}/${b.key}`);
+  }
+
+  expect(errors, 'unexpected browser errors on /compare').toEqual([]);
+});
+
+for (const { a, b } of pairings) {
+  test(`compare page /compare/${a.key}/${b.key} renders the VS hero`, async ({ page }) => {
+    const errors = collectErrors(page);
+    await page.goto(`/compare/${a.key}/${b.key}`, { waitUntil: 'networkidle' });
+
+    await expect(
+      page.getByRole('heading', { level: 1, name: `${a.displayName} versus ${b.displayName}`, exact: true }),
+    ).toBeVisible();
+
+    expect(errors, `unexpected browser errors on /compare/${a.key}/${b.key}`).toEqual([]);
+  });
+}
