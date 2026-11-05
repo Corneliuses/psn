@@ -13,8 +13,8 @@ import { NotFoundPage } from './NotFoundPage';
 
 /*
  * The head-to-head compare page for any pair, routed at /compare/:a/:b: the two
- * players named by the route params pitted across a VS hero, a clash-meter scoreboard, a trophy-tier block, and a
- * shared-games deep list. Everything is driven by `comparePlayers`; a missing
+ * players named by the route params pitted across a VS hero, a clash-meter
+ * scoreboard, a trophy-tier block, and a shared-games deep list. Everything is driven by `comparePlayers`; a missing
  * snapshot short-circuits to a styled empty state naming the pair, so the
  * comparison is never run on incomplete data. An unknown or missing key, or a
  * player compared against themselves, renders the shared 404.
