@@ -1,18 +1,30 @@
 import type { PlayerSnapshot } from 'psn';
 import type { SuggestionsFile } from 'psn/suggestions';
 
-// FIXTURE DATA: data/dad/latest.json and data/braidan/latest.json are
-// placeholder snapshots (see sampleSnapshot() in the root package), not
-// real synced PSN data. They exist so this JSON import resolves and
-// typechecks; issue #8 (auto-sync) replaces them with real snapshots.
-import dadSnapshot from '../../data/dad/latest.json';
-import braidanSnapshot from '../../data/braidan/latest.json';
 import suggestions from '../../data/suggestions.json';
 
-const snapshots: Partial<Record<string, PlayerSnapshot>> = {
-  dad: dadSnapshot as PlayerSnapshot,
-  braidan: braidanSnapshot as PlayerSnapshot,
-};
+// Build-time current-snapshot loading. Every data/<player>/latest.json is
+// eagerly imported and keyed by its directory name, so adding a player to
+// psn.config.json (and committing their snapshot) needs no change here. The
+// glob is one directory deeper than data/suggestions.json and
+// data/suggestions-cache.json, so those are never matched.
+//
+// FIXTURE DATA: data/nadia/latest.json is still a placeholder snapshot (see
+// sampleSnapshot() in the root package), not real synced PSN data — it exists
+// so her page renders before her first sync, and the daily sync workflow
+// overwrites it once the NPSSO_NADIA secret is set. data/dad and data/braidan
+// hold genuine synced data.
+const LATEST_FILE_RE = /\/data\/([^/]+)\/latest\.json$/;
+
+const latestModules = import.meta.glob<{ default: PlayerSnapshot }>('../../data/*/latest.json', {
+  eager: true,
+});
+
+const snapshots: Partial<Record<string, PlayerSnapshot>> = {};
+for (const [path, module] of Object.entries(latestModules)) {
+  const key = LATEST_FILE_RE.exec(path)?.[1];
+  if (key) snapshots[key] = module.default;
+}
 
 export function snapshotByKey(key: string): PlayerSnapshot | undefined {
   return snapshots[key];
