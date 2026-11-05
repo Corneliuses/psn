@@ -5,6 +5,7 @@ import type { PlayerSnapshot, TrophyCounts } from '../src/psn/models.js';
 import { totalTrophies } from '../src/psn/models.js';
 import {
   comparePlayers,
+  compareRoster,
   completionScoreboard,
   gamesWithMostTrophies,
   mostPlayedGames,
@@ -134,6 +135,109 @@ describe('comparePlayers', () => {
     const vsEmpty = comparePlayers(dad, empty);
     expect(vsEmpty.sharedGames).toEqual([]);
     expect(vsEmpty.metrics.find((m) => m.metric === 'trophiesTotal')!.winner).toBe('a');
+  });
+});
+
+describe('compareRoster', () => {
+  // A third player built from Dad's library: plays Rocket League (as the PS5
+  // spelling, to exercise nameKey matching) and God of War, nothing else.
+  const nadia: PlayerSnapshot = {
+    ...empty,
+    player: { key: 'nadia', displayName: 'Nadia' },
+    playedTitles: [
+      { ...dad.playedTitles.find((t) => t.name === 'Rocket League®')!, name: 'Rocket League', playDurationMinutes: 20 },
+      { ...dad.playedTitles.find((t) => t.name === 'God of War Ragnarök')!, playDurationMinutes: 5000 },
+    ],
+    trophyTitles: [
+      { ...dad.trophyTitles.find((t) => t.name === 'Rocket League®')!, name: 'Rocket League', earnedTotal: 3 },
+    ],
+  };
+  const roster = compareRoster([dad, braidan, nadia]);
+  const metricOf = (r: typeof roster, key: string) => r.metrics.find((m) => m.metric === key)!;
+
+  it('keeps players and totals index-aligned in input (config) order', () => {
+    expect(roster.players.map((p) => p.key)).toEqual(['dad', 'braidan', 'nadia']);
+    expect(roster.totals.map((t) => t.gamesPlayed)).toEqual([4, 4, 2]);
+    expect(roster.totals[0]).toEqual(playerTotals(dad));
+  });
+
+  it('uses the same metric set and labels as comparePlayers', () => {
+    const pairwise = comparePlayers(dad, braidan);
+    expect(roster.metrics.map((m) => [m.metric, m.label])).toEqual(
+      pairwise.metrics.map((m) => [m.metric, m.label]),
+    );
+  });
+
+  it('lists every player value and the leader for each metric', () => {
+    const platinums = metricOf(roster, 'platinums');
+    expect(platinums.values).toEqual([
+      { playerKey: 'dad', value: 2 },
+      { playerKey: 'braidan', value: 1 },
+      { playerKey: 'nadia', value: 1 },
+    ]);
+    expect(platinums.leaders).toEqual(['dad']);
+    expect(metricOf(roster, 'playtimeMinutes').leaders).toEqual(['braidan']);
+  });
+
+  it('lists every tied player as a leader', () => {
+    // Dad and Braidan both played 4 games; Nadia played 2.
+    expect(metricOf(roster, 'gamesPlayed').leaders).toEqual(['dad', 'braidan']);
+    // Shared-games count is the same for everyone: a full tie.
+    expect(metricOf(roster, 'sharedGames').leaders).toEqual(['dad', 'braidan', 'nadia']);
+  });
+
+  it('finds games every player has played, matched by nameKey, busiest first', () => {
+    // Combined playtime: Rocket League 5800 + 18072 + 20 > God of War 4934 + 722 + 5000.
+    expect(roster.sharedGames.map((g) => g.name)).toEqual(['Rocket League®', 'God of War Ragnarök']);
+    const rocket = roster.sharedGames[0]!;
+    expect(rocket.players.map((p) => p.playerKey)).toEqual(['dad', 'braidan', 'nadia']);
+    expect(rocket.players[2]).toEqual({ playerKey: 'nadia', playtimeMinutes: 20, trophiesEarned: 3 });
+    const gow = roster.sharedGames[1]!;
+    expect(gow.players[2]!.trophiesEarned).toBe(0); // no trophy title → 0
+    expect(metricOf(roster, 'sharedGames').values.map((v) => v.value)).toEqual([2, 2, 2]);
+  });
+
+  it('degenerates to the comparePlayers result for two players', () => {
+    const two = compareRoster([dad, braidan]);
+    const pairwise = comparePlayers(dad, braidan);
+    expect(two.sharedGames.map((g) => g.name)).toEqual(pairwise.sharedGames.map((g) => g.name));
+    for (const m of pairwise.metrics) {
+      const r = metricOf(two, m.metric);
+      expect(r.values.map((v) => v.value)).toEqual([m.a, m.b]);
+      const expected = m.winner === 'tie' ? ['dad', 'braidan'] : m.winner === 'a' ? ['dad'] : ['braidan'];
+      expect(r.leaders).toEqual(expected);
+    }
+  });
+
+  it('handles an empty snapshot in the roster without crashing', () => {
+    const withEmpty = compareRoster([dad, braidan, empty]);
+    expect(withEmpty.sharedGames).toEqual([]);
+    expect(metricOf(withEmpty, 'trophiesTotal').values[2]).toEqual({ playerKey: 'nobody', value: 0 });
+    expect(metricOf(withEmpty, 'trophiesTotal').leaders).toEqual(['dad']);
+  });
+
+  it('treats an all-empty roster as a full tie at zero', () => {
+    const blank = compareRoster([empty, { ...empty, player: { key: 'other', displayName: 'Other' } }]);
+    for (const m of blank.metrics) {
+      expect(m.values.every((v) => v.value === 0)).toBe(true);
+      expect(m.leaders).toEqual(['nobody', 'other']);
+    }
+  });
+
+  it('returns no shared games when no title is common to everyone', () => {
+    const loner: PlayerSnapshot = {
+      ...empty,
+      player: { key: 'loner', displayName: 'Loner' },
+      playedTitles: [{ ...dad.playedTitles.find((t) => t.name === 'Elden Ring')! }],
+    };
+    const none = compareRoster([dad, braidan, loner]);
+    expect(none.sharedGames).toEqual([]);
+    expect(metricOf(none, 'sharedGames').values.map((v) => v.value)).toEqual([0, 0, 0]);
+  });
+
+  it('returns an empty comparison for an empty roster', () => {
+    expect(compareRoster([])).toEqual({ players: [], totals: [], metrics: expect.any(Array), sharedGames: [] });
+    expect(compareRoster([]).metrics.every((m) => m.values.length === 0 && m.leaders.length === 0)).toBe(true);
   });
 });
 
