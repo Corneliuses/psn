@@ -131,9 +131,10 @@ composes it rather than reinventing one.** The rules below are hard requirements
   header/nav. Its nav links derive from `players` (**never hardcode player keys**), and the route
   structure in `site/src/App.tsx` must stay intact.
 - Player routes (`/<key>`) are generated one per configured player. Compare is two-level:
-  `COMPARE_PATH` (`/compare`) renders `CompareHubPage` (a VS card per entry in `playerPairings`, then
-  `FamilyScoreboard`, which renders a `RosterComparison` from `compareRoster()` as `TriClashMeter`
-  rows), and `/compare/:a/:b` renders
+  `COMPARE_PATH` (`/compare`) renders `CompareHubPage` (a "Matchups" list with a VS card per entry in
+  `playerPairings`, then `FamilyScoreboard`, which renders a `RosterComparison` from
+  `compareRoster()` as `TriClashMeter` rows; it only appears once at least two players have
+  synced snapshots), and `/compare/:a/:b` renders
   `ComparePage` for that pair (build links with `comparePath(a, b)`; `playerPairings` is every
   2-combination of `players` in config order). A reversed pair is valid and swaps sides, but hub
   cards always link the config-order URL so each matchup has one canonical link. An unknown key, a
