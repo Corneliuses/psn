@@ -9,6 +9,11 @@
       "key": "braidan",
       "displayName": "Braidan",
       "auth": { "mode": "npsso", "envVar": "NPSSO_BRAIDAN" }
+    },
+    {
+      "key": "nadia",
+      "displayName": "Nadia",
+      "auth": { "mode": "npsso", "envVar": "NPSSO_NADIA" }
     }
   ]
 }

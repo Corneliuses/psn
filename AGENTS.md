@@ -204,7 +204,7 @@ works within, and they hold whether or not the skill is used.
 ## Security & Secrets
 
 - NPSSO tokens live in `.env` (gitignored) or CI secrets, named per `psn.config.json` (`NPSSO_DAD`, `NPSSO_BRAIDAN`, `NPSSO_NADIA`). Adding a player means adding their secret to the repo and to the `.github/workflows/sync.yml` env block. Never commit, log, or embed tokens in error messages — `PsnAuthError` names the env var, never the value.
-- `data/` holds only *real* synced snapshots. Dry-run output is fixture data and must not be committed as if it were real. **Exception:** `data/nadia/latest.json` is a committed *fixture* snapshot (generated via `sampleSnapshot()`), added in #41 so `site/` has something to import before Nadia's first real sync. Once the daily sync runs with `NPSSO_NADIA` set, it must be overwritten with genuine synced data, not left in place. (`data/dad/` and `data/braidan/` already hold real synced history.)
+- `data/` holds only *real* synced snapshots. Dry-run output is fixture data and must not be committed as if it were real. **Exception:** `data/nadia/latest.json` is a committed *fixture* snapshot (generated via `sampleSnapshot()`), added in #41 so `site/` has something to render for her before her first real sync. The daily sync workflow overwrites it with genuine data once the `NPSSO_NADIA` secret is set; it must not be left in place after that. `data/dad/` and `data/braidan/` hold real synced data — never overwrite them with fixture output (note that `pnpm sync --dry-run` does exactly that — see #49 — so revert `data/` after a dry run).
 
 ## Working Rules
 
