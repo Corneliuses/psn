@@ -51,7 +51,7 @@ vibe comes from original silhouettes, the four shape glyphs (△ ○ ✕ □), a
 |  |  |
 |---|---|
 | ![Splash page](./docs/screenshots/splash.png) | ![Player page](./docs/screenshots/player.png) |
-| **Splash** — animated hero, one portal card per player, family face-off compare CTA | **Player** — hero header, animated stat tiles, staggered game sections |
+| **Splash** — animated hero (dad, son and daughter), one portal card per player, "Family face-off" compare CTA | **Player** — hero header, animated stat tiles, staggered game sections |
 
 ![Compare page](./docs/screenshots/compare.png)
 

@@ -1,6 +1,6 @@
 # psn
 
-Family PlayStation stats tracker for a configurable roster (currently Dad, Braidan and Nadia, declared in `psn.config.json`): syncs play history and trophy data from PSN into committed JSON snapshots, derives displayable stats, and renders them as a website (`site/`) with a splash landing, per-player pages, a compare hub (`/compare`: a three-way family scoreboard plus one VS card per pair), a head-to-head page for every pair (`/compare/:a/:b`), and companion apps for the games we play together, in a dark, PlayStation-vibe UI. Nothing may assume exactly two players: derive rosters, pairings and copy from `players`.
+Family PlayStation stats tracker for a configurable roster (currently Dad, Braidan and Nadia, declared in `psn.config.json`): syncs play history and trophy data from PSN into committed JSON snapshots, derives displayable stats, and renders them as a website (`site/`) with a splash landing, per-player pages, a compare hub (`/compare`: a three-way family scoreboard plus one VS card per pair), a head-to-head page for every pair (`/compare/:a/:b`), and companion apps for the games we play together, in a dark, PlayStation-vibe UI. Nothing may assume exactly two players: derive rosters, pairings and copy from `players`, and list names with `joinNames` (`site/src/format.ts`, "Dad, Braidan & Nadia") rather than a hand-rolled join or `Intl.ListFormat`.
 
 ## Repository Structure
 
