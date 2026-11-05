@@ -10,6 +10,14 @@ export type {
   SharedGameLeader,
   SharedGameSide,
 } from './compare.js';
+export { compareRoster } from './roster.js';
+export type {
+  RosterComparison,
+  RosterGameSide,
+  RosterMetric,
+  RosterMetricValue,
+  RosterSharedGame,
+} from './roster.js';
 export { playtimeTrend, trophyPace } from './trends.js';
 export type { PlaytimePoint, TrophyPaceInterval } from './trends.js';
 export { completionScoreboard } from './completion.js';
