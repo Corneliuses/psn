@@ -47,9 +47,10 @@ function rosterMetric(
   metricKey: string,
   label: string,
   snapshots: PlayerSnapshot[],
-  pick: (index: number) => number,
+  totals: PlayerTotals[],
+  pick: (totals: PlayerTotals) => number,
 ): RosterMetric {
-  const values = snapshots.map((s, i) => ({ playerKey: s.player.key, value: pick(i) }));
+  const values = snapshots.map((s, i) => ({ playerKey: s.player.key, value: pick(totals[i]!) }));
   const max = Math.max(...values.map((v) => v.value));
   return {
     metric: metricKey,
@@ -77,34 +78,44 @@ export function compareRoster(snapshots: PlayerSnapshot[]): RosterComparison {
 
   const [first] = snapshots;
   const sharedGames: RosterSharedGame[] = (first?.playedTitles ?? [])
-    .filter((t) => playedMaps.every((m) => m.has(nameKey(t.name))))
-    .map((t) => {
-      const key = nameKey(t.name);
-      return {
-        name: t.name,
-        players: snapshots.map((s, i) => ({
-          playerKey: s.player.key,
-          playtimeMinutes: playedMaps[i]!.get(key)!.playDurationMinutes,
-          trophiesEarned: trophyMaps[i]!.get(key)?.earnedTotal ?? 0,
-        })),
-      };
-    })
+    .map((t) => ({ title: t, key: nameKey(t.name) }))
+    .filter(({ key }) => playedMaps.every((m) => m.has(key)))
+    .map(({ title, key }) => ({
+      name: title.name,
+      players: snapshots.map((s, i) =>
+        // The first player's side is the row's own title (and its first
+        // trophy match), exactly as `comparePlayers` reports side `a`, so a
+        // library with PS4 + PS5 entries of one game keeps each entry's own
+        // playtime instead of collapsing both rows onto the last entry.
+        i === 0
+          ? {
+              playerKey: s.player.key,
+              playtimeMinutes: title.playDurationMinutes,
+              trophiesEarned: s.trophyTitles.find((x) => nameKey(x.name) === key)?.earnedTotal ?? 0,
+            }
+          : {
+              playerKey: s.player.key,
+              playtimeMinutes: playedMaps[i]!.get(key)!.playDurationMinutes,
+              trophiesEarned: trophyMaps[i]!.get(key)?.earnedTotal ?? 0,
+            },
+      ),
+    }))
     .sort((x, y) => combinedPlaytime(y) - combinedPlaytime(x));
 
-  const m = (key: string, label: string, pick: (i: number) => number) =>
-    rosterMetric(key, label, snapshots, pick);
+  const m = (key: string, label: string, pick: (t: PlayerTotals) => number) =>
+    rosterMetric(key, label, snapshots, totals, pick);
 
   return {
     players: snapshots.map((s) => s.player),
     totals,
     metrics: [
-      m('playtimeMinutes', 'Total play time (minutes)', (i) => totals[i]!.playtimeMinutes),
-      m('gamesPlayed', 'Games played', (i) => totals[i]!.gamesPlayed),
-      m('trophiesTotal', 'Total trophies', (i) => totals[i]!.trophiesTotal),
-      m('bronze', 'Bronze trophies', (i) => totals[i]!.trophies.bronze),
-      m('silver', 'Silver trophies', (i) => totals[i]!.trophies.silver),
-      m('gold', 'Gold trophies', (i) => totals[i]!.trophies.gold),
-      m('platinums', 'Platinum trophies', (i) => totals[i]!.platinums),
+      m('playtimeMinutes', 'Total play time (minutes)', (t) => t.playtimeMinutes),
+      m('gamesPlayed', 'Games played', (t) => t.gamesPlayed),
+      m('trophiesTotal', 'Total trophies', (t) => t.trophiesTotal),
+      m('bronze', 'Bronze trophies', (t) => t.trophies.bronze),
+      m('silver', 'Silver trophies', (t) => t.trophies.silver),
+      m('gold', 'Gold trophies', (t) => t.trophies.gold),
+      m('platinums', 'Platinum trophies', (t) => t.platinums),
       m('sharedGames', 'Shared games', () => sharedGames.length),
     ],
     sharedGames,

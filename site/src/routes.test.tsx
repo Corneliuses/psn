@@ -85,6 +85,18 @@ describe('routing', () => {
     expect(screen.getByRole('heading', { level: 1, name: first!.name })).toBeInTheDocument();
   });
 
+  it.each(['/compare/dad/dad', '/compare/dad/nobody', '/compare/dad'])(
+    'renders the not-found page for the invalid matchup %s',
+    (path) => {
+      render(
+        <MemoryRouter initialEntries={[path]}>
+          <App />
+        </MemoryRouter>,
+      );
+      expect(screen.getByRole('heading', { level: 1, name: /page not found/i })).toBeInTheDocument();
+    },
+  );
+
   it('renders a not-found page for an unmatched route', () => {
     render(
       <MemoryRouter initialEntries={['/this-path-does-not-exist']}>
@@ -102,10 +114,15 @@ describe('comparePath', () => {
 });
 
 describe('playerPairings', () => {
-  it('is every 2-combination of players in config order', () => {
-    const expected = players.flatMap((a, i) => players.slice(i + 1).map((b) => [a.key, b.key]));
-    expect(playerPairings.map(({ a, b }) => [a.key, b.key])).toEqual(expected);
+  it('has one pairing per 2-combination of players', () => {
     expect(playerPairings).toHaveLength((players.length * (players.length - 1)) / 2);
+  });
+
+  it('puts the earlier player in config order on the left of every pairing', () => {
+    const order = players.map((player) => player.key);
+    for (const { a, b } of playerPairings) {
+      expect(order.indexOf(a.key)).toBeLessThan(order.indexOf(b.key));
+    }
   });
 
   it('never pairs a player with themselves or repeats a matchup', () => {

@@ -17,6 +17,9 @@ import { comparePath, playerPairings } from '../routes';
  * render in their player accents around a VS pill; that treatment is decorative
  * (`aria-hidden`) and the link's accessible name is "Compare <A> and <B>".
  *
+ * The names are deliberately large (text-xl, extrabold): the darker shape
+ * accents (cross, circle) clear WCAG AA on this surface only as large text.
+ *
  * Below the matchups sits the family-wide scoreboard (#44), driven by
  * `compareRoster()` over every configured player's snapshot. It only renders
  * when the whole roster (2+ players) has synced data, so a three-way board is
@@ -55,12 +58,13 @@ export function CompareHubPage() {
           {playerPairings.map(({ a, b }) => {
             const accentA = accentForKey(a.key);
             const accentB = accentForKey(b.key);
+            const to = comparePath(a.key, b.key);
             return (
-              <motion.li key={`${a.key}-${b.key}`} variants={fadeRise}>
+              <motion.li key={to} variants={fadeRise}>
                 <GlassCard
                   as={Link}
                   glow
-                  to={comparePath(a.key, b.key)}
+                  to={to}
                   aria-label={`Compare ${a.displayName} and ${b.displayName}`}
                   className="grid h-full grid-cols-[1fr_auto_1fr] items-center gap-4 p-6 no-underline"
                 >
