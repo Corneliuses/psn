@@ -1,6 +1,6 @@
 # psn
 
-PlayStation stats tracker for the players configured in `psn.config.json` (currently Dad, Braidan, and Nadia): syncs play history and trophy data from PSN into committed JSON snapshots, derives displayable stats, and renders them as a website (`site/`) with a splash landing, per-player pages, a head-to-head comparison view, and companion apps for the games the players share, in a dark, PlayStation-vibe UI.
+Father–son PlayStation stats tracker for two players (Dad and Braidan): syncs play history and trophy data from PSN into committed JSON snapshots, derives displayable stats, and renders them as a website (`site/`) with a splash landing, per-player pages, a head-to-head comparison view, and companion apps for the games both players play, in a dark, PlayStation-vibe UI.
 
 ## Repository Structure
 
