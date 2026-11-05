@@ -11,7 +11,7 @@ PSN API ──> pnpm sync ──> data/<player>/<date>.json ──> src/stats �
 
 - **Sync** (`src/psn`, `src/cli`): authenticates with PSN via NPSSO tokens and pulls each player's played titles (play time, play counts, last played) and trophy titles (earned tiers, platinums, progress).
 - **Snapshots** (`data/`): one JSON per player per day plus `latest.json`, committed to git — the history doubles as the dataset for trend analytics later.
-- **Stats** (`src/stats`): pure functions over snapshots — recent games, most played, trophy leaders, platinum list, a full player-vs-player comparison (`comparePlayers`), and an N-player roster comparison (`compareRoster`) for the family scoreboard. The site reads only this layer.
+- **Stats** (`src/stats`): pure functions over snapshots — recent games, most played, trophy leaders, platinum list, a full player-vs-player comparison (`comparePlayers`), and an N-player roster comparison (`compareRoster` in `src/stats/roster.ts`: per-metric values with every tied leader, per-player totals, and the games every player has played) for the family scoreboard. `compareRoster` is additive — pairwise pages keep the two-sided `comparePlayers`/`sharedGamesDeepDive`. The site reads only this layer.
 - **Site** (`site/`): a React + Vite app that renders the stats as a dark, PlayStation-vibe UI — a splash landing, a per-player page, a compare hub (`/compare`) with the three-way family scoreboard and a head-to-head page for each pair (`/compare/:a/:b`), and the [companion apps](#companion-apps) for the games we play together. See [Design language](#design-language).
 
 ## Setup
