@@ -71,7 +71,7 @@ from the dev environment (unauthenticated probes return 401/404, not proxy block
 4. Match every owned game against RAWG and IGDB; record **match rate** and per-title genres.
 5. Build a playtime-weighted genre profile per player; take the top genres **both** players play.
    (Historical: the shipped `sharedGenres` now keeps genres where **at least two** players have
-   playtime, ranked by combined minutes across the roster — see #46.)
+   playtime (`MIN_SHARED_PLAYERS`), ranked by combined minutes across the roster — see #46.)
 6. Fetch highly rated PS4/PS5 games per top genre from each API; exclude owned titles; report.
 
 ## Prototype results
