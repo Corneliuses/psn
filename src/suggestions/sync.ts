@@ -1,7 +1,7 @@
 /**
  * Sync-time orchestration: read the latest snapshots, resolve owned-title
  * genres (via the persisted cache, fetching only cache misses), build the
- * shared-genre profile, fetch suggestions, apply curated overrides, and
+ * shared-genre profile (genres at least two players have time in), fetch suggestions, apply curated overrides, and
  * write `data/suggestions.json` atomically.
  */
 import { join } from 'node:path';

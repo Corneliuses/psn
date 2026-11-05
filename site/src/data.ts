@@ -20,7 +20,7 @@ export function snapshotByKey(key: string): PlayerSnapshot | undefined {
 
 /**
  * Game suggestions built at sync time (see src/suggestions/) from the top
- * genres both players share. `by_genre` is empty until a real RAWG-backed
+ * genres at least two players share. `by_genre` is empty until a real RAWG-backed
  * sync has run.
  */
 export function suggestionsData(): SuggestionsFile {
