@@ -1,6 +1,6 @@
-# psn — father & son PlayStation stats
+# psn — family PlayStation stats
 
-A stats site for two players — Dad and Braidan — tracking what we play and the trophies we earn. A splash page links to each player's stats (recent games, most played, trophy leaders, platinums) and a head-to-head comparison, and a **Together** section holds a [companion app](#companion-apps) per game we play side by side. The site ships as a dark, PlayStation-vibe UI (see [Design language](#design-language) below); the data layer that feeds it is described further down.
+A stats site for the family — Dad, Braidan and Nadia — tracking what we play and the trophies we earn. A splash page links to each player's stats (recent games, most played, trophy leaders, platinums) and a compare hub — a three-way family scoreboard plus a head-to-head page for every pair of players — and a **Together** section holds a [companion app](#companion-apps) per game we play side by side. The site ships as a dark, PlayStation-vibe UI (see [Design language](#design-language) below); the data layer that feeds it is described further down.
 
 ## How it works
 
@@ -11,8 +11,8 @@ PSN API ──> pnpm sync ──> data/<player>/<date>.json ──> src/stats �
 
 - **Sync** (`src/psn`, `src/cli`): authenticates with PSN via NPSSO tokens and pulls each player's played titles (play time, play counts, last played) and trophy titles (earned tiers, platinums, progress).
 - **Snapshots** (`data/`): one JSON per player per day plus `latest.json`, committed to git — the history doubles as the dataset for trend analytics later.
-- **Stats** (`src/stats`): pure functions over snapshots — recent games, most played, trophy leaders, platinum list, and a full player-vs-player comparison. The site reads only this layer.
-- **Site** (`site/`): a React + Vite app that renders the stats as a dark, PlayStation-vibe UI — a splash landing, a per-player page, a head-to-head compare view, and the [companion apps](#companion-apps) for the games we play together. See [Design language](#design-language).
+- **Stats** (`src/stats`): pure functions over snapshots — recent games, most played, trophy leaders, platinum list, a full player-vs-player comparison (`comparePlayers`), and an N-player roster comparison (`compareRoster`) for the family scoreboard. The site reads only this layer.
+- **Site** (`site/`): a React + Vite app that renders the stats as a dark, PlayStation-vibe UI — a splash landing, a per-player page, a compare hub (`/compare`) with the three-way family scoreboard and a head-to-head page for each pair (`/compare/:a/:b`), and the [companion apps](#companion-apps) for the games we play together. See [Design language](#design-language).
 
 ## Setup
 
@@ -27,9 +27,11 @@ pnpm sync --dry-run     # exercise the pipeline with sample data, no credentials
 
 Players are declared in [`psn.config.json`](./psn.config.json). Each player either signs in with their own token (`mode: "npsso"`) or is fetched through another account's session (`mode: "friend"`, requires friendship and open privacy settings).
 
-**Automated daily sync**: the [`Daily sync`](./.github/workflows/sync.yml) GitHub Actions workflow runs `pnpm sync` every day at 11:00 UTC (6:00 AM US Central during daylight time; 5:00 AM during standard time — GitHub cron is UTC-only and doesn't follow DST) and commits any changed snapshots under `data/` back to `main`, so history accumulates without a manual run. It reads the NPSSO tokens from repo secrets — add them at **repo Settings → Secrets and variables → Actions** as `NPSSO_DAD` and `NPSSO_BRAIDAN` (an agent can't set these for you). Because the NPSSO tokens last ~2 months (see above), the workflow will start failing with a per-player auth error when one expires; GitHub's workflow-failure notification is your cue to refresh the affected token and re-run the workflow (it also has a manual "Run workflow" trigger for testing).
+**Adding a player**: append them to `psn.config.json` (config order sets their △ ○ ✕ □ accent), add their `NPSSO_<KEY>` token to `.env` and as a repo secret, add that secret to the env block in `.github/workflows/sync.yml`, and commit a placeholder `data/<key>/latest.json` from `sampleSnapshot()` until their first real sync. Routes, nav, splash cards, compare pairings and the family scoreboard all derive from the config.
 
-**Game suggestions** (`src/suggestions/`): after the PSN sync, `pnpm sync` refreshes `data/suggestions.json` — unowned games suggested from the top genres both players share, sourced from the [RAWG](https://rawg.io) API (see the [#9 spike write-up](./docs/game-suggestions-spike.md) for why RAWG was chosen). This needs a `RAWG_API_KEY` (free at [rawg.io/apidocs](https://rawg.io/apidocs)) in `.env` locally, or as the `RAWG_API_KEY` repo secret for the daily sync workflow; without it, this step is skipped with a warning rather than failing the sync. Pass `--no-suggestions` to skip it explicitly. A `data/suggestions-cache.json` (title → RAWG genres) is committed alongside it so repeat syncs only fetch genres for newly-seen titles. For manual corrections (hiding a misclassified game, adding an edge case RAWG tags poorly), add a gitignored `data/suggestions-overrides.json` — see `src/suggestions/overrides.ts` for its shape.
+**Automated daily sync**: the [`Daily sync`](./.github/workflows/sync.yml) GitHub Actions workflow runs `pnpm sync` every day at 11:00 UTC (6:00 AM US Central during daylight time; 5:00 AM during standard time — GitHub cron is UTC-only and doesn't follow DST) and commits any changed snapshots under `data/` back to `main`, so history accumulates without a manual run. It reads the NPSSO tokens from repo secrets — add them at **repo Settings → Secrets and variables → Actions** as `NPSSO_DAD`, `NPSSO_BRAIDAN` and `NPSSO_NADIA` — one per player in `psn.config.json` (an agent can't set these for you). Because the NPSSO tokens last ~2 months (see above), the workflow will start failing with a per-player auth error when one expires; GitHub's workflow-failure notification is your cue to refresh the affected token and re-run the workflow (it also has a manual "Run workflow" trigger for testing).
+
+**Game suggestions** (`src/suggestions/`): after the PSN sync, `pnpm sync` refreshes `data/suggestions.json` — unowned games suggested from the top genres at least two players share (ranked by combined playtime across the whole family, so a newer player's small library doesn't starve the list), sourced from the [RAWG](https://rawg.io) API (see the [#9 spike write-up](./docs/game-suggestions-spike.md) for why RAWG was chosen). This needs a `RAWG_API_KEY` (free at [rawg.io/apidocs](https://rawg.io/apidocs)) in `.env` locally, or as the `RAWG_API_KEY` repo secret for the daily sync workflow; without it, this step is skipped with a warning rather than failing the sync. Pass `--no-suggestions` to skip it explicitly. A `data/suggestions-cache.json` (title → RAWG genres) is committed alongside it so repeat syncs only fetch genres for newly-seen titles. For manual corrections (hiding a misclassified game, adding an edge case RAWG tags poorly), add a gitignored `data/suggestions-overrides.json` — see `src/suggestions/overrides.ts` for its shape.
 
 ## Commands
 
@@ -49,11 +51,13 @@ vibe comes from original silhouettes, the four shape glyphs (△ ○ ✕ □), a
 |  |  |
 |---|---|
 | ![Splash page](./docs/screenshots/splash.png) | ![Player page](./docs/screenshots/player.png) |
-| **Splash** — animated hero, one portal card per player, VS compare CTA | **Player** — hero header, animated stat tiles, staggered game sections |
+| **Splash** — animated hero, one portal card per player, family face-off compare CTA | **Player** — hero header, animated stat tiles, staggered game sections |
 
 ![Compare page](./docs/screenshots/compare.png)
 
-**Compare** — VS hero, a clash-meter scoreboard with a proportional lightning seam and winner-accent glow, trophy tiers, and a shared-games list.
+**Compare** — `/compare` is a hub: one VS card per pair of players, a three-way family scoreboard (`TriClashMeter` — each metric's track split proportionally in every player's accent, the leader glowing) and a "played by everyone" list. Each pair's page (`/compare/:a/:b`, pictured) keeps the VS hero, the two-way clash-meter scoreboard with a proportional lightning seam and winner-accent glow, trophy tiers, and a shared-games list.
+
+> Screenshots predate the three-player redesign (#41–#46) and show the original two-player splash and compare pages.
 
 The design is built on three layers, all under `site/src/`:
 
@@ -125,4 +129,4 @@ Everything above was produced by an AI agent executing those skills against this
 
 ## Privacy
 
-Gaming stats are low-sensitivity, but this is a public repo involving a kid's data, so: display names are what appear in `psn.config.json` (first name only), NPSSO tokens are never committed, and nothing beyond game/trophy/playtime data is stored.
+Gaming stats are low-sensitivity, but this is a public repo involving kids' data, so: display names are what appear in `psn.config.json` (first name only), NPSSO tokens are never committed, and nothing beyond game/trophy/playtime data is stored.

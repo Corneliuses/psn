@@ -1,6 +1,6 @@
 # psn
 
-Father–son PlayStation stats tracker for two players (Dad and Braidan): syncs play history and trophy data from PSN into committed JSON snapshots, derives displayable stats, and renders them as a website (`site/`) with a splash landing, per-player pages, a head-to-head comparison view, and companion apps for the games both players play, in a dark, PlayStation-vibe UI.
+Family PlayStation stats tracker for a configurable roster (currently Dad, Braidan and Nadia, declared in `psn.config.json`): syncs play history and trophy data from PSN into committed JSON snapshots, derives displayable stats, and renders them as a website (`site/`) with a splash landing, per-player pages, a compare hub (`/compare`: a three-way family scoreboard plus one VS card per pair), a head-to-head page for every pair (`/compare/:a/:b`), and companion apps for the games we play together, in a dark, PlayStation-vibe UI. Nothing may assume exactly two players: derive rosters, pairings and copy from `players`.
 
 ## Repository Structure
 
@@ -20,7 +20,7 @@ psn/
 │       ├── motion/     # presets.ts — shared Motion variants/transitions all animation composes
 │       ├── components/ # PlayStation component kit (GlassCard, StatTile, TrophyBadge, …) + AppShell
 │       ├── companions/ # Companion-app content: one data file per game + the registry
-│       └── pages/      # Splash, Player, Compare, Discover, Together, Companion, NotFound
+│       └── pages/      # Splash, Player, CompareHub (/compare), Compare (/compare/:a/:b), Discover, Together, Companion, NotFound
 └── .claude/skills/ # Workflow skills installed from Corneliuses/agentic-config
 ```
 
@@ -127,6 +127,12 @@ composes it rather than reinventing one.** The rules below are hard requirements
 - Every route renders inside **`AppShell`** (`site/src/components/AppShell.tsx`), the persistent
   header/nav. Its nav links derive from `players` (**never hardcode player keys**), and the route
   structure in `site/src/App.tsx` must stay intact.
+- Player routes (`/<key>`) are generated one per configured player. Compare is two-level:
+  `COMPARE_PATH` (`/compare`) renders `CompareHubPage` (a VS card per entry in `playerPairings` plus
+  the `TriClashMeter` family scoreboard driven by `compareRoster()`), and `/compare/:a/:b` renders
+  `ComparePage` for that pair (build links with `comparePath(a, b)`; an unknown key or `a === b`
+  renders `NotFoundPage`). Pairwise pages keep the two-sided `ClashMeter`/`comparePlayers` shape;
+  only the hub is N-player.
 - Route-level page transitions are centralized in `App.tsx`: the routed content is wrapped in
   `<AnimatePresence mode="wait">` + `RouteTransition` (keyed by `location.pathname`, with
   `<Routes location={location}>`). Each page owns only its **own** internal entrance stagger — never
@@ -189,8 +195,8 @@ works within, and they hold whether or not the skill is used.
 
 ## Security & Secrets
 
-- NPSSO tokens live in `.env` (gitignored) or CI secrets, named per `psn.config.json` (`NPSSO_DAD`, `NPSSO_BRAIDAN`). Never commit, log, or embed tokens in error messages — `PsnAuthError` names the env var, never the value.
-- `data/` holds only *real* synced snapshots. Dry-run output is fixture data and must not be committed as if it were real. **Exception:** `data/dad/latest.json` and `data/braidan/latest.json` are currently committed *fixture* snapshots (generated via `sampleSnapshot()`), added in #4 so `site/` has something to import before real sync (#8) lands. Once #8 runs for real, these must be overwritten with genuine synced data, not left in place.
+- NPSSO tokens live in `.env` (gitignored) or CI secrets, named per `psn.config.json` (`NPSSO_DAD`, `NPSSO_BRAIDAN`, `NPSSO_NADIA`). Adding a player means adding their secret to the repo and to the `.github/workflows/sync.yml` env block. Never commit, log, or embed tokens in error messages — `PsnAuthError` names the env var, never the value.
+- `data/` holds only *real* synced snapshots. Dry-run output is fixture data and must not be committed as if it were real. **Exception:** `data/nadia/latest.json` is a committed *fixture* snapshot (generated via `sampleSnapshot()`), added in #41 so `site/` has something to import before Nadia's first real sync. Once the daily sync runs with `NPSSO_NADIA` set, it must be overwritten with genuine synced data, not left in place. (`data/dad/` and `data/braidan/` already hold real synced history.)
 
 ## Working Rules
 
