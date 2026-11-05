@@ -138,6 +138,10 @@ test('the compare hub lists a matchup card per pairing', async ({ page }) => {
     await expect(card).toHaveAttribute('href', `/compare/${a.key}/${b.key}`);
   }
 
+  // The three-way family scoreboard (#44) renders below the matchups.
+  await expect(page.getByRole('heading', { name: 'Family scoreboard', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Played by everyone', exact: true })).toBeVisible();
+
   expect(errors, 'unexpected browser errors on /compare').toEqual([]);
 });
 
