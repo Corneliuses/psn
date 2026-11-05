@@ -13,3 +13,14 @@ const DATE_FORMAT = new Intl.DateTimeFormat('en-US', {
 export function formatDate(iso: string): string {
   return DATE_FORMAT.format(new Date(iso));
 }
+
+/**
+ * Join display names into a natural English list, ampersand before the last
+ * name: [] → "", ["Dad"] → "Dad", ["Dad", "Braidan"] → "Dad & Braidan",
+ * ["Dad", "Braidan", "Nadia"] → "Dad, Braidan & Nadia". Hand-rolled rather
+ * than `Intl.ListFormat`, which spells "and" and adds an Oxford comma.
+ */
+export function joinNames(names: readonly string[]): string {
+  if (names.length <= 1) return names[0] ?? '';
+  return `${names.slice(0, -1).join(', ')} & ${names[names.length - 1]}`;
+}
