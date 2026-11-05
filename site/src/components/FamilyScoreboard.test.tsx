@@ -100,4 +100,21 @@ describe('FamilyScoreboard', () => {
     expect(screen.getByText('No game has been played by everyone yet.')).toBeInTheDocument();
     expect(screen.queryByRole('list', { name: 'Played by everyone' })).toBeNull();
   });
+
+  it('renders two shared rows with the same name (PS4 + PS5 entries) without a key clash', () => {
+    const base = roster().sharedGames[0]!;
+    const errors: unknown[] = [];
+    const original = console.error;
+    console.error = (...args: unknown[]) => errors.push(args);
+    try {
+      render(<FamilyScoreboard roster={roster({ sharedGames: [base, base] })} />);
+    } finally {
+      console.error = original;
+    }
+
+    const list = screen.getByRole('list', { name: 'Played by everyone' });
+    expect(within(list).getAllByRole('listitem')).toHaveLength(2);
+    expect(errors).toEqual([]);
+  });
 });
+

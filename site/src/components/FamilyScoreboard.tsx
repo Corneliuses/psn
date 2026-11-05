@@ -112,8 +112,10 @@ export function FamilyScoreboard({ roster }: FamilyScoreboardProps) {
             initial="hidden"
             animate="visible"
           >
-            {roster.sharedGames.map((game) => (
-              <motion.li key={game.name} variants={fadeRise}>
+            {roster.sharedGames.map((game, i) => (
+              // Keyed by position too: a PS4 + PS5 entry of one game keeps two
+              // rows with the same name (compareRoster keeps them on purpose).
+              <motion.li key={`${i}-${game.name}`} variants={fadeRise}>
                 <GlassCard glow className="p-4">
                   <h3 className="mb-3 truncate font-semibold text-foreground">{game.name}</h3>
                   <dl

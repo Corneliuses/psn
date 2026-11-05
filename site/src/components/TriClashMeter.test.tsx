@@ -137,4 +137,28 @@ describe('TriClashMeter', () => {
       expect(screen.getByText(glyph)).toHaveAttribute('aria-hidden', 'true');
     }
   });
+
+  it('treats an empty leaders list as neutral instead of dimming everyone', () => {
+    const { container } = render(<TriClashMeter label="Total trophies" entries={entries([1, 2, 3])} leaders={[]} />);
+
+    expect(container.querySelector('[data-leaders]')).toHaveAttribute('data-leaders', 'tie');
+    for (const el of container.querySelectorAll<HTMLElement>('[data-segment]')) {
+      expect(el.style.opacity).toBe('0.8');
+    }
+  });
+
+  it('rounds the first visible segment and drops seams beside a zero-width segment', () => {
+    const { container } = render(
+      <TriClashMeter label="Total trophies" entries={entries([0, 40, 60])} leaders={['nadia']} />,
+    );
+
+    const [dad, braidan, nadia] = [...container.querySelectorAll<HTMLElement>('[data-segment]')];
+    expect(dad).not.toHaveClass('rounded-l-pill');
+    expect(braidan).toHaveClass('rounded-l-pill');
+    expect(nadia).toHaveClass('rounded-r-pill');
+    const lefts = seamLefts(container);
+    expect(lefts).toHaveLength(1);
+    expect(lefts[0]).toBeCloseTo(40);
+  });
 });
+

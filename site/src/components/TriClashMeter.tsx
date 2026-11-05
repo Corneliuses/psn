@@ -78,11 +78,14 @@ export interface TriClashMeterProps {
 
 export function TriClashMeter({ label, entries, leaders, format, tier }: TriClashMeterProps) {
   const finalShares = shares(entries.map((e) => e.value));
+  // A primitive dependency for the effect: a fresh array each render would re-fire it.
   const sharesKey = finalShares.join(',');
 
   const leaderSet = new Set(leaders);
-  // Everyone tied (incl. all-zero) → no winner: neutral treatment.
-  const neutral = entries.length === 0 || entries.every((e) => leaderSet.has(e.key));
+  // Everyone tied (incl. all-zero) → no winner: neutral treatment. No leaders at
+  // all (malformed data) is neutral too, rather than dimming every player.
+  const neutral =
+    entries.length === 0 || leaderSet.size === 0 || entries.every((e) => leaderSet.has(e.key));
   const isLeader = (key: string) => !neutral && leaderSet.has(key);
 
   const [animatable] = useState(canAnimate);
@@ -98,9 +101,18 @@ export function TriClashMeter({ label, entries, leaders, format, tier }: TriClas
     return () => cancelAnimationFrame(id);
   }, [animatable, sharesKey]);
 
-  // Under no-animation, always track the latest data directly.
-  const current = animatable ? pos : finalShares;
-  const pct = (n: number) => `${((n ?? 0) * 100).toFixed(2)}%`;
+  // Under no-animation — or if the roster size changed since `pos` was set —
+  // render the latest data directly so segments and seams never read a stale array.
+  const current = animatable && pos.length === finalShares.length ? pos : finalShares;
+  const pct = (n: number) => `${(n * 100).toFixed(2)}%`;
+
+  // Round the outer corners of the first/last *visible* segment, so a zero value
+  // at either end doesn't leave a square-cornered neighbour poking past the track.
+  const firstVisible = Math.max(0, finalShares.findIndex((n) => n > 0));
+  const lastVisible = Math.max(
+    0,
+    finalShares.length - 1 - [...finalShares].reverse().findIndex((n) => n > 0),
+  );
   const widthTransition = animatable ? `width ${duration.slow}s ${EASE}` : undefined;
   const leftTransition = animatable ? `left ${duration.slow}s ${EASE}` : undefined;
 
@@ -116,7 +128,10 @@ export function TriClashMeter({ label, entries, leaders, format, tier }: TriClas
   };
 
   // Seams sit at each internal division; tinted by a leading neighbour if any.
-  const seams = entries.slice(0, -1).map((entry, i) => {
+  // A seam next to a zero-width segment would stack on another seam or the track
+  // edge, so only divisions between two visible segments get one.
+  const seams = entries.slice(0, -1).flatMap((entry, i) => {
+    if (!(finalShares[i]! > 0 && finalShares[i + 1]! > 0)) return [];
     const left = current.slice(0, i + 1).reduce((s, n) => s + (n ?? 0), 0);
     const next = entries[i + 1]!;
     const colorVar = isLeader(entry.key)
@@ -124,7 +139,7 @@ export function TriClashMeter({ label, entries, leaders, format, tier }: TriClas
       : isLeader(next.key)
         ? next.accent.colorVar
         : 'var(--color-foreground)';
-    return { id: `${entry.key}|${next.key}`, left, colorVar };
+    return [{ id: `${entry.key}|${next.key}`, left, colorVar }];
   });
 
   return (
@@ -189,7 +204,7 @@ export function TriClashMeter({ label, entries, leaders, format, tier }: TriClas
           <div
             key={entry.key}
             data-segment={entry.key}
-            className={`h-full ${i === 0 ? 'rounded-l-pill' : ''} ${i === entries.length - 1 ? 'rounded-r-pill' : ''}`}
+            className={`h-full ${i === firstVisible ? 'rounded-l-pill' : ''} ${i === lastVisible ? 'rounded-r-pill' : ''}`}
             style={segmentStyle(entry, i)}
           />
         ))}
