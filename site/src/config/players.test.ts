@@ -11,6 +11,7 @@ describe('players config', () => {
   it('finds a player by key', () => {
     expect(playerByKey('dad')?.displayName).toBe('Dad');
     expect(playerByKey('braidan')?.displayName).toBe('Braidan');
+    expect(playerByKey('nadia')?.displayName).toBe('Nadia');
   });
 
   it('returns undefined for an unknown key', () => {

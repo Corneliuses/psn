@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "player": {
+    "key": "nadia",
+    "displayName": "Nadia"
+  },
+  "capturedAt": "2026-07-15T00:00:00.000Z",
+  "playedTitles": [
+    {
+      "titleId": "CUSA01433_00",
+      "name": "Rocket League®",
+      "imageUrl": "https://image.example/CUSA01433_00.png",
+      "category": "ps4_game",
+      "playCount": 121,
+      "playDurationIso": "PT58H21M12S",
+      "playDurationMinutes": 3501,
+      "firstPlayed": "2025-01-01T12:00:00Z",
+      "lastPlayed": "2026-07-14T18:40:00Z"
+    },
+    {
+      "titleId": "PPSA02342_00",
+      "name": "Gran Turismo 7",
+      "imageUrl": "https://image.example/PPSA02342_00.png",
+      "category": "ps5_native_game",
+      "playCount": 22,
+      "playDurationIso": "PT19H27M43S",
+      "playDurationMinutes": 1168,
+      "firstPlayed": "2025-01-01T12:00:00Z",
+      "lastPlayed": "2026-06-28T15:05:00Z"
+    },
+    {
+      "titleId": "PPSA03078_00",
+      "name": "Stray",
+      "imageUrl": "https://image.example/PPSA03078_00.png",
+      "category": "ps5_native_game",
+      "playCount": 11,
+      "playDurationIso": "PT9H14M28S",
+      "playDurationMinutes": 554,
+      "firstPlayed": "2025-01-01T12:00:00Z",
+      "lastPlayed": "2026-07-08T22:30:00Z"
+    },
+    {
+      "titleId": "PPSA13195_00",
+      "name": "Astro Bot",
+      "imageUrl": "https://image.example/PPSA13195_00.png",
+      "category": "ps5_native_game",
+      "playCount": 63,
+      "playDurationIso": "PT47H55M6S",
+      "playDurationMinutes": 2875,
+      "firstPlayed": "2025-01-01T12:00:00Z",
+      "lastPlayed": "2026-07-12T20:15:00Z"
+    }
+  ],
+  "trophyTitles": [
+    {
+      "npCommunicationId": "NPWR06904_00",
+      "name": "Rocket League®",
+      "platform": "PS4",
+      "iconUrl": "https://image.example/NPWR06904_00.png",
+      "defined": {
+        "bronze": 30,
+        "silver": 20,
+        "gold": 15,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 18,
+        "silver": 9,
+        "gold": 4,
+        "platinum": 0
+      },
+      "earnedTotal": 31,
+      "progress": 48,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-06-15T20:00:00Z"
+    },
+    {
+      "npCommunicationId": "NPWR24721_00",
+      "name": "Stray",
+      "platform": "PS5",
+      "iconUrl": "https://image.example/NPWR24721_00.png",
+      "defined": {
+        "bronze": 15,
+        "silver": 6,
+        "gold": 2,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 15,
+        "silver": 6,
+        "gold": 2,
+        "platinum": 1
+      },
+      "earnedTotal": 24,
+      "progress": 100,
+      "hasPlatinum": true,
+      "lastTrophyAt": "2026-06-15T20:00:00Z"
+    },
+    {
+      "npCommunicationId": "NPWR35123_00",
+      "name": "Astro Bot",
+      "platform": "PS5",
+      "iconUrl": "https://image.example/NPWR35123_00.png",
+      "defined": {
+        "bronze": 29,
+        "silver": 10,
+        "gold": 3,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 21,
+        "silver": 6,
+        "gold": 1,
+        "platinum": 0
+      },
+      "earnedTotal": 28,
+      "progress": 62,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-06-15T20:00:00Z"
+    }
+  ]
+}
