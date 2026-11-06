@@ -87,7 +87,10 @@ export function createGeminiClient(options: GeminiClientOptions): GeminiClient {
             systemInstruction: { parts: [{ text: systemInstruction }] },
             contents,
             tools: [{ googleSearch: {} }],
-            generationConfig: { temperature: 0.3, maxOutputTokens: 2048 },
+            // The cap covers the model's *thinking* as well as the visible
+            // reply on Gemini 3.x, and a grounded answer thinks for ~2k tokens
+            // before writing ~300 — so leave plenty of headroom.
+            generationConfig: { temperature: 0.3, maxOutputTokens: 8192 },
           }),
           signal: AbortSignal.timeout(timeoutMs),
         });
@@ -108,6 +111,15 @@ export function createGeminiClient(options: GeminiClientOptions): GeminiClient {
         .map((part) => part.text)
         .join('');
       const grounding = candidate?.groundingMetadata;
+
+      // A reply cut off at the token cap is unfinished JSON, and a non-blocked
+      // reply with no text is nothing to answer with; neither may pass as an
+      // answer (help.ts would render the fragment, or an empty answer with
+      // search links). Fail so the UI shows the retry message instead.
+      if (!blocked && candidate?.finishReason === 'MAX_TOKENS') {
+        throw new GeminiError('Gemini reply truncated at the output token cap');
+      }
+      if (!blocked && text.trim() === '') throw new GeminiError('Gemini returned no text');
 
       return {
         text,

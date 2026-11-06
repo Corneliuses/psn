@@ -21,7 +21,12 @@ import { createStaticHandler, type StaticHandler } from './static';
 
 export const CHAT_PATH = '/api/chat';
 export const HEALTH_PATH = '/api/health';
-const MAX_BODY_BYTES = 16 * 1024;
+/**
+ * Transport ceiling, above what `CHAT_LIMITS` allows: six 2,000-char history
+ * turns plus the question and game come to ~40 KB as JSON-escaped UTF-8 in
+ * the worst (CJK) case, so a request that fits every field limit never 413s.
+ */
+const MAX_BODY_BYTES = 64 * 1024;
 
 export interface AppOptions {
   gemini: GeminiClient;
@@ -38,6 +43,14 @@ export interface AppOptions {
    * Docker image) or proxied (the Vite dev server).
    */
   allowedOrigins?: string[];
+  /**
+   * True when a trusted proxy sits in front of the server and appends the
+   * caller's address to `X-Forwarded-For` (the Lambda function URL does).
+   * Off by default: a server reached directly (the Docker image) keys the
+   * rate limit on the socket address, so a caller can't mint a fresh budget
+   * by sending its own header.
+   */
+  trustProxy?: boolean;
   log?: (message: string) => void;
 }
 
@@ -69,11 +82,43 @@ async function readJsonBody(req: IncomingMessage): Promise<unknown> {
   }
 }
 
-/** The client IP, honouring the proxy header Cloud Run and friends set. */
-export function clientKey(req: IncomingMessage): string {
-  const forwarded = req.headers['x-forwarded-for'];
-  const first = (Array.isArray(forwarded) ? forwarded[0] : forwarded)?.split(',')[0]?.trim();
-  return first || req.socket.remoteAddress || 'unknown';
+const singleHeader = (req: IncomingMessage, name: string): string | undefined => {
+  const value = req.headers[name];
+  return Array.isArray(value) ? value[value.length - 1] : value;
+};
+
+/**
+ * The caller's address as a Lambda function URL saw it: the Web Adapter relays
+ * the invocation's `requestContext` (with `http.sourceIp`) in this header,
+ * replacing any the caller sent. The function URL passes a caller-supplied
+ * `X-Forwarded-For` through untouched, so that header is no use there.
+ */
+function lambdaSourceIp(req: IncomingMessage): string | undefined {
+  const raw = singleHeader(req, 'x-amzn-request-context');
+  if (!raw) return undefined;
+  try {
+    const ip = (JSON.parse(raw) as { http?: { sourceIp?: unknown } }).http?.sourceIp;
+    return typeof ip === 'string' && ip ? ip : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+/**
+ * The rate-limit key for a request. Behind a trusted proxy it is the address
+ * that proxy reports: the Lambda request context when present, else the *last*
+ * `X-Forwarded-For` entry — the one the proxy itself appended; anything before
+ * it was supplied by the caller and is not to be believed. Otherwise it is the
+ * socket address.
+ */
+export function clientKey(req: IncomingMessage, trustProxy = false): string {
+  if (trustProxy) {
+    const fromLambda = lambdaSourceIp(req);
+    if (fromLambda) return fromLambda;
+    const last = singleHeader(req, 'x-forwarded-for')?.split(',').map((entry) => entry.trim()).filter(Boolean).at(-1);
+    if (last) return last;
+  }
+  return req.socket.remoteAddress || 'unknown';
 }
 
 function sendJson(res: ServerResponse, status: number, body: ChatResponse | ChatError | Record<string, unknown>): void {
@@ -118,7 +163,7 @@ export function createApp(options: AppOptions): RequestHandler {
       sendJson(res, 405, { error: 'Use POST' });
       return;
     }
-    if (!limiter.allow(clientKey(req))) {
+    if (!limiter.allow(clientKey(req, options.trustProxy ?? false))) {
       res.setHeader('retry-after', '60');
       sendJson(res, 429, { error: 'Too many questions at once — give it a minute and try again.' });
       return;

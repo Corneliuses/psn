@@ -160,8 +160,10 @@ The [`Deploy chat server`](./.github/workflows/deploy-server.yml) workflow runs 
 every push to `main` that touches `server/` (and on demand). It needs the `AWS_ACCESS_KEY_ID`,
 `AWS_SECRET_ACCESS_KEY` and `GEMINI_API_KEY` secrets plus the `AWS_REGION` and `AMPLIFY_APP_ID`
 repository variables. Optional server settings (`GEMINI_MODEL`, `CHAT_RATE_LIMIT_PER_MINUTE`,
-`CHAT_GLOBAL_RATE_LIMIT_PER_MINUTE`) go on the function; the script also caps the function's
-reserved concurrency (default 2) so the in-memory rate limit holds across instances.
+`CHAT_GLOBAL_RATE_LIMIT_PER_MINUTE`) are passed through from the script's environment, and one
+left unset keeps the value already on the function, so a CI re-run never reverts an override set
+by hand. The script also caps the function's reserved concurrency (default 2): the rate limit is
+in-memory per instance, so that bounds how far the real ceiling can exceed the configured one.
 
 The [`Dockerfile`](./Dockerfile) is the alternative for a container host (Cloud Run and the like):
 one image where the server serves both the API and the static site on port 8080, with

@@ -8,6 +8,7 @@ import {
   SYSTEM_INSTRUCTION,
   buildContents,
   finaliseSources,
+  isGroundingRedirect,
   isYouTubeUrl,
   parseChatRequest,
   parseModelAnswer,
@@ -194,8 +195,37 @@ describe('finaliseSources', () => {
   });
 });
 
+describe('isGroundingRedirect', () => {
+  it('recognises only the opaque grounding host', () => {
+    expect(isGroundingRedirect('https://vertexaisearch.cloud.google.com/grounding-api-redirect/x')).toBe(true);
+    expect(isGroundingRedirect(ARTICLE)).toBe(false);
+    expect(isGroundingRedirect('not a url')).toBe(false);
+  });
+});
+
 describe('toChatResponse', () => {
   const request = { question: 'How do I beat the Mantis?', game: 'Grounded 2' };
+
+  it('classifies a grounded page by its URL, using the title only behind a grounding redirect', () => {
+    const response = toChatResponse(
+      reply({
+        text: JSON.stringify({ onTopic: true, answer: 'Dodge, then strike.', sources: [] }),
+        groundingChunks: [
+          // A written page *about* YouTube keeps its URL-based kind…
+          { uri: 'https://support.example/stream-to-youtube', title: 'Stream your game to YouTube' },
+          // …while an opaque redirect is a video only by its title.
+          { uri: 'https://vertexaisearch.cloud.google.com/grounding-api-redirect/x', title: 'Mantis boss fight - YouTube' },
+        ],
+      }),
+      request,
+    );
+    expect(response.kind).toBe('answer');
+    if (response.kind !== 'answer') return;
+    expect(response.sources).toEqual([
+      { title: 'Stream your game to YouTube', url: 'https://support.example/stream-to-youtube', kind: 'article' },
+      { title: 'Mantis boss fight - YouTube', url: 'https://vertexaisearch.cloud.google.com/grounding-api-redirect/x', kind: 'video' },
+    ]);
+  });
 
   it('builds an answer with the contract-complete source list and the searches run', () => {
     const response = toChatResponse(

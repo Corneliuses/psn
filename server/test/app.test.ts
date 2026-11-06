@@ -86,7 +86,8 @@ describe('POST /api/chat', () => {
 
     expect((await ask(base, { question: '' })).status).toBe(400);
     expect((await ask(base, 'not json')).status).toBe(400);
-    expect((await ask(base, { question: 'x'.repeat(20_000) })).status).toBe(413);
+    expect((await ask(base, { question: 'x'.repeat(20_000) })).status).toBe(400);
+    expect((await ask(base, { question: 'x'.repeat(70_000) })).status).toBe(413);
     expect(gemini.generate).not.toHaveBeenCalled();
   });
 
@@ -99,17 +100,57 @@ describe('POST /api/chat', () => {
 
   it('rate-limits per client and never calls the model when over the limit', async () => {
     const gemini = fakeGemini();
-    const base = await start({ gemini, rateLimitPerMinute: 2 });
+    const base = await start({ gemini, rateLimitPerMinute: 2, trustProxy: true });
 
     expect((await ask(base, { question: 'q' }, { 'x-forwarded-for': '1.1.1.1' })).status).toBe(200);
     expect((await ask(base, { question: 'q' }, { 'x-forwarded-for': '1.1.1.1' })).status).toBe(200);
-    const limited = await ask(base, { question: 'q' }, { 'x-forwarded-for': '1.1.1.1, 10.0.0.1' });
+    // The proxy appends the caller last; an address the caller put in front
+    // of it is not a new client.
+    const limited = await ask(base, { question: 'q' }, { 'x-forwarded-for': '10.0.0.1, 1.1.1.1' });
     expect(limited.status).toBe(429);
     expect(limited.headers.get('retry-after')).toBe('60');
     expect(((await limited.json()) as { error: string }).error).toMatch(/give it a minute/);
     // A different client still gets through.
     expect((await ask(base, { question: 'q' }, { 'x-forwarded-for': '2.2.2.2' })).status).toBe(200);
     expect(gemini.generate).toHaveBeenCalledTimes(3);
+  });
+
+  it('keys on the Lambda request context when the Web Adapter relays one', async () => {
+    const gemini = fakeGemini();
+    const base = await start({ gemini, rateLimitPerMinute: 2, trustProxy: true });
+    const context = (sourceIp: string) => ({ 'x-amzn-request-context': JSON.stringify({ http: { sourceIp } }) });
+
+    expect((await ask(base, { question: 'q' }, context('1.1.1.1'))).status).toBe(200);
+    // The function URL passes a caller's X-Forwarded-For through untouched, so
+    // it must not outrank the address the platform reports.
+    expect((await ask(base, { question: 'q' }, { ...context('1.1.1.1'), 'x-forwarded-for': '5.5.5.5' })).status).toBe(200);
+    expect((await ask(base, { question: 'q' }, { ...context('1.1.1.1'), 'x-forwarded-for': '6.6.6.6' })).status).toBe(429);
+    expect((await ask(base, { question: 'q' }, context('2.2.2.2'))).status).toBe(200);
+    // A malformed context falls back rather than crashing.
+    expect((await ask(base, { question: 'q' }, { 'x-amzn-request-context': '{not json' })).status).toBe(200);
+    expect(gemini.generate).toHaveBeenCalledTimes(4);
+  });
+
+  it('ignores X-Forwarded-For unless a trusted proxy is declared', async () => {
+    const gemini = fakeGemini();
+    const base = await start({ gemini, rateLimitPerMinute: 2 });
+
+    // Every request comes from the test's own socket, so forging the header
+    // does not mint a fresh budget.
+    expect((await ask(base, { question: 'q' }, { 'x-forwarded-for': '1.1.1.1' })).status).toBe(200);
+    expect((await ask(base, { question: 'q' }, { 'x-forwarded-for': '2.2.2.2' })).status).toBe(200);
+    expect((await ask(base, { question: 'q' }, { 'x-forwarded-for': '3.3.3.3' })).status).toBe(429);
+    expect(gemini.generate).toHaveBeenCalledTimes(2);
+  });
+
+  it('accepts a request that fills every CHAT_LIMITS field, in a 3-byte script', async () => {
+    const gemini = fakeGemini();
+    const base = await start({ gemini });
+    const cjk = (n: number) => '漢'.repeat(n);
+    const history = Array.from({ length: 6 }, (_, i) => ({ role: i % 2 ? 'assistant' : 'user', text: cjk(2000) }));
+    const response = await ask(base, { question: cjk(500), game: cjk(100), history });
+    expect(response.status).toBe(200);
+    expect(gemini.generate).toHaveBeenCalledTimes(1);
   });
 
   it('maps an upstream failure to 502 with a friendly message', async () => {

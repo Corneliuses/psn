@@ -160,14 +160,28 @@ export function parseModelAnswer(text: string): ModelAnswer {
   };
 }
 
+/** Gemini reports grounded pages as opaque redirects on this host, hiding the real URL. */
+const GROUNDING_REDIRECT_HOST = 'vertexaisearch.cloud.google.com';
+
+export function isGroundingRedirect(url: string): boolean {
+  try {
+    return new URL(url).hostname.toLowerCase() === GROUNDING_REDIRECT_HOST;
+  } catch {
+    return false;
+  }
+}
+
 /** Sources the model grounded on, as reported by Gemini's grounding metadata. */
 function groundingSources(reply: GeminiReply): HelpSource[] {
   return reply.groundingChunks.flatMap((chunk) => {
     const source = toSource({ title: chunk.title, url: chunk.uri });
     if (!source) return [];
-    // Grounding URIs are often opaque redirects, so a YouTube hit is only
-    // recognisable by its title.
-    if (source.kind === 'article' && /youtube/i.test(chunk.title ?? '')) source.kind = 'video';
+    // Behind a grounding redirect a YouTube hit is only recognisable by its
+    // title ("… - YouTube"). A real URL keeps its URL-based kind, so an article
+    // *about* YouTube never fills the video slot.
+    if (source.kind === 'article' && isGroundingRedirect(source.url) && /youtube/i.test(chunk.title ?? '')) {
+      source.kind = 'video';
+    }
     return [source];
   });
 }

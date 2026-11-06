@@ -20,9 +20,13 @@
 #   AWS_REGION / AWS_DEFAULT_REGION   required (where the function lives)
 #   GEMINI_API_KEY                    required — stored on the function, never in git
 #   GEMINI_MODEL                      optional model override
+#   CHAT_RATE_LIMIT_PER_MINUTE        optional per-client cap (server default 10)
+#   CHAT_GLOBAL_RATE_LIMIT_PER_MINUTE optional server-wide cap (server default 60)
 #   CHAT_ALLOWED_ORIGIN               comma-separated site origins for CORS. With
 #                                     --amplify-app it defaults to the app's
 #                                     production-branch and custom domains.
+#   Optional settings left unset keep whatever the deployed function already
+#   has, so a re-run (the CI workflow) never silently reverts an override.
 #   CHAT_FUNCTION_NAME                default psn-chat-server
 #   CHAT_RESERVED_CONCURRENCY         default 2 — caps parallel instances so the
 #                                     in-memory rate limit stays meaningful
@@ -115,19 +119,39 @@ chmod +x "$WORK/run.sh"
 (cd "$WORK" && zip -q -X function.zip index.mjs run.sh)
 ZIP="fileb://$WORK/function.zip"
 
+# The function's environment. update-function-configuration replaces the whole
+# map, so start from what is deployed (nothing on first run) and overlay only
+# the settings this run was given — an optional setting that is not set here
+# keeps its deployed value rather than falling back to the server default.
+EXISTING_ENV='{}'
+if aws lambda get-function --function-name "$FUNCTION_NAME" >/dev/null 2>&1; then
+  EXISTING_ENV="$(aws lambda get-function-configuration --function-name "$FUNCTION_NAME" \
+    --query 'Environment.Variables' --output json)"
+  [ "$EXISTING_ENV" != "null" ] || EXISTING_ENV='{}'
+fi
 # The adapter forwards to the port the server listens on; readiness waits on /api/health.
-ENV_JSON="$(python3 - "$GEMINI_API_KEY" "${GEMINI_MODEL:-}" "${CHAT_ALLOWED_ORIGIN:-}" <<'PY'
+ENV_JSON="$(python3 - "$EXISTING_ENV" "$GEMINI_API_KEY" "${GEMINI_MODEL:-}" "${CHAT_ALLOWED_ORIGIN:-}" \
+  "${CHAT_RATE_LIMIT_PER_MINUTE:-}" "${CHAT_GLOBAL_RATE_LIMIT_PER_MINUTE:-}" <<'PY'
 import json, sys
-key, model, origins = sys.argv[1:4]
-env = {
+existing, key, model, origins, per_client, global_cap = sys.argv[1:7]
+env = json.loads(existing) or {}
+env.update({
     "AWS_LAMBDA_EXEC_WRAPPER": "/opt/bootstrap",
     "AWS_LWA_PORT": "8080",
     "AWS_LWA_READINESS_CHECK_PATH": "/api/health",
     "PORT": "8080",
     "GEMINI_API_KEY": key,
-}
-if model: env["GEMINI_MODEL"] = model
-if origins: env["CHAT_ALLOWED_ORIGIN"] = origins
+    # The function URL is the trusted proxy: it appends the caller's address to
+    # X-Forwarded-For, which is what the per-client rate limit keys on.
+    "CHAT_TRUST_PROXY": "1",
+})
+for name, value in (
+    ("GEMINI_MODEL", model),
+    ("CHAT_ALLOWED_ORIGIN", origins),
+    ("CHAT_RATE_LIMIT_PER_MINUTE", per_client),
+    ("CHAT_GLOBAL_RATE_LIMIT_PER_MINUTE", global_cap),
+):
+    if value: env[name] = value
 print(json.dumps({"Variables": env}))
 PY
 )"

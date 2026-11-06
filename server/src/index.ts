@@ -15,6 +15,8 @@ import { DEFAULT_GEMINI_MODEL, createGeminiClient } from './gemini';
  *   CHAT_RATE_LIMIT_PER_MINUTE       per-client cap, default 10
  *   CHAT_GLOBAL_RATE_LIMIT_PER_MINUTE server-wide cap, default 60
  *   CHAT_ALLOWED_ORIGIN              CORS origin(s), comma-separated, for a site hosted elsewhere (e.g. Amplify)
+ *   CHAT_TRUST_PROXY                 "1" when a trusted proxy appends the caller to X-Forwarded-For
+ *                                    (the Lambda function URL); unset, the socket address keys the rate limit
  *
  * Locally, `.env` at the repo root is loaded when present — the same file that
  * holds the sync tokens, so one secrets file serves both tools.
@@ -54,6 +56,7 @@ const app = createApp({
   ...(allowedOrigins.length ? { allowedOrigins } : {}),
   rateLimitPerMinute: intEnv('CHAT_RATE_LIMIT_PER_MINUTE', 10),
   globalRateLimitPerMinute: intEnv('CHAT_GLOBAL_RATE_LIMIT_PER_MINUTE', 60),
+  trustProxy: ['1', 'true', 'yes'].includes((process.env.CHAT_TRUST_PROXY ?? '').trim().toLowerCase()),
 });
 
 createServer((req, res) => {

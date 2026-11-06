@@ -44,7 +44,9 @@ describe('createGeminiClient', () => {
   });
 
   it('uses the configured model and base URL', async () => {
-    const fetchMock = vi.fn(async (_url: string, _init?: RequestInit) => jsonResponse({ candidates: [] }));
+    const fetchMock = vi.fn(async (_url: string, _init?: RequestInit) =>
+      jsonResponse({ candidates: [{ content: { parts: [{ text: '{"answer":"ok"}' }] }, finishReason: 'STOP' }] }),
+    );
     const client = createGeminiClient({
       apiKey: 'k',
       model: 'gemini-x',
@@ -67,6 +69,34 @@ describe('createGeminiClient', () => {
       fetch: (async () => jsonResponse({ candidates: [{ finishReason: 'SAFETY', content: { parts: [] } }] })) as unknown as typeof fetch,
     });
     expect((await safetyStop.generate('s', [])).blocked).toBe(true);
+  });
+
+  it('fails a reply cut off at the output token cap instead of returning the fragment', async () => {
+    const client = createGeminiClient({
+      apiKey: 'k',
+      fetch: (async () =>
+        jsonResponse({
+          candidates: [{ finishReason: 'MAX_TOKENS', content: { parts: [{ text: '{"onTopic": true, "answer": "Dodge the' }] } }],
+        })) as unknown as typeof fetch,
+    });
+    await expect(client.generate('s', [])).rejects.toThrow(GeminiError);
+    await expect(client.generate('s', [])).rejects.toThrow('truncated');
+  });
+
+  it('fails a non-blocked reply with no text', async () => {
+    for (const body of [{ candidates: [] }, { candidates: [{ finishReason: 'STOP', content: { parts: [{ thought: true, text: 'hmm' }] } }] }]) {
+      const client = createGeminiClient({ apiKey: 'k', fetch: (async () => jsonResponse(body)) as unknown as typeof fetch });
+      await expect(client.generate('s', [])).rejects.toThrow('no text');
+    }
+  });
+
+  it('asks for enough output tokens to cover thinking plus the answer', async () => {
+    const fetchMock = vi.fn(async (_url: string, _init?: RequestInit) =>
+      jsonResponse({ candidates: [{ content: { parts: [{ text: '{}' }] }, finishReason: 'STOP' }] }),
+    );
+    await createGeminiClient({ apiKey: 'k', fetch: fetchMock as unknown as typeof fetch }).generate('s', []);
+    const body = JSON.parse((fetchMock.mock.calls[0] as [string, RequestInit])[1].body as string);
+    expect(body.generationConfig.maxOutputTokens).toBeGreaterThanOrEqual(8192);
   });
 
   it('wraps HTTP errors without echoing the body', async () => {

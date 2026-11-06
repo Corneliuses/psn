@@ -18,8 +18,11 @@ RUN pnpm --filter site build && pnpm --filter chat-server build
 # server bundle has no runtime dependencies, so no node_modules ship.
 #
 # Runtime configuration (see server/src/index.ts and the README):
-#   GEMINI_API_KEY  required — set it as a secret on the service, never bake it in
-#   GEMINI_MODEL    optional model override
+#   GEMINI_API_KEY    required — set it as a secret on the service, never bake it in
+#   GEMINI_MODEL      optional model override
+#   CHAT_TRUST_PROXY  "1" only when the host's ingress appends the caller to
+#                     X-Forwarded-For (Cloud Run does); otherwise the rate limit
+#                     keys on the socket address so the header can't be forged
 FROM node:22-alpine
 WORKDIR /app
 ENV NODE_ENV=production PORT=8080 STATIC_DIR=/app/site/dist

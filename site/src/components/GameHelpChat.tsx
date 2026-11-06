@@ -258,7 +258,7 @@ export function GameHelpChat({ initialGame = '', suggestions = [], ask = askHelp
           <button
             type="submit"
             disabled={pending || question.trim().length === 0}
-            className="rounded-pill bg-ps-blue px-5 py-2 font-semibold text-foreground shadow-glow-sm transition-colors hover:bg-ps-blue-hover disabled:cursor-not-allowed disabled:opacity-60"
+            className="rounded-pill bg-ps-blue-fill px-5 py-2 font-semibold text-foreground shadow-glow-sm transition-colors hover:bg-ps-blue-fill-hover disabled:cursor-not-allowed disabled:opacity-60"
           >
             {pending ? 'Asking…' : 'Ask'}
           </button>
