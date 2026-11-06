@@ -1,8 +1,13 @@
 import { motion } from 'motion/react';
+import type { PlayerSnapshot } from 'psn';
+import { compareRoster } from 'psn/stats';
 import { Link } from 'react-router';
 
+import { FamilyScoreboard } from '../components/FamilyScoreboard';
 import { GlassCard } from '../components/GlassCard';
 import { accentForKey } from '../config/accents';
+import { players } from '../config/players';
+import { snapshotByKey } from '../data';
 import { fadeRise, staggerChildren } from '../motion/presets';
 import { comparePath, playerPairings } from '../routes';
 
@@ -14,9 +19,23 @@ import { comparePath, playerPairings } from '../routes';
  *
  * The names are deliberately large (text-xl, extrabold): the darker shape
  * accents (cross, circle) clear WCAG AA on this surface only as large text.
+ *
+ * Below the matchups sits the family-wide scoreboard (#44), driven by
+ * `compareRoster()` over every configured player's snapshot. It only renders
+ * when the whole roster (2+ players) has synced data, so a three-way board is
+ * never drawn from a partial roster.
  */
 
+/** Every configured player's snapshot, or undefined if any is missing. */
+function rosterSnapshots(): PlayerSnapshot[] | undefined {
+  const snaps = players.map((p) => snapshotByKey(p.key));
+  if (snaps.length < 2 || snaps.some((s) => s === undefined)) return undefined;
+  return snaps as PlayerSnapshot[];
+}
+
 export function CompareHubPage() {
+  const snapshots = rosterSnapshots();
+
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
       <GlassCard glow className="mb-10 p-8 sm:p-10">
@@ -30,7 +49,8 @@ export function CompareHubPage() {
         </GlassCard>
       ) : (
         <motion.ul
-          className="grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2"
+          aria-label="Matchups"
+          className="mb-10 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2"
           variants={staggerChildren}
           initial="hidden"
           animate="visible"
@@ -68,6 +88,8 @@ export function CompareHubPage() {
           })}
         </motion.ul>
       )}
+
+      {snapshots ? <FamilyScoreboard roster={compareRoster(snapshots)} /> : null}
     </main>
   );
 }
