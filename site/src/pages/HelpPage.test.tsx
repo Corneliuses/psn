@@ -20,7 +20,8 @@ describe('HelpPage', () => {
 
     expect(screen.getByRole('heading', { level: 1, name: 'Game help' })).toBeInTheDocument();
     expect(screen.getByText(/backed by a guide and a video/)).toBeInTheDocument();
-    expect(screen.getByText('What are you stuck on?')).toBeInTheDocument();
+    // No second pitch inside the chat: the hero already says what this is for.
+    expect(screen.queryByText('What are you stuck on?')).toBeNull();
     expect(screen.getByLabelText('Your question')).toBeInTheDocument();
   });
 

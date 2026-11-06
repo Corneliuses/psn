@@ -28,6 +28,15 @@ function renderChat(props: GameHelpChatProps = {}) {
 }
 
 describe('GameHelpChat', () => {
+  it('puts the form first, with the starter questions beneath it, while the thread is empty', () => {
+    renderChat({ suggestions: [{ game: 'Grounded 2', question: 'How do I get started in Grounded 2?' }] });
+
+    const form = screen.getByLabelText('Your question').closest('form')!;
+    const starters = screen.getByRole('group', { name: 'Example questions' });
+    expect(form.compareDocumentPosition(starters) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(screen.queryByText('What are you stuck on?')).toBeNull();
+  });
+
   it('renders the labelled form, the empty thread and the starter questions', () => {
     renderChat({ suggestions: [{ game: 'Grounded 2', question: 'How do I get started in Grounded 2?' }] });
 
