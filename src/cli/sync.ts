@@ -92,7 +92,7 @@ async function main(): Promise<void> {
   if (suggestionsEnabled) {
     // Always built from every configured player's latest snapshot, even when
     // --player limited which snapshot(s) this run refreshed — shared-genre
-    // suggestions need both players' data, not just the one that just synced.
+    // suggestions need every player's data, not just the one that just synced.
     try {
       const result = await syncSuggestions({
         dataDir: DATA_DIR,

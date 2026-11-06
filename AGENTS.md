@@ -108,7 +108,8 @@ composes it rather than reinventing one.** The rules below are hard requirements
   reduced-motion/jsdom-safe final state) in the same PR.
 - Comparison meters: `ClashMeter` is the two-sided meter for pairwise pages; `TriClashMeter` is its
   N-player sibling for the hub. Drive leader glow from `compareRoster().metrics[].leaders`, never
-  from segment width, so near-ties read correctly; a full tie (including all-zero) renders neutral.
+  from segment width, so near-ties read correctly; a full tie (including all-zero) or an empty
+  `leaders` list renders neutral. Seams are drawn only between two visible (non-zero) segments.
 - `AnimatedNumber` renders its final value immediately under reduced motion and in jsdom (no
   timers), so component tests assert the **final** number, never intermediate animation state.
 
