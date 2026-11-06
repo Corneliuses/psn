@@ -5,6 +5,7 @@ import { AppShell } from './components/AppShell';
 import { RouteTransition } from './components/RouteTransition';
 import { players } from './config/players';
 import { CompanionPage } from './pages/CompanionPage';
+import { CompareHubPage } from './pages/CompareHubPage';
 import { ComparePage } from './pages/ComparePage';
 import { DiscoverPage } from './pages/DiscoverPage';
 import { NotFoundPage } from './pages/NotFoundPage';
@@ -29,7 +30,8 @@ export function App() {
             {players.map((player) => (
               <Route key={player.key} path={playerPath(player.key)} element={<PlayerPage playerKey={player.key} />} />
             ))}
-            <Route path={COMPARE_PATH} element={<ComparePage />} />
+            <Route path={COMPARE_PATH} element={<CompareHubPage />} />
+            <Route path={`${COMPARE_PATH}/:a/:b`} element={<ComparePage />} />
             <Route path={DISCOVER_PATH} element={<DiscoverPage />} />
             <Route path={TOGETHER_PATH} element={<TogetherPage />} />
             <Route path={`${TOGETHER_PATH}/:slug`} element={<CompanionPage />} />

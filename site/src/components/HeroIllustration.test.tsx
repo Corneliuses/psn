@@ -8,7 +8,9 @@ describe('HeroIllustration', () => {
     render(<HeroIllustration />);
 
     const img = screen.getByRole('img');
-    expect(img).toHaveAccessibleName(/controller/i);
+    expect(img).toHaveAccessibleName(
+      'A dad, his son, and his daughter sitting side by side, each holding a game controller',
+    );
   });
 
   it('keeps the decorative shape accents out of the accessible name', () => {

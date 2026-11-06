@@ -1,4 +1,4 @@
-import { players } from './config/players';
+import { players, type PlayerConfig } from './config/players';
 
 export const COMPARE_PATH = '/compare';
 export const DISCOVER_PATH = '/discover';
@@ -13,6 +13,25 @@ export function playerPath(key: string): string {
 export function companionPath(slug: string): string {
   return `${TOGETHER_PATH}/${slug}`;
 }
+
+/** The pairwise compare page for two player keys, e.g. '/compare/dad/braidan'. */
+export function comparePath(a: string, b: string): string {
+  return `${COMPARE_PATH}/${a}/${b}`;
+}
+
+/** Two players matched up on a pairwise compare page. */
+export interface PlayerPairing {
+  a: PlayerConfig;
+  b: PlayerConfig;
+}
+
+/**
+ * Every 2-combination of `players`, in config order: player i is always `a`
+ * against each later player `b`. 2 players give 1 pairing, 3 give 3.
+ */
+export const playerPairings: PlayerPairing[] = players.flatMap((a, i) =>
+  players.slice(i + 1).map((b) => ({ a, b })),
+);
 
 /** Route paths for every configured player, e.g. ['/dad', '/braidan']. */
 export const playerPaths: string[] = players.map((player) => playerPath(player.key));

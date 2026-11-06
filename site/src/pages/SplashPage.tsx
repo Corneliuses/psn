@@ -1,16 +1,18 @@
+import { Fragment } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router';
 
 import { GlassCard } from '../components/GlassCard';
 import { HeroIllustration } from '../components/HeroIllustration';
 import { players } from '../config/players';
+import { joinNames } from '../format';
 import { fadeRise, staggerChildren } from '../motion/presets';
 import { COMPARE_PATH, playerPath } from '../routes';
 
 /*
  * The splash page is the site's front door: a custom hero illustration, an
  * animated headline, one large portal card per configured player, and a
- * VS-styled compare call-to-action. The whole page enters in a single staggered
+ * family face-off compare call-to-action. The whole page enters in a single staggered
  * sequence (hero → title → cards → CTA) composed from the shared motion presets.
  *
  * Player names are never hardcoded — the headline, portal cards, and compare
@@ -18,9 +20,9 @@ import { COMPARE_PATH, playerPath } from '../routes';
  * contract stays in step with the configured roster.
  */
 
-/** Display names joined for the headline, e.g. "Dad & Braidan". */
-const playerNames = players.map((player) => player.displayName).join(' & ');
-/** Possessive headline lead-in, e.g. "Dad & Braidan’s". Empty roster → no dangling possessive. */
+/** Display names joined for the headline, e.g. "Dad, Braidan & Nadia". */
+const playerNames = joinNames(players.map((player) => player.displayName));
+/** Possessive headline lead-in, e.g. "Dad, Braidan & Nadia’s". Empty roster → no dangling possessive. */
 const headlineOwner = playerNames ? `${playerNames}’s` : '';
 
 /** Derive a per-player invitation line from the display name — no config field needed. */
@@ -50,18 +52,26 @@ export function SplashPage() {
         <motion.span variants={fadeRise} className="block">
           {headlineOwner}
         </motion.span>
+        {/* Explicit space so the accessible name reads "…’s PlayStation Stats"
+            even where block layout isn't applied (e.g. jsdom). */}{' '}
         <motion.span variants={fadeRise} className="block text-ps-blue">
           PlayStation Stats
         </motion.span>
       </motion.h1>
 
-      {/* Player portal cards — one large glass card per configured player. */}
+      {/* Player portal cards — one large glass card per configured player. Two
+          columns on small screens, three on large; at the two-column breakpoint
+          an odd last card spans the full row so it never sits orphaned. */}
       <motion.ul
         variants={staggerChildren}
-        className="grid w-full list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2"
+        className="grid w-full list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3"
       >
         {players.map((player) => (
-          <motion.li key={player.key} variants={fadeRise}>
+          <motion.li
+            key={player.key}
+            variants={fadeRise}
+            className="sm:last:odd:col-span-2 lg:last:odd:col-span-1"
+          >
             <GlassCard
               as={Link}
               to={playerPath(player.key)}
@@ -75,27 +85,34 @@ export function SplashPage() {
         ))}
       </motion.ul>
 
-      {/* Compare CTA — a VS banner. The names + "VS" are a decorative treatment;
-          the link's accessible name is exactly "Compare". */}
+      {/* Compare CTA — a family face-off banner: every configured player's name
+          with a VS pill between each pair. The names, pills, and eyebrow are a
+          decorative treatment; the link's accessible name is exactly "Compare". */}
       <motion.div variants={fadeRise} className="w-full">
         <GlassCard
           as={Link}
           to={COMPARE_PATH}
           glow
           aria-label="Compare"
-          className="mx-auto flex max-w-md items-center justify-center gap-4 p-6 no-underline"
+          className="mx-auto flex max-w-xl flex-col items-center gap-3 p-6 no-underline"
         >
-          <span aria-hidden="true" className="text-lg font-semibold text-foreground">
-            {players[0]?.displayName}
-          </span>
           <span
             aria-hidden="true"
-            className="rounded-pill bg-ps-blue px-3 py-1 text-sm font-bold tracking-widest text-foreground"
+            className="text-sm font-semibold uppercase tracking-widest text-foreground-muted"
           >
-            VS
+            Family face-off
           </span>
-          <span aria-hidden="true" className="text-lg font-semibold text-foreground">
-            {players[1]?.displayName}
+          <span aria-hidden="true" className="flex flex-wrap items-center justify-center gap-3">
+            {players.map((player, index) => (
+              <Fragment key={player.key}>
+                {index > 0 && (
+                  <span className="rounded-pill bg-ps-blue px-3 py-1 text-sm font-bold tracking-widest text-foreground">
+                    VS
+                  </span>
+                )}
+                <span className="text-lg font-semibold text-foreground">{player.displayName}</span>
+              </Fragment>
+            ))}
           </span>
         </GlassCard>
       </motion.div>
