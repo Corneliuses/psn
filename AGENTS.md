@@ -20,7 +20,7 @@ psn/
 │       ├── motion/     # presets.ts — shared Motion variants/transitions all animation composes
 │       ├── components/ # PlayStation component kit (GlassCard, StatTile, TrophyBadge, …) + AppShell
 │       ├── companions/ # Companion-app content: one data file per game + the registry
-│       ├── help/       # client.ts — the browser side of the help desk (POST /api/chat)
+│       ├── help/       # client.ts — the browser side of the help desk (POST /api/chat); speech.ts — read-aloud via the Web Speech API
 │       └── pages/      # Splash, Player, Compare, Discover, Together, Companion, Help, NotFound
 ├── server/         # `chat-server` package: Gemini proxy for the help desk + static server (Docker)
 │   ├── src/

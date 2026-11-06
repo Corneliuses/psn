@@ -94,6 +94,43 @@ describe('GameHelpChat', () => {
     expect(screen.queryByRole('group', { name: 'Example questions' })).toBeNull();
   });
 
+  it('offers one button per answer that reads the answer text only, never the sources', async () => {
+    const speech = { speak: vi.fn(), stop: vi.fn() };
+    const { user } = renderChat({ speech });
+
+    await user.type(screen.getByLabelText('Your question'), 'How do I beat the Mantis?');
+    await user.click(screen.getByRole('button', { name: 'Ask' }));
+    await screen.findByText('Dodge the lunge, then hit its legs.');
+
+    const log = screen.getByRole('log', { name: 'Conversation' });
+    const buttons = within(log).getAllByRole('button', { name: 'Read aloud' });
+    expect(buttons).toHaveLength(1);
+
+    await user.click(buttons[0]!);
+    expect(speech.speak).toHaveBeenCalledTimes(1);
+    const [spoken] = speech.speak.mock.calls[0]!;
+    expect(spoken).toBe('Dodge the lunge, then hit its legs.');
+    expect(spoken).not.toMatch(/Mantis — Grounded Wiki|youtube|grounded 2 mantis/);
+    expect(within(log).getByRole('button', { name: 'Stop reading' })).toBeInTheDocument();
+  });
+
+  it('offers the read-aloud button on an off-topic decline too, and hides it without speech support', async () => {
+    const decline: ChatResponse = { kind: 'off-topic', answer: 'I only help with games.' };
+    const { user, unmount } = renderChat({ ask: vi.fn(async () => decline), speech: { speak: vi.fn(), stop: vi.fn() } });
+    await user.type(screen.getByLabelText('Your question'), 'Do my homework');
+    await user.click(screen.getByRole('button', { name: 'Ask' }));
+    await screen.findByText('I only help with games.');
+    expect(screen.getByRole('button', { name: 'Read aloud' })).toBeInTheDocument();
+    unmount();
+
+    // No engine (as in jsdom by default): no button, nothing else changes.
+    const silent = renderChat({ ask: vi.fn(async () => decline) });
+    await silent.user.type(screen.getByLabelText('Your question'), 'Do my homework');
+    await silent.user.click(screen.getByRole('button', { name: 'Ask' }));
+    await screen.findByText('I only help with games.');
+    expect(screen.queryByRole('button', { name: 'Read aloud' })).toBeNull();
+  });
+
   it('sends the earlier turns as history on a follow-up', async () => {
     const { user, ask } = renderChat();
 

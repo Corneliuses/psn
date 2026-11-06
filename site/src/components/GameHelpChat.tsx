@@ -3,9 +3,11 @@ import { motion } from 'motion/react';
 import { useId, useRef, useState, type FormEvent } from 'react';
 
 import { HelpDeskError, askHelpDesk } from '../help/client';
+import type { SpeechReader } from '../help/speech';
 import { fadeRise } from '../motion/presets';
 import { GlassCard } from './GlassCard';
 import { GuideIcon, PlayIcon, SparkIcon } from './HelpIcons';
+import { ReadAloudButton } from './ReadAloudButton';
 
 /*
  * The help-desk chat: a thread of questions and answers over a small form.
@@ -15,7 +17,9 @@ import { GuideIcon, PlayIcon, SparkIcon } from './HelpIcons';
  * contract, and this just renders whatever `ChatResponse` comes back: the
  * answer, its source links (badged by kind, and marked when the server had to
  * fall back to a search link), the searches the model ran, or a polite
- * decline for an off-topic question.
+ * decline for an off-topic question. Each response carries one "Read aloud"
+ * button that has the browser speak the answer text — and only the answer,
+ * never the sources or searches.
  *
  * The thread is a `role="log"` live region so screen readers hear new answers;
  * each message enters with the shared `fadeRise` preset, which Motion resolves
@@ -42,6 +46,8 @@ export interface GameHelpChatProps {
   suggestions?: HelpSuggestion[];
   /** The API call; injectable for tests. */
   ask?: typeof askHelpDesk;
+  /** The read-aloud engine; injectable for tests. Omit for the browser's own. */
+  speech?: SpeechReader | null;
 }
 
 const KIND_LABEL: Record<HelpSource['kind'], string> = { article: 'Guide', video: 'Video' };
@@ -106,7 +112,8 @@ function SourceList({ sources }: { sources: HelpSource[] }) {
   );
 }
 
-function AssistantMessage({ response }: { response: ChatResponse }) {
+function AssistantMessage({ response, speech }: { response: ChatResponse; speech: SpeechReader | null | undefined }) {
+  const readAloud = <ReadAloudButton text={response.answer} className="mt-3" {...(speech !== undefined ? { speech } : {})} />;
   if (response.kind === 'off-topic') {
     return (
       <>
@@ -115,6 +122,7 @@ function AssistantMessage({ response }: { response: ChatResponse }) {
           Game questions only
         </p>
         <p className="m-0 mt-2 text-foreground">{response.answer}</p>
+        {readAloud}
       </>
     );
   }
@@ -124,6 +132,7 @@ function AssistantMessage({ response }: { response: ChatResponse }) {
         <AiBadge />
       </p>
       <p className="m-0 mt-2 whitespace-pre-line text-lg leading-snug text-foreground">{response.answer}</p>
+      {readAloud}
       <SourceList sources={response.sources} />
       {response.searches.length > 0 ? (
         <p className="m-0 mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-foreground-muted">
@@ -145,7 +154,7 @@ function AssistantMessage({ response }: { response: ChatResponse }) {
   );
 }
 
-export function GameHelpChat({ initialGame = '', suggestions = [], ask = askHelpDesk }: GameHelpChatProps) {
+export function GameHelpChat({ initialGame = '', suggestions = [], ask = askHelpDesk, speech }: GameHelpChatProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [game, setGame] = useState(initialGame);
   const [question, setQuestion] = useState('');
@@ -227,7 +236,7 @@ export function GameHelpChat({ initialGame = '', suggestions = [], ask = askHelp
             ) : null}
             <span className="sr-only">{message.role === 'user' ? 'You: ' : 'Help desk: '}</span>
             {message.role === 'assistant' ? (
-              <AssistantMessage response={message.response} />
+              <AssistantMessage response={message.response} speech={speech} />
             ) : (
               <span className="text-foreground">{message.text}</span>
             )}

@@ -1,11 +1,11 @@
 import type { SVGProps } from 'react';
 
 /*
- * The help desk's three glyphs, as inline SVG so they take the current text
- * color (token utilities like `text-ps-blue-text`) and need no icon font or
- * asset. All are decorative: `aria-hidden`, with the meaning carried by the
- * text beside them ("AI", "Guide", "Video"). Original drawings — no brand
- * marks: the play glyph is a plain triangle in a rounded tile, not a logo.
+ * The help desk's glyphs, as inline SVG so they take the current text color
+ * (token utilities like `text-ps-blue-text`) and need no icon font or asset.
+ * All are decorative: `aria-hidden`, with the meaning carried by the text
+ * beside them ("AI", "Guide", "Video", "Read aloud"). Original drawings — no
+ * brand marks: the play glyph is a plain triangle in a rounded tile, not a logo.
  */
 
 type IconProps = Omit<SVGProps<SVGSVGElement>, 'aria-hidden' | 'focusable'>;
@@ -48,6 +48,30 @@ export function PlayIcon(props: IconProps) {
     <svg {...base} {...props}>
       <rect x="2.5" y="5" width="19" height="14" rx="4" fill="currentColor" />
       <path d="M10 9.2v5.6l5-2.8-5-2.8z" fill="var(--color-surface-0)" />
+    </svg>
+  );
+}
+
+/** A speaker with sound waves — the read-aloud button. */
+export function SpeakerIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4v-5z" fill="currentColor" />
+      <path
+        d="M15.5 9a4.2 4.2 0 010 6M18.3 6.5a8 8 0 010 11"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+/** A plain rounded square — the stop glyph on the read-aloud button while it reads. */
+export function StopIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <rect x="6" y="6" width="12" height="12" rx="2.5" fill="currentColor" />
     </svg>
   );
 }
