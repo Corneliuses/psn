@@ -98,7 +98,7 @@ describe('buildGenreProfile / topGenresForPlayer / sharedGenres', () => {
     expect(topGenresForPlayer(profile, 'stranger')).toEqual([]);
   });
 
-  it('returns only genres every player has time in, ranked by combined minutes', () => {
+  it('with two players, returns genres both have time in, ranked by combined minutes', () => {
     const profile = buildGenreProfile(games);
     expect(sharedGenres(profile)).toEqual(['RPG', 'Action']);
   });
@@ -110,5 +110,39 @@ describe('buildGenreProfile / topGenresForPlayer / sharedGenres', () => {
 
   it('returns empty when there are no players', () => {
     expect(sharedGenres({})).toEqual([]);
+  });
+
+  describe('with three players', () => {
+    const trio: MatchedGame[] = [
+      // Action: all three, 300 + 300 + 300 = 900 combined.
+      { key: 't1', searchName: 'T1', displayName: 'T1', minutes: 300, players: ['dad', 'braidan', 'nadia'], genres: ['Action'] },
+      // Puzzle: exactly two (braidan + nadia), 500 + 500 = 1000 combined.
+      { key: 't2', searchName: 'T2', displayName: 'T2', minutes: 500, players: ['braidan', 'nadia'], genres: ['Puzzle'] },
+      // Racing: only dad, but the most minutes of any genre.
+      { key: 't3', searchName: 'T3', displayName: 'T3', minutes: 5000, players: ['dad'], genres: ['Racing'] },
+      // Shooter: all three via separate titles, 100 + 100 + 100 = 300 combined.
+      { key: 't4', searchName: 'T4', displayName: 'T4', minutes: 100, players: ['dad'], genres: ['Shooter'] },
+      { key: 't5', searchName: 'T5', displayName: 'T5', minutes: 100, players: ['braidan'], genres: ['Shooter'] },
+      { key: 't6', searchName: 'T6', displayName: 'T6', minutes: 100, players: ['nadia'], genres: ['Shooter'] },
+    ];
+
+    it('includes genres exactly two players share, ranked with all-three genres by combined minutes', () => {
+      expect(sharedGenres(buildGenreProfile(trio))).toEqual(['Puzzle', 'Action', 'Shooter']);
+    });
+
+    it('excludes a genre only one player has time in, however many minutes', () => {
+      expect(sharedGenres(buildGenreProfile(trio), 10)).not.toContain('Racing');
+    });
+
+    it('finds a two-player genre the first player in the profile never played', () => {
+      const profile = buildGenreProfile(trio);
+      expect(Object.keys(profile)[0]).toBe('dad');
+      expect(profile.dad?.Puzzle).toBeUndefined();
+      expect(sharedGenres(profile, 1)).toEqual(['Puzzle']);
+    });
+  });
+
+  it('returns empty for a single player', () => {
+    expect(sharedGenres({ dad: { Action: 100 } })).toEqual([]);
   });
 });

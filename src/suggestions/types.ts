@@ -19,7 +19,10 @@ export interface SuggestionsMetadata {
 /** Shape of the committed `data/suggestions.json`. */
 export interface SuggestionsFile {
   by_genre: Record<string, Suggestion[]>;
-  /** Top shared genres, ranked by combined playtime — the order the UI groups by. */
+  /**
+   * Top genres at least two players have time in, ranked by playtime summed
+   * across every player — the order the UI groups by.
+   */
   shared_genres: string[];
   metadata: SuggestionsMetadata;
 }

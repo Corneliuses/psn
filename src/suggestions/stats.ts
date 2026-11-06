@@ -35,7 +35,7 @@ export interface OwnedGame {
 /**
  * Filter every snapshot to real games (excludes media apps, which dominate raw
  * playtime), clean names, and dedupe PS4/PS5 variants — merging playtime and
- * player lists for titles both players own.
+ * player lists for titles more than one player owns.
  */
 export function collectLibrary(snapshots: Map<string, PlayerSnapshot>): OwnedGame[] {
   const byKey = new Map<string, OwnedGame>();
@@ -102,18 +102,24 @@ export function topGenresForPlayer(profile: GenreMinutes, playerKey: string, cou
     .map(([genre]) => genre);
 }
 
+/** How many players must have playtime in a genre for it to count as shared. */
+export const MIN_SHARED_PLAYERS = 2;
+
 /**
- * Genres every player has time in, ranked by combined minutes, capped to the
- * top `count` — the genres suggestions are fetched for.
+ * Genres at least MIN_SHARED_PLAYERS players have time in, ranked by minutes
+ * summed across every player, capped to the top `count` — the genres
+ * suggestions are fetched for. A genre only one player plays never qualifies,
+ * so a solo profile yields nothing.
  */
 export function sharedGenres(profile: GenreMinutes, count = 3): string[] {
   const players = Object.keys(profile);
-  const first = players[0];
-  if (!first) return [];
-  const shared = Object.keys(profile[first] ?? {}).filter((genre) =>
-    players.every((player) => (profile[player]?.[genre] ?? 0) > 0),
-  );
+  const allGenres = new Set(players.flatMap((player) => Object.keys(profile[player] ?? {})));
+  const playersWith = (genre: string) =>
+    players.filter((player) => (profile[player]?.[genre] ?? 0) > 0).length;
   const totalMinutes = (genre: string) =>
     players.reduce((sum, player) => sum + (profile[player]?.[genre] ?? 0), 0);
-  return shared.sort((a, b) => totalMinutes(b) - totalMinutes(a)).slice(0, count);
+  return [...allGenres]
+    .filter((genre) => playersWith(genre) >= MIN_SHARED_PLAYERS)
+    .sort((a, b) => totalMinutes(b) - totalMinutes(a))
+    .slice(0, count);
 }

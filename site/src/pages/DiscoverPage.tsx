@@ -4,9 +4,9 @@ import { players } from '../config/players';
 import { suggestionsData } from '../data';
 
 /*
- * Discover: unowned games suggested from the genres both players share most,
- * refreshed at sync time (see src/suggestions/). The page is a thin shell —
- * Suggestions itself renders the empty state when no shared genres exist yet.
+ * Discover: unowned games suggested from the genres at least two players share,
+ * ranked by combined playtime and refreshed at sync time (see
+ * src/suggestions/). The page is a thin shell — Suggestions itself renders the empty state when no shared genres exist yet.
  */
 
 function playerNamesLabel(): string {
@@ -22,7 +22,7 @@ export function DiscoverPage() {
       <GlassCard glow className="mb-10 p-8 sm:p-10">
         <h1 className="text-3xl font-bold leading-none text-foreground sm:text-display">Discover</h1>
         <p className="mt-2 text-foreground-muted">
-          Unowned games picked from the genres {playerNamesLabel()} both play most.
+          Unowned games picked from the genres at least two of {playerNamesLabel()} play most.
         </p>
       </GlassCard>
       <Suggestions suggestions={suggestionsData()} />

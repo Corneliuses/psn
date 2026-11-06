@@ -6,11 +6,11 @@ import { GlassCard } from './GlassCard';
 import { SectionHeader } from './SectionHeader';
 
 /*
- * Discover: unowned games suggested from the top genres both players share,
+ * Discover: unowned games suggested from the top genres at least two players share,
  * grouped by genre. Each card links out to the game's RAWG page; RAWG's
  * attribution requirement (a backlink on any page using its data) is met by
  * the footer link. Zero shared genres (not yet synced with a RAWG key, or a
- * pair of libraries with no genre overlap) renders a styled empty state.
+ * roster where no two libraries overlap on a genre) renders a styled empty state.
  */
 
 export interface SuggestionsProps {
