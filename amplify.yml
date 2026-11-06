@@ -8,11 +8,20 @@ frontend:
   phases:
     preBuild:
       commands:
+        # Match the Node major the workspace requires (package.json engines) and
+        # CI runs on, so the Amplify build never drifts from what CI verified.
+        - nvm use 22 || nvm install 22
+        - node --version
         - npm install -g pnpm@10.33.0
         - pnpm config set store-dir .pnpm-store
         - pnpm install --frozen-lockfile
     build:
       commands:
+        # Same gate as CI's verify job for the site, in the same order, so a
+        # lint or type error fails the build in a step named for it rather
+        # than halfway through the bundle.
+        - pnpm --filter site lint
+        - pnpm --filter site typecheck
         - pnpm --filter site build
   artifacts:
     baseDirectory: site/dist

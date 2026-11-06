@@ -165,6 +165,15 @@ left unset keeps the value already on the function, so a CI re-run never reverts
 by hand. The script also caps the function's reserved concurrency (default 2): the rate limit is
 in-memory per instance, so that bounds how far the real ceiling can exceed the configured one.
 
+**Keeping deploys green**: every deploy path runs the same lint → typecheck → test → build gate
+that [`ci.yml`](./.github/workflows/ci.yml) runs on every pull request — `amplify.yml` lints and
+typechecks `site/` before bundling it, `deploy-server.yml` lints and typechecks `server/` before
+touching AWS, and CI's `docker-build` job keeps the `Dockerfile` buildable. The one thing a workflow
+cannot do is stop a red pull request from being merged: enable branch protection on `main`
+(Settings → Branches → *Require status checks to pass before merging*) with the `verify`,
+`site-e2e` and `docker-build` checks required, so nothing reaches `main` — and so Amplify — that CI
+has not passed.
+
 The [`Dockerfile`](./Dockerfile) is the alternative for a container host (Cloud Run and the like):
 one image where the server serves both the API and the static site on port 8080, with
 `GEMINI_API_KEY` set as a secret on the service.

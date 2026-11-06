@@ -91,7 +91,7 @@ The help desk's API, package name `chat-server`. Run via `pnpm --filter chat-ser
 
 The Vite dev server proxies `/api` to :8787, so `pnpm --filter site dev` alongside it gives the full help desk locally. The server's tests use a fake Gemini client and an injected `fetch` — they never need a key or the network, same rule as the root package.
 
-**Hosting**: the site is static on Amplify, so the server is deployed separately as an AWS Lambda function behind a public function URL by `server/deploy/aws-lambda.sh` (run by the `Deploy chat server` workflow on pushes to `main` touching `server/`). The site reaches it through `VITE_CHAT_API_URL`, which the script sets on the Amplify app; the Lambda's `CHAT_ALLOWED_ORIGIN` lists the site's domains. Changing the API's URL shape or CORS behaviour means revisiting both ends of that link. The `Dockerfile` is the alternative single-container deploy and stays buildable.
+**Hosting**: the site is static on Amplify, so the server is deployed separately as an AWS Lambda function behind a public function URL by `server/deploy/aws-lambda.sh` (run by the `Deploy chat server` workflow on pushes to `main` touching `server/`). The site reaches it through `VITE_CHAT_API_URL`, which the script sets on the Amplify app; the Lambda's `CHAT_ALLOWED_ORIGIN` lists the site's domains. Changing the API's URL shape or CORS behaviour means revisiting both ends of that link. The `Dockerfile` is the alternative single-container deploy and stays buildable (CI's `docker-build` job enforces it). Every deploy path (`amplify.yml`, `deploy-server.yml`) runs the same lint → typecheck → test → build gate as CI before shipping; keep them in step with `ci.yml` when the gate changes.
 
 ## Architecture Rules
 

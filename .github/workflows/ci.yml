@@ -80,3 +80,18 @@ jobs:
         run: pnpm --filter site exec playwright install --with-deps chromium
 
       - run: pnpm --filter site test:e2e
+
+  # The Dockerfile is the alternative single-container deploy (site + chat
+  # server in one image) and must stay buildable. Its build stage runs the
+  # site's and server's production builds inside node:22-alpine from a clean
+  # install, so this also catches a workspace/lockfile break that only shows
+  # up outside a developer's warm node_modules.
+  docker-build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: docker build --tag psn:ci .
