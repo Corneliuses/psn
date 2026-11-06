@@ -42,6 +42,14 @@ jobs:
 
       - run: pnpm --filter site build
 
+      - run: pnpm --filter chat-server lint
+
+      - run: pnpm --filter chat-server typecheck
+
+      - run: pnpm --filter chat-server test
+
+      - run: pnpm --filter chat-server build
+
   # Browser-level smoke test: drives the real production bundle (vite build +
   # vite preview) in headless Chromium, catching build-only breaks that the
   # jsdom suite in `verify` cannot see (see #14). Runs in its own job so the

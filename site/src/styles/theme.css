@@ -31,6 +31,11 @@
      this lighter variant, which clears 4.5:1 on surfaces 0–3. Decorative fills,
      glows, large headings, and the focus ring keep the brand --color-ps-blue. */
   --color-ps-blue-text: #4c9ff0;
+  /* Accessible blue *fill* for normal-size --color-foreground text on it (a
+     button label): the brand fill is 4.4:1 and its hover 3.3:1, under the 4.5:1
+     WCAG AA needs below large text. These clear it at 5.4:1 and 4.8:1. */
+  --color-ps-blue-fill: #0062b8;
+  --color-ps-blue-fill-hover: #0a6ac4;
 
   /* PlayStation shape accents — decorative motifs only */
   --color-shape-triangle: #00ac9f;

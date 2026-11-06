@@ -1,6 +1,6 @@
 # psn
 
-Father–son PlayStation stats tracker for two players (Dad and Braidan): syncs play history and trophy data from PSN into committed JSON snapshots, derives displayable stats, and renders them as a website (`site/`) with a splash landing, per-player pages, a head-to-head comparison view, and companion apps for the games both players play, in a dark, PlayStation-vibe UI.
+Father–son PlayStation stats tracker for two players (Dad and Braidan): syncs play history and trophy data from PSN into committed JSON snapshots, derives displayable stats, and renders them as a website (`site/`) with a splash landing, per-player pages, a head-to-head comparison view, companion apps for the games both players play, and a game-help chat bot (Gemini, behind `server/`), in a dark, PlayStation-vibe UI.
 
 ## Repository Structure
 
@@ -20,11 +20,21 @@ psn/
 │       ├── motion/     # presets.ts — shared Motion variants/transitions all animation composes
 │       ├── components/ # PlayStation component kit (GlassCard, StatTile, TrophyBadge, …) + AppShell
 │       ├── companions/ # Companion-app content: one data file per game + the registry
-│       └── pages/      # Splash, Player, Compare, Discover, Together, Companion, NotFound
+│       ├── help/       # client.ts — the browser side of the help desk (POST /api/chat)
+│       └── pages/      # Splash, Player, Compare, Discover, Together, Companion, Help, NotFound
+├── server/         # `chat-server` package: Gemini proxy for the help desk + static server (Docker)
+│   ├── src/
+│   │   ├── contract.ts # The /api/chat wire types — the only server file `site/` imports
+│   │   ├── help.ts     # Pure core: guardrail prompt, request validation, source contract
+│   │   ├── gemini.ts   # fetch-based Gemini REST client (Google Search grounding on)
+│   │   ├── app.ts      # node:http handler: /api/chat, /api/health, static site
+│   │   └── index.ts    # Process entrypoint, env config
+│   ├── deploy/         # aws-lambda.sh — idempotent Lambda + function URL rollout, Amplify wiring
+│   └── test/           # Vitest, fixture-based with a fake Gemini — no key, no network
 └── .claude/skills/ # Workflow skills installed from Corneliuses/agentic-config
 ```
 
-This repo is a pnpm workspace (`pnpm-workspace.yaml`): the root package (`psn`) is the data-layer lib, `site/` is a separate workspace package depending on it via `workspace:*`.
+This repo is a pnpm workspace (`pnpm-workspace.yaml`): the root package (`psn`) is the data-layer lib, `site/` is a separate workspace package depending on it via `workspace:*`, and `server/` (`chat-server`) is the help desk's API, which `site/` depends on for its wire types only.
 
 ## Tech Stack
 
@@ -35,6 +45,7 @@ This repo is a pnpm workspace (`pnpm-workspace.yaml`): the root package (`psn`) 
 - **Lint / Format**: ESLint (flat config, typescript-eslint)
 - **Build**: tsup (library + CLI), tsx for running the CLI from source
 - **Site UI** (`site/`): React 19 + Vite 7; [Tailwind CSS 4](https://tailwindcss.com) via `@tailwindcss/vite` (CSS-first `@theme`, no `tailwind.config.js`); [Motion](https://motion.dev) (`motion/react`) for animation; self-hosted display font via `@fontsource-variable/source-sans-3`; React Router 7. See **Designing views & components** below before building UI.
+- **Help-desk chat server** (`server/`): plain `node:http` + the built-in `fetch` against the Gemini REST API (`generateContent` with Google Search grounding) — no framework, no SDK, no runtime dependencies. Bundled with tsup, run with tsx in dev.
 
 ## Commands
 
@@ -49,7 +60,7 @@ This repo is a pnpm workspace (`pnpm-workspace.yaml`): the root package (`psn`) 
 | Sync snapshots (needs `.env`) | `pnpm sync` |
 | Sync pipeline without credentials | `pnpm sync --dry-run` |
 
-Before committing, lint, typecheck, tests, and build must all pass — for both the root package and `site/` (see below).
+Before committing, lint, typecheck, tests, and build must all pass — for the root package, `site/`, and `server/` (see below).
 
 ### `site/` workspace commands
 
@@ -67,7 +78,20 @@ Run from the repo root via `pnpm --filter site <script>`, or `cd site && pnpm <s
 
 `site` has its own ESLint config, TypeScript config, and Vitest suite, run separately from the root package's. Root `pnpm test` only runs `test/` (the data-layer lib); it does not run `site`'s tests.
 
-`pnpm --filter site test:e2e` is a `@playwright/test` smoke suite (`site/e2e/`) that runs against the **production build** — its Playwright config runs `vite build` then serves `dist/` via `vite preview`, so a build-only break (e.g. a Node-only transitive import that breaks `vite build` while every jsdom test stays green) fails it, which the jsdom `pnpm --filter site test` run cannot catch. It needs a Playwright Chromium binary: locally the dev container pre-provisions one (`PLAYWRIGHT_BROWSERS_PATH`); CI runs it in a dedicated `site-e2e` job that installs Chromium via `playwright install --with-deps chromium`. The `e2e/` specs are excluded from the Vitest run, so `pnpm --filter site test` never launches a browser.
+`pnpm --filter site test:e2e` is a `@playwright/test` smoke suite (`site/e2e/`) that runs against the **production build** — its Playwright config runs `vite build` then serves `dist/` via `vite preview`, so a build-only break (e.g. a Node-only transitive import that breaks `vite build` while every jsdom test stays green) fails it, which the jsdom `pnpm --filter site test` run cannot catch. It needs a Playwright Chromium binary: locally the dev container pre-provisions one (`PLAYWRIGHT_BROWSERS_PATH`); CI runs it in a dedicated `site-e2e` job that installs Chromium via `playwright install --with-deps chromium`. The `e2e/` specs are excluded from the Vitest run, so `pnpm --filter site test` never launches a browser. `vite preview` has no chat server behind it, so the `/help` smoke test asserts the offline alert, not an answer.
+
+### `server/` workspace commands
+
+The help desk's API, package name `chat-server`. Run via `pnpm --filter chat-server <script>`:
+
+| Purpose | Command |
+|---|---|
+| Dev server on :8787 (needs `GEMINI_API_KEY` in the root `.env`) | `pnpm --filter chat-server dev` |
+| Lint / Typecheck / Test / Build | `pnpm --filter chat-server lint` / `typecheck` / `test` / `build` |
+
+The Vite dev server proxies `/api` to :8787, so `pnpm --filter site dev` alongside it gives the full help desk locally. The server's tests use a fake Gemini client and an injected `fetch` — they never need a key or the network, same rule as the root package.
+
+**Hosting**: the site is static on Amplify, so the server is deployed separately as an AWS Lambda function behind a public function URL by `server/deploy/aws-lambda.sh` (run by the `Deploy chat server` workflow on pushes to `main` touching `server/`). The site reaches it through `VITE_CHAT_API_URL`, which the script sets on the Amplify app; the Lambda's `CHAT_ALLOWED_ORIGIN` lists the site's domains. Changing the API's URL shape or CORS behaviour means revisiting both ends of that link. The `Dockerfile` is the alternative single-container deploy and stays buildable.
 
 ## Architecture Rules
 
@@ -75,6 +99,7 @@ Run from the repo root via `pnpm --filter site <script>`, or `cd site && pnpm <s
 - **`src/stats` stays pure**: snapshot in, stats out, no I/O. Every new stat function ships with fixture-based tests including empty-snapshot and tie cases.
 - **Snapshots are diff-friendly**: stable key order, arrays sorted by stable IDs, 2-space indent, trailing newline. Preserve this — committed snapshot history doubles as the trend-analytics dataset.
 - **`schemaVersion` guards `PlayerSnapshot`**: bump it and handle old versions in readers if the shape changes; committed history must stay loadable.
+- **The help desk is controlled server-side**: the browser only ever calls `POST /api/chat` (`site/src/help/client.ts`), and the only server file `site/` may import is `server/src/contract.ts` (types + `CHAT_LIMITS`). The game-help-only guardrail (`SYSTEM_INSTRUCTION`), request limits, rate limits and the source contract (every answer carries ≥1 written source and ≥1 YouTube link, with a clearly-flagged search link filling a slot the model left empty) all live in `server/src/help.ts` and `app.ts` — never loosen them from the UI, and keep `help.ts` pure so its behaviour stays fixture-testable. The server never reads `data/` or `src/`.
 
 ## Designing views & components
 
@@ -190,6 +215,7 @@ works within, and they hold whether or not the skill is used.
 ## Security & Secrets
 
 - NPSSO tokens live in `.env` (gitignored) or CI secrets, one per player named in `psn.config.json` (`NPSSO_DAD`, `NPSSO_BRAIDAN`, `NPSSO_NADIA`). Never commit, log, or embed tokens in error messages — `PsnAuthError` names the env var, never the value.
+- `GEMINI_API_KEY` (the help desk) lives in the same `.env` locally and as a secret on the deployed container — never as a `VITE_*` variable, which Vite would inline into the public bundle. The server sends it only as a request header and never echoes Gemini's error bodies (they can quote the request).
 - `data/` holds only *real* synced snapshots. Dry-run output is fixture data and must not be committed as if it were real. **Exception:** `data/nadia/latest.json` is a committed *fixture* snapshot (generated via `sampleSnapshot()`), added in #41 so `site/` has something to render for her before her first real sync. The daily sync workflow overwrites it with genuine data once the `NPSSO_NADIA` secret is set; it must not be left in place after that. `data/dad/` and `data/braidan/` hold real synced data — never overwrite them with fixture output (note that `pnpm sync --dry-run` does exactly that — see #49 — so revert `data/` after a dry run).
 
 ## Working Rules

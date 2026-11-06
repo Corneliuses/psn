@@ -4,6 +4,12 @@ import { configDefaults, defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  server: {
+    // The help desk's API lives in the chat-server package (`pnpm --filter
+    // chat-server dev`, port 8787). Proxying it keeps the browser same-origin
+    // in dev, exactly as the production container serves it.
+    proxy: { '/api': 'http://localhost:8787' },
+  },
   test: {
     environment: 'jsdom',
     globals: true,

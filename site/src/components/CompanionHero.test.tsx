@@ -36,6 +36,14 @@ describe('CompanionHero', () => {
     expect(screen.getByRole('link', { name: /all companion apps/i })).toHaveAttribute('href', '/together');
   });
 
+  it('links to the help desk with this game pre-selected', () => {
+    renderHero();
+    expect(screen.getByRole('link', { name: /ask the help desk about Night City Game/i })).toHaveAttribute(
+      'href',
+      '/help?game=Night+City+Game',
+    );
+  });
+
   it('lists each fact as a term and its value', () => {
     renderHero();
 

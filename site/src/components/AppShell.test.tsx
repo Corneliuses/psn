@@ -24,7 +24,7 @@ describe('AppShell', () => {
     expect(screen.getByRole('heading', { name: 'Page content' })).toBeInTheDocument();
   });
 
-  it('renders a nav link for every configured player plus Compare, Together and Discover', () => {
+  it('renders a nav link for every configured player plus Compare, Together, Discover and Help', () => {
     renderShell('/');
 
     const nav = screen.getByRole('navigation', { name: 'Primary' });
@@ -45,6 +45,10 @@ describe('AppShell', () => {
     const discover = screen.getByRole('link', { name: 'Discover' });
     expect(nav).toContainElement(discover);
     expect(discover).toHaveAttribute('href', '/discover');
+
+    const help = screen.getByRole('link', { name: 'Help' });
+    expect(nav).toContainElement(help);
+    expect(help).toHaveAttribute('href', '/help');
   });
 
   it('marks the active route link with aria-current', () => {

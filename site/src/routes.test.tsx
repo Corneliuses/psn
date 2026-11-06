@@ -8,9 +8,11 @@ import { players } from './config/players';
 import {
   COMPARE_PATH,
   DISCOVER_PATH,
+  HELP_PATH,
   TOGETHER_PATH,
   companionPath,
   comparePath,
+  helpPath,
   playerPairings,
   playerPath,
 } from './routes';
@@ -74,6 +76,15 @@ describe('routing', () => {
     expect(screen.getByRole('heading', { level: 1, name: 'Together' })).toBeInTheDocument();
   });
 
+  it('renders the help desk at /help', () => {
+    render(
+      <MemoryRouter initialEntries={[HELP_PATH]}>
+        <App />
+      </MemoryRouter>,
+    );
+    expect(screen.getByRole('heading', { level: 1, name: 'Help desk' })).toBeInTheDocument();
+  });
+
   it('renders a companion app at /together/:slug', () => {
     const [first] = companions;
     expect(first).toBeDefined();
@@ -110,6 +121,14 @@ describe('routing', () => {
 describe('comparePath', () => {
   it('builds /compare/:a/:b', () => {
     expect(comparePath('dad', 'braidan')).toBe('/compare/dad/braidan');
+  });
+});
+
+describe('helpPath', () => {
+  it('builds /help, with the game query-encoded when given', () => {
+    expect(helpPath()).toBe('/help');
+    expect(helpPath('Grounded 2')).toBe('/help?game=Grounded+2');
+    expect(helpPath('LEGO Batman: Legacy & more')).toBe('/help?game=LEGO+Batman%3A+Legacy+%26+more');
   });
 });
 

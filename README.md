@@ -12,7 +12,8 @@ PSN API ──> pnpm sync ──> data/<player>/<date>.json ──> src/stats �
 - **Sync** (`src/psn`, `src/cli`): authenticates with PSN via NPSSO tokens and pulls each player's played titles (play time, play counts, last played) and trophy titles (earned tiers, platinums, progress).
 - **Snapshots** (`data/`): one JSON per player per day plus `latest.json`, committed to git — the history doubles as the dataset for trend analytics later.
 - **Stats** (`src/stats`): pure functions over snapshots — recent games, most played, trophy leaders, platinum list, and a full player-vs-player comparison. The site reads only this layer.
-- **Site** (`site/`): a React + Vite app that renders the stats as a dark, PlayStation-vibe UI — a splash landing, a per-player page, a head-to-head compare view, and the [companion apps](#companion-apps) for the games we play together. See [Design language](#design-language).
+- **Site** (`site/`): a React + Vite app that renders the stats as a dark, PlayStation-vibe UI — a splash landing, a per-player page, a head-to-head compare view, the [companion apps](#companion-apps) for the games we play together, and the [help desk](#help-desk-ai-chat) chat. See [Design language](#design-language).
+- **Chat server** (`server/`): the one non-static piece — a small Node service that fronts Gemini for the help desk so the API key never reaches the browser, and that serves the built site in the Docker image.
 
 ## Setup
 
@@ -40,6 +41,7 @@ Players are declared in [`psn.config.json`](./psn.config.json). Each player eith
 | Sync one player | `pnpm sync --player braidan` |
 | Sync without refreshing suggestions | `pnpm sync --no-suggestions` |
 | Credential-free pipeline check | `pnpm sync --dry-run` |
+| Help-desk chat server (dev / tests) | `pnpm --filter chat-server dev` / `pnpm --filter chat-server test` |
 
 ## Design language
 
@@ -106,6 +108,66 @@ game — the one step where a plausible guess silently shows another game's numb
 
 The grid, the routes, the section accents and the tests all derive from that registry, so nothing
 else changes. Content is plain data: no component reads markup from a companion file.
+
+## Help desk (AI chat)
+
+**Help** (`/help`) is a controlled chat bot for one job: *how do I do this thing in a game?* Ask
+about a boss, a recipe, a trophy or a setting and it answers in a few sentences with **at least one
+written guide link and one YouTube link** to check the answer against. Anything that isn't a
+question about playing a game gets a polite one-line no. Every companion app has a "Stuck? Ask the
+help desk" link that opens the chat with that game pre-selected.
+
+The bot is a [Gemini](https://ai.google.dev) model behind a small server of our own
+(`server/`, the `chat-server` workspace package), because a browser can't hold the API key. The
+server is where the control lives, and the UI can't loosen it:
+
+- a system prompt that limits the model to game help, caps answers at ~120 words, and demands real
+  URLs of both kinds — the model runs with Google Search grounding so it cites pages it actually read;
+- a source contract enforced in code: articles and videos are classified by URL (not by what the
+  model labelled them), deduped against the grounding metadata, and if either kind is missing the
+  slot is filled with a clearly-labelled search link for the question rather than an invented URL;
+- per-client and server-wide rate limits (10 and 60 questions a minute by default), request size and
+  history caps, and a stock decline when Gemini's safety filters block a prompt.
+
+**Running it locally** needs a Gemini API key (free at [aistudio.google.com](https://aistudio.google.com/apikey))
+in `.env` as `GEMINI_API_KEY`, then two terminals:
+
+```bash
+pnpm --filter chat-server dev    # API on :8787, reads ../.env
+pnpm --filter site dev           # Vite proxies /api to it
+```
+
+Without a server running, the page still renders and reports the help desk offline when you ask.
+`pnpm --filter chat-server test` covers the whole server with fixtures and a fake Gemini — no key or
+network needed.
+
+**Deploying**: the site is static on Amplify Hosting ([`amplify.yml`](./amplify.yml)), which can't
+run the server, so the server runs as an **AWS Lambda function behind a public function URL** — it
+scales to zero and costs nothing idle. [`server/deploy/aws-lambda.sh`](./server/deploy/aws-lambda.sh)
+does the whole rollout idempotently: an execution role, the function (Node 22 + the
+[Lambda Web Adapter](https://github.com/awslabs/aws-lambda-web-adapter) layer, so the server runs
+unchanged), its environment, the function URL, a health check, and — with `--amplify-app <appId>` —
+it merges `VITE_CHAT_API_URL` into the Amplify app's variables, sets the Lambda's
+`CHAT_ALLOWED_ORIGIN` to the site's domains, and starts a release build so the live site picks it
+up:
+
+```bash
+pnpm --filter chat-server build
+AWS_REGION=us-east-1 GEMINI_API_KEY=… server/deploy/aws-lambda.sh --amplify-app <appId>
+```
+
+The [`Deploy chat server`](./.github/workflows/deploy-server.yml) workflow runs the same script on
+every push to `main` that touches `server/` (and on demand). It needs the `AWS_ACCESS_KEY_ID`,
+`AWS_SECRET_ACCESS_KEY` and `GEMINI_API_KEY` secrets plus the `AWS_REGION` and `AMPLIFY_APP_ID`
+repository variables. Optional server settings (`GEMINI_MODEL`, `CHAT_RATE_LIMIT_PER_MINUTE`,
+`CHAT_GLOBAL_RATE_LIMIT_PER_MINUTE`) are passed through from the script's environment, and one
+left unset keeps the value already on the function, so a CI re-run never reverts an override set
+by hand. The script also caps the function's reserved concurrency (default 2): the rate limit is
+in-memory per instance, so that bounds how far the real ceiling can exceed the configured one.
+
+The [`Dockerfile`](./Dockerfile) is the alternative for a container host (Cloud Run and the like):
+one image where the server serves both the API and the static site on port 8080, with
+`GEMINI_API_KEY` set as a secret on the service.
 
 ## Built with agentic-config
 

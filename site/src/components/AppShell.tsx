@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { NavLink } from 'react-router';
 
 import { players } from '../config/players';
-import { COMPARE_PATH, DISCOVER_PATH, TOGETHER_PATH, playerPath } from '../routes';
+import { COMPARE_PATH, DISCOVER_PATH, HELP_PATH, TOGETHER_PATH, playerPath } from '../routes';
 
 interface NavItem {
   to: string;
@@ -16,6 +16,7 @@ const navItems: NavItem[] = [
   { to: COMPARE_PATH, label: 'Compare', end: false },
   { to: TOGETHER_PATH, label: 'Together', end: false },
   { to: DISCOVER_PATH, label: 'Discover', end: false },
+  { to: HELP_PATH, label: 'Help', end: false },
 ];
 
 function navLinkClass({ isActive }: { isActive: boolean }): string {
