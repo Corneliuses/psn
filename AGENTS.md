@@ -29,6 +29,7 @@ psn/
 │   │   ├── gemini.ts   # fetch-based Gemini REST client (Google Search grounding on)
 │   │   ├── app.ts      # node:http handler: /api/chat, /api/health, static site
 │   │   └── index.ts    # Process entrypoint, env config
+│   ├── deploy/         # aws-lambda.sh — idempotent Lambda + function URL rollout, Amplify wiring
 │   └── test/           # Vitest, fixture-based with a fake Gemini — no key, no network
 └── .claude/skills/ # Workflow skills installed from Corneliuses/agentic-config
 ```
@@ -89,6 +90,8 @@ The help desk's API, package name `chat-server`. Run via `pnpm --filter chat-ser
 | Lint / Typecheck / Test / Build | `pnpm --filter chat-server lint` / `typecheck` / `test` / `build` |
 
 The Vite dev server proxies `/api` to :8787, so `pnpm --filter site dev` alongside it gives the full help desk locally. The server's tests use a fake Gemini client and an injected `fetch` — they never need a key or the network, same rule as the root package.
+
+**Hosting**: the site is static on Amplify, so the server is deployed separately as an AWS Lambda function behind a public function URL by `server/deploy/aws-lambda.sh` (run by the `Deploy chat server` workflow on pushes to `main` touching `server/`). The site reaches it through `VITE_CHAT_API_URL`, which the script sets on the Amplify app; the Lambda's `CHAT_ALLOWED_ORIGIN` lists the site's domains. Changing the API's URL shape or CORS behaviour means revisiting both ends of that link. The `Dockerfile` is the alternative single-container deploy and stays buildable.
 
 ## Architecture Rules
 

@@ -14,7 +14,7 @@ import { DEFAULT_GEMINI_MODEL, createGeminiClient } from './gemini';
  *   STATIC_DIR                       serve the built site from here (unset = API only)
  *   CHAT_RATE_LIMIT_PER_MINUTE       per-client cap, default 10
  *   CHAT_GLOBAL_RATE_LIMIT_PER_MINUTE server-wide cap, default 60
- *   CHAT_ALLOWED_ORIGIN              CORS origin for a site hosted elsewhere (e.g. Amplify)
+ *   CHAT_ALLOWED_ORIGIN              CORS origin(s), comma-separated, for a site hosted elsewhere (e.g. Amplify)
  *
  * Locally, `.env` at the repo root is loaded when present — the same file that
  * holds the sync tokens, so one secrets file serves both tools.
@@ -43,12 +43,15 @@ const intEnv = (name: string, fallback: number): number => {
 
 const port = intEnv('PORT', 8787);
 const staticDir = process.env.STATIC_DIR;
-const allowedOrigin = process.env.CHAT_ALLOWED_ORIGIN;
+const allowedOrigins = (process.env.CHAT_ALLOWED_ORIGIN ?? '')
+  .split(',')
+  .map((origin) => origin.trim().replace(/\/+$/, ''))
+  .filter(Boolean);
 
 const app = createApp({
   gemini: createGeminiClient({ apiKey, model: process.env.GEMINI_MODEL ?? DEFAULT_GEMINI_MODEL }),
   ...(staticDir ? { staticDir } : {}),
-  ...(allowedOrigin ? { allowedOrigin } : {}),
+  ...(allowedOrigins.length ? { allowedOrigins } : {}),
   rateLimitPerMinute: intEnv('CHAT_RATE_LIMIT_PER_MINUTE', 10),
   globalRateLimitPerMinute: intEnv('CHAT_GLOBAL_RATE_LIMIT_PER_MINUTE', 60),
 });

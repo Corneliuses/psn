@@ -32,8 +32,12 @@ export interface AppOptions {
   /** Requests across all clients per minute. */
   globalRateLimitPerMinute?: number;
   rateLimiter?: RateLimiter;
-  /** Origin allowed to call the API cross-site (the dev server proxies instead, so usually unset). */
-  allowedOrigin?: string;
+  /**
+   * Origins allowed to call the API cross-site, e.g. a statically hosted site
+   * on another domain. Unset when the site is served from this process (the
+   * Docker image) or proxied (the Vite dev server).
+   */
+  allowedOrigins?: string[];
   log?: (message: string) => void;
 }
 
@@ -89,9 +93,15 @@ export function createApp(options: AppOptions): RequestHandler {
   const serveStatic: StaticHandler | undefined = options.staticDir ? createStaticHandler(options.staticDir) : undefined;
 
   const applyCors = (req: IncomingMessage, res: ServerResponse): boolean => {
-    if (!options.allowedOrigin) return false;
-    res.setHeader('access-control-allow-origin', options.allowedOrigin);
-    res.setHeader('vary', 'origin');
+    const allowed = options.allowedOrigins ?? [];
+    if (allowed.length === 0) return false;
+    const origin = req.headers.origin;
+    // Echo only an origin on the list; anything else gets no CORS header and
+    // the browser refuses the response.
+    if (origin && allowed.includes(origin)) {
+      res.setHeader('access-control-allow-origin', origin);
+      res.setHeader('vary', 'origin');
+    }
     if (req.method !== 'OPTIONS') return false;
     res.writeHead(204, {
       'access-control-allow-methods': 'POST, GET, OPTIONS',

@@ -1,0 +1,62 @@
+name: Deploy chat server
+
+# Deploys the help-desk chat server (server/) to AWS Lambda behind a public
+# function URL, and points the Amplify-hosted site at it — see
+# server/deploy/aws-lambda.sh for what that does and why Lambda.
+#
+# Runs on every push to main that touches the server, and on demand. Needs:
+#   secrets: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, GEMINI_API_KEY
+#   vars:    AWS_REGION, AMPLIFY_APP_ID (optional — set it to also rebuild the site)
+# Add them at repo Settings → Secrets and variables → Actions.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'server/**'
+      - '.github/workflows/deploy-server.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-chat-server
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm --filter chat-server test
+
+      - run: pnpm --filter chat-server build
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Deploy to Lambda (and point Amplify at it)
+        env:
+          AWS_REGION: ${{ vars.AWS_REGION }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          AMPLIFY_APP_ID: ${{ vars.AMPLIFY_APP_ID }}
+        run: |
+          if [ -n "$AMPLIFY_APP_ID" ]; then
+            server/deploy/aws-lambda.sh --amplify-app "$AMPLIFY_APP_ID"
+          else
+            server/deploy/aws-lambda.sh
+          fi

@@ -141,13 +141,31 @@ Without a server running, the page still renders and reports the help desk offli
 `pnpm --filter chat-server test` covers the whole server with fixtures and a fake Gemini — no key or
 network needed.
 
-**Deploying**: the [`Dockerfile`](./Dockerfile) builds the site and the server into one image where
-the server serves both (`/api/chat` plus the static site, port 8080) — set `GEMINI_API_KEY` as a
-secret on the service (Cloud Run: *Variables & Secrets*) and optionally `GEMINI_MODEL`,
-`CHAT_RATE_LIMIT_PER_MINUTE` and `CHAT_GLOBAL_RATE_LIMIT_PER_MINUTE`. A static-only host like
-Amplify ([`amplify.yml`](./amplify.yml)) can't run the server: deploy the image somewhere else, set
-`CHAT_ALLOWED_ORIGIN` on it to the site's origin, and build the site with `VITE_CHAT_API_URL`
-pointing at it.
+**Deploying**: the site is static on Amplify Hosting ([`amplify.yml`](./amplify.yml)), which can't
+run the server, so the server runs as an **AWS Lambda function behind a public function URL** — it
+scales to zero and costs nothing idle. [`server/deploy/aws-lambda.sh`](./server/deploy/aws-lambda.sh)
+does the whole rollout idempotently: an execution role, the function (Node 22 + the
+[Lambda Web Adapter](https://github.com/awslabs/aws-lambda-web-adapter) layer, so the server runs
+unchanged), its environment, the function URL, a health check, and — with `--amplify-app <appId>` —
+it merges `VITE_CHAT_API_URL` into the Amplify app's variables, sets the Lambda's
+`CHAT_ALLOWED_ORIGIN` to the site's domains, and starts a release build so the live site picks it
+up:
+
+```bash
+pnpm --filter chat-server build
+AWS_REGION=us-east-1 GEMINI_API_KEY=… server/deploy/aws-lambda.sh --amplify-app <appId>
+```
+
+The [`Deploy chat server`](./.github/workflows/deploy-server.yml) workflow runs the same script on
+every push to `main` that touches `server/` (and on demand). It needs the `AWS_ACCESS_KEY_ID`,
+`AWS_SECRET_ACCESS_KEY` and `GEMINI_API_KEY` secrets plus the `AWS_REGION` and `AMPLIFY_APP_ID`
+repository variables. Optional server settings (`GEMINI_MODEL`, `CHAT_RATE_LIMIT_PER_MINUTE`,
+`CHAT_GLOBAL_RATE_LIMIT_PER_MINUTE`) go on the function; the script also caps the function's
+reserved concurrency (default 2) so the in-memory rate limit holds across instances.
+
+The [`Dockerfile`](./Dockerfile) is the alternative for a container host (Cloud Run and the like):
+one image where the server serves both the API and the static site on port 8080, with
+`GEMINI_API_KEY` set as a secret on the service.
 
 ## Built with agentic-config
 

@@ -132,11 +132,18 @@ describe('POST /api/chat', () => {
     expect((await ask(base, { question: 'q' })).status).toBe(500);
   });
 
-  it('answers CORS preflight only when an origin is configured', async () => {
-    const open = await start({ gemini: fakeGemini(), allowedOrigin: 'https://site.example' });
-    const preflight = await fetch(`${open}/api/chat`, { method: 'OPTIONS' });
+  it('answers CORS preflight only for a listed origin', async () => {
+    const open = await start({ gemini: fakeGemini(), allowedOrigins: ['https://site.example', 'https://www.site.example'] });
+    const preflight = await fetch(`${open}/api/chat`, { method: 'OPTIONS', headers: { origin: 'https://www.site.example' } });
     expect(preflight.status).toBe(204);
-    expect(preflight.headers.get('access-control-allow-origin')).toBe('https://site.example');
+    expect(preflight.headers.get('access-control-allow-origin')).toBe('https://www.site.example');
+
+    const answered = await ask(open, { question: 'q' }, { origin: 'https://site.example' });
+    expect(answered.headers.get('access-control-allow-origin')).toBe('https://site.example');
+
+    const stranger = await fetch(`${open}/api/chat`, { method: 'OPTIONS', headers: { origin: 'https://evil.example' } });
+    expect(stranger.status).toBe(204);
+    expect(stranger.headers.get('access-control-allow-origin')).toBeNull();
 
     const closed = await start({ gemini: fakeGemini() });
     const response = await fetch(`${closed}/api/chat`, { method: 'OPTIONS' });
