@@ -21,16 +21,15 @@ import { ReadAloudButton } from './ReadAloudButton';
  * button that has the browser speak the answer text — and only the answer,
  * never the sources or searches.
  *
+ * The form is the focus of the screen: it is all the card holds while the
+ * thread is empty (the page hero already says what the help desk is for, so
+ * there is no second pitch here). Once there are messages the thread sits
+ * above the form.
+ *
  * The thread is a `role="log"` live region so screen readers hear new answers;
  * each message enters with the shared `fadeRise` preset, which Motion resolves
  * to its static end state under reduced motion.
  */
-
-export interface HelpSuggestion {
-  /** The game to pre-select when tapped. */
-  game: string;
-  question: string;
-}
 
 type MessageBody =
   | { role: 'user'; text: string }
@@ -42,8 +41,6 @@ type Message = MessageBody & { id: number };
 export interface GameHelpChatProps {
   /** Pre-fills the game field, e.g. when arriving from a companion app. */
   initialGame?: string;
-  /** Starter questions shown while the thread is empty. */
-  suggestions?: HelpSuggestion[];
   /** The API call; injectable for tests. */
   ask?: typeof askHelpDesk;
   /** The read-aloud engine; injectable for tests. Omit for the browser's own. */
@@ -51,6 +48,14 @@ export interface GameHelpChatProps {
 }
 
 const KIND_LABEL: Record<HelpSource['kind'], string> = { article: 'Guide', video: 'Video' };
+
+/**
+ * The two fields are the point of the page, so they read as such: a solid
+ * surface with a strong border, large text, and the PS-blue glow on focus
+ * (on top of the global focus ring). All tokens — no one-off values.
+ */
+const FIELD_CLASS =
+  'w-full rounded-lg border-2 border-border-strong bg-surface-0 px-4 py-3 text-lg text-foreground shadow-panel transition-[border-color,box-shadow] placeholder:text-foreground-muted/70 hover:border-ps-blue/60 focus:border-ps-blue focus:shadow-glow';
 
 /** The source glyphs: a page for a guide, a play tile for a video (the label carries the meaning). */
 function SourceIcon({ kind }: { kind: HelpSource['kind'] }) {
@@ -154,7 +159,7 @@ function AssistantMessage({ response, speech }: { response: ChatResponse; speech
   );
 }
 
-export function GameHelpChat({ initialGame = '', suggestions = [], ask = askHelpDesk, speech }: GameHelpChatProps) {
+export function GameHelpChat({ initialGame = '', ask = askHelpDesk, speech }: GameHelpChatProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [game, setGame] = useState(initialGame);
   const [question, setQuestion] = useState('');
@@ -163,6 +168,7 @@ export function GameHelpChat({ initialGame = '', suggestions = [], ask = askHelp
   const questionRef = useRef<HTMLTextAreaElement>(null);
   const gameFieldId = useId();
   const questionFieldId = useId();
+  const hasThread = messages.length > 0 || pending;
 
   const push = (message: MessageBody): void => {
     const id = nextId.current++;
@@ -194,26 +200,14 @@ export function GameHelpChat({ initialGame = '', suggestions = [], ask = askHelp
     }
   }
 
-  function applySuggestion(suggestion: HelpSuggestion): void {
-    setGame(suggestion.game);
-    setQuestion(suggestion.question);
-    questionRef.current?.focus();
-  }
-
   return (
     <GlassCard className="p-5 sm:p-6">
-      <ol role="log" aria-label="Conversation" aria-live="polite" className="m-0 flex list-none flex-col gap-3 p-0">
-        {messages.length === 0 ? (
-          <li className="flex items-center gap-3 text-lg font-semibold text-foreground">
-            <span
-              aria-hidden="true"
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-ps-blue/15 text-ps-blue-text"
-            >
-              <SparkIcon className="h-5 w-5" />
-            </span>
-            What are you stuck on?
-          </li>
-        ) : null}
+      <ol
+        role="log"
+        aria-label="Conversation"
+        aria-live="polite"
+        className={`m-0 flex list-none flex-col gap-3 p-0 ${hasThread ? 'mb-5' : ''}`}
+      >
         {messages.map((message) => (
           <motion.li
             key={message.id}
@@ -250,26 +244,27 @@ export function GameHelpChat({ initialGame = '', suggestions = [], ask = askHelp
         ) : null}
       </ol>
 
-      {messages.length === 0 && suggestions.length > 0 ? (
-        <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Example questions">
-          {suggestions.map((suggestion) => (
-            <button
-              key={`${suggestion.game}:${suggestion.question}`}
-              type="button"
-              onClick={() => applySuggestion(suggestion)}
-              className="rounded-pill border border-border-subtle px-3 py-1.5 text-sm text-foreground-muted transition-colors hover:border-border-strong hover:text-foreground"
-            >
-              {suggestion.question}
-            </button>
-          ))}
+      <form onSubmit={submit} className="flex flex-col gap-4" aria-busy={pending}>
+        <div className="flex flex-col gap-2">
+          <label htmlFor={questionFieldId} className="text-base font-bold text-foreground">
+            Your question
+          </label>
+          <textarea
+            id={questionFieldId}
+            ref={questionRef}
+            value={question}
+            onChange={(event) => setQuestion(event.target.value)}
+            maxLength={CHAT_LIMITS.questionMaxChars}
+            rows={3}
+            required
+            placeholder="How do I…"
+            className={FIELD_CLASS}
+          />
         </div>
-      ) : null}
-
-      <form onSubmit={submit} className="mt-5 flex flex-col gap-3" aria-busy={pending}>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
-          <div className="flex flex-col gap-1">
-            <label htmlFor={gameFieldId} className="text-sm font-semibold text-foreground-muted">
-              Game (optional)
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
+          <div className="flex flex-col gap-2">
+            <label htmlFor={gameFieldId} className="text-base font-bold text-foreground">
+              Game <span className="font-normal text-foreground-muted">(optional)</span>
             </label>
             <input
               id={gameFieldId}
@@ -278,37 +273,20 @@ export function GameHelpChat({ initialGame = '', suggestions = [], ask = askHelp
               maxLength={CHAT_LIMITS.gameMaxChars}
               autoComplete="off"
               placeholder="Grounded 2"
-              className="rounded-md border border-border-subtle bg-surface-0 px-3 py-2 text-foreground placeholder:text-foreground-muted/70"
+              className={FIELD_CLASS}
             />
           </div>
-          <div className="flex flex-col gap-1">
-            <label htmlFor={questionFieldId} className="text-sm font-semibold text-foreground-muted">
-              Your question
-            </label>
-            <textarea
-              id={questionFieldId}
-              ref={questionRef}
-              value={question}
-              onChange={(event) => setQuestion(event.target.value)}
-              maxLength={CHAT_LIMITS.questionMaxChars}
-              rows={2}
-              required
-              placeholder="How do I…"
-              className="rounded-md border border-border-subtle bg-surface-0 px-3 py-2 text-foreground placeholder:text-foreground-muted/70"
-            />
-          </div>
-        </div>
-        <div className="flex items-center justify-between gap-3">
-          <span className="text-xs text-foreground-muted">AI can be wrong &mdash; check the sources.</span>
           <button
             type="submit"
             disabled={pending || question.trim().length === 0}
-            className="rounded-pill bg-ps-blue-fill px-5 py-2 font-semibold text-foreground shadow-glow-sm transition-colors hover:bg-ps-blue-fill-hover disabled:cursor-not-allowed disabled:opacity-60"
+            className="rounded-pill bg-ps-blue-fill px-7 py-3 text-lg font-bold text-foreground shadow-glow transition-colors hover:bg-ps-blue-fill-hover disabled:cursor-not-allowed disabled:opacity-60 disabled:shadow-none"
           >
             {pending ? 'Asking…' : 'Ask'}
           </button>
         </div>
+        <p className="m-0 text-xs text-foreground-muted">AI can be wrong &mdash; check the sources.</p>
       </form>
+
     </GlassCard>
   );
 }

@@ -28,31 +28,20 @@ function renderChat(props: GameHelpChatProps = {}) {
 }
 
 describe('GameHelpChat', () => {
-  it('renders the labelled form, the empty thread and the starter questions', () => {
-    renderChat({ suggestions: [{ game: 'Grounded 2', question: 'How do I get started in Grounded 2?' }] });
+  it('renders only the labelled form while the thread is empty — no pitch, no starters', () => {
+    renderChat();
 
-    expect(screen.getByRole('log', { name: 'Conversation' })).toBeInTheDocument();
+    expect(screen.getByRole('log', { name: 'Conversation' })).toBeEmptyDOMElement();
     expect(screen.getByLabelText('Game (optional)')).toHaveValue('');
     expect(screen.getByLabelText('Your question')).toHaveValue('');
     expect(screen.getByRole('button', { name: 'Ask' })).toBeDisabled();
-    expect(
-      within(screen.getByRole('group', { name: 'Example questions' })).getByRole('button', {
-        name: 'How do I get started in Grounded 2?',
-      }),
-    ).toBeInTheDocument();
+    expect(screen.queryByText('What are you stuck on?')).toBeNull();
+    expect(screen.getAllByRole('button')).toHaveLength(1);
   });
 
-  it('pre-fills the game and fills the form from a starter question', async () => {
-    const { user } = renderChat({
-      initialGame: 'LEGO Batman',
-      suggestions: [{ game: 'Grounded 2', question: 'How do I get started in Grounded 2?' }],
-    });
+  it('pre-fills the game', () => {
+    renderChat({ initialGame: 'LEGO Batman' });
     expect(screen.getByLabelText('Game (optional)')).toHaveValue('LEGO Batman');
-
-    await user.click(screen.getByRole('button', { name: 'How do I get started in Grounded 2?' }));
-    expect(screen.getByLabelText('Game (optional)')).toHaveValue('Grounded 2');
-    expect(screen.getByLabelText('Your question')).toHaveValue('How do I get started in Grounded 2?');
-    expect(screen.getByLabelText('Your question')).toHaveFocus();
   });
 
   it('sends the question with the game, then renders the answer with badged sources and searches', async () => {
@@ -89,9 +78,9 @@ describe('GameHelpChat', () => {
       'https://www.google.com/search?q=grounded%202%20mantis',
     );
 
-    // The question field clears and keeps focus for a follow-up; the starters are gone.
+    // The question field clears and keeps focus for a follow-up.
     expect(screen.getByLabelText('Your question')).toHaveValue('');
-    expect(screen.queryByRole('group', { name: 'Example questions' })).toBeNull();
+    expect(screen.getByLabelText('Your question')).toHaveFocus();
   });
 
   it('offers one button per answer that reads the answer text only, never the sources', async () => {

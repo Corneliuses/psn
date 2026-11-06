@@ -1,28 +1,19 @@
 import { motion, useReducedMotion } from 'motion/react';
 import { useSearchParams } from 'react-router';
 
-import { companions } from '../companions';
-import { GameHelpChat, type HelpSuggestion } from '../components/GameHelpChat';
+import { GameHelpChat } from '../components/GameHelpChat';
 import { GlassCard } from '../components/GlassCard';
 import { SparkIcon } from '../components/HelpIcons';
 import { glowPulse } from '../motion/presets';
 
 /*
- * Game help: the help desk. A one-line hero with the AI spark, then the chat.
- * The starter questions derive from the companion registry so the games we
- * actually play are one tap away, and `?game=` (set by the "ask about this
+ * Game help: the help desk. A one-line hero with the AI spark, then the chat,
+ * whose form is the point of the page. `?game=` (set by the "ask about this
  * game" link on a companion app) pre-fills the game field.
  */
 
 /** The query parameter a companion app sets to pre-select its game. */
 export const HELP_GAME_PARAM = 'game';
-
-function starterQuestions(): HelpSuggestion[] {
-  return companions.map((companion) => ({
-    game: companion.name,
-    question: `How do I get started in ${companion.name}?`,
-  }));
-}
 
 export function HelpPage() {
   const [params] = useSearchParams();
@@ -50,7 +41,7 @@ export function HelpPage() {
         </div>
       </GlassCard>
 
-      <GameHelpChat {...(game ? { initialGame: game } : {})} suggestions={starterQuestions()} />
+      <GameHelpChat {...(game ? { initialGame: game } : {})} />
     </main>
   );
 }
