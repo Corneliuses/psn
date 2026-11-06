@@ -4,7 +4,7 @@
     "key": "braidan",
     "displayName": "Braidan"
   },
-  "capturedAt": "2026-09-16T15:20:01.208Z",
+  "capturedAt": "2026-11-06T17:48:20.897Z",
   "playedTitles": [
     {
       "titleId": "CUSA00079_00",
@@ -65,23 +65,23 @@
       "titleId": "CUSA01554_00",
       "name": "War of the Monsters™",
       "imageUrl": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA01981_00/1/i_c7e98cf43304b3b2a47131715981275483c69533c5b13cf9ffc1762e6bb352ea/i/icon0.png",
-      "category": "unknown",
+      "category": "ps4_ps2emu_game",
       "playCount": 1,
-      "playDurationIso": "PT56S",
-      "playDurationMinutes": 1,
+      "playDurationIso": "PT6M10S",
+      "playDurationMinutes": 6,
       "firstPlayed": "2025-03-30T22:33:07.900000Z",
-      "lastPlayed": "2025-03-30T22:33:07.900000Z"
+      "lastPlayed": "2026-10-29T22:43:52.020000Z"
     },
     {
       "titleId": "CUSA01967_00",
       "name": "Horizon Zero Dawn™",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0221/vC7trMorHJgbImp8PCQvpI0p.png",
       "category": "ps4_game",
-      "playCount": 24,
-      "playDurationIso": "PT19H1M50S",
-      "playDurationMinutes": 1142,
+      "playCount": 27,
+      "playDurationIso": "PT23H28M24S",
+      "playDurationMinutes": 1408,
       "firstPlayed": "2024-07-26T00:16:29.470000Z",
-      "lastPlayed": "2025-09-21T11:49:39.150000Z"
+      "lastPlayed": "2026-10-29T22:38:30.000000Z"
     },
     {
       "titleId": "CUSA02685_00",
@@ -110,11 +110,11 @@
       "name": "LEGO® Worlds",
       "imageUrl": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA02979_00/3/i_d38f9cbc8fec7c7a46f5905841846f01a194778f5d550a6e6b2a88a3e37adc50/i/icon0.png",
       "category": "ps4_game",
-      "playCount": 115,
-      "playDurationIso": "PT176H12M56S",
-      "playDurationMinutes": 10573,
+      "playCount": 116,
+      "playDurationIso": "PT180H52M7S",
+      "playDurationMinutes": 10852,
       "firstPlayed": "2024-08-29T11:44:21.390000Z",
-      "lastPlayed": "2026-07-10T18:08:01.720000Z"
+      "lastPlayed": "2026-10-17T23:17:23.290000Z"
     },
     {
       "titleId": "CUSA03352_00",
@@ -154,11 +154,11 @@
       "name": "Dead Rising 2",
       "imageUrl": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA04672_00/3/i_d4c92a0e240ed7a8da91ba58d48a6362e835bfed6803b8ae63dd4f1e7d0821a3/i/icon0.png",
       "category": "ps4_game",
-      "playCount": 5,
-      "playDurationIso": "PT2H17M51S",
-      "playDurationMinutes": 138,
+      "playCount": 7,
+      "playDurationIso": "PT2H46M26S",
+      "playDurationMinutes": 166,
       "firstPlayed": "2024-11-22T18:42:04.390000Z",
-      "lastPlayed": "2025-12-13T19:31:55.790000Z"
+      "lastPlayed": "2026-10-29T23:21:42.550000Z"
     },
     {
       "titleId": "CUSA04437_00",
@@ -209,11 +209,11 @@
       "name": "STAR WARS™ Battlefront™ II",
       "imageUrl": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA05749_00/4/i_d1fb05cea9c9978c82fce182d4e79120430b33de101d0652ef91edf150fedb9b/i/icon0_01.png",
       "category": "ps4_game",
-      "playCount": 3,
-      "playDurationIso": "PT1H10M11S",
-      "playDurationMinutes": 70,
+      "playCount": 4,
+      "playDurationIso": "PT1H38M58S",
+      "playDurationMinutes": 99,
       "firstPlayed": "2025-11-14T21:57:45.900000Z",
-      "lastPlayed": "2025-12-13T20:10:04.500000Z"
+      "lastPlayed": "2026-10-19T21:52:10.120000Z"
     },
     {
       "titleId": "CUSA06122_00",
@@ -225,6 +225,17 @@
       "playDurationMinutes": 0,
       "firstPlayed": "2024-06-23T20:11:34.180000Z",
       "lastPlayed": "2024-06-27T11:33:56.820000Z"
+    },
+    {
+      "titleId": "CUSA06548_00",
+      "name": "Cities: Skylines",
+      "imageUrl": "https://image.api.playstation.com/vulcan/img/rnd/202009/3008/XPOfpax0GNLQvr6xgTAJVzB9.png",
+      "category": "unknown",
+      "playCount": 1,
+      "playDurationIso": "PT5M45S",
+      "playDurationMinutes": 6,
+      "firstPlayed": "2026-11-01T11:56:55.900000Z",
+      "lastPlayed": "2026-11-01T11:56:55.900000Z"
     },
     {
       "titleId": "CUSA07739_00",
@@ -286,11 +297,11 @@
       "name": "LEGO® DC Super-Villains",
       "imageUrl": "https://image.api.playstation.com/cdn/UP1018/CUSA11542_00/qkfR8v6usmIEgaceIetxC3tIgM7Zh5vZ.png",
       "category": "ps4_game",
-      "playCount": 218,
+      "playCount": 219,
       "playDurationIso": "PT193H29M58S",
       "playDurationMinutes": 11610,
       "firstPlayed": "2023-10-25T20:12:10.230000Z",
-      "lastPlayed": "2026-05-23T13:14:26.940000Z"
+      "lastPlayed": "2026-09-23T00:07:24.870000Z"
     },
     {
       "titleId": "CUSA11772_00",
@@ -306,7 +317,7 @@
     {
       "titleId": "CUSA12057_00",
       "name": "Fallout 76",
-      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202605/2616/b46faa41cc6ab008be4f7369ad52df51403b012e951346c5.png",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202608/1214/4240708e955c460e92bcaa1f453f1e50567f29fce6636431.png",
       "category": "ps4_game",
       "playCount": 2,
       "playDurationIso": "PT29M58S",
@@ -341,11 +352,11 @@
       "name": "NBA 2K Playgrounds 2",
       "imageUrl": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA13619_00/6/i_39d47c5fc755ad6a933ae11d9deeef0e7b3d5af2c4ebe46e600b588bbb8d008f/i/icon0.png",
       "category": "ps4_game",
-      "playCount": 20,
-      "playDurationIso": "PT13H23M4S",
-      "playDurationMinutes": 803,
+      "playCount": 21,
+      "playDurationIso": "PT13H45M39S",
+      "playDurationMinutes": 826,
       "firstPlayed": "2024-01-19T19:08:20.470000Z",
-      "lastPlayed": "2026-08-09T20:18:18.320000Z"
+      "lastPlayed": "2026-10-17T12:29:13.480000Z"
     },
     {
       "titleId": "CUSA13594_00",
@@ -440,22 +451,22 @@
       "name": "Sackboy: A Big Adventure",
       "imageUrl": "https://image.api.playstation.com/vulcan/img/rnd/202010/1614/TJiBEQMJ9qa93lWBu4sKScY9.png",
       "category": "ps5_native_game",
-      "playCount": 43,
-      "playDurationIso": "PT27H6M32S",
-      "playDurationMinutes": 1627,
+      "playCount": 45,
+      "playDurationIso": "PT29H38M44S",
+      "playDurationMinutes": 1779,
       "firstPlayed": "2026-03-21T15:37:09.430000Z",
-      "lastPlayed": "2026-05-13T20:51:21.280000Z"
+      "lastPlayed": "2026-10-18T13:28:36.430000Z"
     },
     {
       "titleId": "PPSA01325_00",
       "name": "ASTRO's PLAYROOM",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202502/1908/3d17c33239dab88c7e2f24af50140b3f6fa555e6030d5704.png",
       "category": "ps5_native_game",
-      "playCount": 41,
-      "playDurationIso": "PT24H43M13S",
-      "playDurationMinutes": 1483,
+      "playCount": 44,
+      "playDurationIso": "PT26H15M29S",
+      "playDurationMinutes": 1575,
       "firstPlayed": "2024-07-16T13:43:55.760000Z",
-      "lastPlayed": "2026-07-08T12:56:46.220000Z"
+      "lastPlayed": "2026-10-17T12:06:25.860000Z"
     },
     {
       "titleId": "PPSA01411_00",
@@ -524,6 +535,17 @@
       "lastPlayed": "2026-07-17T21:46:23.690000Z"
     },
     {
+      "titleId": "PPSA01650_00",
+      "name": "YouTube",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202009/3017/wYAvR9akyRjDjy75S4zCLAGi.png",
+      "category": "ps5_native_media_app",
+      "playCount": 1,
+      "playDurationIso": "PT1H22M33S",
+      "playDurationMinutes": 83,
+      "firstPlayed": "2026-10-20T20:19:50.250000Z",
+      "lastPlayed": "2026-10-20T21:42:29.050000Z"
+    },
+    {
       "titleId": "PPSA01695_00",
       "name": "Back 4 Blood",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202011/1900/sSZEg1DFAUrfWsA7ltLwpCdu.png",
@@ -550,11 +572,11 @@
       "name": "FAR CRY®6",
       "imageUrl": "https://image.api.playstation.com/vulcan/img/rnd/202106/1514/xqoTYwf0S55ro6fwcIIY1KI4.png",
       "category": "ps5_native_game",
-      "playCount": 41,
-      "playDurationIso": "PT35H57M27S",
-      "playDurationMinutes": 2157,
+      "playCount": 43,
+      "playDurationIso": "PT38H39M14S",
+      "playDurationMinutes": 2319,
       "firstPlayed": "2026-02-28T00:28:03.970000Z",
-      "lastPlayed": "2026-06-26T21:42:32.910000Z"
+      "lastPlayed": "2026-10-10T23:27:27.880000Z"
     },
     {
       "titleId": "PPSA01895_00",
@@ -570,7 +592,7 @@
     {
       "titleId": "PPSA01922_00",
       "name": "Fortnite",
-      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202608/2000/2c7ee56fbf89ace584ee82e74ec198d061a3e035d9f8ee7f.png",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202610/2822/9540e915e26a7168ee5dfc697d8fa756b6a6343b8969d6e5.png",
       "category": "ps5_native_game",
       "playCount": 9,
       "playDurationIso": "PT1H23M50S",
@@ -590,15 +612,26 @@
       "lastPlayed": "2026-06-09T11:32:17.360000Z"
     },
     {
+      "titleId": "PPSA02110_00",
+      "name": "No Man's Sky",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202608/1015/351e97bc1a0a8c44f6a428d70313f9a3a83d8f71300e0314.png",
+      "category": "ps5_native_game",
+      "playCount": 2,
+      "playDurationIso": "PT42M25S",
+      "playDurationMinutes": 42,
+      "firstPlayed": "2026-11-01T13:36:13.480000Z",
+      "lastPlayed": "2026-11-01T14:23:09.120000Z"
+    },
+    {
       "titleId": "PPSA02182_00",
       "name": "Suicide Squad: Kill the Justice League",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202310/1017/927b473e6de3d838b418fddb52f9efb13f19cf4ee8c8dfed.png",
       "category": "ps5_native_game",
-      "playCount": 17,
-      "playDurationIso": "PT13H23M46S",
-      "playDurationMinutes": 804,
+      "playCount": 23,
+      "playDurationIso": "PT17H35M51S",
+      "playDurationMinutes": 1056,
       "firstPlayed": "2026-02-21T05:55:54.420000Z",
-      "lastPlayed": "2026-09-13T14:02:53.210000Z"
+      "lastPlayed": "2026-10-30T21:44:11.130000Z"
     },
     {
       "titleId": "PPSA02223_00",
@@ -616,11 +649,11 @@
       "name": "It Takes Two  PS4™ & PS5™",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202012/0815/0Xqi1LgRoEtJ5zlFprpd54Vu.png",
       "category": "ps5_native_game",
-      "playCount": 18,
-      "playDurationIso": "PT19H1M53S",
-      "playDurationMinutes": 1142,
+      "playCount": 20,
+      "playDurationIso": "PT19H19M16S",
+      "playDurationMinutes": 1159,
       "firstPlayed": "2025-02-01T18:02:10.640000Z",
-      "lastPlayed": "2026-02-01T16:50:36.980000Z"
+      "lastPlayed": "2026-10-17T12:48:11.180000Z"
     },
     {
       "titleId": "PPSA02432_00",
@@ -634,15 +667,26 @@
       "lastPlayed": "2026-05-27T12:24:30.460000Z"
     },
     {
+      "titleId": "PPSA02621_00",
+      "name": "Marvel's Midnight Suns",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202205/2700/HNT7Av8LkRN6M3OiFe0DRq8T.png",
+      "category": "ps5_native_game",
+      "playCount": 2,
+      "playDurationIso": "PT2M",
+      "playDurationMinutes": 2,
+      "firstPlayed": "2026-10-24T20:24:38.770000Z",
+      "lastPlayed": "2026-10-25T14:22:14.900000Z"
+    },
+    {
       "titleId": "PPSA03016_00",
       "name": "Marvel's Spider-Man 2",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/1c7b75d8ed9271516546560d219ad0b22ee0a263b4537bd8.png",
       "category": "ps5_native_game",
-      "playCount": 60,
-      "playDurationIso": "PT80H42M35S",
-      "playDurationMinutes": 4843,
+      "playCount": 67,
+      "playDurationIso": "PT84H18M27S",
+      "playDurationMinutes": 5058,
       "firstPlayed": "2025-12-05T21:40:43.910000Z",
-      "lastPlayed": "2026-08-09T19:35:49.520000Z"
+      "lastPlayed": "2026-11-06T12:33:37.120000Z"
     },
     {
       "titleId": "PPSA03098_00",
@@ -671,11 +715,11 @@
       "name": "Grand Theft Auto V (PlayStation®5)",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
       "category": "ps5_native_game",
-      "playCount": 24,
-      "playDurationIso": "PT33H18M54S",
-      "playDurationMinutes": 1999,
+      "playCount": 26,
+      "playDurationIso": "PT34H29M46S",
+      "playDurationMinutes": 2070,
       "firstPlayed": "2025-12-13T20:45:33.420000Z",
-      "lastPlayed": "2026-07-15T17:21:34.810000Z"
+      "lastPlayed": "2026-10-30T21:01:07.200000Z"
     },
     {
       "titleId": "PPSA03831_00",
@@ -724,13 +768,13 @@
     {
       "titleId": "PPSA04159_00",
       "name": "Goat Simulator 3",
-      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202510/3012/66ffc377ec191e3b0fa870d82c07136c320e9c736c6be443.png",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202204/0413/FSpxZI2qYcriljLKCTnyAvcQ.png",
       "category": "ps5_native_game",
-      "playCount": 78,
-      "playDurationIso": "PT84H16M37S",
-      "playDurationMinutes": 5057,
+      "playCount": 89,
+      "playDurationIso": "PT88H49M30S",
+      "playDurationMinutes": 5330,
       "firstPlayed": "2025-12-13T20:10:07.960000Z",
-      "lastPlayed": "2026-08-01T22:11:17.200000Z"
+      "lastPlayed": "2026-11-06T00:38:58.510000Z"
     },
     {
       "titleId": "PPSA04476_00",
@@ -759,44 +803,44 @@
       "name": "Destroy All Humans! 2 - Reprobed",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202109/0617/DUwFDNC8UEOb1MnuwVppYyhc.png",
       "category": "ps5_native_game",
-      "playCount": 7,
-      "playDurationIso": "PT5H49M11S",
-      "playDurationMinutes": 349,
+      "playCount": 9,
+      "playDurationIso": "PT6H22M30S",
+      "playDurationMinutes": 383,
       "firstPlayed": "2024-10-21T23:19:15.850000Z",
-      "lastPlayed": "2026-06-06T12:35:10.970000Z"
+      "lastPlayed": "2026-10-24T20:22:31.570000Z"
     },
     {
       "titleId": "PPSA05825_00",
       "name": "Disney Dreamlight Valley",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202204/0521/AE2i8UIeHoeCre6lo47PnnfL.png",
       "category": "ps5_native_game",
-      "playCount": 76,
-      "playDurationIso": "PT54H28M34S",
-      "playDurationMinutes": 3269,
+      "playCount": 80,
+      "playDurationIso": "PT55H3M7S",
+      "playDurationMinutes": 3303,
       "firstPlayed": "2024-11-10T13:38:46.390000Z",
-      "lastPlayed": "2026-04-28T14:34:03.340000Z"
+      "lastPlayed": "2026-11-01T12:19:56.940000Z"
     },
     {
       "titleId": "PPSA06081_00",
       "name": "Totally Accurate Battle Simulator",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202308/1512/a800dc5a941af33b5f7b7371f907a0fe26f3c435e4c20f60.png",
       "category": "ps5_native_game",
-      "playCount": 10,
-      "playDurationIso": "PT4H44M26S",
-      "playDurationMinutes": 284,
+      "playCount": 11,
+      "playDurationIso": "PT5H28M54S",
+      "playDurationMinutes": 329,
       "firstPlayed": "2025-11-14T21:19:10.770000Z",
-      "lastPlayed": "2026-02-20T18:09:44.460000Z"
+      "lastPlayed": "2026-10-11T22:57:15.560000Z"
     },
     {
       "titleId": "PPSA06141_00",
       "name": "Super Mega Baseball™ 4",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202305/0217/2761cb4315be4cdb8354521f9b4efa639830642585aa5394.png",
       "category": "ps5_native_game",
-      "playCount": 1,
-      "playDurationIso": "PT24M41S",
-      "playDurationMinutes": 25,
+      "playCount": 2,
+      "playDurationIso": "PT1H19M8S",
+      "playDurationMinutes": 79,
       "firstPlayed": "2026-08-09T19:52:04.770000Z",
-      "lastPlayed": "2026-08-09T20:17:21.040000Z"
+      "lastPlayed": "2026-11-02T20:24:52.160000Z"
     },
     {
       "titleId": "PPSA06319_00",
@@ -869,11 +913,11 @@
       "name": "Peacock",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0921/Nn90v8S8kxiVWcgukIqbNnKE.png",
       "category": "ps5_native_media_app",
-      "playCount": 9,
-      "playDurationIso": "PT3H22M49S",
-      "playDurationMinutes": 203,
+      "playCount": 10,
+      "playDurationIso": "PT3H24M9S",
+      "playDurationMinutes": 204,
       "firstPlayed": "2024-02-02T18:42:47.750000Z",
-      "lastPlayed": "2026-08-27T04:33:16.770000Z"
+      "lastPlayed": "2026-09-25T23:42:52.850000Z"
     },
     {
       "titleId": "PPSA08244_00",
@@ -957,11 +1001,11 @@
       "name": "skate.™",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202604/2122/41d5a3beff5a2b0b9ac56b9b23869dad7821df71a60f4b02.png",
       "category": "ps5_native_game",
-      "playCount": 9,
-      "playDurationIso": "PT3H12M13S",
-      "playDurationMinutes": 192,
+      "playCount": 12,
+      "playDurationIso": "PT3H30M18S",
+      "playDurationMinutes": 210,
       "firstPlayed": "2025-10-18T13:22:25.830000Z",
-      "lastPlayed": "2026-02-18T15:32:02.130000Z"
+      "lastPlayed": "2026-10-17T11:29:55.760000Z"
     },
     {
       "titleId": "PPSA13624_00",
@@ -995,6 +1039,17 @@
       "playDurationMinutes": 35,
       "firstPlayed": "2026-06-07T13:07:55.360000Z",
       "lastPlayed": "2026-06-07T13:43:33.560000Z"
+    },
+    {
+      "titleId": "PPSA14390_00",
+      "name": "Herc's Adventures",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202305/1214/656d11f149b6ab11bd3edbc8141c93a5487af7b40f930da7.png",
+      "category": "ps5_native_game",
+      "playCount": 1,
+      "playDurationIso": "PT4M59S",
+      "playDurationMinutes": 5,
+      "firstPlayed": "2026-11-01T12:03:29.310000Z",
+      "lastPlayed": "2026-11-01T12:09:07.310000Z"
     },
     {
       "titleId": "PPSA14510_00",
@@ -1056,11 +1111,11 @@
       "name": "Grounded PS4® & PS5®",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202404/1120/64a12b89992b8e34ecace3e5c7d1d39b954c2ab1d73de70a.png",
       "category": "ps5_native_game",
-      "playCount": 246,
-      "playDurationIso": "PT271H48M40S",
-      "playDurationMinutes": 16309,
+      "playCount": 248,
+      "playDurationIso": "PT273H9M35S",
+      "playDurationMinutes": 16390,
       "firstPlayed": "2024-12-02T21:55:32.790000Z",
-      "lastPlayed": "2026-08-11T14:54:26.570000Z"
+      "lastPlayed": "2026-10-11T23:18:30.640000Z"
     },
     {
       "titleId": "PPSA15656_00",
@@ -1085,15 +1140,37 @@
       "lastPlayed": "2025-08-17T12:13:32.820000Z"
     },
     {
+      "titleId": "PPSA16645_00",
+      "name": "7 Days to Die - Console Edition",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202406/1216/9023747aeb28e119f8a8fe3272a67ae5f5e19ba0f658aacd.png",
+      "category": "ps5_native_game",
+      "playCount": 4,
+      "playDurationIso": "PT3H23M38S",
+      "playDurationMinutes": 204,
+      "firstPlayed": "2026-11-01T14:23:12.390000Z",
+      "lastPlayed": "2026-11-06T01:04:27.430000Z"
+    },
+    {
       "titleId": "PPSA16833_00",
       "name": "LEGO® Batman™: Legacy of the Dark Knight",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202508/1316/3302f35b66691aa405aee31624c0c95fe73081be8e0c75bb.png",
       "category": "ps5_native_game",
-      "playCount": 16,
-      "playDurationIso": "PT45H22M57S",
-      "playDurationMinutes": 2723,
+      "playCount": 24,
+      "playDurationIso": "PT48H18M29S",
+      "playDurationMinutes": 2898,
       "firstPlayed": "2026-05-19T16:29:25.170000Z",
-      "lastPlayed": "2026-08-18T11:51:40.870000Z"
+      "lastPlayed": "2026-09-27T14:29:14.790000Z"
+    },
+    {
+      "titleId": "PPSA17597_00",
+      "name": "SONIC X SHADOW GENERATIONS",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202405/2308/1efd5c197776d8dd5d5c79261559cd5947b0d52fc23e1174.png",
+      "category": "ps5_native_game",
+      "playCount": 1,
+      "playDurationIso": "PT22M59S",
+      "playDurationMinutes": 23,
+      "firstPlayed": "2026-11-01T12:50:29.700000Z",
+      "lastPlayed": "2026-11-01T13:13:41.310000Z"
     },
     {
       "titleId": "PPSA18571_00",
@@ -1116,6 +1193,17 @@
       "playDurationMinutes": 3,
       "firstPlayed": "2026-01-23T01:15:13.980000Z",
       "lastPlayed": "2026-01-24T13:02:55.620000Z"
+    },
+    {
+      "titleId": "PPSA19769_00",
+      "name": "Two Point Museum",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202407/3014/0494ed5040dbb383906f4bab12de9411722c247d769c1f05.png",
+      "category": "ps5_native_game",
+      "playCount": 2,
+      "playDurationIso": "PT43M54S",
+      "playDurationMinutes": 44,
+      "firstPlayed": "2026-10-04T14:43:20.520000Z",
+      "lastPlayed": "2026-10-04T15:28:25.710000Z"
     },
     {
       "titleId": "PPSA20082_00",
@@ -1166,11 +1254,11 @@
       "name": "Hulu",
       "imageUrl": "https://image.api.playstation.com/vulcan/img/rnd/202104/2623/3GyYgM4Z7gabdvndnmPtDWit.png",
       "category": "ps5_native_media_app",
-      "playCount": 8,
-      "playDurationIso": "PT6H46M44S",
-      "playDurationMinutes": 407,
+      "playCount": 9,
+      "playDurationIso": "PT7H54M39S",
+      "playDurationMinutes": 475,
       "firstPlayed": "2024-07-21T21:51:24.210000Z",
-      "lastPlayed": "2026-08-27T04:44:58.130000Z"
+      "lastPlayed": "2026-09-28T15:59:17.500000Z"
     },
     {
       "titleId": "PPSA23732_00",
@@ -1210,11 +1298,11 @@
       "name": "Teenage Mutant Ninja Turtles: Splintered Fate",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202503/2710/186446d71dc0ccef78047fc246eda3abd6033d93462508af.png",
       "category": "ps5_native_game",
-      "playCount": 1,
-      "playDurationIso": "PT7M54S",
-      "playDurationMinutes": 8,
+      "playCount": 2,
+      "playDurationIso": "PT14M50S",
+      "playDurationMinutes": 15,
       "firstPlayed": "2026-07-10T13:53:44.090000Z",
-      "lastPlayed": "2026-07-10T14:02:19.900000Z"
+      "lastPlayed": "2026-11-01T16:11:08.990000Z"
     },
     {
       "titleId": "PPSA26858_00",
@@ -1272,6 +1360,17 @@
       "lastPlayed": "2026-08-15T15:10:05.740000Z"
     },
     {
+      "titleId": "PPSA29413_00",
+      "name": "Wobbly Life",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202212/0810/iCrnQDLqgGBSnHkTFbOzQX2Q.png",
+      "category": "ps5_native_game",
+      "playCount": 2,
+      "playDurationIso": "PT35M2S",
+      "playDurationMinutes": 35,
+      "firstPlayed": "2026-09-19T20:27:14.540000Z",
+      "lastPlayed": "2026-09-30T11:45:47.280000Z"
+    },
+    {
       "titleId": "PPSA29629_00",
       "name": "MARVEL Cosmic Invasion",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202510/2212/542f13adf581e38321a86470764dbc0ac1b157ed80e1f8b5.png",
@@ -1298,11 +1397,22 @@
       "name": "Grounded 2",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/0316/a79dd27918cc2856b6f459dec2857548cfea7db7a85af544.png",
       "category": "ps5_native_game",
-      "playCount": 66,
-      "playDurationIso": "PT89H14M21S",
-      "playDurationMinutes": 5354,
+      "playCount": 163,
+      "playDurationIso": "PT194H19M41S",
+      "playDurationMinutes": 11660,
       "firstPlayed": "2026-08-11T17:12:03.260000Z",
-      "lastPlayed": "2026-09-16T11:33:55.760000Z"
+      "lastPlayed": "2026-11-05T22:47:00.480000Z"
+    },
+    {
+      "titleId": "PPSA35101_00",
+      "name": "MARVEL MaXimum Collection",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202603/1116/38196ce2c3e6a23610a635c1595986b262d88388333051b2.png",
+      "category": "ps5_native_game",
+      "playCount": 1,
+      "playDurationIso": "PT26M36S",
+      "playDurationMinutes": 27,
+      "firstPlayed": "2026-11-01T16:11:11.150000Z",
+      "lastPlayed": "2026-11-02T19:30:10.980000Z"
     }
   ],
   "trophyTitles": [
@@ -1714,15 +1824,37 @@
         "platinum": 1
       },
       "earned": {
-        "bronze": 9,
+        "bronze": 10,
         "silver": 0,
         "gold": 0,
         "platinum": 0
       },
-      "earnedTotal": 9,
-      "progress": 9,
+      "earnedTotal": 10,
+      "progress": 10,
       "hasPlatinum": false,
-      "lastTrophyAt": "2025-05-15T21:03:17Z"
+      "lastTrophyAt": "2026-10-25T15:57:17Z"
+    },
+    {
+      "npCommunicationId": "NPWR11875_00",
+      "name": "Cities: Skylines",
+      "platform": "PS4",
+      "iconUrl": "https://image.api.playstation.com/trophy/np/NPWR11875_00_006D9C5DE382A112E03F00C0BA21C35930C86EC8BB/E6509DC0F6B2528898C9CD48FCCD805FBCF3A0F5.PNG",
+      "defined": {
+        "bronze": 80,
+        "silver": 38,
+        "gold": 9,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 0,
+        "silver": 0,
+        "gold": 0,
+        "platinum": 0
+      },
+      "earnedTotal": 0,
+      "progress": 0,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-11-01T12:02:45Z"
     },
     {
       "npCommunicationId": "NPWR13374_00",
@@ -2052,7 +2184,7 @@
       "earnedTotal": 17,
       "progress": 25,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-05-11T23:34:48Z"
+      "lastTrophyAt": "2026-10-18T13:25:53Z"
     },
     {
       "npCommunicationId": "NPWR20188_00",
@@ -2075,6 +2207,28 @@
       "progress": 34,
       "hasPlatinum": false,
       "lastTrophyAt": "2026-07-08T12:55:57Z"
+    },
+    {
+      "npCommunicationId": "NPWR20654_00",
+      "name": "No Man's Sky Trophies",
+      "platform": "PS5",
+      "iconUrl": "https://psnobj.prod.dl.playstation.net/psnobj/NPWR20654_00/3d725880-fd7a-42bc-9fdb-a0021f594c5e.png",
+      "defined": {
+        "bronze": 10,
+        "silver": 9,
+        "gold": 8,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 2,
+        "silver": 0,
+        "gold": 0,
+        "platinum": 0
+      },
+      "earnedTotal": 2,
+      "progress": 2,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-11-01T14:08:21Z"
     },
     {
       "npCommunicationId": "NPWR20684_00",
@@ -2220,15 +2374,15 @@
         "platinum": 1
       },
       "earned": {
-        "bronze": 3,
+        "bronze": 4,
         "silver": 0,
         "gold": 0,
         "platinum": 0
       },
-      "earnedTotal": 3,
-      "progress": 2,
+      "earnedTotal": 4,
+      "progress": 3,
       "hasPlatinum": false,
-      "lastTrophyAt": "2025-12-20T01:19:53Z"
+      "lastTrophyAt": "2026-10-10T21:56:43Z"
     },
     {
       "npCommunicationId": "NPWR21757_00",
@@ -2330,15 +2484,15 @@
         "platinum": 1
       },
       "earned": {
-        "bronze": 10,
-        "silver": 0,
+        "bronze": 11,
+        "silver": 1,
         "gold": 0,
         "platinum": 0
       },
-      "earnedTotal": 10,
-      "progress": 8,
+      "earnedTotal": 12,
+      "progress": 10,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-05-14T21:43:40Z"
+      "lastTrophyAt": "2026-10-10T23:14:38Z"
     },
     {
       "npCommunicationId": "NPWR22459_00",
@@ -2429,6 +2583,28 @@
       "lastTrophyAt": "2025-11-21T22:10:28Z"
     },
     {
+      "npCommunicationId": "NPWR22798_00",
+      "name": "Marvel's Midnight Suns",
+      "platform": "PS5",
+      "iconUrl": "https://psnobj.prod.dl.playstation.net/psnobj/NPWR22798_00/e342fc75-3e8f-4715-b40a-f41bd37f5c84.png",
+      "defined": {
+        "bronze": 54,
+        "silver": 13,
+        "gold": 4,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 0,
+        "silver": 0,
+        "gold": 0,
+        "platinum": 0
+      },
+      "earnedTotal": 0,
+      "progress": 0,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-10-24T20:24:41Z"
+    },
+    {
       "npCommunicationId": "NPWR23378_00",
       "name": "Marvel's Spider-Man 2",
       "platform": "PS5,PSPC",
@@ -2441,14 +2617,14 @@
       },
       "earned": {
         "bronze": 9,
-        "silver": 9,
+        "silver": 12,
         "gold": 1,
         "platinum": 0
       },
-      "earnedTotal": 19,
-      "progress": 47,
+      "earnedTotal": 22,
+      "progress": 55,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-08-09T17:26:03Z"
+      "lastTrophyAt": "2026-10-31T12:53:58Z"
     },
     {
       "npCommunicationId": "NPWR23684_00",
@@ -2661,14 +2837,14 @@
       },
       "earned": {
         "bronze": 9,
-        "silver": 1,
+        "silver": 4,
         "gold": 0,
         "platinum": 0
       },
-      "earnedTotal": 10,
-      "progress": 15,
+      "earnedTotal": 13,
+      "progress": 24,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-08-30T20:25:01Z"
+      "lastTrophyAt": "2026-10-30T21:29:40Z"
     },
     {
       "npCommunicationId": "NPWR25716_00",
@@ -2682,15 +2858,15 @@
         "platinum": 1
       },
       "earned": {
-        "bronze": 19,
+        "bronze": 20,
         "silver": 2,
         "gold": 2,
         "platinum": 0
       },
-      "earnedTotal": 23,
-      "progress": 39,
+      "earnedTotal": 24,
+      "progress": 40,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-06-25T11:57:35Z"
+      "lastTrophyAt": "2026-11-03T15:11:38Z"
     },
     {
       "npCommunicationId": "NPWR27252_00",
@@ -2716,7 +2892,7 @@
     },
     {
       "npCommunicationId": "NPWR27454_00",
-      "name": "Destroy All Humans! 2",
+      "name": "Destroy All Humans! 2 - Reprobed",
       "platform": "PS5",
       "iconUrl": "https://psnobj.prod.dl.playstation.net/psnobj/NPWR27454_00/f005ec69-0512-4d92-a249-5980328b6f8e.png",
       "defined": {
@@ -2749,14 +2925,14 @@
       },
       "earned": {
         "bronze": 2,
-        "silver": 0,
+        "silver": 1,
         "gold": 0,
         "platinum": 0
       },
-      "earnedTotal": 2,
-      "progress": 2,
+      "earnedTotal": 3,
+      "progress": 5,
       "hasPlatinum": false,
-      "lastTrophyAt": "2025-12-07T14:23:43Z"
+      "lastTrophyAt": "2026-10-11T22:54:52Z"
     },
     {
       "npCommunicationId": "NPWR28196_00",
@@ -3034,15 +3210,15 @@
         "platinum": 1
       },
       "earned": {
-        "bronze": 0,
+        "bronze": 1,
         "silver": 0,
         "gold": 0,
         "platinum": 0
       },
-      "earnedTotal": 0,
-      "progress": 0,
+      "earnedTotal": 1,
+      "progress": 1,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-08-09T19:52:19Z"
+      "lastTrophyAt": "2026-11-02T20:17:57Z"
     },
     {
       "npCommunicationId": "NPWR34031_00",
@@ -3153,6 +3329,28 @@
       "progress": 0,
       "hasPlatinum": false,
       "lastTrophyAt": "2026-06-07T13:07:56Z"
+    },
+    {
+      "npCommunicationId": "NPWR36593_00",
+      "name": "Herc's Adventures",
+      "platform": "PS5",
+      "iconUrl": "https://psnobj.prod.dl.playstation.net/psnobj/NPWR36593_00/50f00f5c-53fb-4a64-88af-44f8de9ec112.png",
+      "defined": {
+        "bronze": 16,
+        "silver": 15,
+        "gold": 4,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 0,
+        "silver": 0,
+        "gold": 0,
+        "platinum": 0
+      },
+      "earnedTotal": 0,
+      "progress": 0,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-11-01T12:03:30Z"
     },
     {
       "npCommunicationId": "NPWR36847_00",
@@ -3331,6 +3529,28 @@
       "lastTrophyAt": "2025-08-11T14:37:08Z"
     },
     {
+      "npCommunicationId": "NPWR38273_00",
+      "name": "7 Days to Die",
+      "platform": "PS5",
+      "iconUrl": "https://psnobj.prod.dl.playstation.net/psnobj/NPWR38273_00/e6d3c66b-6ebf-496e-aaa6-f74c22b3e5d8.png",
+      "defined": {
+        "bronze": 31,
+        "silver": 9,
+        "gold": 3,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 6,
+        "silver": 0,
+        "gold": 0,
+        "platinum": 0
+      },
+      "earnedTotal": 6,
+      "progress": 8,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-11-06T01:02:03Z"
+    },
+    {
       "npCommunicationId": "NPWR38640_00",
       "name": "Grounded",
       "platform": "PS5",
@@ -3351,6 +3571,28 @@
       "progress": 74,
       "hasPlatinum": false,
       "lastTrophyAt": "2025-06-23T13:47:30Z"
+    },
+    {
+      "npCommunicationId": "NPWR39259_00",
+      "name": "SONIC X SHADOW GENERATIONS",
+      "platform": "PS5",
+      "iconUrl": "https://psnobj.prod.dl.playstation.net/psnobj/NPWR39259_00/7742345e-e86f-44ed-99b0-83b4dc869ffb.png",
+      "defined": {
+        "bronze": 26,
+        "silver": 10,
+        "gold": 4,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 1,
+        "silver": 0,
+        "gold": 0,
+        "platinum": 0
+      },
+      "earnedTotal": 1,
+      "progress": 1,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-11-01T13:10:39Z"
     },
     {
       "npCommunicationId": "NPWR40086_00",
@@ -3439,6 +3681,28 @@
       "progress": 0,
       "hasPlatinum": false,
       "lastTrophyAt": "2025-09-19T20:53:34Z"
+    },
+    {
+      "npCommunicationId": "NPWR41401_00",
+      "name": "Two Point Museum",
+      "platform": "PS5",
+      "iconUrl": "https://psnobj.prod.dl.playstation.net/psnobj/NPWR41401_00/e3c64313-3543-4116-8134-f89620be6a2f.png",
+      "defined": {
+        "bronze": 33,
+        "silver": 11,
+        "gold": 10,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 0,
+        "silver": 0,
+        "gold": 0,
+        "platinum": 0
+      },
+      "earnedTotal": 0,
+      "progress": 0,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-10-04T15:18:05Z"
     },
     {
       "npCommunicationId": "NPWR44317_00",
@@ -3534,21 +3798,21 @@
       "platform": "PS5",
       "iconUrl": "https://psnobj.prod.dl.playstation.net/psnobj/NPWR46362_00/0eae9c21-b96e-4e78-802c-fc00e644608c.png",
       "defined": {
-        "bronze": 44,
-        "silver": 4,
+        "bronze": 55,
+        "silver": 5,
         "gold": 3,
         "platinum": 1
       },
       "earned": {
-        "bronze": 30,
+        "bronze": 33,
         "silver": 0,
         "gold": 1,
         "platinum": 0
       },
-      "earnedTotal": 31,
-      "progress": 51,
+      "earnedTotal": 34,
+      "progress": 46,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-08-18T11:45:01Z"
+      "lastTrophyAt": "2026-09-27T13:40:43Z"
     },
     {
       "npCommunicationId": "NPWR47980_00",
@@ -3683,6 +3947,28 @@
       "lastTrophyAt": "2026-08-15T15:09:41Z"
     },
     {
+      "npCommunicationId": "NPWR51159_00",
+      "name": "Wobbly Life",
+      "platform": "PS5",
+      "iconUrl": "https://psnobj.prod.dl.playstation.net/psnobj/NPWR51159_00/330d7489-7670-4bc4-bfaf-ae716081e74c.png",
+      "defined": {
+        "bronze": 57,
+        "silver": 7,
+        "gold": 4,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 1,
+        "silver": 0,
+        "gold": 0,
+        "platinum": 0
+      },
+      "earnedTotal": 1,
+      "progress": 1,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-09-19T20:32:08Z"
+    },
+    {
       "npCommunicationId": "NPWR52060_00",
       "name": "Marvel: Cosmic Invasion",
       "platform": "PS5",
@@ -3747,6 +4033,28 @@
       "progress": 0,
       "hasPlatinum": false,
       "lastTrophyAt": "2026-06-06T04:05:28Z"
+    },
+    {
+      "npCommunicationId": "NPWR58198_00",
+      "name": "MARVEL MaXimum Collection",
+      "platform": "PS5",
+      "iconUrl": "https://psnobj.prod.dl.playstation.net/psnobj/NPWR58198_00/5711331f-d0f6-48d2-92fb-5606d9459c88.png",
+      "defined": {
+        "bronze": 38,
+        "silver": 10,
+        "gold": 2,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 0,
+        "silver": 0,
+        "gold": 0,
+        "platinum": 0
+      },
+      "earnedTotal": 0,
+      "progress": 0,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-11-01T16:11:14Z"
     }
   ]
 }
