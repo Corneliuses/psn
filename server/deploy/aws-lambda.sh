@@ -165,9 +165,15 @@ if ! aws lambda get-function-url-config --function-name "$FUNCTION_NAME" >/dev/n
   log "Creating function URL"
   aws lambda create-function-url-config --function-name "$FUNCTION_NAME" --auth-type NONE >/dev/null
 fi
+# Public invocation needs two statements: since October 2025 a function URL
+# requires lambda:InvokeFunction (scoped to URL calls) as well as
+# lambda:InvokeFunctionUrl, or every request gets 403. Both are no-ops once added.
 aws lambda add-permission --function-name "$FUNCTION_NAME" \
   --statement-id FunctionURLAllowPublicAccess --action lambda:InvokeFunctionUrl \
   --principal '*' --function-url-auth-type NONE >/dev/null 2>&1 || true
+aws lambda add-permission --function-name "$FUNCTION_NAME" \
+  --statement-id FunctionURLInvokeAllowPublicAccess --action lambda:InvokeFunction \
+  --principal '*' --invoked-via-function-url >/dev/null 2>&1 || true
 
 FUNCTION_URL="$(aws lambda get-function-url-config --function-name "$FUNCTION_NAME" --query FunctionUrl --output text)"
 FUNCTION_URL="${FUNCTION_URL%/}"
