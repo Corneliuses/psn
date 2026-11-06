@@ -1,13 +1,15 @@
 import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { GuideIcon, PlayIcon, SparkIcon } from './HelpIcons';
+import { GuideIcon, PlayIcon, SparkIcon, SpeakerIcon, StopIcon } from './HelpIcons';
 
 describe('HelpIcons', () => {
   it.each([
     ['SparkIcon', SparkIcon],
     ['GuideIcon', GuideIcon],
     ['PlayIcon', PlayIcon],
+    ['SpeakerIcon', SpeakerIcon],
+    ['StopIcon', StopIcon],
   ])('%s renders a decorative, unfocusable SVG that takes a class', (_name, Icon) => {
     const { container } = render(<Icon className="h-4 w-4 text-ps-blue-text" />);
     const svg = container.querySelector('svg');
