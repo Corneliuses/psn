@@ -21,21 +21,15 @@ import { ReadAloudButton } from './ReadAloudButton';
  * button that has the browser speak the answer text — and only the answer,
  * never the sources or searches.
  *
- * The form is the focus of the screen: it comes first while the thread is
- * empty (the page hero already says what the help desk is for, so there is
- * no second pitch here), with the starter questions beneath it as a nudge.
- * Once there are messages the thread sits above the form.
+ * The form is the focus of the screen: it is all the card holds while the
+ * thread is empty (the page hero already says what the help desk is for, so
+ * there is no second pitch here). Once there are messages the thread sits
+ * above the form.
  *
  * The thread is a `role="log"` live region so screen readers hear new answers;
  * each message enters with the shared `fadeRise` preset, which Motion resolves
  * to its static end state under reduced motion.
  */
-
-export interface HelpSuggestion {
-  /** The game to pre-select when tapped. */
-  game: string;
-  question: string;
-}
 
 type MessageBody =
   | { role: 'user'; text: string }
@@ -47,8 +41,6 @@ type Message = MessageBody & { id: number };
 export interface GameHelpChatProps {
   /** Pre-fills the game field, e.g. when arriving from a companion app. */
   initialGame?: string;
-  /** Starter questions shown while the thread is empty. */
-  suggestions?: HelpSuggestion[];
   /** The API call; injectable for tests. */
   ask?: typeof askHelpDesk;
   /** The read-aloud engine; injectable for tests. Omit for the browser's own. */
@@ -167,7 +159,7 @@ function AssistantMessage({ response, speech }: { response: ChatResponse; speech
   );
 }
 
-export function GameHelpChat({ initialGame = '', suggestions = [], ask = askHelpDesk, speech }: GameHelpChatProps) {
+export function GameHelpChat({ initialGame = '', ask = askHelpDesk, speech }: GameHelpChatProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [game, setGame] = useState(initialGame);
   const [question, setQuestion] = useState('');
@@ -206,12 +198,6 @@ export function GameHelpChat({ initialGame = '', suggestions = [], ask = askHelp
       setPending(false);
       questionRef.current?.focus();
     }
-  }
-
-  function applySuggestion(suggestion: HelpSuggestion): void {
-    setGame(suggestion.game);
-    setQuestion(suggestion.question);
-    questionRef.current?.focus();
   }
 
   return (
@@ -301,23 +287,6 @@ export function GameHelpChat({ initialGame = '', suggestions = [], ask = askHelp
         <p className="m-0 text-xs text-foreground-muted">AI can be wrong &mdash; check the sources.</p>
       </form>
 
-      {!hasThread && suggestions.length > 0 ? (
-        <div className="mt-5 border-t border-border-subtle pt-4" role="group" aria-label="Example questions">
-          <p className="m-0 mb-2 text-xs font-semibold uppercase tracking-wide text-foreground-muted">Or try one of these</p>
-          <div className="flex flex-wrap gap-2">
-            {suggestions.map((suggestion) => (
-              <button
-                key={`${suggestion.game}:${suggestion.question}`}
-                type="button"
-                onClick={() => applySuggestion(suggestion)}
-                className="rounded-pill border border-border-subtle px-3 py-1.5 text-sm text-foreground-muted transition-colors hover:border-border-strong hover:text-foreground"
-              >
-                {suggestion.question}
-              </button>
-            ))}
-          </div>
-        </div>
-      ) : null}
     </GlassCard>
   );
 }
