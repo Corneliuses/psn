@@ -39,9 +39,25 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      # The same gate as CI's verify job, in the same order, so nothing reaches
+      # AWS unless it also lints and typechecks — a push to main that slipped
+      # past a missing branch-protection rule fails here, not in production.
+      - run: pnpm --filter chat-server lint
+
+      - run: pnpm --filter chat-server typecheck
+
       - run: pnpm --filter chat-server test
 
       - run: pnpm --filter chat-server build
+
+      # Fail with a readable reason before touching AWS when the repository
+      # variables the rollout needs are not set (the action otherwise dies with
+      # "Input required and not supplied: aws-region").
+      - name: Check deploy configuration
+        if: ${{ vars.AWS_REGION == '' }}
+        run: |
+          echo "::error::The AWS_REGION repository variable is not set. Add it at Settings → Secrets and variables → Actions → Variables (see the README's Deploying section)."
+          exit 1
 
       - uses: aws-actions/configure-aws-credentials@v4
         with:
