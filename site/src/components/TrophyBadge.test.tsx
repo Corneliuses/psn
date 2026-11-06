@@ -19,6 +19,12 @@ describe('TrophyBadge', () => {
     expect(screen.getByText('42')).toBeInTheDocument();
   });
 
+  it('groups thousands in the visible count', () => {
+    render(<TrophyBadge tier="bronze" count={2875} />);
+    expect(screen.getByText('2,875')).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: '2875 bronze trophies' })).toBeInTheDocument();
+  });
+
   it('colors the marker with the matching trophy-metal token per tier', () => {
     const cases: Array<[TrophyTier, string]> = [
       ['bronze', 'text-trophy-bronze'],

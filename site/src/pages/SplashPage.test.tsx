@@ -1,9 +1,22 @@
 import { render, screen, within } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { sampleSnapshot } from 'psn';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { MemoryRouter } from 'react-router';
 
 import { players } from '../config/players';
+import { snapshotByKey } from '../data';
 import { SplashPage } from './SplashPage';
+
+vi.mock('../data');
+const snapshotByKeyMock = vi.mocked(snapshotByKey);
+
+// Dad and Braidan have synced snapshots; Nadia has none yet, so her portal
+// renders without numbers — both branches of the portal card on one page.
+beforeEach(() => {
+  snapshotByKeyMock.mockImplementation((key) =>
+    key === 'nadia' ? undefined : sampleSnapshot(key, key === 'dad' ? 'Dad' : 'Braidan'),
+  );
+});
 
 // Pin a three-player family roster so the list formatting, three-card grid, and
 // face-off CTA are exercised independently of what psn.config.json holds today.
@@ -44,7 +57,7 @@ describe('SplashPage', () => {
   it('renders the hero illustration with an accessible name', () => {
     renderSplash();
 
-    expect(screen.getByRole('img')).toHaveAccessibleName(/controller/i);
+    expect(screen.getByRole('img', { name: /controller/i })).toBeInTheDocument();
   });
 
   it('renders a level-1 heading naming every configured player', () => {
@@ -70,6 +83,26 @@ describe('SplashPage', () => {
 
     const portalList = screen.getAllByRole('list')[0]!;
     expect(within(portalList).getAllByRole('listitem')).toHaveLength(3);
+  });
+
+  it('shows each synced player’s trophy tiers on their portal and a no-stats line otherwise', () => {
+    renderSplash();
+
+    const dad = screen.getByRole('link', { name: /Dad/ });
+    expect(within(dad).getAllByRole('img', { name: /troph/ })).toHaveLength(4);
+
+    const nadia = screen.getByRole('link', { name: /Nadia/ });
+    expect(within(nadia).getByText('No stats synced yet')).toBeInTheDocument();
+    expect(within(nadia).queryByRole('img')).not.toBeInTheDocument();
+  });
+
+  it('leads with the big help-desk call to action linking to /help', () => {
+    renderSplash();
+
+    const help = screen.getByRole('link', { name: 'Get help with your game' });
+    expect(help).toHaveAttribute('href', '/help');
+    // It is the first link on the page.
+    expect(screen.getAllByRole('link')[0]).toBe(help);
   });
 
   it('names every player in the face-off CTA while keeping its accessible name "Compare"', () => {

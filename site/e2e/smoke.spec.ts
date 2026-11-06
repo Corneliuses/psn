@@ -81,6 +81,33 @@ for (const key of playerKeys) {
 }
 
 /**
+ * The splash page (/): the help-desk call to action up top, then one portal
+ * per configured player carrying their trophy-tier counts. Clicking the CTA lands
+ * on the help desk.
+ */
+test('the splash page leads with the help CTA and a stats portal per player', async ({ page }) => {
+  const errors = collectErrors(page);
+  await page.goto('/', { waitUntil: 'networkidle' });
+
+  // Scoped to <main>: the header nav also has a link per player.
+  const main = page.getByRole('main');
+  for (const player of psnConfig.players) {
+    const portal = main.getByRole('link', { name: new RegExp(escapeRegExp(player.displayName)) });
+    await expect(portal).toBeVisible();
+    // A synced snapshot shows the four trophy-tier badges.
+    await expect(portal.getByRole('img', { name: /platinum troph/ })).toBeVisible();
+  }
+
+  const help = page.getByRole('link', { name: 'Get help with your game' });
+  await expect(help).toBeVisible();
+  await help.click();
+  await expect(page).toHaveURL(/\/help$/);
+  await expect(page.getByRole('heading', { level: 1, name: 'Game help' })).toBeVisible();
+
+  expect(errors, 'unexpected browser errors on /').toEqual([]);
+});
+
+/**
  * The companion apps (/together). Driven here rather than only in jsdom because
  * the map is a percentage-positioned layer over an SVG backdrop — real layout,
  * real hit-testing. Titles come from the companion registry, so this tracks

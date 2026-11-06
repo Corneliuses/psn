@@ -14,6 +14,9 @@ const TIER_COLOR: Record<TrophyTier, string> = {
   platinum: 'text-trophy-platinum',
 };
 
+/** Visible count with a thousands separator, e.g. 2875 → "2,875". */
+const COUNT_FORMAT = new Intl.NumberFormat('en-US');
+
 export interface TrophyBadgeProps {
   tier: TrophyTier;
   count: number;
@@ -29,7 +32,7 @@ export function TrophyBadge({ tier, count }: TrophyBadgeProps) {
         ●
       </span>
       <span aria-hidden="true" className="text-sm font-semibold tabular-nums text-foreground">
-        {count}
+        {COUNT_FORMAT.format(count)}
       </span>
     </span>
   );
