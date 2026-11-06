@@ -82,7 +82,7 @@ describe('routing', () => {
         <App />
       </MemoryRouter>,
     );
-    expect(screen.getByRole('heading', { level: 1, name: 'Help desk' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: 'Game help' })).toBeInTheDocument();
   });
 
   it('renders a companion app at /together/:slug', () => {

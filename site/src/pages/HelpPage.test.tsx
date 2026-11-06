@@ -15,12 +15,12 @@ function renderPage(path = '/help') {
 }
 
 describe('HelpPage', () => {
-  it('renders the heading, the scope statement and the chat', () => {
+  it('renders the heading, the one-line pitch and the chat', () => {
     renderPage();
 
-    expect(screen.getByRole('heading', { level: 1, name: 'Help desk' })).toBeInTheDocument();
-    expect(screen.getByText(/only talks about playing games/)).toBeInTheDocument();
-    expect(screen.getByRole('heading', { level: 2, name: 'Ask the help desk' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: 'Game help' })).toBeInTheDocument();
+    expect(screen.getByText(/backed by a guide and a video/)).toBeInTheDocument();
+    expect(screen.getByText('What are you stuck on?')).toBeInTheDocument();
     expect(screen.getByLabelText('Your question')).toBeInTheDocument();
   });
 

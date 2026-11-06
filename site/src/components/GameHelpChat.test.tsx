@@ -148,7 +148,7 @@ describe('GameHelpChat', () => {
     await user.type(screen.getByLabelText('Your question'), 'How do I parry?');
     await user.click(screen.getByRole('button', { name: 'Ask' }));
 
-    expect(screen.getByRole('status')).toHaveTextContent('Looking that up');
+    expect(screen.getByRole('status')).toHaveTextContent('Thinking');
     expect(screen.getByRole('button', { name: 'Asking…' })).toBeDisabled();
 
     resolve(answer);

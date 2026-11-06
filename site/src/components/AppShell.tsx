@@ -16,7 +16,7 @@ const navItems: NavItem[] = [
   { to: COMPARE_PATH, label: 'Compare', end: false },
   { to: TOGETHER_PATH, label: 'Together', end: false },
   { to: DISCOVER_PATH, label: 'Discover', end: false },
-  { to: HELP_PATH, label: 'Help', end: false },
+  { to: HELP_PATH, label: 'Game help', end: false },
 ];
 
 function navLinkClass({ isActive }: { isActive: boolean }): string {
