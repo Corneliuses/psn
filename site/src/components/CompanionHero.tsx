@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 import type { Companion, CompanionBackdrop } from '../companions/types';
 import { duration, easing, fadeRise, staggerChildren } from '../motion/presets';
-import { TOGETHER_PATH } from '../routes';
+import { TOGETHER_PATH, helpPath } from '../routes';
 import { GlassCard } from './GlassCard';
 
 /*
@@ -139,6 +139,12 @@ export function CompanionHero({ companion }: CompanionHeroProps) {
         </p>
         <h1 className="mt-1 text-3xl font-bold leading-none text-foreground sm:text-display">{companion.name}</h1>
         <p className="mt-3 max-w-2xl text-foreground-muted">{companion.blurb}</p>
+        <Link
+          to={helpPath(companion.name)}
+          className="mt-3 inline-block text-sm font-semibold text-ps-blue-text transition-colors hover:text-foreground"
+        >
+          Stuck? Ask the help desk about {companion.name} &rarr;
+        </Link>
 
         {companion.facts?.length ? (
           <motion.dl

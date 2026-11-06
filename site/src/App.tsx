@@ -8,11 +8,12 @@ import { CompanionPage } from './pages/CompanionPage';
 import { CompareHubPage } from './pages/CompareHubPage';
 import { ComparePage } from './pages/ComparePage';
 import { DiscoverPage } from './pages/DiscoverPage';
+import { HelpPage } from './pages/HelpPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PlayerPage } from './pages/PlayerPage';
 import { SplashPage } from './pages/SplashPage';
 import { TogetherPage } from './pages/TogetherPage';
-import { COMPARE_PATH, DISCOVER_PATH, TOGETHER_PATH, playerPath } from './routes';
+import { COMPARE_PATH, DISCOVER_PATH, HELP_PATH, TOGETHER_PATH, playerPath } from './routes';
 
 export function App() {
   // Freeze the location so the outgoing route keeps rendering its old element
@@ -35,6 +36,7 @@ export function App() {
             <Route path={DISCOVER_PATH} element={<DiscoverPage />} />
             <Route path={TOGETHER_PATH} element={<TogetherPage />} />
             <Route path={`${TOGETHER_PATH}/:slug`} element={<CompanionPage />} />
+            <Route path={HELP_PATH} element={<HelpPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </RouteTransition>
