@@ -8,8 +8,8 @@ license: MIT
 
 ## Overview
 
-The **Together** section (`/together`) is a grid of the games both players play side
-by side. Each tile opens that title's companion app: the material worth having on a
+The **Together** section (`/together`) is a grid of the games at least two of us play,
+side by side or separately. Each tile opens that title's companion app: the material worth having on a
 second screen mid-session.
 
 The mechanics are deliberately trivial — one content file plus one line in a
@@ -26,10 +26,11 @@ attention on the two things that actually go wrong:
 
 ## Step 1 — Confirm the game belongs here
 
-Together is for games *both players play* — side by side or separately, both count.
-The stats module is built around a pair, so a title only one player has touched
-renders "Not in this library yet" on the other's card, which looks broken rather than
-informative.
+Together is for games *at least two players play*. Side by side or separately, both
+count, and it doesn't need the whole family. The companion page shows one card per
+configured player, so a player who hasn't touched the title gets "Not in this library
+yet". That's expected for a two-player game. A title only one player has touched shows
+that on every other card, which looks broken rather than informative.
 
 The script in Step 2 answers this as a side effect — it prints which players have
 the title. If only one does, say so and ask whether to add it anyway before spending
@@ -144,11 +145,11 @@ The personal layer is what no wiki can have, and it is where the page earns its 
 when it exists: which gear you have built, where your base is, what you agreed to do
 next. Shipping a title with just links and notes is a perfectly good first version.
 
-### Games the two players play apart
+### Games we play apart
 
-Together is "games both players play", which is not the same as "co-op games". A
-single-player title both of you are working through separately belongs here, and the
-stats module handles it fine — two columns, two sets of progress.
+Together is "games at least two of us play", which is not the same as "co-op games". A
+single-player title two or more of you are working through separately belongs here, and the
+stats module handles it fine, with one card and one set of progress per player.
 
 What does not survive is the map's premise. With no shared save there is no shared
 base and no agreed route, so pins about "our places" have nothing to describe. Either

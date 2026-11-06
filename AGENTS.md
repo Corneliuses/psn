@@ -1,6 +1,6 @@
 # psn
 
-Father–son PlayStation stats tracker for two players (Dad and Braidan): syncs play history and trophy data from PSN into committed JSON snapshots, derives displayable stats, and renders them as a website (`site/`) with a splash landing, per-player pages, a head-to-head comparison view, and companion apps for the games both players play, in a dark, PlayStation-vibe UI.
+Family PlayStation stats tracker for a configurable roster (currently Dad, Braidan and Nadia, declared in `psn.config.json`): syncs play history and trophy data from PSN into committed JSON snapshots, derives displayable stats, and renders them as a website (`site/`) with a splash landing, per-player pages, a compare hub (`/compare`: a three-way family scoreboard plus one VS card per pair), a head-to-head page for every pair (`/compare/:a/:b`), and companion apps for the games at least two of us play, in a dark, PlayStation-vibe UI. Nothing may assume exactly two players: derive rosters, pairings and copy from `players`, and list names with `joinNames` (`site/src/format.ts`, "Dad, Braidan & Nadia") rather than a hand-rolled join or `Intl.ListFormat`.
 
 ## Repository Structure
 
@@ -20,7 +20,7 @@ psn/
 │       ├── motion/     # presets.ts — shared Motion variants/transitions all animation composes
 │       ├── components/ # PlayStation component kit (GlassCard, StatTile, TrophyBadge, …) + AppShell
 │       ├── companions/ # Companion-app content: one data file per game + the registry
-│       └── pages/      # Splash, Player, Compare, Discover, Together, Companion, NotFound
+│       └── pages/      # Splash, Player, CompareHub (/compare), Compare (/compare/:a/:b), Discover, Together, Companion, NotFound
 └── .claude/skills/ # Workflow skills installed from Corneliuses/agentic-config
 ```
 
@@ -106,6 +106,10 @@ composes it rather than reinventing one.** The rules below are hard requirements
 - A genuinely new primitive (not expressible by composing the kit) also lives in
   `site/src/components/` and **ships with a component test** (render, accessible name,
   reduced-motion/jsdom-safe final state) in the same PR.
+- Comparison meters: `ClashMeter` is the two-sided meter for pairwise pages; `TriClashMeter` is its
+  N-player sibling for the hub. Drive leader glow from `compareRoster().metrics[].leaders`, never
+  from segment width, so near-ties read correctly; a full tie (including all-zero) or an empty
+  `leaders` list renders neutral. Seams are drawn only between two visible (non-zero) segments.
 - `AnimatedNumber` renders its final value immediately under reduced motion and in jsdom (no
   timers), so component tests assert the **final** number, never intermediate animation state.
 
@@ -127,6 +131,16 @@ composes it rather than reinventing one.** The rules below are hard requirements
 - Every route renders inside **`AppShell`** (`site/src/components/AppShell.tsx`), the persistent
   header/nav. Its nav links derive from `players` (**never hardcode player keys**), and the route
   structure in `site/src/App.tsx` must stay intact.
+- Player routes (`/<key>`) are generated one per configured player. Compare is two-level:
+  `COMPARE_PATH` (`/compare`) renders `CompareHubPage`: a "Matchups" list with a VS card per entry
+  in `playerPairings` (every 2-combination of `players`, config order), then `FamilyScoreboard`,
+  which renders `compareRoster()` as `TriClashMeter` rows. The scoreboard only renders when every
+  configured player has a snapshot and there are at least two players. `/compare/:a/:b` renders
+  `ComparePage` for that pair; build links with `comparePath(a, b)`. A reversed pair is valid and
+  swaps sides, but hub cards always link the config-order URL so each matchup has one canonical
+  link. An unknown key, a missing param, or `a === b` renders `NotFoundPage`. Pairwise pages keep
+  the two-sided `ClashMeter`/`comparePlayers` shape; only the hub is N-player. The e2e smoke suite
+  derives pairings from `psn.config.json`, so a new player gets compare coverage automatically.
 - Route-level page transitions are centralized in `App.tsx`: the routed content is wrapped in
   `<AnimatePresence mode="wait">` + `RouteTransition` (keyed by `location.pathname`, with
   `<Routes location={location}>`). Each page owns only its **own** internal entrance stagger — never
@@ -189,8 +203,8 @@ works within, and they hold whether or not the skill is used.
 
 ## Security & Secrets
 
-- NPSSO tokens live in `.env` (gitignored) or CI secrets, one per player named in `psn.config.json` (`NPSSO_DAD`, `NPSSO_BRAIDAN`, `NPSSO_NADIA`). Never commit, log, or embed tokens in error messages — `PsnAuthError` names the env var, never the value.
-- `data/` holds only *real* synced snapshots. Dry-run output is fixture data and must not be committed as if it were real. **Exception:** `data/nadia/latest.json` is a committed *fixture* snapshot (generated via `sampleSnapshot()`), added in #41 so `site/` has something to render for her before her first real sync. The daily sync workflow overwrites it with genuine data once the `NPSSO_NADIA` secret is set; it must not be left in place after that. `data/dad/` and `data/braidan/` hold real synced data — never overwrite them with fixture output (note that `pnpm sync --dry-run` does exactly that — see #49 — so revert `data/` after a dry run).
+- NPSSO tokens live in `.env` (gitignored) or CI secrets, named per `psn.config.json` (`NPSSO_DAD`, `NPSSO_BRAIDAN`, `NPSSO_NADIA`). Adding a player means adding their secret to the repo and to the `.github/workflows/sync.yml` env block. Never commit, log, or embed tokens in error messages — `PsnAuthError` names the env var, never the value.
+- `data/` holds only *real* synced snapshots. Dry-run output is fixture data and must not be committed as if it were real. **Exception:** `data/nadia/latest.json` is a committed *fixture* snapshot (generated via `sampleSnapshot()`), added in #41 so `site/` has something to render for her before her first real sync. Until then her player page, her pairwise compare pages and the family scoreboard all show this placeholder data — that is expected, not a bug. The daily sync workflow overwrites it with genuine data once the `NPSSO_NADIA` secret is set; it must not be left in place after that. `data/dad/` and `data/braidan/` hold real synced data — never overwrite them with fixture output (note that `pnpm sync --dry-run` does exactly that — see #49 — so revert `data/` after a dry run).
 
 ## Working Rules
 

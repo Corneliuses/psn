@@ -25,7 +25,7 @@ short-lived OAuth tokens.
 | Refresh | `exchangeRefreshTokenForAuthTokens` | **Not used today** — we re-auth from NPSSO each sync |
 
 - NPSSO tokens expire (~months) and must be refreshed manually from a browser
-  session. This repo stores them per player in `.env` (`NPSSO_DAD`, `NPSSO_BRAIDAN`).
+  session. This repo stores them per player in `.env` (`NPSSO_DAD`, `NPSSO_BRAIDAN`, `NPSSO_NADIA`).
 - The OAuth `accessToken` is short-lived; a refresh token exists but is currently
   unused (**future milestone opportunity:** long-running sync without re-pasting NPSSO).
 
