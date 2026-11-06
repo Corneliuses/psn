@@ -76,7 +76,7 @@ PS-vibe boundaries, and a per-view ship checklist — live in [`AGENTS.md`](./AG
 
 ## Companion apps
 
-**Together** (`/together`) is a grid of the games we actually play as a pair; each tile opens that
+**Together** (`/together`) is a grid of the games at least two of us actually play; each tile opens that
 title's companion app — the stuff worth having on a second screen mid-session.
 
 |  |  |

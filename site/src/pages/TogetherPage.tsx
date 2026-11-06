@@ -4,7 +4,7 @@ import { companions } from '../companions';
 import { players } from '../config/players';
 
 /*
- * Together: the companion-apps index. A tile per game we play as a pair, each
+ * Together: the companion-apps index. A tile per game at least two of us play, each
  * opening that title's companion app. The page is a thin shell — CompanionGrid
  * owns the tiles and its own empty state.
  */
