@@ -25,24 +25,19 @@ describe('PlayerPortalCard', () => {
     expect(link).toHaveTextContent('Explore Dad’s trophies & playtime');
   });
 
-  it('shows the headline totals and every trophy tier at their final values', () => {
+  it('shows every trophy tier count and no playtime or game stats', () => {
     const totals = playerTotals(sampleSnapshot('dad', 'Dad'));
     renderCard(totals);
 
     const link = screen.getByRole('link', { name: /Dad/ });
-    // Playtime, games, trophies — AnimatedNumber renders the final value in jsdom.
-    expect(within(link).getByText('Played')).toBeInTheDocument();
-    expect(within(link).getByText(`${Math.round(totals.playtimeMinutes / 60)}h`)).toBeInTheDocument();
-    expect(within(link).getByText('Games')).toBeInTheDocument();
-    expect(within(link).getByText(String(totals.gamesPlayed))).toBeInTheDocument();
-    expect(within(link).getByText('Trophies')).toBeInTheDocument();
-    expect(within(link).getByText(String(totals.trophiesTotal))).toBeInTheDocument();
-
     for (const tier of ['bronze', 'silver', 'gold', 'platinum'] as const) {
       expect(
         within(link).getByRole('img', { name: new RegExp(`^${totals.trophies[tier]} ${tier} troph`) }),
       ).toBeInTheDocument();
     }
+    expect(within(link).getAllByRole('img')).toHaveLength(4);
+    expect(within(link).queryByText('Played')).not.toBeInTheDocument();
+    expect(within(link).queryByText('Games')).not.toBeInTheDocument();
   });
 
   it('still renders the portal without a snapshot, saying no stats are synced', () => {

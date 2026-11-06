@@ -85,12 +85,10 @@ describe('SplashPage', () => {
     expect(within(portalList).getAllByRole('listitem')).toHaveLength(3);
   });
 
-  it('shows each synced player’s totals on their portal and a no-stats line otherwise', () => {
+  it('shows each synced player’s trophy tiers on their portal and a no-stats line otherwise', () => {
     renderSplash();
 
-    const dadTotals = sampleSnapshot('dad', 'Dad');
     const dad = screen.getByRole('link', { name: /Dad/ });
-    expect(within(dad).getByText(String(dadTotals.playedTitles.length))).toBeInTheDocument();
     expect(within(dad).getAllByRole('img', { name: /troph/ })).toHaveLength(4);
 
     const nadia = screen.getByRole('link', { name: /Nadia/ });

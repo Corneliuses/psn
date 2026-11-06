@@ -16,16 +16,16 @@ import { COMPARE_PATH } from '../routes';
 /*
  * The splash page is the site's front door: the help-desk call to action up
  * top, a custom hero illustration, an animated headline, one large portal card
- * per configured player (tinted with their accent and showing their headline
- * totals), and a family face-off compare call-to-action. The whole page enters
+ * per configured player (tinted with their accent and showing their trophy
+ * tiers), and a family face-off compare call-to-action. The whole page enters
  * in a single staggered sequence (CTA → hero → title → cards → compare)
  * composed from the shared motion presets.
  *
  * Player names are never hardcoded — the headline, portal cards, and compare
  * banner all derive from `players` (config-sourced), so the accessible link/heading
- * contract stays in step with the configured roster. Each portal's totals come
- * from that player's latest snapshot via `playerTotals()`; a player without a
- * snapshot still gets a portal, minus the numbers.
+ * contract stays in step with the configured roster. Each portal's trophy counts
+ * come from that player's latest snapshot via `playerTotals()`; a player without
+ * a snapshot still gets a portal, minus the badges.
  */
 
 /** Display names joined for the headline, e.g. "Dad, Braidan & Nadia". */

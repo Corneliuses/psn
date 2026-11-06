@@ -82,7 +82,7 @@ for (const key of playerKeys) {
 
 /**
  * The splash page (/): the help-desk call to action up top, then one portal
- * per configured player carrying their synced totals. Clicking the CTA lands
+ * per configured player carrying their trophy-tier counts. Clicking the CTA lands
  * on the help desk.
  */
 test('the splash page leads with the help CTA and a stats portal per player', async ({ page }) => {
@@ -94,8 +94,8 @@ test('the splash page leads with the help CTA and a stats portal per player', as
   for (const player of psnConfig.players) {
     const portal = main.getByRole('link', { name: new RegExp(escapeRegExp(player.displayName)) });
     await expect(portal).toBeVisible();
-    // A synced snapshot shows whole hours played ("12,711h").
-    await expect(portal.getByText(/^[\d,]+h$|No stats synced yet/)).toBeVisible();
+    // A synced snapshot shows the four trophy-tier badges.
+    await expect(portal.getByRole('img', { name: /platinum troph/ })).toBeVisible();
   }
 
   const help = page.getByRole('link', { name: 'Get help with your game' });

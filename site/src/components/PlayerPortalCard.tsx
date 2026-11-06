@@ -4,7 +4,6 @@ import { Link } from 'react-router';
 import { accentForKey } from '../config/accents';
 import type { PlayerConfig } from '../config/players';
 import { playerPath } from '../routes';
-import { AnimatedNumber } from './AnimatedNumber';
 import { GlassCard } from './GlassCard';
 import { TrophyBadge } from './TrophyBadge';
 
@@ -12,41 +11,20 @@ import { TrophyBadge } from './TrophyBadge';
  * A player's portal on the splash page: one big glass card per family member
  * that links to their stats page. It is tinted with the player's shape accent
  * (hairline, backdrop glyph, hover wash — all decorative), leads with their
- * name, and shows their headline totals (playtime, games, trophies) plus the
- * four trophy tiers so the front door already says something about each
- * player. Without a synced snapshot it still renders the portal, with a
- * "no stats yet" line in place of the numbers.
+ * name, and shows their four trophy-tier counts so the front door already says
+ * something about each player. Without a synced snapshot it still renders the
+ * portal, with a "no stats yet" line in place of the badges.
  *
  * The whole card is the link; its accessible name is its text content, so it
  * reads "<name> … Explore <name>'s trophies & playtime" plus the badge labels.
  */
 
-/**
- * Whole hours with a thousands separator ("12,711h"): the full "12710h 31m"
- * wraps inside a three-up stat row, and the player page has the exact figure.
- * Rounds the (possibly fractional, mid-tween) minutes AnimatedNumber feeds in.
- */
-function formatHours(minutes: number): string {
-  return `${new Intl.NumberFormat('en-US').format(Math.round(minutes / 60))}h`;
-}
-
 const TIERS = ['bronze', 'silver', 'gold', 'platinum'] as const;
 
 export interface PlayerPortalCardProps {
   player: PlayerConfig;
-  /** Headline totals from `playerTotals()`; omit when the player has no snapshot yet. */
+  /** Totals from `playerTotals()` (only `trophies` is shown); omit when the player has no snapshot yet. */
   totals?: PlayerTotals;
-}
-
-function Stat({ label, value, format }: { label: string; value: number; format?: (n: number) => string }) {
-  return (
-    <span className="flex flex-col items-center gap-0.5">
-      <span className="text-xl font-extrabold leading-none tabular-nums text-foreground sm:text-2xl">
-        <AnimatedNumber value={value} {...(format ? { format } : {})} />
-      </span>
-      <span className="text-xs font-semibold uppercase tracking-widest text-foreground-muted">{label}</span>
-    </span>
-  );
 }
 
 export function PlayerPortalCard({ player, totals }: PlayerPortalCardProps) {
@@ -97,12 +75,7 @@ export function PlayerPortalCard({ player, totals }: PlayerPortalCardProps) {
 
       {totals ? (
         <>
-          <span className="relative grid w-full grid-cols-3 gap-2 border-y border-border-subtle py-4">
-            <Stat label="Played" value={totals.playtimeMinutes} format={formatHours} />
-            <Stat label="Games" value={totals.gamesPlayed} />
-            <Stat label="Trophies" value={totals.trophiesTotal} />
-          </span>
-          <span className="relative flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+          <span className="relative flex w-full flex-wrap items-center justify-center gap-x-5 gap-y-2 border-y border-border-subtle py-4">
             {TIERS.map((tier) => (
               <TrophyBadge key={tier} tier={tier} count={totals.trophies[tier]} />
             ))}
