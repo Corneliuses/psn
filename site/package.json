@@ -11,7 +11,8 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "icons": "node scripts/make-icon.ts"
   },
   "dependencies": {
     "@fontsource-variable/source-sans-3": "^5.2.9",
