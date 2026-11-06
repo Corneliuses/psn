@@ -133,7 +133,7 @@ test('the help desk renders its form and reports the chat server offline', async
   const errors = collectErrors(page);
   await page.goto('/help', { waitUntil: 'networkidle' });
 
-  await expect(page.getByRole('heading', { level: 1, name: 'Help desk' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: 'Game help' })).toBeVisible();
   await page.getByLabel('Game (optional)').fill('Grounded 2');
   await page.getByLabel('Your question').fill('How do I beat the Mantis?');
   await page.getByRole('button', { name: 'Ask' }).click();

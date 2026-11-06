@@ -5,6 +5,7 @@ import { useId, useRef, useState, type FormEvent } from 'react';
 import { HelpDeskError, askHelpDesk } from '../help/client';
 import { fadeRise } from '../motion/presets';
 import { GlassCard } from './GlassCard';
+import { GuideIcon, PlayIcon, SparkIcon } from './HelpIcons';
 
 /*
  * The help-desk chat: a thread of questions and answers over a small form.
@@ -45,6 +46,25 @@ export interface GameHelpChatProps {
 
 const KIND_LABEL: Record<HelpSource['kind'], string> = { article: 'Guide', video: 'Video' };
 
+/** The source glyphs: a page for a guide, a play tile for a video (the label carries the meaning). */
+function SourceIcon({ kind }: { kind: HelpSource['kind'] }) {
+  return kind === 'video' ? (
+    <PlayIcon className="h-5 w-5 shrink-0 text-shape-circle" />
+  ) : (
+    <GuideIcon className="h-5 w-5 shrink-0 text-ps-blue-text" />
+  );
+}
+
+/** The "AI" badge an answer carries. */
+function AiBadge() {
+  return (
+    <span className="inline-flex items-center gap-1 rounded-pill bg-ps-blue/15 px-2 py-0.5 text-xs font-bold uppercase tracking-wide text-ps-blue-text">
+      <SparkIcon className="h-3.5 w-3.5" />
+      AI
+    </span>
+  );
+}
+
 /** The transcript as the server wants it: plain text per turn, answers only. */
 function toHistory(messages: Message[]): ChatTurn[] {
   const turns: ChatTurn[] = [];
@@ -57,23 +77,29 @@ function toHistory(messages: Message[]): ChatTurn[] {
 
 function SourceList({ sources }: { sources: HelpSource[] }) {
   return (
-    <ul className="m-0 mt-3 flex list-none flex-col gap-1.5 p-0" aria-label="Sources">
+    <ul className="m-0 mt-4 flex list-none flex-col gap-2 p-0 sm:flex-row sm:flex-wrap" aria-label="Sources">
       {sources.map((source) => (
-        <li key={source.url} className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 text-sm">
-          <span className="rounded-pill border border-border-subtle px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-foreground-muted">
-            {KIND_LABEL[source.kind]}
+        <li
+          key={source.url}
+          className="flex min-w-0 items-center gap-2.5 rounded-md border border-border-subtle bg-surface-2 px-3 py-2 text-sm sm:max-w-[48%]"
+        >
+          <SourceIcon kind={source.kind} />
+          <span className="flex min-w-0 flex-col">
+            <span className="text-xs font-semibold uppercase tracking-wide text-foreground-muted">
+              {KIND_LABEL[source.kind]}
+            </span>
+            <a
+              href={source.url}
+              target="_blank"
+              rel="noreferrer"
+              className="break-words font-semibold text-foreground underline-offset-2 hover:text-ps-blue-text hover:underline"
+            >
+              {source.title}
+            </a>
+            {source.fallback ? (
+              <span className="text-xs text-foreground-muted">(no exact match found — this is a search)</span>
+            ) : null}
           </span>
-          <a
-            href={source.url}
-            target="_blank"
-            rel="noreferrer"
-            className="font-semibold text-ps-blue-text underline-offset-2 hover:underline"
-          >
-            {source.title}
-          </a>
-          {source.fallback ? (
-            <span className="text-xs text-foreground-muted">(no exact match found — this is a search)</span>
-          ) : null}
         </li>
       ))}
     </ul>
@@ -84,14 +110,20 @@ function AssistantMessage({ response }: { response: ChatResponse }) {
   if (response.kind === 'off-topic') {
     return (
       <>
-        <p className="m-0 text-xs font-semibold uppercase tracking-wide text-foreground-muted">Game questions only</p>
-        <p className="m-0 mt-1 text-foreground">{response.answer}</p>
+        <p className="m-0 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-foreground-muted">
+          <AiBadge />
+          Game questions only
+        </p>
+        <p className="m-0 mt-2 text-foreground">{response.answer}</p>
       </>
     );
   }
   return (
     <>
-      <p className="m-0 whitespace-pre-line text-foreground">{response.answer}</p>
+      <p className="m-0">
+        <AiBadge />
+      </p>
+      <p className="m-0 mt-2 whitespace-pre-line text-lg leading-snug text-foreground">{response.answer}</p>
       <SourceList sources={response.sources} />
       {response.searches.length > 0 ? (
         <p className="m-0 mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-foreground-muted">
@@ -163,9 +195,14 @@ export function GameHelpChat({ initialGame = '', suggestions = [], ask = askHelp
     <GlassCard className="p-5 sm:p-6">
       <ol role="log" aria-label="Conversation" aria-live="polite" className="m-0 flex list-none flex-col gap-3 p-0">
         {messages.length === 0 ? (
-          <li className="text-foreground-muted">
-            Ask how to do something in a game &mdash; a boss, a recipe, a trophy, a setting. Every answer comes with a
-            written guide and a video to check it against.
+          <li className="flex items-center gap-3 text-lg font-semibold text-foreground">
+            <span
+              aria-hidden="true"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-ps-blue/15 text-ps-blue-text"
+            >
+              <SparkIcon className="h-5 w-5" />
+            </span>
+            What are you stuck on?
           </li>
         ) : null}
         {messages.map((message) => (
@@ -180,25 +217,26 @@ export function GameHelpChat({ initialGame = '', suggestions = [], ask = askHelp
                 ? 'self-end rounded-lg border border-border-strong bg-surface-3 px-4 py-2.5 sm:max-w-[80%]'
                 : message.role === 'error'
                   ? 'self-start rounded-lg border border-shape-circle/60 bg-surface-1 px-4 py-2.5 text-foreground'
-                  : 'self-start rounded-lg border border-border-subtle bg-surface-1 px-4 py-3 sm:max-w-[90%]'
+                  : 'min-w-0 max-w-full self-start rounded-lg border border-ps-blue/40 bg-ps-blue/10 px-4 py-3 shadow-glow-sm sm:max-w-[90%]'
             }
           >
-            <span aria-hidden="true" className={`mr-2 ${message.role === 'user' ? 'text-shape-square' : 'text-shape-triangle'}`}>
-              {message.role === 'user' ? '□' : '△'}
-            </span>
+            {message.role !== 'assistant' ? (
+              <span aria-hidden="true" className={`mr-2 ${message.role === 'user' ? 'text-shape-square' : 'text-shape-circle'}`}>
+                {message.role === 'user' ? '□' : '○'}
+              </span>
+            ) : null}
             <span className="sr-only">{message.role === 'user' ? 'You: ' : 'Help desk: '}</span>
             {message.role === 'assistant' ? (
-              <div className="mt-1">
-                <AssistantMessage response={message.response} />
-              </div>
+              <AssistantMessage response={message.response} />
             ) : (
               <span className="text-foreground">{message.text}</span>
             )}
           </motion.li>
         ))}
         {pending ? (
-          <li role="status" className="text-sm text-foreground-muted">
-            Looking that up&hellip;
+          <li role="status" className="flex items-center gap-2 text-sm font-semibold text-ps-blue-text">
+            <SparkIcon className="h-4 w-4 motion-safe:animate-flicker" />
+            Thinking&hellip;
           </li>
         ) : null}
       </ol>
@@ -252,9 +290,7 @@ export function GameHelpChat({ initialGame = '', suggestions = [], ask = askHelp
           </div>
         </div>
         <div className="flex items-center justify-between gap-3">
-          <span className="text-xs text-foreground-muted">
-            Answers come from an AI and can be wrong &mdash; check the sources.
-          </span>
+          <span className="text-xs text-foreground-muted">AI can be wrong &mdash; check the sources.</span>
           <button
             type="submit"
             disabled={pending || question.trim().length === 0}

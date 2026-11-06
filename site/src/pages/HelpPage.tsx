@@ -1,15 +1,17 @@
+import { motion, useReducedMotion } from 'motion/react';
 import { useSearchParams } from 'react-router';
 
 import { companions } from '../companions';
 import { GameHelpChat, type HelpSuggestion } from '../components/GameHelpChat';
 import { GlassCard } from '../components/GlassCard';
-import { SectionHeader } from '../components/SectionHeader';
+import { SparkIcon } from '../components/HelpIcons';
+import { glowPulse } from '../motion/presets';
 
 /*
- * Help: the game help desk. A hero that says what the bot will and won't do,
- * then the chat. The starter questions derive from the companion registry so
- * the games we actually play are one tap away, and `?game=` (set by the "ask
- * about this game" link on a companion app) pre-fills the game field.
+ * Game help: the help desk. A one-line hero with the AI spark, then the chat.
+ * The starter questions derive from the companion registry so the games we
+ * actually play are one tap away, and `?game=` (set by the "ask about this
+ * game" link on a companion app) pre-fills the game field.
  */
 
 /** The query parameter a companion app sets to pre-select its game. */
@@ -25,21 +27,30 @@ function starterQuestions(): HelpSuggestion[] {
 export function HelpPage() {
   const [params] = useSearchParams();
   const game = params.get(HELP_GAME_PARAM)?.trim() ?? '';
+  const shouldReduceMotion = useReducedMotion();
+  // The glow is a box-shadow loop, which <MotionConfig reducedMotion> does not
+  // stop, so gate it here; the static shadow-glow-sm stays either way.
+  const glowProps = shouldReduceMotion ? {} : ({ variants: glowPulse, initial: 'rest', animate: 'pulse' } as const);
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
-      <GlassCard glow className="mb-10 p-8 sm:p-10">
-        <h1 className="text-3xl font-bold leading-none text-foreground sm:text-display">Help desk</h1>
-        <p className="mt-2 text-foreground-muted">
-          Stuck in a game? Ask how to do it and get a short answer with a written guide and a video to back
-          it up. It only talks about playing games &mdash; everything else gets a polite no.
-        </p>
+      <GlassCard glow className="mb-8 flex items-center gap-5 p-6 sm:p-8">
+        <motion.span
+          {...glowProps}
+          aria-hidden="true"
+          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-ps-blue/15 text-ps-blue-text shadow-glow-sm"
+        >
+          <SparkIcon className="h-8 w-8" />
+        </motion.span>
+        <div className="min-w-0">
+          <h1 className="text-3xl font-bold leading-none text-foreground sm:text-display">Game help</h1>
+          <p className="m-0 mt-2 text-foreground-muted">
+            Stuck on a boss, a recipe or a trophy? Ask, and get a short answer backed by a guide and a video.
+          </p>
+        </div>
       </GlassCard>
 
-      <section>
-        <SectionHeader title="Ask the help desk" />
-        <GameHelpChat {...(game ? { initialGame: game } : {})} suggestions={starterQuestions()} />
-      </section>
+      <GameHelpChat {...(game ? { initialGame: game } : {})} suggestions={starterQuestions()} />
     </main>
   );
 }

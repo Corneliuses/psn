@@ -46,7 +46,7 @@ describe('AppShell', () => {
     expect(nav).toContainElement(discover);
     expect(discover).toHaveAttribute('href', '/discover');
 
-    const help = screen.getByRole('link', { name: 'Help' });
+    const help = screen.getByRole('link', { name: 'Game help' });
     expect(nav).toContainElement(help);
     expect(help).toHaveAttribute('href', '/help');
   });
