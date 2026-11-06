@@ -1,0 +1,14 @@
+{
+  "name": "Dad, Braidan & Nadia's PlayStation Stats",
+  "short_name": "PSN Stats",
+  "description": "A family PlayStation stats tracker: play history, trophies, head-to-head comparisons and companion apps for the games we play together.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0f1a",
+  "theme_color": "#0b0f1a",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
