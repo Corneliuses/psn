@@ -9,7 +9,7 @@ import { DEFAULT_GEMINI_MODEL, createGeminiClient } from './gemini';
  * Process entrypoint. Configuration is environment only:
  *
  *   GEMINI_API_KEY                   required — the key the browser must never see
- *   GEMINI_MODEL                     default gemini-2.5-flash
+ *   GEMINI_MODEL                     default gemini-3.8-flash
  *   PORT                             default 8787 (Cloud Run sets 8080)
  *   STATIC_DIR                       serve the built site from here (unset = API only)
  *   CHAT_RATE_LIMIT_PER_MINUTE       per-client cap, default 10

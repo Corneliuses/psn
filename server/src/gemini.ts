@@ -8,7 +8,7 @@
  * (`webSearchQueries`) — the raw material for the answer's source links.
  */
 
-export const DEFAULT_GEMINI_MODEL = 'gemini-2.5-flash';
+export const DEFAULT_GEMINI_MODEL = 'gemini-3.8-flash';
 export const GEMINI_API_BASE = 'https://generativelanguage.googleapis.com/v1beta';
 
 export interface GeminiContent {
