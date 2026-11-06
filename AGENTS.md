@@ -132,16 +132,15 @@ composes it rather than reinventing one.** The rules below are hard requirements
   header/nav. Its nav links derive from `players` (**never hardcode player keys**), and the route
   structure in `site/src/App.tsx` must stay intact.
 - Player routes (`/<key>`) are generated one per configured player. Compare is two-level:
-  `COMPARE_PATH` (`/compare`) renders `CompareHubPage` (a "Matchups" list with a VS card per entry in
-  `playerPairings`, then `FamilyScoreboard`, which renders a `RosterComparison` from
-  `compareRoster()` as `TriClashMeter` rows; it only appears once at least two players have
-  synced snapshots), and `/compare/:a/:b` renders
-  `ComparePage` for that pair (build links with `comparePath(a, b)`; `playerPairings` is every
-  2-combination of `players` in config order). A reversed pair is valid and swaps sides, but hub
-  cards always link the config-order URL so each matchup has one canonical link. An unknown key, a
-  missing param, or `a === b` renders `NotFoundPage`. The e2e smoke suite derives pairings from
-  `psn.config.json`, so a new player gets compare coverage automatically. Pairwise pages keep the two-sided `ClashMeter`/`comparePlayers` shape;
-  only the hub is N-player.
+  `COMPARE_PATH` (`/compare`) renders `CompareHubPage`: a "Matchups" list with a VS card per entry
+  in `playerPairings` (every 2-combination of `players`, config order), then `FamilyScoreboard`,
+  which renders `compareRoster()` as `TriClashMeter` rows. The scoreboard only renders when every
+  configured player has a snapshot and there are at least two players. `/compare/:a/:b` renders
+  `ComparePage` for that pair; build links with `comparePath(a, b)`. A reversed pair is valid and
+  swaps sides, but hub cards always link the config-order URL so each matchup has one canonical
+  link. An unknown key, a missing param, or `a === b` renders `NotFoundPage`. Pairwise pages keep
+  the two-sided `ClashMeter`/`comparePlayers` shape; only the hub is N-player. The e2e smoke suite
+  derives pairings from `psn.config.json`, so a new player gets compare coverage automatically.
 - Route-level page transitions are centralized in `App.tsx`: the routed content is wrapped in
   `<AnimatePresence mode="wait">` + `RouteTransition` (keyed by `location.pathname`, with
   `<Routes location={location}>`). Each page owns only its **own** internal entrance stagger — never
