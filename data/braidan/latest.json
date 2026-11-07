@@ -4,7 +4,7 @@
     "key": "braidan",
     "displayName": "Braidan"
   },
-  "capturedAt": "2026-11-06T17:48:20.897Z",
+  "capturedAt": "2026-11-07T16:44:45.792Z",
   "playedTitles": [
     {
       "titleId": "CUSA00079_00",
@@ -770,11 +770,11 @@
       "name": "Goat Simulator 3",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202204/0413/FSpxZI2qYcriljLKCTnyAvcQ.png",
       "category": "ps5_native_game",
-      "playCount": 89,
-      "playDurationIso": "PT88H49M30S",
+      "playCount": 92,
+      "playDurationIso": "PT88H50M",
       "playDurationMinutes": 5330,
       "firstPlayed": "2025-12-13T20:10:07.960000Z",
-      "lastPlayed": "2026-11-06T00:38:58.510000Z"
+      "lastPlayed": "2026-11-07T12:13:13.830000Z"
     },
     {
       "titleId": "PPSA04476_00",
@@ -1144,11 +1144,11 @@
       "name": "7 Days to Die - Console Edition",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202406/1216/9023747aeb28e119f8a8fe3272a67ae5f5e19ba0f658aacd.png",
       "category": "ps5_native_game",
-      "playCount": 4,
+      "playCount": 5,
       "playDurationIso": "PT3H23M38S",
       "playDurationMinutes": 204,
       "firstPlayed": "2026-11-01T14:23:12.390000Z",
-      "lastPlayed": "2026-11-06T01:04:27.430000Z"
+      "lastPlayed": "2026-11-07T12:13:21.290000Z"
     },
     {
       "titleId": "PPSA16833_00",
@@ -3540,15 +3540,15 @@
         "platinum": 1
       },
       "earned": {
-        "bronze": 6,
+        "bronze": 9,
         "silver": 0,
         "gold": 0,
         "platinum": 0
       },
-      "earnedTotal": 6,
-      "progress": 8,
+      "earnedTotal": 9,
+      "progress": 13,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-11-06T01:02:03Z"
+      "lastTrophyAt": "2026-11-07T14:09:06Z"
     },
     {
       "npCommunicationId": "NPWR38640_00",
