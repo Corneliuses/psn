@@ -4,7 +4,7 @@
     "key": "braidan",
     "displayName": "Braidan"
   },
-  "capturedAt": "2026-11-07T16:44:45.792Z",
+  "capturedAt": "2026-11-08T16:54:51.140Z",
   "playedTitles": [
     {
       "titleId": "CUSA00079_00",
@@ -572,11 +572,11 @@
       "name": "FAR CRY®6",
       "imageUrl": "https://image.api.playstation.com/vulcan/img/rnd/202106/1514/xqoTYwf0S55ro6fwcIIY1KI4.png",
       "category": "ps5_native_game",
-      "playCount": 43,
-      "playDurationIso": "PT38H39M14S",
-      "playDurationMinutes": 2319,
+      "playCount": 44,
+      "playDurationIso": "PT39H26M44S",
+      "playDurationMinutes": 2367,
       "firstPlayed": "2026-02-28T00:28:03.970000Z",
-      "lastPlayed": "2026-10-10T23:27:27.880000Z"
+      "lastPlayed": "2026-11-08T00:50:14.810000Z"
     },
     {
       "titleId": "PPSA01895_00",
@@ -715,11 +715,11 @@
       "name": "Grand Theft Auto V (PlayStation®5)",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
       "category": "ps5_native_game",
-      "playCount": 26,
-      "playDurationIso": "PT34H29M46S",
-      "playDurationMinutes": 2070,
+      "playCount": 28,
+      "playDurationIso": "PT36H3M16S",
+      "playDurationMinutes": 2163,
       "firstPlayed": "2025-12-13T20:45:33.420000Z",
-      "lastPlayed": "2026-10-30T21:01:07.200000Z"
+      "lastPlayed": "2026-11-08T02:25:06.990000Z"
     },
     {
       "titleId": "PPSA03831_00",
@@ -770,11 +770,11 @@
       "name": "Goat Simulator 3",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202204/0413/FSpxZI2qYcriljLKCTnyAvcQ.png",
       "category": "ps5_native_game",
-      "playCount": 92,
-      "playDurationIso": "PT88H50M",
-      "playDurationMinutes": 5330,
+      "playCount": 94,
+      "playDurationIso": "PT88H50M31S",
+      "playDurationMinutes": 5331,
       "firstPlayed": "2025-12-13T20:10:07.960000Z",
-      "lastPlayed": "2026-11-07T12:13:13.830000Z"
+      "lastPlayed": "2026-11-07T23:54:45.590000Z"
     },
     {
       "titleId": "PPSA04476_00",
@@ -1144,11 +1144,11 @@
       "name": "7 Days to Die - Console Edition",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202406/1216/9023747aeb28e119f8a8fe3272a67ae5f5e19ba0f658aacd.png",
       "category": "ps5_native_game",
-      "playCount": 5,
-      "playDurationIso": "PT3H23M38S",
-      "playDurationMinutes": 204,
+      "playCount": 6,
+      "playDurationIso": "PT4H19M57S",
+      "playDurationMinutes": 260,
       "firstPlayed": "2026-11-01T14:23:12.390000Z",
-      "lastPlayed": "2026-11-07T12:13:21.290000Z"
+      "lastPlayed": "2026-11-07T19:29:39.510000Z"
     },
     {
       "titleId": "PPSA16833_00",
@@ -1354,10 +1354,10 @@
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202508/0821/ade7404425c20a8c9dfddb1f6fec66f3fa1596046a450efa.png",
       "category": "ps5_native_game",
       "playCount": 11,
-      "playDurationIso": "PT13H47M59S",
-      "playDurationMinutes": 828,
+      "playDurationIso": "PT14H18M19S",
+      "playDurationMinutes": 858,
       "firstPlayed": "2025-12-13T13:06:54.850000Z",
-      "lastPlayed": "2026-08-15T15:10:05.740000Z"
+      "lastPlayed": "2026-11-07T18:30:41.540000Z"
     },
     {
       "titleId": "PPSA29413_00",
@@ -2858,15 +2858,15 @@
         "platinum": 1
       },
       "earned": {
-        "bronze": 20,
+        "bronze": 21,
         "silver": 2,
         "gold": 2,
         "platinum": 0
       },
-      "earnedTotal": 24,
-      "progress": 40,
+      "earnedTotal": 25,
+      "progress": 41,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-11-03T15:11:38Z"
+      "lastTrophyAt": "2026-11-07T19:38:15Z"
     },
     {
       "npCommunicationId": "NPWR27252_00",
@@ -3540,15 +3540,15 @@
         "platinum": 1
       },
       "earned": {
-        "bronze": 9,
+        "bronze": 10,
         "silver": 0,
         "gold": 0,
         "platinum": 0
       },
-      "earnedTotal": 9,
-      "progress": 13,
+      "earnedTotal": 10,
+      "progress": 14,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-11-07T14:09:06Z"
+      "lastTrophyAt": "2026-11-07T19:28:27Z"
     },
     {
       "npCommunicationId": "NPWR38640_00",
@@ -3944,7 +3944,7 @@
       "earnedTotal": 19,
       "progress": 49,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-08-15T15:09:41Z"
+      "lastTrophyAt": "2026-11-07T18:29:29Z"
     },
     {
       "npCommunicationId": "NPWR51159_00",

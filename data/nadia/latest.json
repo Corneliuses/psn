@@ -4,7 +4,7 @@
     "key": "nadia",
     "displayName": "Nadia"
   },
-  "capturedAt": "2026-11-07T16:44:46.763Z",
+  "capturedAt": "2026-11-08T16:54:51.860Z",
   "playedTitles": [
     {
       "titleId": "CUSA00079_00",
@@ -352,11 +352,11 @@
       "name": "Goat Simulator 3",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202204/0413/FSpxZI2qYcriljLKCTnyAvcQ.png",
       "category": "ps5_native_game",
-      "playCount": 1,
-      "playDurationIso": "PT25H7M50S",
+      "playCount": 2,
+      "playDurationIso": "PT25H8M21S",
       "playDurationMinutes": 1508,
       "firstPlayed": "2026-05-28T16:05:59.690000Z",
-      "lastPlayed": "2026-11-06T00:15:33.040000Z"
+      "lastPlayed": "2026-11-07T19:30:37.540000Z"
     },
     {
       "titleId": "PPSA05398_00",
@@ -649,11 +649,11 @@
       "name": "LEGO® Party!",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202508/0821/ade7404425c20a8c9dfddb1f6fec66f3fa1596046a450efa.png",
       "category": "ps5_native_game",
-      "playCount": 13,
-      "playDurationIso": "PT12H17M47S",
-      "playDurationMinutes": 738,
+      "playCount": 15,
+      "playDurationIso": "PT12H48M47S",
+      "playDurationMinutes": 769,
       "firstPlayed": "2026-01-10T13:56:49.040000Z",
-      "lastPlayed": "2026-10-12T20:21:13.100000Z"
+      "lastPlayed": "2026-11-08T12:59:28.650000Z"
     },
     {
       "titleId": "PPSA29413_00",
@@ -2030,7 +2030,7 @@
       "earnedTotal": 19,
       "progress": 47,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-10-12T20:20:58Z"
+      "lastTrophyAt": "2026-11-08T14:08:30Z"
     },
     {
       "npCommunicationId": "NPWR51159_00",
