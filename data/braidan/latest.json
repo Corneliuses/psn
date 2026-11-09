@@ -4,7 +4,7 @@
     "key": "braidan",
     "displayName": "Braidan"
   },
-  "capturedAt": "2026-11-08T16:54:51.140Z",
+  "capturedAt": "2026-11-09T21:17:16.148Z",
   "playedTitles": [
     {
       "titleId": "CUSA00079_00",
@@ -715,11 +715,11 @@
       "name": "Grand Theft Auto V (PlayStation®5)",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
       "category": "ps5_native_game",
-      "playCount": 28,
-      "playDurationIso": "PT36H3M16S",
-      "playDurationMinutes": 2163,
+      "playCount": 31,
+      "playDurationIso": "PT37H24M53S",
+      "playDurationMinutes": 2245,
       "firstPlayed": "2025-12-13T20:45:33.420000Z",
-      "lastPlayed": "2026-11-08T02:25:06.990000Z"
+      "lastPlayed": "2026-11-08T20:51:00.130000Z"
     },
     {
       "titleId": "PPSA03831_00",

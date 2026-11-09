@@ -4,7 +4,7 @@
     "key": "nadia",
     "displayName": "Nadia"
   },
-  "capturedAt": "2026-11-08T16:54:51.860Z",
+  "capturedAt": "2026-11-09T21:17:17.059Z",
   "playedTitles": [
     {
       "titleId": "CUSA00079_00",
@@ -335,6 +335,17 @@
       "playDurationMinutes": 67,
       "firstPlayed": "2026-04-19T18:09:18.060000Z",
       "lastPlayed": "2026-04-19T19:21:00.670000Z"
+    },
+    {
+      "titleId": "PPSA03420_00",
+      "name": "Grand Theft Auto V (PlayStation®5)",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
+      "category": "ps5_native_game",
+      "playCount": 2,
+      "playDurationIso": "PT2H57M13S",
+      "playDurationMinutes": 177,
+      "firstPlayed": "2026-11-08T16:58:50.790000Z",
+      "lastPlayed": "2026-11-08T21:59:38.970000Z"
     },
     {
       "titleId": "PPSA03933_00",
@@ -683,10 +694,10 @@
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/0316/a79dd27918cc2856b6f459dec2857548cfea7db7a85af544.png",
       "category": "ps5_native_game",
       "playCount": 46,
-      "playDurationIso": "PT59H49M25S",
-      "playDurationMinutes": 3589,
+      "playDurationIso": "PT62H3M28S",
+      "playDurationMinutes": 3723,
       "firstPlayed": "2026-08-11T18:40:23.640000Z",
-      "lastPlayed": "2026-10-31T11:32:31.490000Z"
+      "lastPlayed": "2026-10-31T13:47:27.460000Z"
     }
   ],
   "trophyTitles": [
@@ -1085,6 +1096,28 @@
       "progress": 4,
       "hasPlatinum": false,
       "lastTrophyAt": "2024-01-18T22:25:30Z"
+    },
+    {
+      "npCommunicationId": "NPWR21647_00",
+      "name": "Grand Theft Auto V",
+      "platform": "PS5",
+      "iconUrl": "https://psnobj.prod.dl.playstation.net/psnobj/NPWR21647_00/26efdb55-9e6d-4de9-943f-6b95768ae607.png",
+      "defined": {
+        "bronze": 59,
+        "silver": 15,
+        "gold": 3,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 2,
+        "silver": 0,
+        "gold": 0,
+        "platinum": 0
+      },
+      "earnedTotal": 2,
+      "progress": 1,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-11-08T17:20:05Z"
     },
     {
       "npCommunicationId": "NPWR21670_00",
