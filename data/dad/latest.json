@@ -4,7 +4,7 @@
     "key": "dad",
     "displayName": "Dad"
   },
-  "capturedAt": "2026-11-11T18:23:04.004Z",
+  "capturedAt": "2026-11-12T18:41:26.696Z",
   "playedTitles": [
     {
       "titleId": "CUSA00001_00",
@@ -1650,11 +1650,11 @@
       "name": "YouTube",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202009/3017/wYAvR9akyRjDjy75S4zCLAGi.png",
       "category": "ps5_native_media_app",
-      "playCount": 382,
-      "playDurationIso": "PT164H6M25S",
+      "playCount": 385,
+      "playDurationIso": "PT164H6M26S",
       "playDurationMinutes": 9846,
       "firstPlayed": "2023-07-19T15:49:49.690000Z",
-      "lastPlayed": "2026-11-11T14:48:43.890000Z"
+      "lastPlayed": "2026-11-12T14:18:22.520000Z"
     },
     {
       "titleId": "PPSA01768_00",
@@ -2838,11 +2838,11 @@
       "name": "The Blood of Dawnwalker",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202512/1814/fd8c64ffef89f338da778a59a8e23fd4eb8e793bd6d94a2f.png",
       "category": "ps5_native_game",
-      "playCount": 50,
-      "playDurationIso": "PT38H23M55S",
-      "playDurationMinutes": 2304,
+      "playCount": 53,
+      "playDurationIso": "PT40H3M39S",
+      "playDurationMinutes": 2404,
       "firstPlayed": "2026-10-02T03:00:48.460000Z",
-      "lastPlayed": "2026-11-11T16:30:50.210000Z"
+      "lastPlayed": "2026-11-12T15:39:43.320000Z"
     },
     {
       "titleId": "PPSA28180_00",
@@ -2904,11 +2904,11 @@
       "name": "Grounded 2",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/0316/a79dd27918cc2856b6f459dec2857548cfea7db7a85af544.png",
       "category": "ps5_native_game",
-      "playCount": 272,
-      "playDurationIso": "PT198H2M47S",
-      "playDurationMinutes": 11883,
+      "playCount": 273,
+      "playDurationIso": "PT198H8M2S",
+      "playDurationMinutes": 11888,
       "firstPlayed": "2026-08-11T17:09:56.720000Z",
-      "lastPlayed": "2026-11-11T15:40:33.710000Z"
+      "lastPlayed": "2026-11-12T05:20:13.330000Z"
     },
     {
       "titleId": "PPSA35101_00",
@@ -2926,11 +2926,11 @@
       "name": "NBA 2K27",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/2913/4a31f711e2ff460cd44ad646983f36533278cea61f639be9.png",
       "category": "ps5_native_game",
-      "playCount": 26,
-      "playDurationIso": "PT22H31M42S",
-      "playDurationMinutes": 1352,
+      "playCount": 29,
+      "playDurationIso": "PT24H18S",
+      "playDurationMinutes": 1440,
       "firstPlayed": "2026-10-19T04:01:05.910000Z",
-      "lastPlayed": "2026-11-11T15:28:47.940000Z"
+      "lastPlayed": "2026-11-12T15:13:06.830000Z"
     },
     {
       "titleId": "PPSA36327_00",
