@@ -4,7 +4,7 @@
     "key": "dad",
     "displayName": "Dad"
   },
-  "capturedAt": "2026-11-12T18:41:26.696Z",
+  "capturedAt": "2026-11-13T18:22:44.879Z",
   "playedTitles": [
     {
       "titleId": "CUSA00001_00",
@@ -284,7 +284,7 @@
     {
       "titleId": "CUSA00224_00",
       "name": "War Thunder",
-      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202611/1108/45ba4290d7bdd7d24ca1aa9940e7279b91047af4ab69b801.png",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202609/1610/5d9820b5dd3584eadc9bc106d36042dad45e4c6ab5915cd0.png",
       "category": "ps4_game",
       "playCount": 4,
       "playDurationIso": "PT5M48S",
@@ -1650,11 +1650,11 @@
       "name": "YouTube",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202009/3017/wYAvR9akyRjDjy75S4zCLAGi.png",
       "category": "ps5_native_media_app",
-      "playCount": 385,
-      "playDurationIso": "PT164H6M26S",
-      "playDurationMinutes": 9846,
+      "playCount": 387,
+      "playDurationIso": "PT164H20M2S",
+      "playDurationMinutes": 9860,
       "firstPlayed": "2023-07-19T15:49:49.690000Z",
-      "lastPlayed": "2026-11-12T14:18:22.520000Z"
+      "lastPlayed": "2026-11-13T05:41:52.180000Z"
     },
     {
       "titleId": "PPSA01768_00",
@@ -2174,6 +2174,17 @@
       "lastPlayed": "2023-06-05T04:02:15.770000Z"
     },
     {
+      "titleId": "PPSA07862_00",
+      "name": "Monster Hunter Wilds",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202409/0506/aa5c40ba185302dfcc88edc276a876fdc6c516c4db07ec9d.png",
+      "category": "ps5_native_game",
+      "playCount": 1,
+      "playDurationIso": "PT13M17S",
+      "playDurationMinutes": 13,
+      "firstPlayed": "2026-11-13T00:52:49.720000Z",
+      "lastPlayed": "2026-11-13T01:06:31.930000Z"
+    },
+    {
       "titleId": "PPSA07980_00",
       "name": "Peacock",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0921/Nn90v8S8kxiVWcgukIqbNnKE.png",
@@ -2671,7 +2682,7 @@
     {
       "titleId": "PPSA21669_00",
       "name": "Marvel Rivals",
-      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202609/1008/3d85937370ce5d1fe39c9541e7cdc14455798fed56dc2390.png",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202611/1210/652a064c255831b4bc06eab2a88e886c5d96411fc7d4bc5e.png",
       "category": "ps5_native_game",
       "playCount": 1,
       "playDurationIso": "PT11M34S",
@@ -2838,11 +2849,11 @@
       "name": "The Blood of Dawnwalker",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202512/1814/fd8c64ffef89f338da778a59a8e23fd4eb8e793bd6d94a2f.png",
       "category": "ps5_native_game",
-      "playCount": 53,
-      "playDurationIso": "PT40H3M39S",
-      "playDurationMinutes": 2404,
+      "playCount": 57,
+      "playDurationIso": "PT41H11M54S",
+      "playDurationMinutes": 2472,
       "firstPlayed": "2026-10-02T03:00:48.460000Z",
-      "lastPlayed": "2026-11-12T15:39:43.320000Z"
+      "lastPlayed": "2026-11-13T16:30:13.220000Z"
     },
     {
       "titleId": "PPSA28180_00",
@@ -2904,11 +2915,11 @@
       "name": "Grounded 2",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/0316/a79dd27918cc2856b6f459dec2857548cfea7db7a85af544.png",
       "category": "ps5_native_game",
-      "playCount": 273,
-      "playDurationIso": "PT198H8M2S",
-      "playDurationMinutes": 11888,
+      "playCount": 274,
+      "playDurationIso": "PT198H20M1S",
+      "playDurationMinutes": 11900,
       "firstPlayed": "2026-08-11T17:09:56.720000Z",
-      "lastPlayed": "2026-11-12T05:20:13.330000Z"
+      "lastPlayed": "2026-11-13T00:48:09.040000Z"
     },
     {
       "titleId": "PPSA35101_00",
@@ -2926,11 +2937,11 @@
       "name": "NBA 2K27",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/2913/4a31f711e2ff460cd44ad646983f36533278cea61f639be9.png",
       "category": "ps5_native_game",
-      "playCount": 29,
-      "playDurationIso": "PT24H18S",
-      "playDurationMinutes": 1440,
+      "playCount": 33,
+      "playDurationIso": "PT25H32M22S",
+      "playDurationMinutes": 1532,
       "firstPlayed": "2026-10-19T04:01:05.910000Z",
-      "lastPlayed": "2026-11-12T15:13:06.830000Z"
+      "lastPlayed": "2026-11-13T14:58:45.400000Z"
     },
     {
       "titleId": "PPSA36327_00",
@@ -7894,6 +7905,28 @@
       "progress": 0,
       "hasPlatinum": false,
       "lastTrophyAt": "2026-01-11T14:54:12Z"
+    },
+    {
+      "npCommunicationId": "NPWR29738_00",
+      "name": "Monster Hunter Wilds",
+      "platform": "PS5",
+      "iconUrl": "https://psnobj.prod.dl.playstation.net/psnobj/NPWR29738_00/b2a2e124-3a4f-4860-9c60-8df61b7d1e85.png",
+      "defined": {
+        "bronze": 36,
+        "silver": 11,
+        "gold": 2,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 0,
+        "silver": 0,
+        "gold": 0,
+        "platinum": 0
+      },
+      "earnedTotal": 0,
+      "progress": 0,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-11-13T00:52:51Z"
     },
     {
       "npCommunicationId": "NPWR29875_00",

@@ -38,18 +38,6 @@
         "released": "2002-10-27"
       },
       {
-        "name": "The Elder Scrolls V: Skyrim",
-        "rawgId": 5679,
-        "rating": 94,
-        "released": "2011-11-11"
-      },
-      {
-        "name": "Quake",
-        "rawgId": 54491,
-        "rating": 94,
-        "released": "1996-06-22"
-      },
-      {
         "name": "BioShock Infinite",
         "rawgId": 4062,
         "rating": 94,
@@ -60,6 +48,18 @@
         "rawgId": 28623,
         "rating": 94,
         "released": "2011-10-18"
+      },
+      {
+        "name": "The Elder Scrolls V: Skyrim",
+        "rawgId": 5679,
+        "rating": 94,
+        "released": "2011-11-11"
+      },
+      {
+        "name": "Quake",
+        "rawgId": 54491,
+        "rating": 94,
+        "released": "1996-06-22"
       }
     ],
     "Adventure": [
@@ -124,48 +124,12 @@
         "released": "2012-03-13"
       }
     ],
-    "RPG": [
-      {
-        "name": "Baldur's Gate III",
-        "rawgId": 324997,
-        "rating": 97,
-        "released": "2023-08-03"
-      },
-      {
-        "name": "Divinity: Original Sin 2",
-        "rawgId": 10073,
-        "rating": 95,
-        "released": "2017-09-14"
-      },
-      {
-        "name": "Elden Ring",
-        "rawgId": 326243,
-        "rating": 95,
-        "released": "2022-02-25"
-      },
-      {
-        "name": "The Elder Scrolls V: Skyrim",
-        "rawgId": 5679,
-        "rating": 94,
-        "released": "2011-11-11"
-      },
+    "Indie": [
       {
         "name": "Divinity: Original Sin - Enhanced Edition",
         "rawgId": 16359,
         "rating": 94,
         "released": "2015-10-27"
-      },
-      {
-        "name": "Divinity: Original Sin 2 - Definitive Edition",
-        "rawgId": 59199,
-        "rating": 94,
-        "released": "2018-08-31"
-      },
-      {
-        "name": "Persona 5 Royal",
-        "rawgId": 339958,
-        "rating": 94,
-        "released": "2020-03-31"
       },
       {
         "name": "Hades",
@@ -174,26 +138,62 @@
         "released": "2020-09-17"
       },
       {
-        "name": "Persona 5",
-        "rawgId": 49,
-        "rating": 93,
-        "released": "2016-09-15"
+        "name": "Undertale",
+        "rawgId": 13627,
+        "rating": 92,
+        "released": "2015-09-14"
       },
       {
-        "name": "Demon's Souls (2020)",
-        "rawgId": 452648,
+        "name": "Journey",
+        "rawgId": 3254,
         "rating": 92,
-        "released": "2020-11-12"
+        "released": "2012-03-13"
+      },
+      {
+        "name": "Disco Elysium",
+        "rawgId": 262382,
+        "rating": 91,
+        "released": "2019-10-14"
+      },
+      {
+        "name": "Tumblestone",
+        "rawgId": 1657,
+        "rating": 91,
+        "released": "2016-07-11"
+      },
+      {
+        "name": "Death Road to Canada",
+        "rawgId": 345,
+        "rating": 91,
+        "released": "2016-07-20"
+      },
+      {
+        "name": "Ticket to Ride",
+        "rawgId": 964,
+        "rating": 91,
+        "released": "2009-12-18"
+      },
+      {
+        "name": "FEZ",
+        "rawgId": 3740,
+        "rating": 91,
+        "released": "2012-04-13"
+      },
+      {
+        "name": "Rez Infinite",
+        "rawgId": 1081,
+        "rating": 91,
+        "released": "2016-10-13"
       }
     ]
   },
   "shared_genres": [
     "Action",
     "Adventure",
-    "RPG"
+    "Indie"
   ],
   "metadata": {
-    "generated_at": "2026-11-01T16:59:54.832Z",
+    "generated_at": "2026-11-13T18:23:35.987Z",
     "rawg_base_url": "https://rawg.io",
     "attribution": "Data from RAWG.io",
     "build": "v0.1.0"

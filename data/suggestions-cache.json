@@ -1,4 +1,12 @@
 {
+  "7 days to die - console edition": {
+    "rawgId": 297207,
+    "matchedName": "Stellaris: Console Edition",
+    "genres": [
+      "Strategy"
+    ],
+    "checkedAt": "2026-11-13T18:23:22.166Z"
+  },
   "age of mythology: retold": {
     "rawgId": 60028,
     "matchedName": "Age of Wonders: Planetfall",
@@ -316,6 +324,14 @@
       "RPG"
     ],
     "checkedAt": "2026-07-24T12:30:47.007Z"
+  },
+  "chess mate": {
+    "rawgId": 3724,
+    "matchedName": "Pure Chess",
+    "genres": [
+      "Board Games"
+    ],
+    "checkedAt": "2026-11-13T18:23:22.166Z"
   },
   "contrast": {
     "rawgId": 3834,
@@ -769,6 +785,16 @@
     ],
     "checkedAt": "2026-07-24T12:30:47.007Z"
   },
+  "five nights at freddy's: security breach": {
+    "rawgId": 494383,
+    "matchedName": "Five Nights at Freddy's: Security Breach",
+    "genres": [
+      "Indie",
+      "Adventure",
+      "Action"
+    ],
+    "checkedAt": "2026-11-13T18:23:22.166Z"
+  },
   "for honor": {
     "rawgId": 362,
     "matchedName": "For Honor",
@@ -910,6 +936,16 @@
     "matchedName": "Hardware: Rivals",
     "genres": [],
     "checkedAt": "2026-07-24T12:30:47.007Z"
+  },
+  "herc's adventures": {
+    "rawgId": 52337,
+    "matchedName": "Them's Fightin' Herds",
+    "genres": [
+      "Indie",
+      "Action",
+      "Fighting"
+    ],
+    "checkedAt": "2026-11-13T18:23:22.166Z"
   },
   "high on life": {
     "rawgId": 801032,
@@ -1266,6 +1302,15 @@
     ],
     "checkedAt": "2026-07-24T12:30:47.007Z"
   },
+  "mafia iii: definitive edition": {
+    "rawgId": 445430,
+    "matchedName": "Mafia III: Definitive Edition",
+    "genres": [
+      "Adventure",
+      "Action"
+    ],
+    "checkedAt": "2026-11-13T18:23:22.166Z"
+  },
   "mafia: trilogy": {
     "rawgId": 442852,
     "matchedName": "Mafia: Trilogy",
@@ -1392,6 +1437,16 @@
     ],
     "checkedAt": "2026-07-24T12:30:47.007Z"
   },
+  "monster hunter wilds": {
+    "rawgId": 973391,
+    "matchedName": "Monster Hunter Wilds",
+    "genres": [
+      "Adventure",
+      "Action",
+      "RPG"
+    ],
+    "checkedAt": "2026-11-13T18:23:22.166Z"
+  },
   "mount & blade ii: bannerlord": {
     "rawgId": 10069,
     "matchedName": "Mount & Blade II: Bannerlord",
@@ -1419,6 +1474,26 @@
       "Sports"
     ],
     "checkedAt": "2026-07-24T12:30:47.007Z"
+  },
+  "nba 2k27": {
+    "rawgId": 338386,
+    "matchedName": "NBA 2K20",
+    "genres": [
+      "Action",
+      "Simulation",
+      "Sports"
+    ],
+    "checkedAt": "2026-11-13T18:23:22.166Z"
+  },
+  "nba bounce": {
+    "rawgId": 338386,
+    "matchedName": "NBA 2K20",
+    "genres": [
+      "Action",
+      "Simulation",
+      "Sports"
+    ],
+    "checkedAt": "2026-11-13T18:23:22.166Z"
   },
   "ninja kidz time masters": {
     "rawgId": 558985,
@@ -1889,6 +1964,15 @@
     ],
     "checkedAt": "2026-07-24T12:30:47.007Z"
   },
+  "the blood of dawnwalker": {
+    "rawgId": 996046,
+    "matchedName": "The Blood Of Dawnwalker",
+    "genres": [
+      "Action",
+      "RPG"
+    ],
+    "checkedAt": "2026-11-13T18:23:22.166Z"
+  },
   "the cabin factory": {
     "rawgId": 3208,
     "matchedName": "Tina's Toy Factory",
@@ -2057,6 +2141,15 @@
     ],
     "checkedAt": "2026-07-24T12:30:47.007Z"
   },
+  "the witcher 3: wild hunt — remastered": {
+    "rawgId": 3328,
+    "matchedName": "The Witcher 3: Wild Hunt",
+    "genres": [
+      "Action",
+      "RPG"
+    ],
+    "checkedAt": "2026-11-13T18:23:22.166Z"
+  },
   "this war of mine: the little ones": {
     "rawgId": 2860,
     "matchedName": "This War of Mine: The Little Ones",
@@ -2134,6 +2227,16 @@
     ],
     "checkedAt": "2026-07-24T12:30:47.007Z"
   },
+  "two point museum": {
+    "rawgId": 614967,
+    "matchedName": "Two Point Campus",
+    "genres": [
+      "Strategy",
+      "Indie",
+      "Simulation"
+    ],
+    "checkedAt": "2026-11-13T18:23:22.166Z"
+  },
   "uno": {
     "rawgId": 2074,
     "matchedName": "UNO",
@@ -2154,6 +2257,17 @@
       "Platformer"
     ],
     "checkedAt": "2026-07-24T12:30:47.007Z"
+  },
+  "unravel two": {
+    "rawgId": 58735,
+    "matchedName": "Unravel Two",
+    "genres": [
+      "Platformer",
+      "Adventure",
+      "Action",
+      "Puzzle"
+    ],
+    "checkedAt": "2026-11-13T18:23:22.166Z"
   },
   "until dawn": {
     "rawgId": 3209,
@@ -2235,6 +2349,18 @@
       "Arcade"
     ],
     "checkedAt": "2026-07-24T12:30:47.007Z"
+  },
+  "wobbly life": {
+    "rawgId": 491187,
+    "matchedName": "Wobbly Life",
+    "genres": [
+      "Adventure",
+      "Action",
+      "Casual",
+      "Simulation",
+      "Indie"
+    ],
+    "checkedAt": "2026-11-13T18:23:22.166Z"
   },
   "world war z: aftermath": {
     "rawgId": 650648,
