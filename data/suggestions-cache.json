@@ -1357,6 +1357,16 @@
     ],
     "checkedAt": "2026-07-24T12:30:47.007Z"
   },
+  "marvel's guardians of the galaxy": {
+    "rawgId": 616765,
+    "matchedName": "Marvel's Guardians of the Galaxy",
+    "genres": [
+      "Shooter",
+      "Adventure",
+      "Action"
+    ],
+    "checkedAt": "2026-11-14T16:51:10.008Z"
+  },
   "marvel's midnight suns": {
     "rawgId": 650604,
     "matchedName": "Marvel's Midnight Suns",
@@ -1740,6 +1750,14 @@
       "Action"
     ],
     "checkedAt": "2026-07-24T12:30:47.007Z"
+  },
+  "shrek 2 remastered": {
+    "rawgId": 327246,
+    "matchedName": "Commandos 2 - HD Remaster",
+    "genres": [
+      "Strategy"
+    ],
+    "checkedAt": "2026-11-14T16:51:10.008Z"
   },
   "silent hill 2": {
     "rawgId": 868086,

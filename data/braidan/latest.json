@@ -4,7 +4,7 @@
     "key": "braidan",
     "displayName": "Braidan"
   },
-  "capturedAt": "2026-11-13T18:22:45.667Z",
+  "capturedAt": "2026-11-14T16:51:08.379Z",
   "playedTitles": [
     {
       "titleId": "CUSA00079_00",
@@ -187,11 +187,11 @@
       "name": "For Honor",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202402/2815/934a3852ebc9f2e2aec3421cf7ce5e31ad0aeb3cabcd349c.png",
       "category": "ps4_game",
-      "playCount": 2,
-      "playDurationIso": "PT3M16S",
-      "playDurationMinutes": 3,
+      "playCount": 3,
+      "playDurationIso": "PT29M22S",
+      "playDurationMinutes": 29,
       "firstPlayed": "2024-12-12T14:35:28.280000Z",
-      "lastPlayed": "2026-11-13T01:09:43.410000Z"
+      "lastPlayed": "2026-11-14T01:36:26.230000Z"
     },
     {
       "titleId": "CUSA05462_00",
@@ -385,11 +385,11 @@
       "name": "Zombies Ate My Neighbors and Ghoul Patrol",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202102/0405/LwGe62AmbsFBz2gg5iUYnOvU.png",
       "category": "ps4_game",
-      "playCount": 4,
-      "playDurationIso": "PT23M36S",
-      "playDurationMinutes": 24,
+      "playCount": 5,
+      "playDurationIso": "PT25M23S",
+      "playDurationMinutes": 25,
       "firstPlayed": "2024-10-30T23:16:50.660000Z",
-      "lastPlayed": "2026-11-13T01:15:23.440000Z"
+      "lastPlayed": "2026-11-13T23:34:08.770000Z"
     },
     {
       "titleId": "CUSA20085_00",
@@ -555,6 +555,17 @@
       "playDurationMinutes": 3,
       "firstPlayed": "2025-11-21T22:10:15.960000Z",
       "lastPlayed": "2025-11-21T22:13:53.990000Z"
+    },
+    {
+      "titleId": "PPSA01748_00",
+      "name": "Marvel's Guardians of the Galaxy",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202106/0215/Pw9cWnyqkix3EoCOGqrN1cgN.png",
+      "category": "ps5_native_game",
+      "playCount": 1,
+      "playDurationIso": "PT1H38S",
+      "playDurationMinutes": 61,
+      "firstPlayed": "2026-11-14T01:36:29.780000Z",
+      "lastPlayed": "2026-11-14T02:38:07.330000Z"
     },
     {
       "titleId": "PPSA01864_00",
@@ -770,11 +781,11 @@
       "name": "Goat Simulator 3",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202204/0413/FSpxZI2qYcriljLKCTnyAvcQ.png",
       "category": "ps5_native_game",
-      "playCount": 94,
-      "playDurationIso": "PT88H50M31S",
-      "playDurationMinutes": 5331,
+      "playCount": 96,
+      "playDurationIso": "PT91H1M28S",
+      "playDurationMinutes": 5461,
       "firstPlayed": "2025-12-13T20:10:07.960000Z",
-      "lastPlayed": "2026-11-07T23:54:45.590000Z"
+      "lastPlayed": "2026-11-14T13:31:35.040000Z"
     },
     {
       "titleId": "PPSA04476_00",
@@ -803,11 +814,11 @@
       "name": "Destroy All Humans! 2 - Reprobed",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202109/0617/DUwFDNC8UEOb1MnuwVppYyhc.png",
       "category": "ps5_native_game",
-      "playCount": 9,
-      "playDurationIso": "PT6H22M30S",
-      "playDurationMinutes": 383,
+      "playCount": 10,
+      "playDurationIso": "PT6H34M46S",
+      "playDurationMinutes": 395,
       "firstPlayed": "2024-10-21T23:19:15.850000Z",
-      "lastPlayed": "2026-10-24T20:22:31.570000Z"
+      "lastPlayed": "2026-11-14T02:50:31.510000Z"
     },
     {
       "titleId": "PPSA05825_00",
@@ -891,11 +902,11 @@
       "name": "Teenage Mutant Ninja Turtles: Shredder's Revenge",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202206/0919/hq6KtnlrPbnUj7iNNI0V6gwe.png",
       "category": "ps5_native_game",
-      "playCount": 29,
-      "playDurationIso": "PT15H46M11S",
-      "playDurationMinutes": 946,
+      "playCount": 31,
+      "playDurationIso": "PT16H14M17S",
+      "playDurationMinutes": 974,
       "firstPlayed": "2023-11-05T16:45:56.000000Z",
-      "lastPlayed": "2026-07-10T14:06:22.510000Z"
+      "lastPlayed": "2026-11-14T01:09:40.220000Z"
     },
     {
       "titleId": "PPSA06888_00",
@@ -1391,6 +1402,17 @@
       "playDurationMinutes": 18,
       "firstPlayed": "2025-11-12T14:20:04.070000Z",
       "lastPlayed": "2025-11-14T21:57:36.010000Z"
+    },
+    {
+      "titleId": "PPSA31341_00",
+      "name": "Shrek 2 Remastered",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202610/1520/55a2d8335f4cf30e94ae7747778dc007fda46a2c963e44ac.png",
+      "category": "ps5_native_game",
+      "playCount": 1,
+      "playDurationIso": "PT29M13S",
+      "playDurationMinutes": 29,
+      "firstPlayed": "2026-11-14T13:01:48.560000Z",
+      "lastPlayed": "2026-11-14T13:31:31.840000Z"
     },
     {
       "titleId": "PPSA32718_00",
@@ -2363,6 +2385,28 @@
       "lastTrophyAt": "2024-01-18T22:25:29Z"
     },
     {
+      "npCommunicationId": "NPWR21586_00",
+      "name": "Marvel's Guardians of the Galaxy",
+      "platform": "PS5",
+      "iconUrl": "https://psnobj.prod.dl.playstation.net/psnobj/NPWR21586_00/e4cba10a-c4ef-4c63-8632-c0d2d6632874.png",
+      "defined": {
+        "bronze": 54,
+        "silver": 3,
+        "gold": 1,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 1,
+        "silver": 0,
+        "gold": 0,
+        "platinum": 0
+      },
+      "earnedTotal": 1,
+      "progress": 1,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-11-14T02:35:19Z"
+    },
+    {
       "npCommunicationId": "NPWR21647_00",
       "name": "Grand Theft Auto V",
       "platform": "PS5",
@@ -2859,14 +2903,14 @@
       },
       "earned": {
         "bronze": 21,
-        "silver": 2,
+        "silver": 3,
         "gold": 2,
         "platinum": 0
       },
-      "earnedTotal": 25,
-      "progress": 41,
+      "earnedTotal": 26,
+      "progress": 43,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-11-07T19:38:15Z"
+      "lastTrophyAt": "2026-11-13T23:14:19Z"
     },
     {
       "npCommunicationId": "NPWR27252_00",
@@ -4011,6 +4055,28 @@
       "progress": 0,
       "hasPlatinum": false,
       "lastTrophyAt": "2025-11-12T14:20:10Z"
+    },
+    {
+      "npCommunicationId": "NPWR53347_00",
+      "name": "Shrek 2 Remastered",
+      "platform": "PS5",
+      "iconUrl": "https://psnobj.prod.dl.playstation.net/psnobj/NPWR53347_00/53d7dd14-c42b-4b7c-b0db-a527a1383049.png",
+      "defined": {
+        "bronze": 32,
+        "silver": 10,
+        "gold": 3,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 2,
+        "silver": 0,
+        "gold": 0,
+        "platinum": 0
+      },
+      "earnedTotal": 2,
+      "progress": 2,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-11-14T13:10:53Z"
     },
     {
       "npCommunicationId": "NPWR54219_00",
