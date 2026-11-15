@@ -4,7 +4,7 @@
     "key": "dad",
     "displayName": "Dad"
   },
-  "capturedAt": "2026-11-14T16:51:07.569Z",
+  "capturedAt": "2026-11-15T17:33:52.097Z",
   "playedTitles": [
     {
       "titleId": "CUSA00001_00",
@@ -284,7 +284,7 @@
     {
       "titleId": "CUSA00224_00",
       "name": "War Thunder",
-      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202611/1108/45ba4290d7bdd7d24ca1aa9940e7279b91047af4ab69b801.png",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202609/1610/5d9820b5dd3584eadc9bc106d36042dad45e4c6ab5915cd0.png",
       "category": "ps4_game",
       "playCount": 4,
       "playDurationIso": "PT5M48S",
@@ -1595,11 +1595,11 @@
       "name": "Devil May Cry 5 Series",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202107/3012/lPldVWxsnIfFOUBvBTKXndnw.png",
       "category": "ps5_native_game",
-      "playCount": 5,
-      "playDurationIso": "PT2H35M14S",
-      "playDurationMinutes": 155,
+      "playCount": 6,
+      "playDurationIso": "PT2H48M50S",
+      "playDurationMinutes": 169,
       "firstPlayed": "2024-10-30T04:52:13.110000Z",
-      "lastPlayed": "2025-08-11T22:26:36.740000Z"
+      "lastPlayed": "2026-11-14T22:00:41.600000Z"
     },
     {
       "titleId": "PPSA01467_00",
@@ -1925,11 +1925,11 @@
       "name": "Grand Theft Auto V (PlayStation®5)",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
       "category": "ps5_native_game",
-      "playCount": 213,
-      "playDurationIso": "PT176H49S",
-      "playDurationMinutes": 10561,
+      "playCount": 214,
+      "playDurationIso": "PT176H40M54S",
+      "playDurationMinutes": 10601,
       "firstPlayed": "2023-06-05T04:58:21.810000Z",
-      "lastPlayed": "2026-11-08T21:58:52.720000Z"
+      "lastPlayed": "2026-11-14T22:41:51.460000Z"
     },
     {
       "titleId": "PPSA03771_00",
@@ -2575,10 +2575,10 @@
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202508/1316/3302f35b66691aa405aee31624c0c95fe73081be8e0c75bb.png",
       "category": "ps5_native_game",
       "playCount": 57,
-      "playDurationIso": "PT40H35M59S",
-      "playDurationMinutes": 2436,
+      "playDurationIso": "PT40H45M24S",
+      "playDurationMinutes": 2445,
       "firstPlayed": "2026-06-24T05:11:56.370000Z",
-      "lastPlayed": "2026-09-27T14:29:14.790000Z"
+      "lastPlayed": "2026-11-14T21:42:39.780000Z"
     },
     {
       "titleId": "PPSA17085_00",
@@ -2682,7 +2682,7 @@
     {
       "titleId": "PPSA21669_00",
       "name": "Marvel Rivals",
-      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202609/1008/3d85937370ce5d1fe39c9541e7cdc14455798fed56dc2390.png",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202611/1210/652a064c255831b4bc06eab2a88e886c5d96411fc7d4bc5e.png",
       "category": "ps5_native_game",
       "playCount": 1,
       "playDurationIso": "PT11M34S",
@@ -2915,11 +2915,11 @@
       "name": "Grounded 2",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/0316/a79dd27918cc2856b6f459dec2857548cfea7db7a85af544.png",
       "category": "ps5_native_game",
-      "playCount": 275,
-      "playDurationIso": "PT198H51M43S",
-      "playDurationMinutes": 11932,
+      "playCount": 276,
+      "playDurationIso": "PT198H59M11S",
+      "playDurationMinutes": 11939,
       "firstPlayed": "2026-08-11T17:09:56.720000Z",
-      "lastPlayed": "2026-11-13T22:11:30.190000Z"
+      "lastPlayed": "2026-11-15T08:04:23.680000Z"
     },
     {
       "titleId": "PPSA35101_00",

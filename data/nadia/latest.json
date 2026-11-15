@@ -4,7 +4,7 @@
     "key": "nadia",
     "displayName": "Nadia"
   },
-  "capturedAt": "2026-11-14T16:51:09.020Z",
+  "capturedAt": "2026-11-15T17:33:53.508Z",
   "playedTitles": [
     {
       "titleId": "CUSA00079_00",
@@ -44,11 +44,11 @@
       "name": "LEGO® Worlds",
       "imageUrl": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA02979_00/3/i_d38f9cbc8fec7c7a46f5905841846f01a194778f5d550a6e6b2a88a3e37adc50/i/icon0.png",
       "category": "ps4_game",
-      "playCount": 130,
+      "playCount": 131,
       "playDurationIso": "PT153H13M58S",
       "playDurationMinutes": 9194,
       "firstPlayed": "2024-09-06T13:20:00.440000Z",
-      "lastPlayed": "2026-11-13T21:32:38.020000Z"
+      "lastPlayed": "2026-11-14T22:01:27.090000Z"
     },
     {
       "titleId": "CUSA05462_00",
@@ -341,11 +341,11 @@
       "name": "Grand Theft Auto V (PlayStation®5)",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
       "category": "ps5_native_game",
-      "playCount": 2,
-      "playDurationIso": "PT2H57M13S",
-      "playDurationMinutes": 177,
+      "playCount": 3,
+      "playDurationIso": "PT3H37M2S",
+      "playDurationMinutes": 217,
       "firstPlayed": "2026-11-08T16:58:50.790000Z",
-      "lastPlayed": "2026-11-08T21:59:38.970000Z"
+      "lastPlayed": "2026-11-14T22:41:59.710000Z"
     },
     {
       "titleId": "PPSA03933_00",

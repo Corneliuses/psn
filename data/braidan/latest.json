@@ -4,7 +4,7 @@
     "key": "braidan",
     "displayName": "Braidan"
   },
-  "capturedAt": "2026-11-14T16:51:08.379Z",
+  "capturedAt": "2026-11-15T17:33:52.944Z",
   "playedTitles": [
     {
       "titleId": "CUSA00079_00",
@@ -115,6 +115,17 @@
       "playDurationMinutes": 10852,
       "firstPlayed": "2024-08-29T11:44:21.390000Z",
       "lastPlayed": "2026-10-17T23:17:23.290000Z"
+    },
+    {
+      "titleId": "CUSA03293_00",
+      "name": "Vampyr",
+      "imageUrl": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA03468_00/3/i_b53500af29886a40317286383edd4c0c960ea66a4ceef006051963f97dc7c2d1/i/icon0.png",
+      "category": "unknown",
+      "playCount": 1,
+      "playDurationIso": "PT59M6S",
+      "playDurationMinutes": 59,
+      "firstPlayed": "2026-11-14T21:43:10.530000Z",
+      "lastPlayed": "2026-11-14T21:43:10.530000Z"
     },
     {
       "titleId": "CUSA03352_00",
@@ -781,11 +792,11 @@
       "name": "Goat Simulator 3",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202204/0413/FSpxZI2qYcriljLKCTnyAvcQ.png",
       "category": "ps5_native_game",
-      "playCount": 96,
-      "playDurationIso": "PT91H1M28S",
+      "playCount": 97,
+      "playDurationIso": "PT91H1M29S",
       "playDurationMinutes": 5461,
       "firstPlayed": "2025-12-13T20:10:07.960000Z",
-      "lastPlayed": "2026-11-14T13:31:35.040000Z"
+      "lastPlayed": "2026-11-14T21:28:05.750000Z"
     },
     {
       "titleId": "PPSA04476_00",
@@ -1166,11 +1177,11 @@
       "name": "LEGO® Batman™: Legacy of the Dark Knight",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202508/1316/3302f35b66691aa405aee31624c0c95fe73081be8e0c75bb.png",
       "category": "ps5_native_game",
-      "playCount": 24,
-      "playDurationIso": "PT48H18M29S",
-      "playDurationMinutes": 2898,
+      "playCount": 27,
+      "playDurationIso": "PT48H32M57S",
+      "playDurationMinutes": 2913,
       "firstPlayed": "2026-05-19T16:29:25.170000Z",
-      "lastPlayed": "2026-09-27T14:29:14.790000Z"
+      "lastPlayed": "2026-11-15T12:32:41.960000Z"
     },
     {
       "titleId": "PPSA17597_00",
@@ -1419,11 +1430,11 @@
       "name": "Grounded 2",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/0316/a79dd27918cc2856b6f459dec2857548cfea7db7a85af544.png",
       "category": "ps5_native_game",
-      "playCount": 164,
+      "playCount": 166,
       "playDurationIso": "PT194H33M50S",
       "playDurationMinutes": 11674,
       "firstPlayed": "2026-08-11T17:12:03.260000Z",
-      "lastPlayed": "2026-11-13T00:37:46.620000Z"
+      "lastPlayed": "2026-11-15T17:30:01.450000Z"
     },
     {
       "titleId": "PPSA35101_00",
@@ -1679,6 +1690,28 @@
       "progress": 2,
       "hasPlatinum": false,
       "lastTrophyAt": "2024-12-13T13:48:12Z"
+    },
+    {
+      "npCommunicationId": "NPWR09862_00",
+      "name": "Vampyr",
+      "platform": "PS4",
+      "iconUrl": "https://image.api.playstation.com/trophy/np/NPWR09862_00_00FC81FA414C9E0FE5C3A4E507686C60D825FF9172/5472DBF543D139228055098E14B20D74E8B36CB0.PNG",
+      "defined": {
+        "bronze": 6,
+        "silver": 17,
+        "gold": 5,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 1,
+        "silver": 0,
+        "gold": 0,
+        "platinum": 0
+      },
+      "earnedTotal": 1,
+      "progress": 1,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-11-14T21:59:23Z"
     },
     {
       "npCommunicationId": "NPWR10102_00",
@@ -3856,7 +3889,7 @@
       "earnedTotal": 34,
       "progress": 46,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-09-27T13:40:43Z"
+      "lastTrophyAt": "2026-11-14T21:38:44Z"
     },
     {
       "npCommunicationId": "NPWR47980_00",

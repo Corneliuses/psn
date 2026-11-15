@@ -8,16 +8,16 @@
         "released": "2009-10-13"
       },
       {
-        "name": "Red Dead Redemption",
-        "rawgId": 4544,
-        "rating": 95,
-        "released": "2010-05-18"
-      },
-      {
         "name": "The Last Of Us",
         "rawgId": 3990,
         "rating": 95,
         "released": "2013-06-14"
+      },
+      {
+        "name": "Red Dead Redemption",
+        "rawgId": 4544,
+        "rating": 95,
+        "released": "2010-05-18"
       },
       {
         "name": "Elden Ring",
@@ -38,12 +38,6 @@
         "released": "2002-10-27"
       },
       {
-        "name": "BioShock Infinite",
-        "rawgId": 4062,
-        "rating": 94,
-        "released": "2013-03-26"
-      },
-      {
         "name": "Batman: Arkham City",
         "rawgId": 28623,
         "rating": 94,
@@ -54,6 +48,12 @@
         "rawgId": 5679,
         "rating": 94,
         "released": "2011-11-11"
+      },
+      {
+        "name": "BioShock Infinite",
+        "rawgId": 4062,
+        "rating": 94,
+        "released": "2013-03-26"
       },
       {
         "name": "Quake",
@@ -156,12 +156,6 @@
         "released": "2019-10-14"
       },
       {
-        "name": "Tumblestone",
-        "rawgId": 1657,
-        "rating": 91,
-        "released": "2016-07-11"
-      },
-      {
         "name": "Death Road to Canada",
         "rawgId": 345,
         "rating": 91,
@@ -174,16 +168,22 @@
         "released": "2009-12-18"
       },
       {
+        "name": "Tumblestone",
+        "rawgId": 1657,
+        "rating": 91,
+        "released": "2016-07-11"
+      },
+      {
         "name": "FEZ",
         "rawgId": 3740,
         "rating": 91,
         "released": "2012-04-13"
       },
       {
-        "name": "Rez Infinite",
-        "rawgId": 1081,
+        "name": "Celeste",
+        "rawgId": 22121,
         "rating": 91,
-        "released": "2016-10-13"
+        "released": "2018-01-25"
       }
     ]
   },
@@ -193,7 +193,7 @@
     "Indie"
   ],
   "metadata": {
-    "generated_at": "2026-11-14T16:51:15.680Z",
+    "generated_at": "2026-11-15T17:33:58.748Z",
     "rawg_base_url": "https://rawg.io",
     "attribution": "Data from RAWG.io",
     "build": "v0.1.0"
