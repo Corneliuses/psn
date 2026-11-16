@@ -38,10 +38,10 @@
         "released": "2002-10-27"
       },
       {
-        "name": "Batman: Arkham City",
-        "rawgId": 28623,
+        "name": "Quake",
+        "rawgId": 54491,
         "rating": 94,
-        "released": "2011-10-18"
+        "released": "1996-06-22"
       },
       {
         "name": "The Elder Scrolls V: Skyrim",
@@ -50,16 +50,16 @@
         "released": "2011-11-11"
       },
       {
+        "name": "Batman: Arkham City",
+        "rawgId": 28623,
+        "rating": 94,
+        "released": "2011-10-18"
+      },
+      {
         "name": "BioShock Infinite",
         "rawgId": 4062,
         "rating": 94,
         "released": "2013-03-26"
-      },
-      {
-        "name": "Quake",
-        "rawgId": 54491,
-        "rating": 94,
-        "released": "1996-06-22"
       }
     ],
     "Adventure": [
@@ -162,16 +162,16 @@
         "released": "2016-07-20"
       },
       {
-        "name": "Ticket to Ride",
-        "rawgId": 964,
-        "rating": 91,
-        "released": "2009-12-18"
-      },
-      {
         "name": "Tumblestone",
         "rawgId": 1657,
         "rating": 91,
         "released": "2016-07-11"
+      },
+      {
+        "name": "Ticket to Ride",
+        "rawgId": 964,
+        "rating": 91,
+        "released": "2009-12-18"
       },
       {
         "name": "FEZ",
@@ -193,7 +193,7 @@
     "Indie"
   ],
   "metadata": {
-    "generated_at": "2026-11-15T17:33:58.748Z",
+    "generated_at": "2026-11-16T20:49:07.198Z",
     "rawg_base_url": "https://rawg.io",
     "attribution": "Data from RAWG.io",
     "build": "v0.1.0"
