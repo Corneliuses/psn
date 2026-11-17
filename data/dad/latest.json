@@ -4,7 +4,7 @@
     "key": "dad",
     "displayName": "Dad"
   },
-  "capturedAt": "2026-11-16T20:49:00.941Z",
+  "capturedAt": "2026-11-17T19:37:23.875Z",
   "playedTitles": [
     {
       "titleId": "CUSA00001_00",
@@ -1651,8 +1651,8 @@
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202009/3017/wYAvR9akyRjDjy75S4zCLAGi.png",
       "category": "ps5_native_media_app",
       "playCount": 387,
-      "playDurationIso": "PT164H20M2S",
-      "playDurationMinutes": 9860,
+      "playDurationIso": "PT164H43M45S",
+      "playDurationMinutes": 9884,
       "firstPlayed": "2023-07-19T15:49:49.690000Z",
       "lastPlayed": "2026-11-13T05:41:52.180000Z"
     },
@@ -2420,11 +2420,11 @@
       "name": "HBO Max",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202506/1017/89c2a3a1eb2b1150c9583399b2fc0c1ecea8263fd5a0372c.png",
       "category": "ps5_web_based_media_app",
-      "playCount": 255,
-      "playDurationIso": "PT112H5M26S",
-      "playDurationMinutes": 6725,
+      "playCount": 257,
+      "playDurationIso": "PT112H32M32S",
+      "playDurationMinutes": 6753,
       "firstPlayed": "2023-06-05T04:03:50.810000Z",
-      "lastPlayed": "2026-11-09T06:03:56.270000Z"
+      "lastPlayed": "2026-11-17T06:17:43.640000Z"
     },
     {
       "titleId": "PPSA14632_00",
@@ -2915,11 +2915,11 @@
       "name": "Grounded 2",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/0316/a79dd27918cc2856b6f459dec2857548cfea7db7a85af544.png",
       "category": "ps5_native_game",
-      "playCount": 280,
-      "playDurationIso": "PT200H21M38S",
-      "playDurationMinutes": 12022,
+      "playCount": 284,
+      "playDurationIso": "PT205H26M27S",
+      "playDurationMinutes": 12326,
       "firstPlayed": "2026-08-11T17:09:56.720000Z",
-      "lastPlayed": "2026-11-16T20:47:10.960000Z"
+      "lastPlayed": "2026-11-17T19:04:22.210000Z"
     },
     {
       "titleId": "PPSA35101_00",
@@ -2937,11 +2937,11 @@
       "name": "NBA 2K27",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/2913/4a31f711e2ff460cd44ad646983f36533278cea61f639be9.png",
       "category": "ps5_native_game",
-      "playCount": 34,
-      "playDurationIso": "PT26H46M20S",
-      "playDurationMinutes": 1606,
+      "playCount": 35,
+      "playDurationIso": "PT28H52M41S",
+      "playDurationMinutes": 1733,
       "firstPlayed": "2026-10-19T04:01:05.910000Z",
-      "lastPlayed": "2026-11-14T04:19:19.090000Z"
+      "lastPlayed": "2026-11-17T06:16:52.450000Z"
     },
     {
       "titleId": "PPSA36327_00",

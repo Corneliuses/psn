@@ -4,7 +4,7 @@
     "key": "braidan",
     "displayName": "Braidan"
   },
-  "capturedAt": "2026-11-16T20:49:02.531Z",
+  "capturedAt": "2026-11-17T19:37:24.804Z",
   "playedTitles": [
     {
       "titleId": "CUSA00079_00",
@@ -705,10 +705,10 @@
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/1c7b75d8ed9271516546560d219ad0b22ee0a263b4537bd8.png",
       "category": "ps5_native_game",
       "playCount": 67,
-      "playDurationIso": "PT84H18M27S",
-      "playDurationMinutes": 5058,
+      "playDurationIso": "PT85H8M3S",
+      "playDurationMinutes": 5108,
       "firstPlayed": "2025-12-05T21:40:43.910000Z",
-      "lastPlayed": "2026-11-06T12:33:37.120000Z"
+      "lastPlayed": "2026-11-06T12:41:42.770000Z"
     },
     {
       "titleId": "PPSA03098_00",
@@ -738,10 +738,10 @@
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
       "category": "ps5_native_game",
       "playCount": 31,
-      "playDurationIso": "PT37H24M53S",
-      "playDurationMinutes": 2245,
+      "playDurationIso": "PT39H1M10S",
+      "playDurationMinutes": 2341,
       "firstPlayed": "2025-12-13T20:45:33.420000Z",
-      "lastPlayed": "2026-11-08T20:51:00.130000Z"
+      "lastPlayed": "2026-11-08T21:58:40.840000Z"
     },
     {
       "titleId": "PPSA03831_00",
@@ -793,8 +793,8 @@
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202204/0413/FSpxZI2qYcriljLKCTnyAvcQ.png",
       "category": "ps5_native_game",
       "playCount": 97,
-      "playDurationIso": "PT91H1M29S",
-      "playDurationMinutes": 5461,
+      "playDurationIso": "PT102H41M15S",
+      "playDurationMinutes": 6161,
       "firstPlayed": "2025-12-13T20:10:07.960000Z",
       "lastPlayed": "2026-11-14T21:28:05.750000Z"
     },
@@ -1167,8 +1167,8 @@
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202406/1216/9023747aeb28e119f8a8fe3272a67ae5f5e19ba0f658aacd.png",
       "category": "ps5_native_game",
       "playCount": 6,
-      "playDurationIso": "PT4H19M57S",
-      "playDurationMinutes": 260,
+      "playDurationIso": "PT6H38M49S",
+      "playDurationMinutes": 399,
       "firstPlayed": "2026-11-01T14:23:12.390000Z",
       "lastPlayed": "2026-11-07T19:29:39.510000Z"
     },
@@ -1299,10 +1299,10 @@
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202506/2715/32a9405d4eeda54216f93c2a41213866d67c2c6e8719b3a9.png",
       "category": "ps5_native_game",
       "playCount": 1,
-      "playDurationIso": "PT0S",
-      "playDurationMinutes": 0,
+      "playDurationIso": "PT1H34M56S",
+      "playDurationMinutes": 95,
       "firstPlayed": "2026-11-15T19:02:44.120000Z",
-      "lastPlayed": "2026-11-15T19:02:44.120000Z"
+      "lastPlayed": "2026-11-15T20:37:41.180000Z"
     },
     {
       "titleId": "PPSA25153_00",
@@ -1441,11 +1441,11 @@
       "name": "Grounded 2",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/0316/a79dd27918cc2856b6f459dec2857548cfea7db7a85af544.png",
       "category": "ps5_native_game",
-      "playCount": 166,
-      "playDurationIso": "PT196H1M40S",
-      "playDurationMinutes": 11762,
+      "playCount": 167,
+      "playDurationIso": "PT199H8M44S",
+      "playDurationMinutes": 11949,
       "firstPlayed": "2026-08-11T17:12:03.260000Z",
-      "lastPlayed": "2026-11-15T18:58:47.310000Z"
+      "lastPlayed": "2026-11-17T00:14:52.330000Z"
     },
     {
       "titleId": "PPSA35101_00",
