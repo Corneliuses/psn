@@ -8,16 +8,16 @@
         "released": "2009-10-13"
       },
       {
-        "name": "The Last Of Us",
-        "rawgId": 3990,
-        "rating": 95,
-        "released": "2013-06-14"
-      },
-      {
         "name": "Red Dead Redemption",
         "rawgId": 4544,
         "rating": 95,
         "released": "2010-05-18"
+      },
+      {
+        "name": "The Last Of Us",
+        "rawgId": 3990,
+        "rating": 95,
+        "released": "2013-06-14"
       },
       {
         "name": "Elden Ring",
@@ -26,16 +26,16 @@
         "released": "2022-02-25"
       },
       {
-        "name": "Grand Theft Auto: Vice City",
-        "rawgId": 430,
-        "rating": 94,
-        "released": "2002-10-27"
-      },
-      {
         "name": "Resident Evil Code: Veronica",
         "rawgId": 40841,
         "rating": 94,
         "released": "2000-02-03"
+      },
+      {
+        "name": "Grand Theft Auto: Vice City",
+        "rawgId": 430,
+        "rating": 94,
+        "released": "2002-10-27"
       },
       {
         "name": "Quake",
@@ -168,16 +168,16 @@
         "released": "2016-07-11"
       },
       {
-        "name": "Ticket to Ride",
-        "rawgId": 964,
-        "rating": 91,
-        "released": "2009-12-18"
-      },
-      {
         "name": "FEZ",
         "rawgId": 3740,
         "rating": 91,
         "released": "2012-04-13"
+      },
+      {
+        "name": "Ticket to Ride",
+        "rawgId": 964,
+        "rating": 91,
+        "released": "2009-12-18"
       },
       {
         "name": "Celeste",
@@ -193,7 +193,7 @@
     "Indie"
   ],
   "metadata": {
-    "generated_at": "2026-11-17T19:37:29.101Z",
+    "generated_at": "2026-11-18T19:14:46.499Z",
     "rawg_base_url": "https://rawg.io",
     "attribution": "Data from RAWG.io",
     "build": "v0.1.0"
