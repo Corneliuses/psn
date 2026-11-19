@@ -4,7 +4,7 @@
     "key": "nadia",
     "displayName": "Nadia"
   },
-  "capturedAt": "2026-11-18T19:14:42.954Z",
+  "capturedAt": "2026-11-19T19:21:16.839Z",
   "playedTitles": [
     {
       "titleId": "CUSA00079_00",
@@ -1411,9 +1411,9 @@
       "platform": "PS5",
       "iconUrl": "https://psnobj.prod.dl.playstation.net/psnobj/NPWR25716_00/582a0e08-68ee-403b-862a-8f61e45a4201.png",
       "defined": {
-        "bronze": 49,
-        "silver": 11,
-        "gold": 3,
+        "bronze": 52,
+        "silver": 14,
+        "gold": 7,
         "platinum": 1
       },
       "earned": {

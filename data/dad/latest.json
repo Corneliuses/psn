@@ -4,7 +4,7 @@
     "key": "dad",
     "displayName": "Dad"
   },
-  "capturedAt": "2026-11-18T19:14:41.502Z",
+  "capturedAt": "2026-11-19T19:21:15.138Z",
   "playedTitles": [
     {
       "titleId": "CUSA00001_00",
@@ -1613,6 +1613,17 @@
       "lastPlayed": "2026-01-03T19:47:17.790000Z"
     },
     {
+      "titleId": "PPSA01547_00",
+      "name": "Grand Theft Auto VI",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
+      "category": "ps5_native_game",
+      "playCount": 4,
+      "playDurationIso": "PT1H20M20S",
+      "playDurationMinutes": 80,
+      "firstPlayed": "2026-11-19T05:00:26.320000Z",
+      "lastPlayed": "2026-11-19T19:04:51.530000Z"
+    },
+    {
       "titleId": "PPSA01576_00",
       "name": "Avatar: Frontiers of Pandora™",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202306/0113/38ad0cc5b92af440d46ccebf5d1f271213d656684fce3385.png",
@@ -1650,11 +1661,11 @@
       "name": "YouTube",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202009/3017/wYAvR9akyRjDjy75S4zCLAGi.png",
       "category": "ps5_native_media_app",
-      "playCount": 388,
-      "playDurationIso": "PT164H49M56S",
-      "playDurationMinutes": 9890,
+      "playCount": 391,
+      "playDurationIso": "PT165H5M20S",
+      "playDurationMinutes": 9905,
       "firstPlayed": "2023-07-19T15:49:49.690000Z",
-      "lastPlayed": "2026-11-18T04:54:51.820000Z"
+      "lastPlayed": "2026-11-19T14:00:19.430000Z"
     },
     {
       "titleId": "PPSA01768_00",
@@ -2077,7 +2088,7 @@
     {
       "titleId": "PPSA05825_00",
       "name": "Disney Dreamlight Valley",
-      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202204/0521/AE2i8UIeHoeCre6lo47PnnfL.png",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202611/0318/24f1b6f37f6295196a8055bcf43c2b95609bd0850ac4f023.png",
       "category": "ps5_native_game",
       "playCount": 3,
       "playDurationIso": "PT2H57M48S",
@@ -2937,11 +2948,11 @@
       "name": "NBA 2K27",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/2913/4a31f711e2ff460cd44ad646983f36533278cea61f639be9.png",
       "category": "ps5_native_game",
-      "playCount": 37,
-      "playDurationIso": "PT29H45M26S",
-      "playDurationMinutes": 1785,
+      "playCount": 38,
+      "playDurationIso": "PT29H45M33S",
+      "playDurationMinutes": 1786,
       "firstPlayed": "2026-10-19T04:01:05.910000Z",
-      "lastPlayed": "2026-11-18T15:55:25.750000Z"
+      "lastPlayed": "2026-11-19T05:00:18.090000Z"
     },
     {
       "titleId": "PPSA36327_00",
@@ -6961,6 +6972,28 @@
       "lastTrophyAt": "2025-08-11T22:26:31Z"
     },
     {
+      "npCommunicationId": "NPWR21085_00",
+      "name": "Grand Theft Auto VI",
+      "platform": "PS5",
+      "iconUrl": "https://psnobj.prod.dl.playstation.net/psnobj/NPWR21085_00/a71143e7-a67a-434e-b61d-38653cf9608f.png",
+      "defined": {
+        "bronze": 46,
+        "silver": 6,
+        "gold": 2,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 1,
+        "silver": 0,
+        "gold": 0,
+        "platinum": 0
+      },
+      "earnedTotal": 1,
+      "progress": 1,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-11-19T15:41:25Z"
+    },
+    {
       "npCommunicationId": "NPWR21143_00",
       "name": "Avatar: Frontiers of Pandora™",
       "platform": "PS5",
@@ -7692,9 +7725,9 @@
       "platform": "PS5",
       "iconUrl": "https://psnobj.prod.dl.playstation.net/psnobj/NPWR25716_00/582a0e08-68ee-403b-862a-8f61e45a4201.png",
       "defined": {
-        "bronze": 49,
-        "silver": 11,
-        "gold": 3,
+        "bronze": 52,
+        "silver": 14,
+        "gold": 7,
         "platinum": 1
       },
       "earned": {

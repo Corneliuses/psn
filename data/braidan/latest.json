@@ -4,7 +4,7 @@
     "key": "braidan",
     "displayName": "Braidan"
   },
-  "capturedAt": "2026-11-18T19:14:42.268Z",
+  "capturedAt": "2026-11-19T19:21:16.141Z",
   "playedTitles": [
     {
       "titleId": "CUSA00079_00",
@@ -834,7 +834,7 @@
     {
       "titleId": "PPSA05825_00",
       "name": "Disney Dreamlight Valley",
-      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202204/0521/AE2i8UIeHoeCre6lo47PnnfL.png",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202611/0318/24f1b6f37f6295196a8055bcf43c2b95609bd0850ac4f023.png",
       "category": "ps5_native_game",
       "playCount": 80,
       "playDurationIso": "PT55H3M7S",
@@ -2940,9 +2940,9 @@
       "platform": "PS5",
       "iconUrl": "https://psnobj.prod.dl.playstation.net/psnobj/NPWR25716_00/582a0e08-68ee-403b-862a-8f61e45a4201.png",
       "defined": {
-        "bronze": 49,
-        "silver": 11,
-        "gold": 3,
+        "bronze": 52,
+        "silver": 14,
+        "gold": 7,
         "platinum": 1
       },
       "earned": {
@@ -2952,7 +2952,7 @@
         "platinum": 0
       },
       "earnedTotal": 26,
-      "progress": 43,
+      "progress": 31,
       "hasPlatinum": false,
       "lastTrophyAt": "2026-11-13T23:14:19Z"
     },
