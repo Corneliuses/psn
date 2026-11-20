@@ -2321,6 +2321,16 @@
     ],
     "checkedAt": "2026-07-24T12:30:47.007Z"
   },
+  "vampyr": {
+    "rawgId": 28110,
+    "matchedName": "Vampyr",
+    "genres": [
+      "Adventure",
+      "Action",
+      "RPG"
+    ],
+    "checkedAt": "2026-11-20T18:57:55.189Z"
+  },
   "war of the monsters": {
     "rawgId": 3004,
     "matchedName": "War of the Monsters",

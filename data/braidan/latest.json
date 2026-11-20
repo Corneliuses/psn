@@ -4,7 +4,7 @@
     "key": "braidan",
     "displayName": "Braidan"
   },
-  "capturedAt": "2026-11-19T19:21:16.141Z",
+  "capturedAt": "2026-11-20T18:57:53.910Z",
   "playedTitles": [
     {
       "titleId": "CUSA00079_00",
@@ -120,12 +120,12 @@
       "titleId": "CUSA03293_00",
       "name": "Vampyr",
       "imageUrl": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA03468_00/3/i_b53500af29886a40317286383edd4c0c960ea66a4ceef006051963f97dc7c2d1/i/icon0.png",
-      "category": "unknown",
-      "playCount": 1,
-      "playDurationIso": "PT59M6S",
-      "playDurationMinutes": 59,
+      "category": "ps4_game",
+      "playCount": 2,
+      "playDurationIso": "PT2H7M52S",
+      "playDurationMinutes": 128,
       "firstPlayed": "2026-11-14T21:43:10.530000Z",
-      "lastPlayed": "2026-11-14T21:43:10.530000Z"
+      "lastPlayed": "2026-11-20T01:10:05.630000Z"
     },
     {
       "titleId": "CUSA03352_00",
@@ -834,7 +834,7 @@
     {
       "titleId": "PPSA05825_00",
       "name": "Disney Dreamlight Valley",
-      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202611/0318/24f1b6f37f6295196a8055bcf43c2b95609bd0850ac4f023.png",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202204/0521/AE2i8UIeHoeCre6lo47PnnfL.png",
       "category": "ps5_native_game",
       "playCount": 80,
       "playDurationIso": "PT55H3M7S",
@@ -1430,11 +1430,11 @@
       "name": "Shrek 2 Remastered",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202610/1520/55a2d8335f4cf30e94ae7747778dc007fda46a2c963e44ac.png",
       "category": "ps5_native_game",
-      "playCount": 1,
-      "playDurationIso": "PT29M13S",
-      "playDurationMinutes": 29,
+      "playCount": 2,
+      "playDurationIso": "PT1H6M25S",
+      "playDurationMinutes": 66,
       "firstPlayed": "2026-11-14T13:01:48.560000Z",
-      "lastPlayed": "2026-11-14T13:31:31.840000Z"
+      "lastPlayed": "2026-11-20T01:48:26.260000Z"
     },
     {
       "titleId": "PPSA32718_00",
@@ -1714,15 +1714,15 @@
         "platinum": 1
       },
       "earned": {
-        "bronze": 1,
-        "silver": 0,
+        "bronze": 4,
+        "silver": 1,
         "gold": 0,
         "platinum": 0
       },
-      "earnedTotal": 1,
-      "progress": 1,
+      "earnedTotal": 5,
+      "progress": 8,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-11-14T21:59:23Z"
+      "lastTrophyAt": "2026-11-20T01:07:09Z"
     },
     {
       "npCommunicationId": "NPWR10102_00",
@@ -4134,15 +4134,15 @@
         "platinum": 1
       },
       "earned": {
-        "bronze": 2,
+        "bronze": 3,
         "silver": 0,
         "gold": 0,
         "platinum": 0
       },
-      "earnedTotal": 2,
-      "progress": 2,
+      "earnedTotal": 3,
+      "progress": 4,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-11-14T13:10:53Z"
+      "lastTrophyAt": "2026-11-20T01:44:19Z"
     },
     {
       "npCommunicationId": "NPWR54219_00",

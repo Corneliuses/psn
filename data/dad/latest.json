@@ -4,7 +4,7 @@
     "key": "dad",
     "displayName": "Dad"
   },
-  "capturedAt": "2026-11-19T19:21:15.138Z",
+  "capturedAt": "2026-11-20T18:57:52.962Z",
   "playedTitles": [
     {
       "titleId": "CUSA00001_00",
@@ -1617,11 +1617,11 @@
       "name": "Grand Theft Auto VI",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
       "category": "ps5_native_game",
-      "playCount": 4,
-      "playDurationIso": "PT1H20M20S",
-      "playDurationMinutes": 80,
+      "playCount": 8,
+      "playDurationIso": "PT2H47M15S",
+      "playDurationMinutes": 167,
       "firstPlayed": "2026-11-19T05:00:26.320000Z",
-      "lastPlayed": "2026-11-19T19:04:51.530000Z"
+      "lastPlayed": "2026-11-20T15:14:17.470000Z"
     },
     {
       "titleId": "PPSA01576_00",
@@ -1661,11 +1661,11 @@
       "name": "YouTube",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202009/3017/wYAvR9akyRjDjy75S4zCLAGi.png",
       "category": "ps5_native_media_app",
-      "playCount": 391,
-      "playDurationIso": "PT165H5M20S",
-      "playDurationMinutes": 9905,
+      "playCount": 393,
+      "playDurationIso": "PT165H16M47S",
+      "playDurationMinutes": 9917,
       "firstPlayed": "2023-07-19T15:49:49.690000Z",
-      "lastPlayed": "2026-11-19T14:00:19.430000Z"
+      "lastPlayed": "2026-11-20T06:07:46.660000Z"
     },
     {
       "titleId": "PPSA01768_00",
@@ -2550,7 +2550,7 @@
     {
       "titleId": "PPSA16526_00",
       "name": "SpongeBob SquarePants: The Cosmic Shake",
-      "imageUrl": "https://image.api.playstation.com/vulcan/img/rnd/202109/0714/S6bCoFtrDo0EYWx2o9pruC5x.png",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202611/1815/7bf3fe44ee21bd3fb739cd511d455ed818e66b7eb855f5e7.png",
       "category": "ps5_native_game",
       "playCount": 1,
       "playDurationIso": "PT39M58S",
@@ -2693,7 +2693,7 @@
     {
       "titleId": "PPSA21669_00",
       "name": "Marvel Rivals",
-      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202611/1210/652a064c255831b4bc06eab2a88e886c5d96411fc7d4bc5e.png",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202611/1907/24cf4a281a9234c6f7648246bec9a2ceeec9dd6bbc4910b2.png",
       "category": "ps5_native_game",
       "playCount": 1,
       "playDurationIso": "PT11M34S",
@@ -2926,11 +2926,11 @@
       "name": "Grounded 2",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/0316/a79dd27918cc2856b6f459dec2857548cfea7db7a85af544.png",
       "category": "ps5_native_game",
-      "playCount": 287,
-      "playDurationIso": "PT208H4M15S",
-      "playDurationMinutes": 12484,
+      "playCount": 289,
+      "playDurationIso": "PT208H6M12S",
+      "playDurationMinutes": 12486,
       "firstPlayed": "2026-08-11T17:09:56.720000Z",
-      "lastPlayed": "2026-11-18T15:55:20.410000Z"
+      "lastPlayed": "2026-11-20T00:00:48.410000Z"
     },
     {
       "titleId": "PPSA35101_00",
@@ -2948,11 +2948,11 @@
       "name": "NBA 2K27",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/2913/4a31f711e2ff460cd44ad646983f36533278cea61f639be9.png",
       "category": "ps5_native_game",
-      "playCount": 38,
-      "playDurationIso": "PT29H45M33S",
-      "playDurationMinutes": 1786,
+      "playCount": 41,
+      "playDurationIso": "PT30H18M56S",
+      "playDurationMinutes": 1819,
       "firstPlayed": "2026-10-19T04:01:05.910000Z",
-      "lastPlayed": "2026-11-19T05:00:18.090000Z"
+      "lastPlayed": "2026-11-20T15:14:27.850000Z"
     },
     {
       "titleId": "PPSA36327_00",
@@ -6991,7 +6991,7 @@
       "earnedTotal": 1,
       "progress": 1,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-11-19T15:41:25Z"
+      "lastTrophyAt": "2026-11-20T06:15:10Z"
     },
     {
       "npCommunicationId": "NPWR21143_00",
@@ -9368,6 +9368,28 @@
       "progress": 29,
       "hasPlatinum": false,
       "lastTrophyAt": "2025-11-11T05:00:04Z"
+    },
+    {
+      "npCommunicationId": "NPWR53347_00",
+      "name": "Shrek 2 Remastered",
+      "platform": "PS5",
+      "iconUrl": "https://psnobj.prod.dl.playstation.net/psnobj/NPWR53347_00/53d7dd14-c42b-4b7c-b0db-a527a1383049.png",
+      "defined": {
+        "bronze": 32,
+        "silver": 10,
+        "gold": 3,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 3,
+        "silver": 0,
+        "gold": 0,
+        "platinum": 0
+      },
+      "earnedTotal": 3,
+      "progress": 4,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-11-20T01:44:19Z"
     },
     {
       "npCommunicationId": "NPWR53376_00",
