@@ -4,7 +4,7 @@
     "key": "dad",
     "displayName": "Dad"
   },
-  "capturedAt": "2026-11-20T18:57:52.962Z",
+  "capturedAt": "2026-11-21T17:52:43.688Z",
   "playedTitles": [
     {
       "titleId": "CUSA00001_00",
@@ -2926,11 +2926,11 @@
       "name": "Grounded 2",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/0316/a79dd27918cc2856b6f459dec2857548cfea7db7a85af544.png",
       "category": "ps5_native_game",
-      "playCount": 289,
-      "playDurationIso": "PT208H6M12S",
-      "playDurationMinutes": 12486,
+      "playCount": 290,
+      "playDurationIso": "PT209H58S",
+      "playDurationMinutes": 12541,
       "firstPlayed": "2026-08-11T17:09:56.720000Z",
-      "lastPlayed": "2026-11-20T00:00:48.410000Z"
+      "lastPlayed": "2026-11-20T22:13:16.100000Z"
     },
     {
       "titleId": "PPSA35101_00",
@@ -9381,15 +9381,15 @@
         "platinum": 1
       },
       "earned": {
-        "bronze": 3,
+        "bronze": 4,
         "silver": 0,
         "gold": 0,
         "platinum": 0
       },
-      "earnedTotal": 3,
-      "progress": 4,
+      "earnedTotal": 4,
+      "progress": 5,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-11-20T01:44:19Z"
+      "lastTrophyAt": "2026-11-20T22:50:40Z"
     },
     {
       "npCommunicationId": "NPWR53376_00",

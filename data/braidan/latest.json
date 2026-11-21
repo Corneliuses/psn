@@ -4,7 +4,7 @@
     "key": "braidan",
     "displayName": "Braidan"
   },
-  "capturedAt": "2026-11-20T18:57:53.910Z",
+  "capturedAt": "2026-11-21T17:52:44.338Z",
   "playedTitles": [
     {
       "titleId": "CUSA00079_00",
@@ -834,7 +834,7 @@
     {
       "titleId": "PPSA05825_00",
       "name": "Disney Dreamlight Valley",
-      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202204/0521/AE2i8UIeHoeCre6lo47PnnfL.png",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202611/0318/24f1b6f37f6295196a8055bcf43c2b95609bd0850ac4f023.png",
       "category": "ps5_native_game",
       "playCount": 80,
       "playDurationIso": "PT55H3M7S",
@@ -1153,7 +1153,7 @@
     {
       "titleId": "PPSA16526_00",
       "name": "SpongeBob SquarePants: The Cosmic Shake",
-      "imageUrl": "https://image.api.playstation.com/vulcan/img/rnd/202109/0714/S6bCoFtrDo0EYWx2o9pruC5x.png",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202611/1815/7bf3fe44ee21bd3fb739cd511d455ed818e66b7eb855f5e7.png",
       "category": "ps5_native_game",
       "playCount": 5,
       "playDurationIso": "PT4H59M45S",
@@ -1430,22 +1430,33 @@
       "name": "Shrek 2 Remastered",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202610/1520/55a2d8335f4cf30e94ae7747778dc007fda46a2c963e44ac.png",
       "category": "ps5_native_game",
-      "playCount": 2,
-      "playDurationIso": "PT1H6M25S",
-      "playDurationMinutes": 66,
+      "playCount": 3,
+      "playDurationIso": "PT1H44M27S",
+      "playDurationMinutes": 104,
       "firstPlayed": "2026-11-14T13:01:48.560000Z",
-      "lastPlayed": "2026-11-20T01:48:26.260000Z"
+      "lastPlayed": "2026-11-20T22:55:09.560000Z"
     },
     {
       "titleId": "PPSA32718_00",
       "name": "Grounded 2",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/0316/a79dd27918cc2856b6f459dec2857548cfea7db7a85af544.png",
       "category": "ps5_native_game",
-      "playCount": 167,
-      "playDurationIso": "PT199H8M44S",
-      "playDurationMinutes": 11949,
+      "playCount": 168,
+      "playDurationIso": "PT200H7M41S",
+      "playDurationMinutes": 12008,
       "firstPlayed": "2026-08-11T17:12:03.260000Z",
-      "lastPlayed": "2026-11-17T00:14:52.330000Z"
+      "lastPlayed": "2026-11-20T22:16:43.970000Z"
+    },
+    {
+      "titleId": "PPSA33626_00",
+      "name": "Disney•Pixar Toy Story 3 Complete Edition",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202608/1114/86b2651fcc61e74da44a7949263a63f43fee87911bd4c411.png",
+      "category": "ps5_native_game",
+      "playCount": 1,
+      "playDurationIso": "PT15M31S",
+      "playDurationMinutes": 16,
+      "firstPlayed": "2026-11-20T22:55:15.090000Z",
+      "lastPlayed": "2026-11-20T23:10:57.770000Z"
     },
     {
       "titleId": "PPSA35101_00",
@@ -4134,15 +4145,15 @@
         "platinum": 1
       },
       "earned": {
-        "bronze": 3,
+        "bronze": 4,
         "silver": 0,
         "gold": 0,
         "platinum": 0
       },
-      "earnedTotal": 3,
-      "progress": 4,
+      "earnedTotal": 4,
+      "progress": 5,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-11-20T01:44:19Z"
+      "lastTrophyAt": "2026-11-20T22:50:40Z"
     },
     {
       "npCommunicationId": "NPWR54219_00",
@@ -4165,6 +4176,28 @@
       "progress": 0,
       "hasPlatinum": false,
       "lastTrophyAt": "2026-06-06T04:05:28Z"
+    },
+    {
+      "npCommunicationId": "NPWR56392_00",
+      "name": "Toy Story 3 Complete Edition",
+      "platform": "PS5",
+      "iconUrl": "https://psnobj.prod.dl.playstation.net/psnobj/NPWR56392_00/aa8084f3-60e8-479e-a80a-d902cd03668f.png",
+      "defined": {
+        "bronze": 24,
+        "silver": 14,
+        "gold": 3,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 1,
+        "silver": 1,
+        "gold": 0,
+        "platinum": 0
+      },
+      "earnedTotal": 2,
+      "progress": 4,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-11-20T23:07:08Z"
     },
     {
       "npCommunicationId": "NPWR58198_00",
