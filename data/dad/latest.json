@@ -4,7 +4,7 @@
     "key": "dad",
     "displayName": "Dad"
   },
-  "capturedAt": "2026-11-21T17:52:43.688Z",
+  "capturedAt": "2026-11-22T18:13:50.160Z",
   "playedTitles": [
     {
       "titleId": "CUSA00001_00",
@@ -1617,11 +1617,11 @@
       "name": "Grand Theft Auto VI",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
       "category": "ps5_native_game",
-      "playCount": 8,
-      "playDurationIso": "PT2H47M15S",
-      "playDurationMinutes": 167,
+      "playCount": 11,
+      "playDurationIso": "PT4H8M40S",
+      "playDurationMinutes": 249,
       "firstPlayed": "2026-11-19T05:00:26.320000Z",
-      "lastPlayed": "2026-11-20T15:14:17.470000Z"
+      "lastPlayed": "2026-11-22T06:42:25.920000Z"
     },
     {
       "titleId": "PPSA01576_00",
@@ -1661,11 +1661,11 @@
       "name": "YouTube",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202009/3017/wYAvR9akyRjDjy75S4zCLAGi.png",
       "category": "ps5_native_media_app",
-      "playCount": 393,
-      "playDurationIso": "PT165H16M47S",
-      "playDurationMinutes": 9917,
+      "playCount": 396,
+      "playDurationIso": "PT165H28M6S",
+      "playDurationMinutes": 9928,
       "firstPlayed": "2023-07-19T15:49:49.690000Z",
-      "lastPlayed": "2026-11-20T06:07:46.660000Z"
+      "lastPlayed": "2026-11-22T06:29:40.670000Z"
     },
     {
       "titleId": "PPSA01768_00",
@@ -2431,11 +2431,11 @@
       "name": "HBO Max",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202506/1017/89c2a3a1eb2b1150c9583399b2fc0c1ecea8263fd5a0372c.png",
       "category": "ps5_web_based_media_app",
-      "playCount": 258,
-      "playDurationIso": "PT112H49M",
-      "playDurationMinutes": 6769,
+      "playCount": 259,
+      "playDurationIso": "PT112H49M43S",
+      "playDurationMinutes": 6770,
       "firstPlayed": "2023-06-05T04:03:50.810000Z",
-      "lastPlayed": "2026-11-18T04:48:31.890000Z"
+      "lastPlayed": "2026-11-22T04:21:04.450000Z"
     },
     {
       "titleId": "PPSA14632_00",
@@ -2795,10 +2795,10 @@
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202506/2715/32a9405d4eeda54216f93c2a41213866d67c2c6e8719b3a9.png",
       "category": "ps5_native_game",
       "playCount": 2,
-      "playDurationIso": "PT1H34M23S",
-      "playDurationMinutes": 94,
+      "playDurationIso": "PT1H43M29S",
+      "playDurationMinutes": 103,
       "firstPlayed": "2026-10-18T21:36:39.000000Z",
-      "lastPlayed": "2026-10-19T02:33:22.200000Z"
+      "lastPlayed": "2026-11-22T15:03:10.790000Z"
     },
     {
       "titleId": "PPSA25153_00",
@@ -2948,11 +2948,11 @@
       "name": "NBA 2K27",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/2913/4a31f711e2ff460cd44ad646983f36533278cea61f639be9.png",
       "category": "ps5_native_game",
-      "playCount": 41,
-      "playDurationIso": "PT30H18M56S",
+      "playCount": 44,
+      "playDurationIso": "PT30H19M15S",
       "playDurationMinutes": 1819,
       "firstPlayed": "2026-10-19T04:01:05.910000Z",
-      "lastPlayed": "2026-11-20T15:14:27.850000Z"
+      "lastPlayed": "2026-11-22T04:48:23.160000Z"
     },
     {
       "titleId": "PPSA36327_00",
@@ -6991,7 +6991,7 @@
       "earnedTotal": 1,
       "progress": 1,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-11-20T06:15:10Z"
+      "lastTrophyAt": "2026-11-22T06:37:09Z"
     },
     {
       "npCommunicationId": "NPWR21143_00",

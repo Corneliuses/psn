@@ -4,7 +4,7 @@
     "key": "braidan",
     "displayName": "Braidan"
   },
-  "capturedAt": "2026-11-21T17:52:44.338Z",
+  "capturedAt": "2026-11-22T18:13:50.907Z",
   "playedTitles": [
     {
       "titleId": "CUSA00079_00",
@@ -77,11 +77,11 @@
       "name": "Horizon Zero Dawn™",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0221/vC7trMorHJgbImp8PCQvpI0p.png",
       "category": "ps4_game",
-      "playCount": 27,
-      "playDurationIso": "PT23H28M24S",
+      "playCount": 29,
+      "playDurationIso": "PT23H28M25S",
       "playDurationMinutes": 1408,
       "firstPlayed": "2024-07-26T00:16:29.470000Z",
-      "lastPlayed": "2026-10-29T22:38:30.000000Z"
+      "lastPlayed": "2026-11-22T14:53:26.450000Z"
     },
     {
       "titleId": "CUSA02685_00",
@@ -1298,11 +1298,11 @@
       "name": "NBA BOUNCE",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202506/2715/32a9405d4eeda54216f93c2a41213866d67c2c6e8719b3a9.png",
       "category": "ps5_native_game",
-      "playCount": 1,
-      "playDurationIso": "PT1H34M56S",
-      "playDurationMinutes": 95,
+      "playCount": 2,
+      "playDurationIso": "PT1H44M13S",
+      "playDurationMinutes": 104,
       "firstPlayed": "2026-11-15T19:02:44.120000Z",
-      "lastPlayed": "2026-11-15T20:37:41.180000Z"
+      "lastPlayed": "2026-11-22T15:03:10.790000Z"
     },
     {
       "titleId": "PPSA25153_00",
@@ -1452,11 +1452,11 @@
       "name": "Disney•Pixar Toy Story 3 Complete Edition",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202608/1114/86b2651fcc61e74da44a7949263a63f43fee87911bd4c411.png",
       "category": "ps5_native_game",
-      "playCount": 1,
+      "playCount": 2,
       "playDurationIso": "PT15M31S",
       "playDurationMinutes": 16,
       "firstPlayed": "2026-11-20T22:55:15.090000Z",
-      "lastPlayed": "2026-11-20T23:10:57.770000Z"
+      "lastPlayed": "2026-11-22T14:53:29.900000Z"
     },
     {
       "titleId": "PPSA35101_00",
@@ -4013,15 +4013,15 @@
         "platinum": 1
       },
       "earned": {
-        "bronze": 4,
+        "bronze": 8,
         "silver": 1,
         "gold": 0,
         "platinum": 0
       },
-      "earnedTotal": 5,
-      "progress": 7,
+      "earnedTotal": 9,
+      "progress": 12,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-11-15T19:29:26Z"
+      "lastTrophyAt": "2026-11-21T19:06:34Z"
     },
     {
       "npCommunicationId": "NPWR49606_00",
