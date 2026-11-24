@@ -4,7 +4,7 @@
     "key": "braidan",
     "displayName": "Braidan"
   },
-  "capturedAt": "2026-11-23T22:27:07.492Z",
+  "capturedAt": "2026-11-24T20:59:22.772Z",
   "playedTitles": [
     {
       "titleId": "CUSA00079_00",
@@ -1254,11 +1254,11 @@
       "name": "ASTRO BOT",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202406/0500/8f15268257b878597757fcc5f2c9545840867bc71fc863b1.png",
       "category": "ps5_native_game",
-      "playCount": 86,
+      "playCount": 87,
       "playDurationIso": "PT73H45M7S",
       "playDurationMinutes": 4425,
       "firstPlayed": "2024-09-10T20:15:38.810000Z",
-      "lastPlayed": "2026-02-01T22:19:29.670000Z"
+      "lastPlayed": "2026-11-24T12:33:11.130000Z"
     },
     {
       "titleId": "PPSA22695_00",

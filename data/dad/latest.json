@@ -4,7 +4,7 @@
     "key": "dad",
     "displayName": "Dad"
   },
-  "capturedAt": "2026-11-23T22:27:06.401Z",
+  "capturedAt": "2026-11-24T20:59:22.121Z",
   "playedTitles": [
     {
       "titleId": "CUSA00001_00",
@@ -1617,11 +1617,11 @@
       "name": "Grand Theft Auto VI",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
       "category": "ps5_native_game",
-      "playCount": 14,
-      "playDurationIso": "PT7H41M53S",
-      "playDurationMinutes": 462,
+      "playCount": 18,
+      "playDurationIso": "PT8H55M43S",
+      "playDurationMinutes": 536,
       "firstPlayed": "2026-11-19T05:00:26.320000Z",
-      "lastPlayed": "2026-11-23T18:37:18.730000Z"
+      "lastPlayed": "2026-11-24T16:35:13.110000Z"
     },
     {
       "titleId": "PPSA01576_00",
@@ -2431,11 +2431,11 @@
       "name": "HBO Max",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202506/1017/89c2a3a1eb2b1150c9583399b2fc0c1ecea8263fd5a0372c.png",
       "category": "ps5_web_based_media_app",
-      "playCount": 260,
-      "playDurationIso": "PT112H58M6S",
-      "playDurationMinutes": 6778,
+      "playCount": 261,
+      "playDurationIso": "PT113H3M10S",
+      "playDurationMinutes": 6783,
       "firstPlayed": "2023-06-05T04:03:50.810000Z",
-      "lastPlayed": "2026-11-23T07:07:15.920000Z"
+      "lastPlayed": "2026-11-24T05:08:36.550000Z"
     },
     {
       "titleId": "PPSA14632_00",
@@ -2948,11 +2948,11 @@
       "name": "NBA 2K27",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/2913/4a31f711e2ff460cd44ad646983f36533278cea61f639be9.png",
       "category": "ps5_native_game",
-      "playCount": 45,
-      "playDurationIso": "PT30H19M15S",
-      "playDurationMinutes": 1819,
+      "playCount": 47,
+      "playDurationIso": "PT31H50M46S",
+      "playDurationMinutes": 1911,
       "firstPlayed": "2026-10-19T04:01:05.910000Z",
-      "lastPlayed": "2026-11-23T04:20:19.890000Z"
+      "lastPlayed": "2026-11-24T17:24:50.180000Z"
     },
     {
       "titleId": "PPSA36327_00",
@@ -6991,7 +6991,7 @@
       "earnedTotal": 2,
       "progress": 2,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-11-23T17:50:47Z"
+      "lastTrophyAt": "2026-11-24T15:30:07Z"
     },
     {
       "npCommunicationId": "NPWR21143_00",
