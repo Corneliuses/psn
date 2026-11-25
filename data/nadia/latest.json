@@ -4,7 +4,7 @@
     "key": "nadia",
     "displayName": "Nadia"
   },
-  "capturedAt": "2026-11-24T20:59:23.327Z",
+  "capturedAt": "2026-11-25T20:22:32.540Z",
   "playedTitles": [
     {
       "titleId": "CUSA00079_00",
@@ -16,6 +16,17 @@
       "playDurationMinutes": 12,
       "firstPlayed": "2024-04-05T20:17:31.500000Z",
       "lastPlayed": "2024-04-05T20:29:56.900000Z"
+    },
+    {
+      "titleId": "CUSA00084_00",
+      "name": "The LEGO® Movie - Videogame (GER)",
+      "imageUrl": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA00563_00/3/i_8552a8a8814b88a86dffd54b6166b5e8288c3cc7ad7087f34b3e6b34866483b2/i/icon0.png",
+      "category": "unknown",
+      "playCount": 1,
+      "playDurationIso": "PT33M33S",
+      "playDurationMinutes": 34,
+      "firstPlayed": "2026-11-25T14:39:00.350000Z",
+      "lastPlayed": "2026-11-25T14:39:00.350000Z"
     },
     {
       "titleId": "CUSA00131_00",
@@ -694,10 +705,10 @@
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/0316/a79dd27918cc2856b6f459dec2857548cfea7db7a85af544.png",
       "category": "ps5_native_game",
       "playCount": 47,
-      "playDurationIso": "PT63H56M2S",
-      "playDurationMinutes": 3836,
+      "playDurationIso": "PT64H15M26S",
+      "playDurationMinutes": 3855,
       "firstPlayed": "2026-08-11T18:40:23.640000Z",
-      "lastPlayed": "2026-11-17T01:12:33.070000Z"
+      "lastPlayed": "2026-11-25T15:32:34.310000Z"
     }
   ],
   "trophyTitles": [
@@ -722,6 +733,28 @@
       "progress": 0,
       "hasPlatinum": false,
       "lastTrophyAt": "2024-04-05T20:29:57Z"
+    },
+    {
+      "npCommunicationId": "NPWR05422_00",
+      "name": "The LEGO® Movie - Videogame",
+      "platform": "PS4",
+      "iconUrl": "https://image.api.playstation.com/trophy/np/NPWR05422_00_00C3285600C7D0FB99977D7B56B5728510315A724E/563C4398F9110D613503E77A3FCDFA0D4F2DD4FA.PNG",
+      "defined": {
+        "bronze": 40,
+        "silver": 5,
+        "gold": 3,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 2,
+        "silver": 0,
+        "gold": 0,
+        "platinum": 0
+      },
+      "earnedTotal": 2,
+      "progress": 2,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-11-25T15:08:12Z"
     },
     {
       "npCommunicationId": "NPWR09124_00",

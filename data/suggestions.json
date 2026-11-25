@@ -44,16 +44,16 @@
         "released": "1996-06-22"
       },
       {
-        "name": "Batman: Arkham City",
-        "rawgId": 28623,
-        "rating": 94,
-        "released": "2011-10-18"
-      },
-      {
         "name": "BioShock Infinite",
         "rawgId": 4062,
         "rating": 94,
         "released": "2013-03-26"
+      },
+      {
+        "name": "Batman: Arkham City",
+        "rawgId": 28623,
+        "rating": 94,
+        "released": "2011-10-18"
       },
       {
         "name": "The Elder Scrolls V: Skyrim",
@@ -168,16 +168,16 @@
         "released": "2016-07-11"
       },
       {
-        "name": "FEZ",
-        "rawgId": 3740,
-        "rating": 91,
-        "released": "2012-04-13"
-      },
-      {
         "name": "Ticket to Ride",
         "rawgId": 964,
         "rating": 91,
         "released": "2009-12-18"
+      },
+      {
+        "name": "FEZ",
+        "rawgId": 3740,
+        "rating": 91,
+        "released": "2012-04-13"
       },
       {
         "name": "Rez Infinite",
@@ -193,7 +193,7 @@
     "Indie"
   ],
   "metadata": {
-    "generated_at": "2026-11-24T20:59:36.676Z",
+    "generated_at": "2026-11-25T20:22:43.107Z",
     "rawg_base_url": "https://rawg.io",
     "attribution": "Data from RAWG.io",
     "build": "v0.1.0"
