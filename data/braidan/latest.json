@@ -4,7 +4,7 @@
     "key": "braidan",
     "displayName": "Braidan"
   },
-  "capturedAt": "2026-11-25T20:22:31.642Z",
+  "capturedAt": "2026-11-26T19:59:00.434Z",
   "playedTitles": [
     {
       "titleId": "CUSA00079_00",
@@ -16,6 +16,17 @@
       "playDurationMinutes": 20,
       "firstPlayed": "2024-05-20T16:38:53.710000Z",
       "lastPlayed": "2024-05-20T16:59:35.840000Z"
+    },
+    {
+      "titleId": "CUSA00084_00",
+      "name": "The LEGO® Movie - Videogame (GER)",
+      "imageUrl": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA00563_00/3/i_8552a8a8814b88a86dffd54b6166b5e8288c3cc7ad7087f34b3e6b34866483b2/i/icon0.png",
+      "category": "unknown",
+      "playCount": 1,
+      "playDurationIso": "PT24M6S",
+      "playDurationMinutes": 24,
+      "firstPlayed": "2026-11-26T12:44:46.790000Z",
+      "lastPlayed": "2026-11-26T12:44:46.790000Z"
     },
     {
       "titleId": "CUSA00131_00",
@@ -704,11 +715,11 @@
       "name": "Marvel's Spider-Man 2",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/1c7b75d8ed9271516546560d219ad0b22ee0a263b4537bd8.png",
       "category": "ps5_native_game",
-      "playCount": 67,
-      "playDurationIso": "PT85H8M3S",
-      "playDurationMinutes": 5108,
+      "playCount": 68,
+      "playDurationIso": "PT86H19M",
+      "playDurationMinutes": 5179,
       "firstPlayed": "2025-12-05T21:40:43.910000Z",
-      "lastPlayed": "2026-11-06T12:41:42.770000Z"
+      "lastPlayed": "2026-11-26T14:19:58.800000Z"
     },
     {
       "titleId": "PPSA03098_00",
@@ -1514,6 +1525,28 @@
       "progress": 1,
       "hasPlatinum": false,
       "lastTrophyAt": "2024-05-20T16:58:10Z"
+    },
+    {
+      "npCommunicationId": "NPWR05422_00",
+      "name": "The LEGO® Movie - Videogame",
+      "platform": "PS4",
+      "iconUrl": "https://image.api.playstation.com/trophy/np/NPWR05422_00_00C3285600C7D0FB99977D7B56B5728510315A724E/563C4398F9110D613503E77A3FCDFA0D4F2DD4FA.PNG",
+      "defined": {
+        "bronze": 40,
+        "silver": 5,
+        "gold": 3,
+        "platinum": 1
+      },
+      "earned": {
+        "bronze": 3,
+        "silver": 0,
+        "gold": 0,
+        "platinum": 0
+      },
+      "earnedTotal": 3,
+      "progress": 4,
+      "hasPlatinum": false,
+      "lastTrophyAt": "2026-11-26T13:05:49Z"
     },
     {
       "npCommunicationId": "NPWR05542_00",
@@ -2715,15 +2748,15 @@
         "platinum": 1
       },
       "earned": {
-        "bronze": 9,
-        "silver": 12,
+        "bronze": 10,
+        "silver": 13,
         "gold": 1,
         "platinum": 0
       },
-      "earnedTotal": 22,
-      "progress": 55,
+      "earnedTotal": 24,
+      "progress": 60,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-10-31T12:53:58Z"
+      "lastTrophyAt": "2026-11-26T13:25:18Z"
     },
     {
       "npCommunicationId": "NPWR23684_00",

@@ -4,7 +4,7 @@
     "key": "dad",
     "displayName": "Dad"
   },
-  "capturedAt": "2026-11-25T20:22:30.465Z",
+  "capturedAt": "2026-11-26T19:58:59.736Z",
   "playedTitles": [
     {
       "titleId": "CUSA00001_00",
@@ -1617,11 +1617,11 @@
       "name": "Grand Theft Auto VI",
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
       "category": "ps5_native_game",
-      "playCount": 21,
+      "playCount": 22,
       "playDurationIso": "PT10H40M37S",
       "playDurationMinutes": 641,
       "firstPlayed": "2026-11-19T05:00:26.320000Z",
-      "lastPlayed": "2026-11-25T17:13:34.310000Z"
+      "lastPlayed": "2026-11-26T04:46:44.090000Z"
     },
     {
       "titleId": "PPSA01576_00",
@@ -1670,7 +1670,7 @@
     {
       "titleId": "PPSA01768_00",
       "name": "HITMAN World of Assassination",
-      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202610/2311/b8eef1ed41e1a72df5174894082790fd23a115e6fe73eaf2.png",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202611/2614/d79922bcdf7d61a61b9016568b4d09ff28bd36edf382d832.png",
       "category": "ps5_native_game",
       "playCount": 45,
       "playDurationIso": "PT21H57M54S",
@@ -1904,10 +1904,10 @@
       "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/1c7b75d8ed9271516546560d219ad0b22ee0a263b4537bd8.png",
       "category": "ps5_native_game",
       "playCount": 70,
-      "playDurationIso": "PT49H1M36S",
-      "playDurationMinutes": 2942,
+      "playDurationIso": "PT50H12M33S",
+      "playDurationMinutes": 3013,
       "firstPlayed": "2023-11-02T18:09:11.980000Z",
-      "lastPlayed": "2026-08-11T04:02:57.200000Z"
+      "lastPlayed": "2026-11-26T14:19:58.800000Z"
     },
     {
       "titleId": "PPSA03098_00",
@@ -2693,7 +2693,7 @@
     {
       "titleId": "PPSA21669_00",
       "name": "Marvel Rivals",
-      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202611/1907/24cf4a281a9234c6f7648246bec9a2ceeec9dd6bbc4910b2.png",
+      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202611/2606/2e09d4298f346256e70a5b0916d1f3bfd0409b671a0b89f3.png",
       "category": "ps5_native_game",
       "playCount": 1,
       "playDurationIso": "PT11M34S",
@@ -6983,15 +6983,15 @@
         "platinum": 1
       },
       "earned": {
-        "bronze": 3,
+        "bronze": 4,
         "silver": 0,
         "gold": 0,
         "platinum": 0
       },
-      "earnedTotal": 3,
-      "progress": 4,
+      "earnedTotal": 4,
+      "progress": 5,
       "hasPlatinum": false,
-      "lastTrophyAt": "2026-11-25T17:46:09Z"
+      "lastTrophyAt": "2026-11-26T06:43:37Z"
     },
     {
       "npCommunicationId": "NPWR21143_00",
